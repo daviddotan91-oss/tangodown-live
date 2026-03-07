@@ -444,25 +444,53 @@ function Scene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick
   )
 }
 
+class GlobeErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+  componentDidCatch(error, info) {
+    console.error('Globe render error:', error, info)
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff2d2d', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', flexDirection: 'column', gap: '8px' }}>
+          <span>GLOBE RENDER ERROR</span>
+          <button onClick={() => this.setState({ hasError: false })} style={{ background: '#0a1628', border: '1px solid #00c8ff44', color: '#00c8ff', padding: '6px 16px', cursor: 'pointer', fontFamily: 'inherit', fontSize: '11px' }}>
+            RETRY
+          </button>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
 export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
   return (
     <div className="globe-container">
-      <Canvas
-        camera={{ position: [0, 0, 2.5], fov: 45 }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 2]}
-      >
-        <Scene
-          conflicts={conflicts}
-          incidents={incidents}
-          feed={feed}
-          naval={naval}
-          flyToTarget={flyToTarget}
-          onIncidentClick={onIncidentClick}
-          selectedIncident={selectedIncident}
-          onTourZone={onTourZone}
-        />
-      </Canvas>
+      <GlobeErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 2.5], fov: 45 }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+          dpr={[1, 2]}
+        >
+          <Scene
+            conflicts={conflicts}
+            incidents={incidents}
+            feed={feed}
+            naval={naval}
+            flyToTarget={flyToTarget}
+            onIncidentClick={onIncidentClick}
+            selectedIncident={selectedIncident}
+            onTourZone={onTourZone}
+          />
+        </Canvas>
+      </GlobeErrorBoundary>
 
       {/* CRT Overlay */}
       <div className="crt-overlay" />
