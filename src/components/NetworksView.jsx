@@ -3,25 +3,40 @@ import OrgDossier from './OrgDossier'
 
 function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
   const canvasRef = useRef(null)
+  const containerRef = useRef(null)
   const [nodes, setNodes] = useState([])
+  const [canvasSize, setCanvasSize] = useState({ w: 1200, h: 700 })
   const animRef = useRef(null)
   const dragRef = useRef(null)
+
+  // Resize canvas to fill container
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        setCanvasSize({ w: Math.floor(rect.width), h: Math.floor(rect.height) })
+      }
+    }
+    updateSize()
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
 
   // Initialize node positions
   useEffect(() => {
     if (!organizations.length) return
-    const w = 900
-    const h = 600
+    const w = canvasSize.w
+    const h = canvasSize.h
     const initial = organizations.map((org, i) => {
-      // Position by cluster
+      // Position by cluster — spread across the full canvas
       const cluster = networks.clusters?.find(c => c.members.includes(org.id))
       let cx = w / 2, cy = h / 2
-      if (cluster?.id === 'axis-of-resistance') { cx = 300; cy = 250 }
-      else if (cluster?.id === 'aq-network') { cx = 650; cy = 200 }
-      else if (cluster?.id === 'isis-network') { cx = 650; cy = 420 }
-      else { cx = 200 + (i % 4) * 180; cy = 450 + Math.floor(i / 4) * 80 }
+      if (cluster?.id === 'axis-of-resistance') { cx = w * 0.28; cy = h * 0.35 }
+      else if (cluster?.id === 'aq-network') { cx = w * 0.72; cy = h * 0.3 }
+      else if (cluster?.id === 'isis-network') { cx = w * 0.65; cy = h * 0.7 }
+      else { cx = w * 0.15 + (i % 5) * (w * 0.16); cy = h * 0.6 + Math.floor(i / 5) * (h * 0.12) }
 
-      const jitter = 60
+      const jitter = Math.min(w, h) * 0.06
       return {
         id: org.id,
         x: cx + (Math.random() - 0.5) * jitter,
@@ -33,7 +48,7 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
       }
     })
     setNodes(initial)
-  }, [organizations, networks])
+  }, [organizations, networks, canvasSize])
 
   // Force simulation + draw
   useEffect(() => {
@@ -172,11 +187,11 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
   }
 
   return (
-    <div className="network-graph-container">
+    <div className="network-graph-container" ref={containerRef}>
       <canvas
         ref={canvasRef}
-        width={900}
-        height={600}
+        width={canvasSize.w}
+        height={canvasSize.h}
         className="network-graph-canvas"
         onClick={handleClick}
       />
