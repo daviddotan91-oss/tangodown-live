@@ -554,30 +554,40 @@ function RegionLabels({ conflicts }) {
 }
 
 // Fighter jet & ship SVG silhouettes on the globe
-function WarAssets({ conflicts }) {
-  const FRIENDLY_OPS = ['US', 'Ukraine', 'Israel', 'South Korea', 'Taiwan', 'France', 'UK', 'Philippines']
+const FRIENDLY_OPS = ['US', 'Ukraine', 'Israel', 'South Korea', 'Taiwan', 'France', 'UK', 'RAF', 'Philippines', 'DRC', 'ENDF', 'Mali', 'Burkina', 'USMC', 'CBP', 'USFK', 'French', 'Royal']
 
-  // Generate aircraft positions near conflict fronts
+function isFriendlyOp(operator) {
+  return FRIENDLY_OPS.some(f => operator?.includes(f))
+}
+
+function WarAssets({ conflicts, onSelectAsset }) {
   const [aircraftPositions, setAircraftPositions] = useState([])
 
   useEffect(() => {
     const generate = () => {
       const result = []
       conflicts.forEach(conflict => {
-        if (!conflict.fronts) return
-        const count = conflict.intensity === 'CRITICAL' ? 3 : conflict.intensity === 'HIGH' ? 2 : 1
-        for (let i = 0; i < count; i++) {
-          const front = conflict.fronts[Math.floor(Math.random() * conflict.fronts.length)]
-          if (!front?.center) continue
-          const isFriendly = Math.random() > 0.4
+        if (!conflict.aircraft || !conflict.fronts) return
+        conflict.aircraft.forEach((ac, acIdx) => {
+          const front = conflict.fronts[acIdx % conflict.fronts.length]
+          if (!front?.center) return
+          const friendly = isFriendlyOp(ac.operator)
           result.push({
-            id: `${conflict.id}-ac-${i}`,
-            lat: front.center[0] + (Math.random() - 0.5) * 2,
-            lng: front.center[1] + (Math.random() - 0.5) * 2,
-            isFriendly,
-            type: isFriendly ? 'F-35' : 'Su-35',
+            id: `${conflict.id}-${ac.type}-${acIdx}`,
+            lat: front.center[0] + (Math.random() - 0.5) * 1.5,
+            lng: front.center[1] + (Math.random() - 0.5) * 1.5,
+            isFriendly: friendly,
+            type: ac.type,
+            role: ac.role,
+            operator: ac.operator,
+            totalCount: ac.count,
+            status: ac.status,
+            zoneName: conflict.name,
+            zoneId: conflict.id,
+            weapons: conflict.weapons || [],
+            recentStrikes: conflict.recentStrikes || [],
           })
-        }
+        })
       })
       return result
     }
@@ -588,17 +598,187 @@ function WarAssets({ conflicts }) {
 
   return (
     <group>
-      {/* Aircraft — fighter jet silhouette SVGs */}
       {aircraftPositions.map(ac => {
         const pos = latLngToVec3(ac.lat, ac.lng, GLOBE_RADIUS + 0.012)
         const col = ac.isFriendly ? '#00FF88' : '#FF4444'
         const fill = ac.isFriendly ? 'rgba(0,255,136,0.25)' : 'rgba(255,68,68,0.25)'
         return (
           <Html key={ac.id} position={pos} center distanceFactor={3.2} occlude={false} zIndexRange={[10, 20]}>
-            <div className={`war-globe-aircraft ${ac.isFriendly ? 'friendly' : 'hostile'}`} title={`${ac.type}`}>
+            <div
+              className={`war-globe-aircraft ${ac.isFriendly ? 'friendly' : 'hostile'}`}
+              title={`${ac.type} — ${ac.operator}`}
+              onClick={(e) => { e.stopPropagation(); onSelectAsset?.({ kind: 'aircraft', data: ac }) }}
+            >
               <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
                 <path d="M16 2 L17.5 10 L27 14 L26 16 L17.5 15 L18 24 L22 27 L21 29 L16 26 L11 29 L10 27 L14 24 L14.5 15 L6 16 L5 14 L14.5 10 Z"
                   fill={fill} stroke={col} strokeWidth="1" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Html>
+        )
+      })}
+    </group>
+  )
+}
+
+// Asset detail popup — matches Overwatch WarAssetPopup
+function WarAssetPopup({ asset, onClose }) {
+  const { kind, data } = asset
+
+  if (kind === 'ship') {
+    return (
+      <div className="war-asset-popup">
+        <button className="war-asset-popup-close" onClick={onClose}>✕</button>
+        <div className="war-asset-popup-header ship">
+          <svg width="22" height="16" viewBox="0 0 28 18" fill="none">
+            <path d="M2 12 L6 4 L22 4 L26 12 Z" fill="rgba(0,170,255,0.25)" stroke="#00AAFF" strokeWidth="1.2" />
+            <rect x="10" y="1" width="2" height="3" fill="#00AAFF" opacity="0.8" />
+            <rect x="15" y="2" width="1.5" height="2" fill="#00AAFF" opacity="0.6" />
+          </svg>
+          <div>
+            <div className="war-asset-popup-name">{data.name}</div>
+            <div className="war-asset-popup-class">{data.class}</div>
+          </div>
+        </div>
+        <div className="war-asset-popup-grid">
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">OPERATOR</span>
+            <span className="war-asset-popup-value">{data.operator}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">TYPE</span>
+            <span className="war-asset-popup-value">{data.type}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">STATUS</span>
+            <span className="war-asset-popup-value" style={{ color: '#44CC44' }}>{data.status?.toUpperCase()}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">THEATER</span>
+            <span className="war-asset-popup-value">{data.theater}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">POSITION</span>
+            <span className="war-asset-popup-value">{data.lat?.toFixed(2)}°N, {data.lng?.toFixed(2)}°E</span>
+          </div>
+          {data.armament && (
+            <div className="war-asset-popup-field">
+              <span className="war-asset-popup-label">ARMAMENT</span>
+              <span className="war-asset-popup-value">{data.armament}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  if (kind === 'aircraft') {
+    const relevantStrikes = (data.recentStrikes || []).filter(s =>
+      s.aircraft?.toLowerCase().includes(data.type.split(' ')[0].toLowerCase())
+    )
+    const relevantWeapons = (data.weapons || []).filter(w =>
+      w.operator === data.operator || w.operator?.includes(data.operator?.split(' ')[0])
+    )
+
+    return (
+      <div className="war-asset-popup">
+        <button className="war-asset-popup-close" onClick={onClose}>✕</button>
+        <div className="war-asset-popup-header aircraft">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2 L17.5 10 L27 14 L26 16 L17.5 15 L18 24 L22 27 L21 29 L16 26 L11 29 L10 27 L14 24 L14.5 15 L6 16 L5 14 L14.5 10 Z"
+              fill="rgba(0,255,136,0.2)" stroke="#00FF88" strokeWidth="1.2" strokeLinejoin="round" />
+          </svg>
+          <div>
+            <div className="war-asset-popup-name">{data.type}</div>
+            <div className="war-asset-popup-class">{data.role}</div>
+          </div>
+        </div>
+        <div className="war-asset-popup-grid">
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">OPERATOR</span>
+            <span className="war-asset-popup-value">{data.operator}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">FLEET SIZE</span>
+            <span className="war-asset-popup-value">{data.totalCount} aircraft</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">STATUS</span>
+            <span className="war-asset-popup-value" style={{ color: data.status === 'active' ? '#44CC44' : '#FFB800' }}>{data.status?.toUpperCase()}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">THEATER</span>
+            <span className="war-asset-popup-value">{data.zoneName}</span>
+          </div>
+          <div className="war-asset-popup-field">
+            <span className="war-asset-popup-label">POSITION (EST)</span>
+            <span className="war-asset-popup-value">{data.lat?.toFixed(2)}°N, {data.lng?.toFixed(2)}°E</span>
+          </div>
+        </div>
+        {relevantWeapons.length > 0 && (
+          <>
+            <div className="war-asset-popup-section">ARMAMENT</div>
+            {relevantWeapons.slice(0, 5).map((w, i) => (
+              <div key={i} className="war-asset-popup-weapon">
+                <span className="war-asset-popup-wname">{w.name}</span>
+                <span className="war-asset-popup-wtype">{w.type}</span>
+                <span className="war-asset-popup-wdaily">{w.dailyUse}/day</span>
+              </div>
+            ))}
+          </>
+        )}
+        {relevantStrikes.length > 0 ? (
+          <>
+            <div className="war-asset-popup-section">CONFIRMED STRIKES</div>
+            {relevantStrikes.slice(0, 3).map((s, i) => (
+              <div key={i} className="war-asset-popup-strike">
+                <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
+                <div className="war-asset-popup-strike-target">{s.target}</div>
+                <div className="war-asset-popup-strike-weapon">{s.weapon}</div>
+                <div className="war-asset-popup-strike-result">{s.result}</div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <div className="war-asset-popup-section">RECENT THEATER STRIKES</div>
+            {(data.recentStrikes || []).slice(0, 3).map((s, i) => (
+              <div key={i} className="war-asset-popup-strike">
+                <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
+                <div className="war-asset-popup-strike-target">{s.target}</div>
+                <div className="war-asset-popup-strike-weapon">{s.weapon} via {s.aircraft}</div>
+                <div className="war-asset-popup-strike-result">{s.result}</div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    )
+  }
+
+  return null
+}
+
+// Invisible Html click targets over naval markers
+function NavalClickTargets({ naval, onSelectAsset }) {
+  return (
+    <group>
+      {naval.map(ship => {
+        const pos = latLngToVec3(ship.lat, ship.lng, GLOBE_RADIUS + 0.012)
+        const isHostile = ship.force === 'hostile'
+        const col = isHostile ? '#FF8800' : '#00AAFF'
+        const fill = isHostile ? 'rgba(255,136,0,0.25)' : 'rgba(0,170,255,0.25)'
+        return (
+          <Html key={ship.id} position={pos} center distanceFactor={3.2} occlude={false} zIndexRange={[10, 20]}>
+            <div
+              className={`war-globe-ship ${isHostile ? 'hostile' : ''}`}
+              title={`${ship.name} — ${ship.class}`}
+              onClick={(e) => { e.stopPropagation(); onSelectAsset?.({ kind: 'ship', data: ship }) }}
+            >
+              <svg width="16" height="12" viewBox="0 0 28 18" fill="none">
+                <path d="M2 12 L6 4 L22 4 L26 12 Z" fill={fill} stroke={col} strokeWidth="1.2" />
+                <rect x="10" y="1" width="2" height="3" fill={col} opacity="0.8" />
+                <rect x="15" y="2" width="1.5" height="2" fill={col} opacity="0.6" />
               </svg>
             </div>
           </Html>
@@ -700,7 +880,7 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
   )
 }
 
-function GlobeScene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
+function GlobeScene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone, onSelectAsset }) {
   const threatLevel = useMemo(() => Math.min(incidents.length / 100, 1), [incidents])
 
   return (
@@ -751,7 +931,10 @@ function GlobeScene({ conflicts, incidents, feed, naval, flyToTarget, onIncident
         <TacticalOverlay conflicts={conflicts} naval={naval} />
 
         {/* Fighter jet silhouettes */}
-        <WarAssets conflicts={conflicts} />
+        <WarAssets conflicts={conflicts} onSelectAsset={onSelectAsset} />
+
+        {/* Naval ship click targets */}
+        <NavalClickTargets naval={naval} onSelectAsset={onSelectAsset} />
       </group>
 
       <CameraController
@@ -801,6 +984,12 @@ class GlobeErrorBoundary extends React.Component {
 }
 
 export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
+  const [selectedWarAsset, setSelectedWarAsset] = useState(null)
+
+  const handleSelectAsset = useCallback((asset) => {
+    setSelectedWarAsset(asset)
+  }, [])
+
   return (
     <div className="globe-container">
       <GlobeErrorBoundary>
@@ -819,6 +1008,7 @@ export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, 
             onIncidentClick={onIncidentClick}
             selectedIncident={selectedIncident}
             onTourZone={onTourZone}
+            onSelectAsset={handleSelectAsset}
           />
         </Canvas>
       </GlobeErrorBoundary>
@@ -827,6 +1017,11 @@ export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, 
       <div className="war-scanlines" />
       {/* Vignette overlay */}
       <div className="war-vignette" />
+
+      {/* Asset detail popup */}
+      {selectedWarAsset && (
+        <WarAssetPopup asset={selectedWarAsset} onClose={() => setSelectedWarAsset(null)} />
+      )}
     </div>
   )
 }

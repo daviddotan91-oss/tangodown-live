@@ -24,7 +24,33 @@
       { "name": "Northern Border — Lebanon", "type": "conventional", "intensity": "HIGH", "uasPerDay": 20, "center": [33.1, 35.2] },
       { "name": "West Bank — Jenin/Tulkarm", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 8, "center": [32.3, 35.2] }
     ],
-    "killChain": { "detect": 12, "classify": 8, "track": 15, "engage": 5, "neutralize": 3 }
+    "killChain": { "detect": 12, "classify": 8, "track": 15, "engage": 5, "neutralize": 3 },
+    "aircraft": [
+      { "type": "F-35I Adir", "operator": "Israel", "role": "Stealth Multirole", "count": 36, "status": "active" },
+      { "type": "F-16I Sufa", "operator": "Israel", "role": "Strike", "count": 100, "status": "active" },
+      { "type": "F-15I Ra'am", "operator": "Israel", "role": "Strike Eagle", "count": 25, "status": "active" },
+      { "type": "AH-64D Saraph", "operator": "Israel", "role": "Attack Helicopter", "count": 48, "status": "active" },
+      { "type": "Hermes 900 Kochav", "operator": "Israel", "role": "MALE UCAV/ISR", "count": 30, "status": "active" },
+      { "type": "Hermes 450", "operator": "Israel", "role": "Tactical ISR", "count": 50, "status": "active" },
+      { "type": "Heron TP Eitan", "operator": "Israel", "role": "HALE ISR/Strike", "count": 12, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "JDAM GBU-31/32", "type": "GPS-Guided Bomb", "operator": "Israel", "usage": "Building strikes", "dailyUse": 40 },
+      { "name": "GBU-39 SDB", "type": "Small Diameter Bomb", "operator": "Israel", "usage": "Precision urban targets", "dailyUse": 60 },
+      { "name": "Spike NLOS", "type": "Anti-Tank Missile", "operator": "Israel", "usage": "Tunnel entrances, vehicles", "dailyUse": 20 },
+      { "name": "Iron Dome Tamir", "type": "Interceptor Missile", "operator": "Israel", "usage": "Rocket defense", "dailyUse": 30 },
+      { "name": "David's Sling Stunner", "type": "Interceptor", "operator": "Israel", "usage": "Heavy rocket/CM defense", "dailyUse": 5 },
+      { "name": "Arrow 3", "type": "Exo-atmospheric Interceptor", "operator": "Israel", "usage": "Ballistic missile defense", "dailyUse": 1 },
+      { "name": "Qassam Rockets", "type": "Unguided Rocket", "operator": "Hamas", "usage": "Area bombardment", "dailyUse": 15 },
+      { "name": "Kornet ATGM", "type": "Anti-Tank Missile", "operator": "Hezbollah", "usage": "IDF vehicle strikes", "dailyUse": 8 },
+      { "name": "Burkan SRBM", "type": "Short-Range Ballistic", "operator": "Hezbollah", "usage": "Deep strikes into Israel", "dailyUse": 2 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "Hamas tunnel complex Khan Younis", "weapon": "GBU-31 JDAM (2,000 lb)", "aircraft": "F-16I Sufa", "operator": "Israel", "result": "Tunnel collapsed" },
+      { "date": "2026-03-05", "target": "Hezbollah ATGM team Naqoura", "weapon": "Spike NLOS", "aircraft": "Hermes 900", "operator": "Israel", "result": "Target eliminated" },
+      { "date": "2026-03-04", "target": "Sderot / Ashkelon", "weapon": "Qassam Rocket Salvo (22x)", "aircraft": "Ground launch", "operator": "Hamas", "result": "18/22 intercepted by Iron Dome" },
+      { "date": "2026-03-04", "target": "Hezbollah C2 bunker Baalbek", "weapon": "GBU-28 Bunker Buster", "aircraft": "F-15I Ra'am", "operator": "Israel", "result": "Destroyed" }
+    ]
   },
   {
     "id": "ukraine-russia",
@@ -52,7 +78,39 @@
       { "name": "Kursk — Ukrainian Incursion", "type": "conventional", "intensity": "HIGH", "uasPerDay": 90, "center": [51.4, 35.2] },
       { "name": "Kharkiv — Northern Front", "type": "conventional", "intensity": "HIGH", "uasPerDay": 70, "center": [50.0, 36.2] }
     ],
-    "killChain": { "detect": 8, "classify": 5, "track": 10, "engage": 12, "neutralize": 8 }
+    "killChain": { "detect": 8, "classify": 5, "track": 10, "engage": 12, "neutralize": 8 },
+    "aircraft": [
+      { "type": "Su-34 Fullback", "operator": "Russia", "role": "Strike/Bomber", "count": 80, "status": "active" },
+      { "type": "Su-25 Frogfoot", "operator": "Russia", "role": "CAS", "count": 55, "status": "active" },
+      { "type": "Su-35S Flanker-E", "operator": "Russia", "role": "Air Superiority", "count": 60, "status": "active" },
+      { "type": "MiG-29 Fulcrum", "operator": "Ukraine", "role": "Multirole", "count": 25, "status": "active" },
+      { "type": "F-16AM Viper", "operator": "Ukraine", "role": "Multirole", "count": 10, "status": "active" },
+      { "type": "Su-24M Fencer", "operator": "Ukraine", "role": "Strike", "count": 12, "status": "active" },
+      { "type": "Bayraktar TB2", "operator": "Ukraine", "role": "ISR/Strike UCAV", "count": 20, "status": "active" },
+      { "type": "Tu-95MS Bear", "operator": "Russia", "role": "Strategic Bomber", "count": 15, "status": "active" },
+      { "type": "Tu-22M3 Backfire", "operator": "Russia", "role": "Bomber", "count": 12, "status": "active" },
+      { "type": "Ka-52 Alligator", "operator": "Russia", "role": "Attack Helicopter", "count": 40, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "Shahed-136/Geran-2", "type": "OWA/Loitering Munition", "operator": "Russia", "usage": "Mass strikes on infrastructure", "dailyUse": 25 },
+      { "name": "Lancet-3", "type": "Loitering Munition", "operator": "Russia", "usage": "Precision anti-armor", "dailyUse": 40 },
+      { "name": "FPV Kamikaze Drones", "type": "Modified Commercial UAS", "operator": "Both", "usage": "Anti-personnel/armor", "dailyUse": 800 },
+      { "name": "HIMARS M142 / GMLRS", "type": "Precision Rocket Artillery", "operator": "Ukraine", "usage": "Ammo depots, C2 nodes", "dailyUse": 8 },
+      { "name": "ATACMS MGM-140", "type": "Tactical Ballistic Missile", "operator": "Ukraine", "usage": "Deep strike airfields", "dailyUse": 1 },
+      { "name": "Storm Shadow/SCALP-EG", "type": "Air-Launched Cruise Missile", "operator": "Ukraine", "usage": "HVT strikes", "dailyUse": 2 },
+      { "name": "Kh-101", "type": "Air-Launched Cruise Missile", "operator": "Russia", "usage": "Infrastructure strikes", "dailyUse": 3 },
+      { "name": "Iskander-M 9K720", "type": "SRBM", "operator": "Russia", "usage": "C2 and staging areas", "dailyUse": 4 },
+      { "name": "Kh-59MK2", "type": "Glide Bomb", "operator": "Russia", "usage": "Frontline positions", "dailyUse": 30 },
+      { "name": "UMPB D-30SN", "type": "Guided Glide Bomb", "operator": "Russia", "usage": "GPS-guided area denial", "dailyUse": 50 },
+      { "name": "Patriot PAC-3 MSE", "type": "SAM", "operator": "Ukraine", "usage": "Ballistic missile defense", "dailyUse": 2 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "Dnipro power station", "weapon": "Kh-101 ALCM", "aircraft": "Tu-95MS Bear", "operator": "Russia", "result": "Partial damage" },
+      { "date": "2026-03-04", "target": "Russian airfield Morozovsk", "weapon": "ATACMS MGM-140B", "aircraft": "Ground launch", "operator": "Ukraine", "result": "2x Su-34 destroyed on ground" },
+      { "date": "2026-03-04", "target": "Ammunition depot Tokmak", "weapon": "Storm Shadow", "aircraft": "Su-24M Fencer", "operator": "Ukraine", "result": "Secondary explosions confirmed" },
+      { "date": "2026-03-03", "target": "Ukrainian trench line Chasiv Yar", "weapon": "UMPB D-30SN glide bomb", "aircraft": "Su-34 Fullback", "operator": "Russia", "result": "Position destroyed" },
+      { "date": "2026-03-03", "target": "Russian BMP column near Pokrovsk", "weapon": "FPV drone swarm (12x)", "aircraft": "Commercial FPV", "operator": "Ukraine", "result": "3 BMP-2 destroyed" }
+    ]
   },
   {
     "id": "red-sea-houthi",
@@ -77,7 +135,32 @@
       { "name": "Southern Red Sea", "type": "naval", "intensity": "HIGH", "uasPerDay": 5, "center": [15.0, 42.0] },
       { "name": "Sanaa — Houthi Interior", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 3, "center": [15.35, 44.2] }
     ],
-    "killChain": { "detect": 15, "classify": 10, "track": 20, "engage": 8, "neutralize": 5 }
+    "killChain": { "detect": 15, "classify": 10, "track": 20, "engage": 8, "neutralize": 5 },
+    "aircraft": [
+      { "type": "F/A-18E/F Super Hornet", "operator": "US Navy", "role": "Strike/Fleet Defense", "count": 44, "status": "active" },
+      { "type": "EA-18G Growler", "operator": "US Navy", "role": "Electronic Warfare", "count": 8, "status": "active" },
+      { "type": "E-2D Advanced Hawkeye", "operator": "US Navy", "role": "AEW&C", "count": 5, "status": "active" },
+      { "type": "MQ-9A Reaper", "operator": "US Air Force", "role": "ISR/Strike", "count": 8, "status": "active" },
+      { "type": "Rafale M", "operator": "French Navy", "role": "Multirole", "count": 12, "status": "active" },
+      { "type": "Eurofighter Typhoon", "operator": "RAF", "role": "Air Defense", "count": 6, "status": "active" },
+      { "type": "Samad-3", "operator": "Houthis", "role": "OWA / Cruise Drone", "count": 200, "status": "active" },
+      { "type": "Waid", "operator": "Houthis", "role": "Strike UCAV", "count": 80, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "SM-2 Block IIIA", "type": "Ship-to-Air Missile", "operator": "US Navy", "usage": "Anti-cruise missile / drone", "dailyUse": 4 },
+      { "name": "SM-6 Block I", "type": "Ship-to-Air Missile", "operator": "US Navy", "usage": "Anti-ASBM / terminal defense", "dailyUse": 2 },
+      { "name": "ESSM RIM-162", "type": "Point Defense Missile", "operator": "US Navy", "usage": "Close-in drone defense", "dailyUse": 6 },
+      { "name": "Phalanx CIWS", "type": "20mm Gatling CIWS", "operator": "US Navy", "usage": "Last-ditch drone defense", "dailyUse": 3 },
+      { "name": "Tomahawk BGM-109", "type": "Land-Attack Cruise Missile", "operator": "US Navy", "usage": "Houthi launch site strikes", "dailyUse": 3 },
+      { "name": "Khalij Fars ASBM", "type": "Anti-Ship Ballistic Missile", "operator": "Houthis", "usage": "Shipping attacks", "dailyUse": 2 },
+      { "name": "C-802 / Noor", "type": "Anti-Ship Cruise Missile", "operator": "Houthis", "usage": "Ship targeting", "dailyUse": 1 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "Houthi Samad-3 drone swarm (6x)", "weapon": "SM-2 Block IIIA (4x) + ESSM (2x)", "aircraft": "Ship-based", "operator": "USS Stout (DDG-55)", "result": "All 6 drones destroyed" },
+      { "date": "2026-03-05", "target": "Houthi mobile launcher Hodeidah", "weapon": "Tomahawk BGM-109E Block IV", "aircraft": "Ship launch", "operator": "USS Florida (SSGN-728)", "result": "Launcher destroyed" },
+      { "date": "2026-03-04", "target": "Container ship MSC Valentina", "weapon": "Khalij Fars ASBM", "aircraft": "Ground launch", "operator": "Houthis", "result": "Hit — ship damaged, still underway" },
+      { "date": "2026-03-04", "target": "Houthi weapons depot Sanaa", "weapon": "GBU-31 JDAM (2x)", "aircraft": "F/A-18E Super Hornet", "operator": "US Navy / VFA-11", "result": "Secondary explosions" }
+    ]
   },
   {
     "id": "syria-civil",
@@ -102,7 +185,25 @@
       { "name": "Northeast — Al-Hasakah", "type": "guerrilla", "intensity": "LOW", "uasPerDay": 5, "center": [36.5, 40.7] },
       { "name": "Deir ez-Zor — Euphrates Valley", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 8, "center": [35.3, 40.1] }
     ],
-    "killChain": { "detect": 20, "classify": 12, "track": 25, "engage": 10, "neutralize": 8 }
+    "killChain": { "detect": 20, "classify": 12, "track": 25, "engage": 10, "neutralize": 8 },
+    "aircraft": [
+      { "type": "Su-35S Flanker-E", "operator": "Russia", "role": "Air Superiority", "count": 12, "status": "active" },
+      { "type": "Su-24M Fencer", "operator": "Russia", "role": "Strike", "count": 8, "status": "active" },
+      { "type": "Bayraktar TB2", "operator": "Turkey", "role": "ISR/Strike UCAV", "count": 12, "status": "active" },
+      { "type": "F-15E Strike Eagle", "operator": "US", "role": "Strike", "count": 8, "status": "active" },
+      { "type": "MQ-9A Reaper", "operator": "US", "role": "ISR/Strike", "count": 6, "status": "active" },
+      { "type": "Shahed-129", "operator": "Iran", "role": "ISR UCAV", "count": 10, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "MAM-L", "type": "Smart Micro Munition", "operator": "Turkey", "usage": "Bayraktar strikes on SDF", "dailyUse": 4 },
+      { "name": "Hellfire AGM-114", "type": "Air-to-Ground Missile", "operator": "US", "usage": "ISIS HVT strikes", "dailyUse": 1 },
+      { "name": "KAB-500", "type": "Guided Bomb", "operator": "Russia", "usage": "Idlib strikes", "dailyUse": 3 },
+      { "name": "Fateh-110", "type": "SRBM", "operator": "Iran/IRGC", "usage": "Strategic deterrence", "dailyUse": 0 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "ISIS cell Deir ez-Zor", "weapon": "Hellfire AGM-114R", "aircraft": "MQ-9A Reaper", "operator": "US CENTCOM", "result": "3 militants KIA" },
+      { "date": "2026-03-04", "target": "SDF position Tal Rifaat", "weapon": "MAM-L", "aircraft": "Bayraktar TB2", "operator": "Turkey", "result": "Position destroyed" }
+    ]
   },
   {
     "id": "sudan-civil",
@@ -127,7 +228,23 @@
       { "name": "Darfur — El Fasher", "type": "conventional", "intensity": "CRITICAL", "uasPerDay": 3, "center": [13.6, 25.3] },
       { "name": "Gezira State", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 2, "center": [14.5, 33.5] }
     ],
-    "killChain": { "detect": 30, "classify": 20, "track": 35, "engage": 15, "neutralize": 12 }
+    "killChain": { "detect": 30, "classify": 20, "track": 35, "engage": 15, "neutralize": 12 },
+    "aircraft": [
+      { "type": "Wing Loong II", "operator": "UAE/RSF", "role": "Strike UCAV", "count": 12, "status": "active" },
+      { "type": "Mohajer-6", "operator": "Iran/SAF", "role": "ISR/Strike UCAV", "count": 8, "status": "active" },
+      { "type": "Su-25 Frogfoot", "operator": "SAF", "role": "CAS", "count": 6, "status": "active" },
+      { "type": "MiG-29 Fulcrum", "operator": "SAF", "role": "Air Superiority", "count": 4, "status": "degraded" }
+    ],
+    "weapons": [
+      { "name": "Blue Arrow 7", "type": "Air-to-Ground Missile", "operator": "RSF/UAE", "usage": "Wing Loong strikes", "dailyUse": 5 },
+      { "name": "Qaem-5 PGM", "type": "Precision Guided Munition", "operator": "SAF/Iran", "usage": "Mohajer strikes", "dailyUse": 3 },
+      { "name": "S-5 Rockets", "type": "Unguided Air Rocket", "operator": "SAF", "usage": "CAS from Su-25", "dailyUse": 10 },
+      { "name": "OFAB-250", "type": "Unguided Bomb", "operator": "SAF", "usage": "Area bombardment", "dailyUse": 8 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "RSF convoy El Fasher", "weapon": "Mohajer-6 Qaem PGM", "aircraft": "Mohajer-6", "operator": "SAF", "result": "4 technicals destroyed" },
+      { "date": "2026-03-04", "target": "SAF barracks Omdurman", "weapon": "Blue Arrow 7", "aircraft": "Wing Loong II", "operator": "RSF/UAE", "result": "Barracks hit" }
+    ]
   },
   {
     "id": "myanmar-civil",
@@ -152,7 +269,23 @@
       { "name": "Chin State — Resistance Front", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [21.5, 93.5] },
       { "name": "Sagaing Region", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 3, "center": [22.0, 95.0] }
     ],
-    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 }
+    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 },
+    "aircraft": [
+      { "type": "Yak-130", "operator": "Tatmadaw", "role": "Light Attack", "count": 6, "status": "active" },
+      { "type": "JF-17 Thunder", "operator": "Tatmadaw", "role": "Multirole", "count": 16, "status": "active" },
+      { "type": "Mi-35 Hind", "operator": "Tatmadaw", "role": "Attack Helicopter", "count": 12, "status": "active" },
+      { "type": "CH-3 Rainbow", "operator": "Tatmadaw", "role": "UCAV (Chinese)", "count": 4, "status": "active" },
+      { "type": "DJI Mavic 3 (modified)", "operator": "PDF Resistance", "role": "Grenade Dropper", "count": 500, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "AR-1 Missile", "type": "Air-to-Ground", "operator": "Tatmadaw", "usage": "CH-3 UCAV strikes", "dailyUse": 2 },
+      { "name": "Modified 40mm Grenades", "type": "Improvised Drone Munition", "operator": "PDF", "usage": "Dropped from DJI drones", "dailyUse": 30 },
+      { "name": "S-8 Rockets", "type": "Unguided Air Rocket", "operator": "Tatmadaw", "usage": "Mi-35 CAS", "dailyUse": 15 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-04", "target": "PDF positions Sagaing", "weapon": "S-8 Rockets", "aircraft": "Mi-35 Hind", "operator": "Tatmadaw", "result": "Position suppressed" },
+      { "date": "2026-03-03", "target": "Tatmadaw checkpoint Shan", "weapon": "Modified 40mm grenade", "aircraft": "DJI Mavic 3", "operator": "PDF", "result": "2 soldiers KIA" }
+    ]
   },
   {
     "id": "sahel-insurgency",
@@ -177,7 +310,22 @@
       { "name": "Northern Mali — Kidal", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 3, "center": [18.4, 1.4] },
       { "name": "Burkina Faso — Northern Provinces", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 4, "center": [14.0, -1.5] }
     ],
-    "killChain": { "detect": 45, "classify": 30, "track": 50, "engage": 25, "neutralize": 20 }
+    "killChain": { "detect": 45, "classify": 30, "track": 50, "engage": 25, "neutralize": 20 },
+    "aircraft": [
+      { "type": "Bayraktar TB2", "operator": "Mali", "role": "Strike UCAV", "count": 6, "status": "active" },
+      { "type": "Bayraktar Akinci", "operator": "Burkina Faso", "role": "Heavy UCAV", "count": 2, "status": "active" },
+      { "type": "L-39 Albatros", "operator": "Mali", "role": "Light Attack", "count": 4, "status": "active" },
+      { "type": "Mi-17 Hip", "operator": "Wagner/Africa Corps", "role": "Transport/CAS", "count": 8, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "MAM-L", "type": "Smart Micro Munition", "operator": "Mali/Burkina", "usage": "Bayraktar strikes on JNIM", "dailyUse": 3 },
+      { "name": "IED (buried)", "type": "Improvised Explosive", "operator": "JNIM/ISGS", "usage": "Road ambushes", "dailyUse": 6 },
+      { "name": "SVBIED", "type": "Vehicle-Borne IED", "operator": "ISGS", "usage": "Base attacks", "dailyUse": 1 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "JNIM convoy Liptako-Gourma", "weapon": "MAM-L (3x)", "aircraft": "Bayraktar TB2", "operator": "Mali", "result": "5 motorcycles destroyed" },
+      { "date": "2026-03-03", "target": "Malian army patrol", "weapon": "Buried IED", "aircraft": "N/A", "operator": "JNIM", "result": "1 BTR-80 destroyed, 4 KIA" }
+    ]
   },
   {
     "id": "somalia-alshabaab",
@@ -202,7 +350,22 @@
       { "name": "Mogadishu Environs", "type": "urban", "intensity": "MEDIUM", "uasPerDay": 3, "center": [2.04, 45.34] },
       { "name": "Galmudug — Central Front", "type": "guerrilla", "intensity": "LOW", "uasPerDay": 2, "center": [5.3, 46.6] }
     ],
-    "killChain": { "detect": 35, "classify": 20, "track": 40, "engage": 15, "neutralize": 10 }
+    "killChain": { "detect": 35, "classify": 20, "track": 40, "engage": 15, "neutralize": 10 },
+    "aircraft": [
+      { "type": "MQ-9A Reaper", "operator": "US AFRICOM", "role": "ISR/Strike", "count": 6, "status": "active" },
+      { "type": "AC-130J Ghostrider", "operator": "US AFSOC", "role": "Gunship", "count": 2, "status": "active" },
+      { "type": "Bayraktar TB2", "operator": "Turkey/Somalia", "role": "Strike UCAV", "count": 4, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "Hellfire AGM-114", "type": "Air-to-Ground Missile", "operator": "US AFRICOM", "usage": "HVT strikes", "dailyUse": 1 },
+      { "name": "GBU-39 SDB", "type": "Small Diameter Bomb", "operator": "US AFRICOM", "usage": "Compound strikes", "dailyUse": 2 },
+      { "name": "MAM-L", "type": "Smart Micro Munition", "operator": "Turkey/Somalia", "usage": "Bayraktar strikes", "dailyUse": 1 },
+      { "name": "VBIED", "type": "Vehicle-Borne IED", "operator": "Al-Shabaab", "usage": "Checkpoint attacks", "dailyUse": 1 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "Al-Shabaab compound Lower Shabelle", "weapon": "Hellfire AGM-114R (2x)", "aircraft": "MQ-9A Reaper", "operator": "US AFRICOM", "result": "5 militants KIA" },
+      { "date": "2026-03-03", "target": "SNA checkpoint Mogadishu", "weapon": "SVBIED", "aircraft": "N/A", "operator": "Al-Shabaab", "result": "12 casualties" }
+    ]
   },
   {
     "id": "drc-conflict",
@@ -226,7 +389,22 @@
       { "name": "North Kivu — Goma Axis", "type": "conventional", "intensity": "HIGH", "uasPerDay": 3, "center": [-1.67, 29.22] },
       { "name": "Ituri Province", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [1.5, 30.5] }
     ],
-    "killChain": { "detect": 50, "classify": 35, "track": 55, "engage": 30, "neutralize": 25 }
+    "killChain": { "detect": 50, "classify": 35, "track": 55, "engage": 30, "neutralize": 25 },
+    "aircraft": [
+      { "type": "CH-4 Rainbow", "operator": "DRC/FARDC", "role": "Strike UCAV (Chinese)", "count": 3, "status": "active" },
+      { "type": "Bayraktar TB2", "operator": "DRC/FARDC", "role": "Strike UCAV (Turkish)", "count": 4, "status": "active" },
+      { "type": "Su-25 Frogfoot", "operator": "DRC/FARDC", "role": "CAS", "count": 2, "status": "degraded" },
+      { "type": "Mi-24 Hind", "operator": "DRC/FARDC", "role": "Attack Helicopter", "count": 3, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "MAM-L", "type": "Smart Micro Munition", "operator": "DRC", "usage": "Bayraktar strikes", "dailyUse": 3 },
+      { "name": "AR-1 Missile", "type": "Air-to-Ground", "operator": "DRC", "usage": "CH-4 strikes", "dailyUse": 2 },
+      { "name": "M2 Browning .50 cal", "type": "Heavy Machine Gun", "operator": "M23", "usage": "Anti-air / anti-vehicle", "dailyUse": 20 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "M23 staging area North Kivu", "weapon": "MAM-L (2x)", "aircraft": "Bayraktar TB2", "operator": "DRC FARDC", "result": "Camp dispersed" },
+      { "date": "2026-03-03", "target": "FARDC convoy Bukavu road", "weapon": "RPG-7 ambush", "aircraft": "N/A", "operator": "M23", "result": "2 trucks destroyed" }
+    ]
   },
   {
     "id": "iran-israel-shadow",
@@ -251,7 +429,24 @@
       { "name": "Iranian Nuclear Sites", "type": "special operations", "intensity": "LOW", "uasPerDay": 0, "center": [33.7, 51.6] },
       { "name": "Iraqi Militia Corridor", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 5, "center": [33.3, 44.4] }
     ],
-    "killChain": { "detect": 10, "classify": 6, "track": 8, "engage": 4, "neutralize": 2 }
+    "killChain": { "detect": 10, "classify": 6, "track": 8, "engage": 4, "neutralize": 2 },
+    "aircraft": [
+      { "type": "F-35I Adir", "operator": "Israel", "role": "Stealth Strike", "count": 36, "status": "active" },
+      { "type": "F-15I Ra'am", "operator": "Israel", "role": "Long-Range Strike", "count": 25, "status": "active" },
+      { "type": "Shahed-136", "operator": "Iran", "role": "OWA Loitering Munition", "count": 500, "status": "active" },
+      { "type": "Mohajer-6", "operator": "Iran", "role": "ISR/Strike UCAV", "count": 30, "status": "active" },
+      { "type": "Kowsar-88", "operator": "Iran", "role": "Light Fighter", "count": 12, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "Popeye Turbo ALCM", "type": "Air-Launched Cruise Missile", "operator": "Israel", "usage": "Deep strike Iran", "dailyUse": 0 },
+      { "name": "Rocks / LORA", "type": "Ballistic Missile", "operator": "Israel", "usage": "Precision strike", "dailyUse": 1 },
+      { "name": "Emad MRBM", "type": "Medium-Range Ballistic", "operator": "Iran", "usage": "Retaliatory strikes", "dailyUse": 0 },
+      { "name": "Shahed-136", "type": "OWA Loitering Munition", "operator": "Iran", "usage": "Swarm attacks", "dailyUse": 3 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "IRGC weapons depot Damascus", "weapon": "Stand-off missile", "aircraft": "F-35I Adir", "operator": "Israel", "result": "Depot destroyed" },
+      { "date": "2026-03-03", "target": "Iraqi militia base Al-Qaim", "weapon": "GBU-39 SDB", "aircraft": "F-15I Ra'am", "operator": "Israel", "result": "Base neutralized" }
+    ]
   },
   {
     "id": "ethiopia-internal",
@@ -275,7 +470,21 @@
       { "name": "Amhara Region — Fano Front", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 4, "center": [11.5, 37.5] },
       { "name": "Oromia — OLA Operations", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [8.0, 39.0] }
     ],
-    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 }
+    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 },
+    "aircraft": [
+      { "type": "Bayraktar TB2", "operator": "ENDF", "role": "Strike UCAV", "count": 8, "status": "active" },
+      { "type": "Mohajer-6", "operator": "ENDF", "role": "ISR/Strike", "count": 4, "status": "active" },
+      { "type": "Wing Loong I", "operator": "ENDF", "role": "Strike UCAV (UAE)", "count": 3, "status": "active" },
+      { "type": "Mi-35 Hind", "operator": "ENDF", "role": "Attack Helicopter", "count": 6, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "MAM-C", "type": "Smart Micro Munition", "operator": "ENDF", "usage": "Precision strike from TB2", "dailyUse": 4 },
+      { "name": "Qaem-5", "type": "PGM", "operator": "ENDF/Iran", "usage": "Mohajer strikes", "dailyUse": 2 },
+      { "name": "DShK 12.7mm", "type": "Heavy Machine Gun", "operator": "Fano", "usage": "Anti-aircraft", "dailyUse": 5 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-04", "target": "Fano militia camp near Gondar", "weapon": "MAM-C (2x)", "aircraft": "Bayraktar TB2", "operator": "ENDF", "result": "Camp destroyed" }
+    ]
   },
   {
     "id": "south-china-sea",
@@ -300,6 +509,28 @@
       { "name": "Scarborough Shoal", "type": "naval", "intensity": "LOW", "uasPerDay": 1, "center": [15.2, 117.8] },
       { "name": "Taiwan Strait", "type": "naval", "intensity": "LOW", "uasPerDay": 5, "center": [24.0, 119.0] }
     ],
-    "killChain": { "detect": 5, "classify": 3, "track": 4, "engage": 0, "neutralize": 0 }
+    "killChain": { "detect": 5, "classify": 3, "track": 4, "engage": 0, "neutralize": 0 },
+    "aircraft": [
+      { "type": "J-20 Mighty Dragon", "operator": "PLA", "role": "Stealth Air Superiority", "count": 50, "status": "active" },
+      { "type": "J-16", "operator": "PLA", "role": "Multirole Strike", "count": 120, "status": "active" },
+      { "type": "J-15 Flying Shark", "operator": "PLA Navy", "role": "Carrier Fighter", "count": 40, "status": "active" },
+      { "type": "H-6K/N", "operator": "PLA", "role": "Strategic Bomber", "count": 30, "status": "active" },
+      { "type": "GJ-11 Sharp Sword", "operator": "PLA", "role": "Stealth UCAV", "count": 20, "status": "active" },
+      { "type": "F-16V Viper", "operator": "Taiwan", "role": "Multirole", "count": 140, "status": "active" },
+      { "type": "P-8A Poseidon", "operator": "US Navy", "role": "Maritime Patrol", "count": 4, "status": "active" },
+      { "type": "ScanEagle", "operator": "Philippines", "role": "ISR", "count": 6, "status": "active" }
+    ],
+    "weapons": [
+      { "name": "DF-21D ASBM", "type": "Anti-Ship Ballistic Missile", "operator": "PLA", "usage": "Carrier denial (standby)", "dailyUse": 0 },
+      { "name": "YJ-12 ASCM", "type": "Anti-Ship Cruise Missile", "operator": "PLA", "usage": "Naval strike (standby)", "dailyUse": 0 },
+      { "name": "Hsiung Feng III", "type": "Supersonic ASCM", "operator": "Taiwan", "usage": "Anti-invasion defense", "dailyUse": 0 },
+      { "name": "Water Cannon", "type": "Non-Lethal", "operator": "China Coast Guard", "usage": "Harassment of Philippine vessels", "dailyUse": 3 },
+      { "name": "Military-Grade Laser", "type": "Directed Energy", "operator": "China Coast Guard", "usage": "Blinding Philippine crew", "dailyUse": 1 }
+    ],
+    "recentStrikes": [
+      { "date": "2026-03-05", "target": "Philippine resupply boat", "weapon": "Water cannon (3 vessels)", "aircraft": "N/A", "operator": "China Coast Guard", "result": "Resupply mission blocked" },
+      { "date": "2026-03-04", "target": "Taiwan ADIZ (30+ aircraft incursion)", "weapon": "None — gray zone", "aircraft": "J-16 (12x), J-10C (8x), H-6K (4x)", "operator": "PLA", "result": "Taiwan scrambled F-16V interceptors" },
+      { "date": "2026-03-03", "target": "Spratly Islands FONOP", "weapon": "None — shadowing", "aircraft": "J-15 overflight", "operator": "PLA Navy", "result": "USS Ralph Johnson completed transit" }
+    ]
   }
 ]
