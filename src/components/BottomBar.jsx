@@ -1,50 +1,43 @@
 import React, { useState, useEffect } from 'react'
 
 export default function BottomBar({ stats }) {
-  const [scrollPos, setScrollPos] = useState(0)
+  const [uptime, setUptime] = useState(0)
 
   useEffect(() => {
+    const start = performance.now()
     const interval = setInterval(() => {
-      setScrollPos(prev => prev - 1)
-    }, 30)
+      setUptime(Math.floor((performance.now() - start) / 1000))
+    }, 1000)
     return () => clearInterval(interval)
   }, [])
 
-  const tickerItems = [
-    'GOD\'S EYE ACTIVE',
-    `ACTIVE CONFLICTS: ${stats.zones || 0}`,
-    `ENGAGEMENTS TODAY: ${stats.incidents || 0}`,
-    `NAVAL ASSETS TRACKED: ${stats.naval || 0}`,
-    `AIRCRAFT IN THEATER: ${stats.aircraft || '0'}`,
-    'OPEN SOURCE INTELLIGENCE',
-    'TANGODOWN.LIVE',
-    'ALL DATA SOURCED FROM OSINT',
-    'ENGAGEMENT FEED: SIMULATED',
-    `GLOBAL THREAT LEVEL: ${stats.threatLevel || 'ELEVATED'}`,
-  ]
-
-  const tickerText = tickerItems.join('  ///  ')
-  const doubledText = `${tickerText}  ///  ${tickerText}`
+  const formatUptime = (s) => {
+    const h = Math.floor(s / 3600)
+    const m = Math.floor((s % 3600) / 60)
+    const sec = s % 60
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  }
 
   return (
-    <div className="bottom-bar">
-      <div className="bottom-bar-left">
-        <span className="osint-badge">OSINT</span>
-        <span className="system-status">SYS NOMINAL</span>
+    <div className="status-bar">
+      <div className="status-bar-section">
+        <span className="status-bar-dot status-bar-dot-green" />
+        <span>SYSTEM NOMINAL</span>
       </div>
-
-      <div className="bottom-bar-ticker">
-        <div
-          className="ticker-content"
-          style={{ transform: `translateX(${scrollPos}px)` }}
-        >
-          {doubledText}
-        </div>
+      <div className="status-bar-section">
+        <span className="status-bar-active-label">GOD'S EYE ACTIVE</span>
+        <span className="status-bar-divider">|</span>
+        <span>{stats.zones || 0} ACTIVE CONFLICTS</span>
+        <span className="status-bar-divider">|</span>
+        <span>{stats.incidents || 0} ENGAGEMENTS/DAY</span>
+        <span className="status-bar-divider">|</span>
+        <span>{stats.naval || 0} NAVAL ASSETS TRACKED</span>
+        <span className="status-bar-divider">|</span>
+        <span className="status-bar-tdl">TANGODOWN.LIVE</span>
       </div>
-
-      <div className="bottom-bar-right">
-        <span className="classification-badge">UNCLASSIFIED</span>
-        <span className="version-tag">v1.0.0</span>
+      <div className="status-bar-section">
+        <span>SESSION: {formatUptime(uptime)}</span>
+        <span className="status-bar-dot status-bar-dot-green" />
       </div>
     </div>
   )

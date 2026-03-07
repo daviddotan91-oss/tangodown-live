@@ -1,291 +1,550 @@
 import React, { useRef, useMemo, useCallback, useState, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Stars, Sphere, Html } from '@react-three/drei'
+import { OrbitControls, Stars, Html } from '@react-three/drei'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
-import * as topojson from 'topojson-client'
+import { feature } from 'topojson-client'
 import GlobeMarkers from './GlobeMarkers'
 import ArcTraces from './ArcTraces'
 import TacticalOverlay from './TacticalOverlay'
 import { latLngToVector3 } from '../utils/geoUtils'
+import { getIntensityColor } from '../utils/dataUtils'
 
-// Convert lng/lat to equirectangular canvas coordinates
-function project(lng, lat, w, h) {
-  const x = ((lng + 180) / 360) * w
-  const y = ((90 - lat) / 180) * h
-  return [x, y]
+const GLOBE_RADIUS = 1
+
+function latLngToVec3(lat, lng, radius) {
+  const phi = (90 - lat) * (Math.PI / 180)
+  const theta = (lng + 180) * (Math.PI / 180)
+  return new THREE.Vector3(
+    -radius * Math.sin(phi) * Math.cos(theta),
+    radius * Math.cos(phi),
+    radius * Math.sin(phi) * Math.sin(theta)
+  )
 }
 
-// Draw a GeoJSON polygon ring onto canvas
-function drawRing(ctx, ring, w, h) {
-  for (let i = 0; i < ring.length; i++) {
-    const [x, y] = project(ring[i][0], ring[i][1], w, h)
-    if (i === 0) ctx.moveTo(x, y)
-    else ctx.lineTo(x, y)
+function geoToLines(coordinates, radius) {
+  const points = []
+  for (let i = 0; i < coordinates.length - 1; i++) {
+    const [lng1, lat1] = coordinates[i]
+    const [lng2, lat2] = coordinates[i + 1]
+    points.push(
+      latLngToVec3(lat1, lng1, radius),
+      latLngToVec3(lat2, lng2, radius)
+    )
   }
+  return points
 }
 
-// Build the earth texture from TopoJSON data
-function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
-  const W = 4096
-  const H = 2048
-  const canvas = document.createElement('canvas')
-  canvas.width = W
-  canvas.height = H
-  const ctx = canvas.getContext('2d')
+// Filled country polygons — warm dark landmass
+function CountryFills() {
+  const [geos, setGeos] = useState([])
 
-  // Deep black ocean
-  ctx.fillStyle = '#0A0A0F'
-  ctx.fillRect(0, 0, W, H)
-
-  // Subtle grid lines
-  ctx.strokeStyle = '#1a1510'
-  ctx.lineWidth = 0.5
-  for (let i = 0; i < 36; i++) {
-    ctx.beginPath()
-    ctx.moveTo((i / 36) * W, 0)
-    ctx.lineTo((i / 36) * W, H)
-    ctx.stroke()
-  }
-  for (let i = 0; i < 18; i++) {
-    ctx.beginPath()
-    ctx.moveTo(0, (i / 18) * H)
-    ctx.lineTo(W, (i / 18) * H)
-    ctx.stroke()
-  }
-
-  // Draw land masses — fill
-  ctx.fillStyle = '#141018'
-  landGeoJSON.features.forEach(feature => {
-    const geom = feature.geometry
-    if (geom.type === 'Polygon') {
-      ctx.beginPath()
-      geom.coordinates.forEach(ring => drawRing(ctx, ring, W, H))
-      ctx.fill()
-    } else if (geom.type === 'MultiPolygon') {
-      geom.coordinates.forEach(polygon => {
-        ctx.beginPath()
-        polygon.forEach(ring => drawRing(ctx, ring, W, H))
-        ctx.fill()
-      })
-    }
-  })
-
-  // Draw coastline outlines — faint red/amber
-  ctx.strokeStyle = '#FF444420'
-  ctx.lineWidth = 1.2
-  landGeoJSON.features.forEach(feature => {
-    const geom = feature.geometry
-    if (geom.type === 'Polygon') {
-      geom.coordinates.forEach(ring => {
-        ctx.beginPath()
-        drawRing(ctx, ring, W, H)
-        ctx.closePath()
-        ctx.stroke()
-      })
-    } else if (geom.type === 'MultiPolygon') {
-      geom.coordinates.forEach(polygon => {
-        polygon.forEach(ring => {
-          ctx.beginPath()
-          drawRing(ctx, ring, W, H)
-          ctx.closePath()
-          ctx.stroke()
-        })
-      })
-    }
-  })
-
-  // Brighter coastline glow pass
-  ctx.strokeStyle = '#FF440010'
-  ctx.lineWidth = 3
-  landGeoJSON.features.forEach(feature => {
-    const geom = feature.geometry
-    if (geom.type === 'Polygon') {
-      geom.coordinates.forEach(ring => {
-        ctx.beginPath()
-        drawRing(ctx, ring, W, H)
-        ctx.closePath()
-        ctx.stroke()
-      })
-    } else if (geom.type === 'MultiPolygon') {
-      geom.coordinates.forEach(polygon => {
-        polygon.forEach(ring => {
-          ctx.beginPath()
-          drawRing(ctx, ring, W, H)
-          ctx.closePath()
-          ctx.stroke()
-        })
-      })
-    }
-  })
-
-  // Draw country borders
-  if (countriesGeoJSON) {
-    ctx.strokeStyle = '#FFB80010'
-    ctx.lineWidth = 0.6
-    countriesGeoJSON.features.forEach(feature => {
-      const geom = feature.geometry
-      if (geom.type === 'Polygon') {
-        geom.coordinates.forEach(ring => {
-          ctx.beginPath()
-          drawRing(ctx, ring, W, H)
-          ctx.closePath()
-          ctx.stroke()
-        })
-      } else if (geom.type === 'MultiPolygon') {
-        geom.coordinates.forEach(polygon => {
-          polygon.forEach(ring => {
-            ctx.beginPath()
-            drawRing(ctx, ring, W, H)
-            ctx.closePath()
-            ctx.stroke()
-          })
-        })
-      }
-    })
-  }
-
-  const texture = new THREE.CanvasTexture(canvas)
-  texture.wrapS = THREE.RepeatWrapping
-  texture.wrapT = THREE.ClampToEdgeWrapping
-  return texture
-}
-
-function GlobeMesh({ conflicts, incidents, feed, naval, onIncidentClick, selectedIncident }) {
-  const meshRef = useRef()
-  const atmosphereRef = useRef()
-  const cloudsRef = useRef()
-  const [earthTexture, setEarthTexture] = useState(null)
-
-  // Load TopoJSON and build texture with country borders
   useEffect(() => {
-    Promise.all([
-      import('world-atlas/land-50m.json'),
-      import('world-atlas/countries-50m.json')
-    ]).then(([landTopo, countrTopo]) => {
-      const landData = landTopo.default || landTopo
-      const countrData = countrTopo.default || countrTopo
-      const land = topojson.feature(landData, landData.objects.land)
-      const countries = topojson.feature(countrData, countrData.objects.countries)
-      setEarthTexture(buildEarthTexture(land, countries))
+    import('world-atlas/countries-110m.json').then(worldTopo => {
+      const data = worldTopo.default || worldTopo
+      const countries = feature(data, data.objects.countries)
+      const geometries = []
+      countries.features.forEach(feat => {
+        const geom = feat.geometry
+        const rings = []
+        if (geom.type === 'Polygon') rings.push(geom.coordinates[0])
+        else if (geom.type === 'MultiPolygon') geom.coordinates.forEach(p => rings.push(p[0]))
+
+        rings.forEach(ring => {
+          if (ring.length < 4) return
+          const r = GLOBE_RADIUS + 0.001
+          const pts = ring.map(([lng, lat]) => latLngToVec3(lat, lng, r))
+          let cx = 0, cy = 0, cz = 0
+          pts.forEach(p => { cx += p.x; cy += p.y; cz += p.z })
+          cx /= pts.length; cy /= pts.length; cz /= pts.length
+          const centerLen = Math.sqrt(cx * cx + cy * cy + cz * cz)
+          cx = cx / centerLen * r; cy = cy / centerLen * r; cz = cz / centerLen * r
+
+          const vertices = [cx, cy, cz]
+          pts.forEach(p => vertices.push(p.x, p.y, p.z))
+          const indices = []
+          for (let i = 1; i < pts.length; i++) {
+            indices.push(0, i, i + 1 <= pts.length ? i + 1 : 1)
+          }
+          const geo = new THREE.BufferGeometry()
+          geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
+          geo.setIndex(indices)
+          geo.computeVertexNormals()
+          geometries.push(geo)
+        })
+      })
+      setGeos(geometries)
     })
   }, [])
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.0003
+  return (
+    <group>
+      {geos.map((geo, i) => (
+        <mesh key={i} geometry={geo}>
+          <meshBasicMaterial
+            color="#2a1e10"
+            transparent
+            opacity={0.4}
+            side={THREE.DoubleSide}
+            depthWrite={false}
+          />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+// Country boundary lines
+function CountryBoundaries() {
+  const [geometry, setGeometry] = useState(null)
+
+  useEffect(() => {
+    import('world-atlas/countries-110m.json').then(worldTopo => {
+      const data = worldTopo.default || worldTopo
+      const countries = feature(data, data.objects.countries)
+      const points = []
+      const r = GLOBE_RADIUS + 0.0015
+      countries.features.forEach(feat => {
+        const geom = feat.geometry
+        if (geom.type === 'Polygon') {
+          geom.coordinates.forEach(ring => points.push(...geoToLines(ring, r)))
+        } else if (geom.type === 'MultiPolygon') {
+          geom.coordinates.forEach(polygon =>
+            polygon.forEach(ring => points.push(...geoToLines(ring, r)))
+          )
+        }
+      })
+      setGeometry(new THREE.BufferGeometry().setFromPoints(points))
+    })
+  }, [])
+
+  if (!geometry) return null
+  return (
+    <lineSegments geometry={geometry}>
+      <lineBasicMaterial color="#6a5a30" transparent opacity={0.25} />
+    </lineSegments>
+  )
+}
+
+// Coordinate grid
+function Graticule() {
+  const geometry = useMemo(() => {
+    const points = []
+    const r = GLOBE_RADIUS + 0.001
+    for (let lat = -80; lat <= 80; lat += 30) {
+      for (let lng = -180; lng < 180; lng += 3) {
+        points.push(latLngToVec3(lat, lng, r), latLngToVec3(lat, lng + 3, r))
+      }
     }
-    if (cloudsRef.current) {
-      cloudsRef.current.rotation.y += 0.0005
+    for (let lng = -180; lng < 180; lng += 30) {
+      for (let lat = -80; lat < 80; lat += 3) {
+        points.push(latLngToVec3(lat, lng, r), latLngToVec3(lat + 3, lng, r))
+      }
     }
-    if (atmosphereRef.current) {
-      // Pulse atmosphere based on global threat level
-      const pulse = Math.sin(state.clock.elapsedTime * 0.5) * 0.05 + 1.0
-      atmosphereRef.current.scale.setScalar(pulse)
-    }
+    return new THREE.BufferGeometry().setFromPoints(points)
+  }, [])
+
+  return (
+    <lineSegments geometry={geometry}>
+      <lineBasicMaterial color="#2a2010" transparent opacity={0.1} />
+    </lineSegments>
+  )
+}
+
+// Hotspot glow clusters
+function HotspotGlow({ incidents }) {
+  const hotspots = useMemo(() => {
+    const cells = {}
+    const cellSize = 8
+    incidents.forEach(inc => {
+      if (!inc.lat || !inc.lng) return
+      const key = `${Math.round(inc.lat / cellSize) * cellSize},${Math.round(inc.lng / cellSize) * cellSize}`
+      if (!cells[key]) cells[key] = { lat: 0, lng: 0, count: 0 }
+      cells[key].lat += inc.lat
+      cells[key].lng += inc.lng
+      cells[key].count += 1
+    })
+    return Object.values(cells)
+      .filter(c => c.count >= 2)
+      .map(c => ({
+        lat: c.lat / c.count,
+        lng: c.lng / c.count,
+        intensity: Math.min(c.count / 12, 1),
+      }))
+  }, [incidents])
+
+  const groupRef = useRef()
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return
+    groupRef.current.children.forEach((child, i) => {
+      if (child.material) {
+        const base = hotspots[i]?.intensity || 0.1
+        child.material.opacity = base * 0.12 + 0.02 * Math.sin(clock.elapsedTime * 0.8 + i)
+      }
+    })
   })
 
   return (
-    <group>
-      {/* Main Globe */}
-      <mesh ref={meshRef}>
-        <sphereGeometry args={[1, 64, 64]} />
-        {earthTexture ? (
-          <meshStandardMaterial
-            map={earthTexture}
-            roughness={0.85}
-            metalness={0.1}
-          />
-        ) : (
-          <meshStandardMaterial
-            color="#060a12"
-            roughness={0.85}
-            metalness={0.1}
-          />
-        )}
-      </mesh>
-
-      {/* Cloud Layer */}
-      <mesh ref={cloudsRef}>
-        <sphereGeometry args={[1.005, 64, 64]} />
-        <meshStandardMaterial
-          transparent
-          opacity={0.03}
-          color="#2a1510"
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Atmosphere Glow — red/amber */}
-      <mesh ref={atmosphereRef}>
-        <sphereGeometry args={[1.08, 64, 64]} />
-        <meshBasicMaterial
-          color="#FF4444"
-          transparent
-          opacity={0.06}
-          side={THREE.BackSide}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Inner Glow — warm */}
-      <mesh>
-        <sphereGeometry args={[1.15, 64, 64]} />
-        <meshBasicMaterial
-          color="#331a00"
-          transparent
-          opacity={0.06}
-          side={THREE.BackSide}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Conflict zone hotspot glows */}
-      {conflicts.map(conflict => {
-        const pos = latLngToVector3(conflict.center[0], conflict.center[1], 1.001)
-        const color = conflict.intensity === 'CRITICAL' ? '#FF2244' :
-                      conflict.intensity === 'HIGH' ? '#FF6644' :
-                      conflict.intensity === 'MEDIUM' ? '#FFAA44' : '#44AA88'
+    <group ref={groupRef}>
+      {hotspots.map((h, i) => {
+        const pos = latLngToVec3(h.lat, h.lng, GLOBE_RADIUS + 0.002)
+        const normal = pos.clone().normalize()
+        const q = new THREE.Quaternion()
+        q.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal)
+        const size = 0.04 + h.intensity * 0.1
         return (
-          <mesh key={conflict.id} position={pos}>
-            <sphereGeometry args={[conflict.radius * 0.025, 16, 16]} />
+          <mesh key={i} position={pos} quaternion={q}>
+            <circleGeometry args={[size, 24]} />
             <meshBasicMaterial
-              color={color}
+              color={h.intensity > 0.5 ? '#FF4444' : '#FFB800'}
               transparent
-              opacity={0.25}
+              opacity={h.intensity * 0.12}
+              side={THREE.DoubleSide}
               depthWrite={false}
             />
           </mesh>
         )
       })}
+    </group>
+  )
+}
 
-      {/* Incident Markers */}
-      <GlobeMarkers
-        incidents={incidents}
-        onIncidentClick={onIncidentClick}
-        selectedIncident={selectedIncident}
-        globeRef={meshRef}
+// Atmosphere shader — Overwatch style
+function Atmosphere({ threatLevel = 0 }) {
+  const shaderRef = useRef()
+
+  const uniforms = useMemo(() => ({
+    glowColor: { value: new THREE.Color('#FFB800') },
+    viewVector: { value: new THREE.Vector3(0, 0, 1) },
+    intensity: { value: 0.4 },
+  }), [])
+
+  useFrame(({ camera }) => {
+    if (shaderRef.current) {
+      shaderRef.current.uniforms.viewVector.value.copy(camera.position)
+      const t = Math.min(threatLevel, 1)
+      const color = shaderRef.current.uniforms.glowColor.value
+      color.setRGB(1.0, 0.72 - t * 0.45, 0.0)
+      shaderRef.current.uniforms.intensity.value = 0.4 + t * 0.25
+    }
+  })
+
+  const vertexShader = `
+    varying float vIntensity;
+    uniform vec3 viewVector;
+    void main() {
+      vec3 vNormal = normalize(normalMatrix * normal);
+      vec3 vNormel = normalize(normalMatrix * viewVector);
+      vIntensity = pow(0.7 - dot(vNormal, vNormel), 2.0);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `
+
+  const fragmentShader = `
+    uniform vec3 glowColor;
+    uniform float intensity;
+    varying float vIntensity;
+    void main() {
+      vec3 glow = glowColor * vIntensity;
+      gl_FragColor = vec4(glow, vIntensity * intensity);
+    }
+  `
+
+  return (
+    <mesh scale={[1.12, 1.12, 1.12]}>
+      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+      <shaderMaterial
+        ref={shaderRef}
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        side={THREE.BackSide}
+        blending={THREE.AdditiveBlending}
+        transparent
+        depthWrite={false}
       />
+    </mesh>
+  )
+}
 
-      {/* Arc Traces — animated missile/strike paths */}
-      <ArcTraces feed={feed} conflicts={conflicts} />
+function InnerGlow() {
+  return (
+    <mesh scale={[1.03, 1.03, 1.03]}>
+      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+      <meshBasicMaterial color="#FFB800" transparent opacity={0.04} side={THREE.BackSide} />
+    </mesh>
+  )
+}
 
-      {/* Tactical Overlay — zone rings, naval markers, theater links */}
-      <TacticalOverlay conflicts={conflicts} naval={naval} />
+// Day/night terminator shadow
+function DayNightTerminator() {
+  const shaderRef = useRef()
 
-      {/* Region Labels */}
-      {conflicts.reduce((regions, c) => {
-        if (!regions.find(r => r.region === c.region)) {
-          regions.push({ region: c.region, center: c.center, count: conflicts.filter(x => x.region === c.region).reduce((s, x) => s + x.stats.dailyEngagements, 0) })
+  const uniforms = useMemo(() => ({
+    sunDirection: { value: new THREE.Vector3(1, 0.3, 0.5).normalize() },
+  }), [])
+
+  useFrame(({ clock }) => {
+    if (shaderRef.current) {
+      const t = clock.elapsedTime * 0.05
+      shaderRef.current.uniforms.sunDirection.value.set(
+        Math.cos(t), 0.3, Math.sin(t)
+      ).normalize()
+    }
+  })
+
+  const vertexShader = `
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      vPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `
+
+  const fragmentShader = `
+    uniform vec3 sunDirection;
+    varying vec3 vNormal;
+    void main() {
+      float intensity = dot(normalize(vNormal), sunDirection);
+      float shadow = smoothstep(-0.15, 0.15, intensity);
+      float nightOpacity = (1.0 - shadow) * 0.25;
+      gl_FragColor = vec4(0.0, 0.0, 0.02, nightOpacity);
+    }
+  `
+
+  return (
+    <mesh scale={[1.002, 1.002, 1.002]}>
+      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+      <shaderMaterial
+        ref={shaderRef}
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        transparent
+        depthWrite={false}
+      />
+    </mesh>
+  )
+}
+
+// Radar sweep shader
+function RadarSweep() {
+  const shaderRef = useRef()
+
+  const uniforms = useMemo(() => ({
+    time: { value: 0 },
+  }), [])
+
+  useFrame(({ clock }) => {
+    if (shaderRef.current) {
+      shaderRef.current.uniforms.time.value = clock.elapsedTime
+    }
+  })
+
+  const vertexShader = `
+    varying vec3 vPos;
+    void main() {
+      vPos = position;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `
+
+  const fragmentShader = `
+    uniform float time;
+    varying vec3 vPos;
+    void main() {
+      float angle = atan(vPos.x, vPos.z);
+      float sweep = mod(time * 0.5, 6.28318);
+      float diff = mod(angle - sweep + 6.28318, 6.28318);
+      float intensity = smoothstep(0.6, 0.0, diff) * 0.12;
+      gl_FragColor = vec4(1.0, 0.72, 0.0, intensity);
+    }
+  `
+
+  return (
+    <mesh scale={[1.003, 1.003, 1.003]}>
+      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+      <shaderMaterial
+        ref={shaderRef}
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        transparent
+        depthWrite={false}
+        side={THREE.FrontSide}
+      />
+    </mesh>
+  )
+}
+
+// Orbit ring
+function OrbitRing() {
+  const ref = useRef()
+
+  const geometry = useMemo(() => {
+    const points = []
+    const r = GLOBE_RADIUS * 1.25
+    for (let i = 0; i <= 128; i++) {
+      const angle = (i / 128) * Math.PI * 2
+      points.push(new THREE.Vector3(Math.cos(angle) * r, 0, Math.sin(angle) * r))
+    }
+    return new THREE.BufferGeometry().setFromPoints(points)
+  }, [])
+
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.x = 1.2 + Math.sin(clock.elapsedTime * 0.1) * 0.05
+      ref.current.rotation.z = 0.3 + Math.cos(clock.elapsedTime * 0.08) * 0.03
+    }
+  })
+
+  return (
+    <group ref={ref} rotation={[1.2, 0, 0.3]}>
+      <line geometry={geometry}>
+        <lineBasicMaterial color="#FFB800" transparent opacity={0.06} />
+      </line>
+    </group>
+  )
+}
+
+// Floating data particles
+function DataParticles() {
+  const count = 200
+  const positions = useMemo(() => {
+    const pos = new Float32Array(count * 3)
+    let seed = 42
+    const rand = () => { seed = (seed * 16807 + 0) % 2147483647; return seed / 2147483647 }
+    for (let i = 0; i < count; i++) {
+      const r = GLOBE_RADIUS * (1.15 + rand() * 0.6)
+      const theta = rand() * Math.PI * 2
+      const phi = Math.acos(2 * rand() - 1)
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta)
+      pos[i * 3 + 1] = r * Math.cos(phi)
+      pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta)
+    }
+    return pos
+  }, [])
+
+  const ref = useRef()
+
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.y = clock.elapsedTime * 0.02
+      ref.current.rotation.x = Math.sin(clock.elapsedTime * 0.01) * 0.1
+    }
+  })
+
+  return (
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={count}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#FFB800"
+        size={0.004}
+        transparent
+        opacity={0.3}
+        sizeAttenuation
+        depthWrite={false}
+      />
+    </points>
+  )
+}
+
+// Base glow under globe
+function BaseGlow() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -GLOBE_RADIUS - 0.01, 0]}>
+      <circleGeometry args={[0.6, 32]} />
+      <meshBasicMaterial color="#FFB800" transparent opacity={0.04} depthWrite={false} />
+    </mesh>
+  )
+}
+
+// Compass N/S/E/W markers
+function CompassMarkers() {
+  const markers = useMemo(() => [
+    { label: 'N', lat: 85, lng: 0 },
+    { label: 'S', lat: -85, lng: 0 },
+    { label: 'E', lat: 0, lng: 90 },
+    { label: 'W', lat: 0, lng: -90 },
+  ], [])
+
+  return (
+    <group>
+      {markers.map(m => (
+        <Html
+          key={m.label}
+          position={latLngToVec3(m.lat, m.lng, GLOBE_RADIUS + 0.05)}
+          center
+          distanceFactor={3}
+          occlude={false}
+          style={{ pointerEvents: 'none' }}
+        >
+          <div style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: '8px',
+            fontWeight: 700,
+            color: 'rgba(255, 184, 0, 0.25)',
+            letterSpacing: '0.15em',
+            textShadow: '0 0 4px rgba(255, 184, 0, 0.15)',
+          }}>
+            {m.label}
+          </div>
+        </Html>
+      ))}
+    </group>
+  )
+}
+
+// Region labels with incident counts
+const REGION_LABELS = [
+  { label: 'EUROPE', lat: 52, lng: 10 },
+  { label: 'MIDDLE EAST', lat: 25, lng: 46 },
+  { label: 'EAST ASIA', lat: 38, lng: 115 },
+  { label: 'NORTH AMERICA', lat: 48, lng: -100 },
+  { label: 'SOUTH AMERICA', lat: -15, lng: -58 },
+  { label: 'AFRICA', lat: 2, lng: 22 },
+  { label: 'SOUTH ASIA', lat: 18, lng: 78 },
+  { label: 'OCEANIA', lat: -28, lng: 135 },
+]
+
+function RegionLabels({ conflicts }) {
+  const counts = useMemo(() => {
+    const c = {}
+    REGION_LABELS.forEach(r => {
+      c[r.label] = conflicts.filter(conf => {
+        const regionMap = {
+          'EUROPE': 'Europe', 'MIDDLE EAST': 'Middle East',
+          'EAST ASIA': 'East Asia', 'NORTH AMERICA': 'North America',
+          'SOUTH AMERICA': 'South America', 'AFRICA': 'Africa',
+          'SOUTH ASIA': 'South Asia', 'OCEANIA': 'Oceania',
         }
-        return regions
-      }, []).map(region => {
-        const pos = latLngToVector3(region.center[0], region.center[1], 1.12)
+        return conf.region === regionMap[r.label]
+      }).reduce((s, x) => s + (x.stats?.dailyEngagements || 0), 0)
+    })
+    return c
+  }, [conflicts])
+
+  return (
+    <group>
+      {REGION_LABELS.map(r => {
+        const pos = latLngToVec3(r.lat, r.lng, GLOBE_RADIUS + 0.04)
+        const count = counts[r.label] || 0
+        if (count === 0) return null
         return (
-          <Html key={region.region} position={pos} center distanceFactor={3} zIndexRange={[10, 0]}>
-            <div className="globe-region-label">
-              <span className="region-name">{region.region}</span>
-              <span className="region-count">{region.count}</span>
+          <Html key={r.label} position={pos} center distanceFactor={3.5} occlude={false} zIndexRange={[0, 5]} style={{ pointerEvents: 'none' }}>
+            <div className="region-label">
+              <span className="region-label-name">{r.label}</span>
+              <span className="region-label-count">{count}</span>
             </div>
           </Html>
         )
@@ -294,7 +553,62 @@ function GlobeMesh({ conflicts, incidents, feed, naval, onIncidentClick, selecte
   )
 }
 
-// Camera controller — handles fly-to targets and auto-tour
+// Fighter jet & ship SVG silhouettes on the globe
+function WarAssets({ conflicts }) {
+  const FRIENDLY_OPS = ['US', 'Ukraine', 'Israel', 'South Korea', 'Taiwan', 'France', 'UK', 'Philippines']
+
+  // Generate aircraft positions near conflict fronts
+  const [aircraftPositions, setAircraftPositions] = useState([])
+
+  useEffect(() => {
+    const generate = () => {
+      const result = []
+      conflicts.forEach(conflict => {
+        if (!conflict.fronts) return
+        const count = conflict.intensity === 'CRITICAL' ? 3 : conflict.intensity === 'HIGH' ? 2 : 1
+        for (let i = 0; i < count; i++) {
+          const front = conflict.fronts[Math.floor(Math.random() * conflict.fronts.length)]
+          if (!front?.center) continue
+          const isFriendly = Math.random() > 0.4
+          result.push({
+            id: `${conflict.id}-ac-${i}`,
+            lat: front.center[0] + (Math.random() - 0.5) * 2,
+            lng: front.center[1] + (Math.random() - 0.5) * 2,
+            isFriendly,
+            type: isFriendly ? 'F-35' : 'Su-35',
+          })
+        }
+      })
+      return result
+    }
+    setAircraftPositions(generate())
+    const interval = setInterval(() => setAircraftPositions(generate()), 12000)
+    return () => clearInterval(interval)
+  }, [conflicts])
+
+  return (
+    <group>
+      {/* Aircraft — fighter jet silhouette SVGs */}
+      {aircraftPositions.map(ac => {
+        const pos = latLngToVec3(ac.lat, ac.lng, GLOBE_RADIUS + 0.012)
+        const col = ac.isFriendly ? '#00FF88' : '#FF4444'
+        const fill = ac.isFriendly ? 'rgba(0,255,136,0.25)' : 'rgba(255,68,68,0.25)'
+        return (
+          <Html key={ac.id} position={pos} center distanceFactor={3.2} occlude={false} zIndexRange={[10, 20]}>
+            <div className={`war-globe-aircraft ${ac.isFriendly ? 'friendly' : 'hostile'}`} title={`${ac.type}`}>
+              <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
+                <path d="M16 2 L17.5 10 L27 14 L26 16 L17.5 15 L18 24 L22 27 L21 29 L16 26 L11 29 L10 27 L14 24 L14.5 15 L6 16 L5 14 L14.5 10 Z"
+                  fill={fill} stroke={col} strokeWidth="1" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Html>
+        )
+      })}
+    </group>
+  )
+}
+
+// Camera controller
 function CameraController({ flyToTarget, conflicts, onTourZone }) {
   const { camera } = useThree()
   const controlsRef = useRef()
@@ -303,33 +617,27 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
   const tourActiveRef = useRef(false)
   const flyingRef = useRef(false)
   const targetPosRef = useRef(new THREE.Vector3())
-  const targetLookRef = useRef(new THREE.Vector3(0, 0, 0))
   const lastInteraction = useRef(Date.now())
 
-  // Sort conflicts by intensity for tour priority
   const tourOrder = useMemo(() => {
     const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 }
     return [...conflicts].sort((a, b) => (order[a.intensity] ?? 4) - (order[b.intensity] ?? 4))
   }, [conflicts])
 
-  // Compute camera position to look at a lat/lng from outside the globe
   const getCameraPosition = useCallback((lat, lng, distance = 2.2) => {
     const pos = latLngToVector3(lat, lng, distance)
     return new THREE.Vector3(pos[0], pos[1], pos[2])
   }, [])
 
-  // Handle explicit fly-to requests
   useEffect(() => {
     if (!flyToTarget) return
     const target = getCameraPosition(flyToTarget[0], flyToTarget[1], 2.0)
     targetPosRef.current.copy(target)
-    targetLookRef.current.set(0, 0, 0)
     flyingRef.current = true
     tourActiveRef.current = false
     lastInteraction.current = Date.now()
   }, [flyToTarget, getCameraPosition])
 
-  // Detect user interaction to pause tour
   useEffect(() => {
     const onInteract = () => {
       lastInteraction.current = Date.now()
@@ -347,11 +655,9 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
     const now = Date.now()
     const idleSeconds = (now - lastInteraction.current) / 1000
 
-    // Start auto-tour after 12 seconds of idle
     if (!tourActiveRef.current && !flyingRef.current && idleSeconds > 12 && tourOrder.length > 0) {
       tourActiveRef.current = true
       idleTimerRef.current = 0
-      // Pick next zone
       const zone = tourOrder[tourIndexRef.current % tourOrder.length]
       const target = getCameraPosition(zone.center[0], zone.center[1], 2.2)
       targetPosRef.current.copy(target)
@@ -359,7 +665,6 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
       onTourZone?.(zone)
     }
 
-    // Cycle to next zone every 8 seconds during tour
     if (tourActiveRef.current) {
       idleTimerRef.current += delta
       if (idleTimerRef.current > 8) {
@@ -373,11 +678,9 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
       }
     }
 
-    // Smooth camera interpolation
     if (flyingRef.current) {
       camera.position.lerp(targetPosRef.current, delta * 1.2)
-      const dist = camera.position.distanceTo(targetPosRef.current)
-      if (dist < 0.02) {
+      if (camera.position.distanceTo(targetPosRef.current) < 0.02) {
         flyingRef.current = false
       }
     }
@@ -393,36 +696,63 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
       dampingFactor={0.05}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
-      autoRotate={false}
     />
   )
 }
 
-function Scene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
+function GlobeScene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
+  const threatLevel = useMemo(() => Math.min(incidents.length / 100, 1), [incidents])
+
   return (
     <>
-      <ambientLight intensity={0.12} />
-      <directionalLight position={[5, 3, 5]} intensity={0.5} color="#aa8866" />
-      <pointLight position={[-5, -3, -5]} intensity={0.15} color="#1a0a00" />
+      <ambientLight intensity={0.3} />
+      <pointLight position={[5, 3, 5]} intensity={0.5} />
 
-      <Stars
-        radius={100}
-        depth={50}
-        count={5000}
-        factor={4}
-        saturation={0}
-        fade
-        speed={0.5}
-      />
+      <Stars radius={100} depth={60} count={1500} factor={3} saturation={0} fade speed={0.5} />
 
-      <GlobeMesh
-        conflicts={conflicts}
-        incidents={incidents}
-        feed={feed}
-        naval={naval}
-        onIncidentClick={onIncidentClick}
-        selectedIncident={selectedIncident}
-      />
+      <group name="globe-group">
+        {/* Base sphere */}
+        <mesh>
+          <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+          <meshPhongMaterial
+            color="#100a05"
+            emissive="#0a0805"
+            emissiveIntensity={0.5}
+            shininess={5}
+          />
+        </mesh>
+
+        <CountryFills />
+        <Graticule />
+        <CountryBoundaries />
+        <Atmosphere threatLevel={threatLevel} />
+        <InnerGlow />
+        <DayNightTerminator />
+        <RadarSweep />
+        <OrbitRing />
+        <DataParticles />
+        <BaseGlow />
+        <CompassMarkers />
+
+        <HotspotGlow incidents={incidents} />
+        <RegionLabels conflicts={conflicts} />
+
+        {/* Incident Markers */}
+        <GlobeMarkers
+          incidents={incidents}
+          onIncidentClick={onIncidentClick}
+          selectedIncident={selectedIncident}
+        />
+
+        {/* Arc Traces */}
+        <ArcTraces feed={feed} conflicts={conflicts} />
+
+        {/* Tactical Overlay */}
+        <TacticalOverlay conflicts={conflicts} naval={naval} />
+
+        {/* Fighter jet silhouettes */}
+        <WarAssets conflicts={conflicts} />
+      </group>
 
       <CameraController
         flyToTarget={flyToTarget}
@@ -475,11 +805,12 @@ export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, 
     <div className="globe-container">
       <GlobeErrorBoundary>
         <Canvas
-          camera={{ position: [0, 0, 2.5], fov: 45 }}
+          camera={{ position: [0, 1, 5], fov: 45 }}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           dpr={[1, 2]}
+          style={{ background: 'transparent' }}
         >
-          <Scene
+          <GlobeScene
             conflicts={conflicts}
             incidents={incidents}
             feed={feed}
@@ -492,11 +823,10 @@ export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, 
         </Canvas>
       </GlobeErrorBoundary>
 
-      {/* CRT Overlay */}
-      <div className="crt-overlay" />
-
-      {/* Radar Sweep */}
-      <div className="radar-sweep" />
+      {/* War scanlines overlay */}
+      <div className="war-scanlines" />
+      {/* Vignette overlay */}
+      <div className="war-vignette" />
     </div>
   )
 }

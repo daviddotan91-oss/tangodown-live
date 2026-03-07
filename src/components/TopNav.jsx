@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react'
 
 export default function TopNav({ activeView, setActiveView, stats }) {
   const [utcTime, setUtcTime] = useState('')
-  const [utcDate, setUtcDate] = useState('')
 
   useEffect(() => {
     const update = () => {
       const now = new Date()
+      const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+      const day = String(now.getUTCDate()).padStart(2, '0')
+      const month = months[now.getUTCMonth()]
+      const year = now.getUTCFullYear()
       const h = String(now.getUTCHours()).padStart(2, '0')
       const m = String(now.getUTCMinutes()).padStart(2, '0')
       const s = String(now.getUTCSeconds()).padStart(2, '0')
-      setUtcTime(`${h}:${m}:${s}`)
-      const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-      setUtcDate(`${now.getUTCDate()} ${months[now.getUTCMonth()]} ${now.getUTCFullYear()}`)
+      setUtcTime(`${day} ${month} ${year} | ${h}:${m}:${s} UTC`)
     }
     update()
     const interval = setInterval(update, 1000)
@@ -20,72 +21,62 @@ export default function TopNav({ activeView, setActiveView, stats }) {
   }, [])
 
   return (
-    <nav className="top-nav">
-      <div className="top-nav-left">
-        <div className="brand">
-          <span className="brand-name">TANGODOWN</span>
-          <span className="brand-tld">.LIVE</span>
+    <div className="top-bar">
+      <div className="top-bar-left">
+        <div className="top-bar-brand">
+          <div className="top-bar-title">TANGODOWN<span className="top-bar-tld">.LIVE</span></div>
+          <div className="top-bar-subtitle">GLOBAL BATTLESPACE INTELLIGENCE</div>
         </div>
-        <span className="brand-subtitle">GLOBAL BATTLESPACE INTELLIGENCE</span>
+        <div className="top-bar-nav-btns">
+          <button
+            className={`top-bar-war-btn ${activeView === 'godseye' ? 'active' : ''}`}
+            onClick={() => setActiveView('godseye')}
+          >
+            <span className={`top-bar-war-dot ${activeView === 'godseye' ? 'pulsing' : ''}`} />
+            GOD'S EYE
+          </button>
+          <button
+            className={`top-bar-nav-btn ${activeView === 'networks' ? 'active' : ''}`}
+            onClick={() => setActiveView('networks')}
+          >
+            <span className="top-bar-nav-dot" />
+            NETWORKS
+          </button>
+          <button
+            className={`top-bar-nav-btn ${activeView === 'replay' ? 'active' : ''}`}
+            onClick={() => setActiveView('replay')}
+          >
+            <span className="top-bar-nav-dot" />
+            REPLAY
+          </button>
+          <button
+            className={`top-bar-nav-btn ${activeView === 'intel' ? 'active' : ''}`}
+            onClick={() => setActiveView('intel')}
+          >
+            <span className="top-bar-nav-dot" />
+            INTEL
+          </button>
+        </div>
       </div>
 
-      <div className="top-nav-center">
-        <button
-          className={`nav-btn ${activeView === 'godseye' ? 'active' : ''}`}
-          onClick={() => setActiveView('godseye')}
-        >
-          <span className="nav-btn-icon">&#9678;</span>
-          GOD'S EYE
-          {activeView === 'godseye' && <span className="nav-badge-red" />}
-        </button>
-        <button
-          className={`nav-btn ${activeView === 'networks' ? 'active' : ''}`}
-          onClick={() => setActiveView('networks')}
-        >
-          <span className="nav-btn-icon">&#9733;</span>
-          NETWORKS
-        </button>
-        <button
-          className={`nav-btn ${activeView === 'replay' ? 'active' : ''}`}
-          onClick={() => setActiveView('replay')}
-        >
-          <span className="nav-btn-icon">&#9654;</span>
-          REPLAY
-        </button>
-        <button
-          className={`nav-btn ${activeView === 'intel' ? 'active' : ''}`}
-          onClick={() => setActiveView('intel')}
-        >
-          <span className="nav-btn-icon">&#9881;</span>
-          INTEL
-        </button>
+      <div className="top-bar-stats">
+        <div className="top-bar-stat">
+          INCIDENTS: <span className="top-bar-stat-value">{stats.incidents || 0}</span>
+        </div>
+        <div className="top-bar-stat">
+          ACTIVE ZONES: <span className="top-bar-stat-value">{stats.zones || 0}</span>
+        </div>
+        <div className="top-bar-stat">
+          NAVAL ASSETS: <span className="top-bar-stat-value">{stats.naval || 0}</span>
+        </div>
+        <div className="top-bar-stat">
+          AIRCRAFT: <span className="top-bar-stat-value">{stats.aircraft || '0'}</span>
+        </div>
       </div>
 
-      <div className="top-nav-right">
-        <div className="nav-stats">
-          <div className="nav-stat">
-            <span className="nav-stat-label">INCIDENTS</span>
-            <span className="nav-stat-value">{stats.incidents || 0}</span>
-          </div>
-          <div className="nav-stat">
-            <span className="nav-stat-label">ZONES</span>
-            <span className="nav-stat-value">{stats.zones || 0}</span>
-          </div>
-          <div className="nav-stat">
-            <span className="nav-stat-label">NAVAL</span>
-            <span className="nav-stat-value">{stats.naval || 0}</span>
-          </div>
-          <div className="nav-stat">
-            <span className="nav-stat-label">AIRCRAFT</span>
-            <span className="nav-stat-value">{stats.aircraft || '0'}</span>
-          </div>
-        </div>
-        <div className="nav-clock">
-          <div className="clock-time">{utcTime}</div>
-          <div className="clock-date">{utcDate}</div>
-          <div className="clock-label">UTC</div>
-        </div>
+      <div className="top-bar-right">
+        {utcTime}
       </div>
-    </nav>
+    </div>
   )
 }

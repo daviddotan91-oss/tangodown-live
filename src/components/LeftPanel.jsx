@@ -1,113 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getIntensityColor } from '../utils/dataUtils'
 import ConflictZone from './ConflictZone'
 
-function ThreatGauge({ level }) {
-  const canvasRef = useRef(null)
+export default function LeftPanel({ conflicts, onConflictSelect, selectedConflict }) {
+  const [threatLevel, setThreatLevel] = useState(91)
+  const [expandedConflict, setExpandedConflict] = useState(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    const w = canvas.width
-    const h = canvas.height
+    const interval = setInterval(() => {
+      setThreatLevel(prev => {
+        const delta = (Math.random() - 0.48) * 3
+        return Math.max(55, Math.min(98, prev + delta))
+      })
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
 
-    ctx.clearRect(0, 0, w, h)
-
-    // Background arc
-    ctx.beginPath()
-    ctx.arc(w / 2, h - 10, 60, Math.PI, 0)
-    ctx.strokeStyle = '#0a1628'
-    ctx.lineWidth = 8
-    ctx.stroke()
-
-    // Threat level arc
-    const angle = Math.PI + (level / 100) * Math.PI
-    const gradient = ctx.createLinearGradient(0, 0, w, 0)
-    gradient.addColorStop(0, '#44CC44')
-    gradient.addColorStop(0.4, '#FFB800')
-    gradient.addColorStop(0.7, '#FF6644')
-    gradient.addColorStop(1, '#FF4444')
-
-    ctx.beginPath()
-    ctx.arc(w / 2, h - 10, 60, Math.PI, angle)
-    ctx.strokeStyle = gradient
-    ctx.lineWidth = 8
-    ctx.lineCap = 'round'
-    ctx.stroke()
-
-    // Needle
-    const needleAngle = Math.PI + (level / 100) * Math.PI
-    const nx = w / 2 + Math.cos(needleAngle) * 50
-    const ny = (h - 10) + Math.sin(needleAngle) * 50
-    ctx.beginPath()
-    ctx.moveTo(w / 2, h - 10)
-    ctx.lineTo(nx, ny)
-    ctx.strokeStyle = '#ffffff'
-    ctx.lineWidth = 2
-    ctx.stroke()
-
-    // Center dot
-    ctx.beginPath()
-    ctx.arc(w / 2, h - 10, 4, 0, Math.PI * 2)
-    ctx.fillStyle = '#FFB800'
-    ctx.fill()
-
-  }, [level])
-
-  return (
-    <div className="threat-gauge">
-      <div className="threat-gauge-title">GLOBAL THREAT LEVEL</div>
-      <canvas ref={canvasRef} width={160} height={90} className="threat-gauge-canvas" />
-      <div className="threat-gauge-value" style={{
-        color: level > 80 ? '#FF4444' : level > 60 ? '#FF6644' : level > 40 ? '#FFB800' : '#44CC44'
-      }}>
-        {level}%
-      </div>
-      <div className="threat-gauge-label">
-        {level > 80 ? 'CRITICAL' : level > 60 ? 'ELEVATED' : level > 40 ? 'GUARDED' : 'LOW'}
-      </div>
-    </div>
-  )
-}
-
-function KillChainBar({ killChain }) {
-  if (!killChain) return null
-  const steps = [
-    { key: 'detect', label: 'DETECT', color: '#00AAFF' },
-    { key: 'classify', label: 'CLASSIFY', color: '#00AAFF' },
-    { key: 'track', label: 'TRACK', color: '#FFB800' },
-    { key: 'engage', label: 'ENGAGE', color: '#FF6644' },
-    { key: 'neutralize', label: 'NEUTRALIZE', color: '#FF4444' }
-  ]
-  const total = steps.reduce((s, step) => s + (killChain[step.key] || 0), 0)
-
-  return (
-    <div className="kill-chain">
-      <div className="kill-chain-title">KILL CHAIN — AVG RESPONSE</div>
-      <div className="kill-chain-total">{total}s TOTAL</div>
-      <div className="kill-chain-bars">
-        {steps.map(step => (
-          <div key={step.key} className="kill-chain-step">
-            <div className="kill-chain-label">{step.label}</div>
-            <div className="kill-chain-bar-bg">
-              <div
-                className="kill-chain-bar-fill"
-                style={{
-                  width: `${(killChain[step.key] / 60) * 100}%`,
-                  backgroundColor: step.color
-                }}
-              />
-            </div>
-            <div className="kill-chain-value" style={{ color: step.color }}>{killChain[step.key]}s</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function GlobalStats({ conflicts }) {
   const totals = conflicts.reduce((acc, c) => ({
     zones: acc.zones + 1,
     fronts: acc.fronts + (c.fronts?.length || 0),
@@ -117,46 +25,6 @@ function GlobalStats({ conflicts }) {
     engagements: acc.engagements + (c.stats?.dailyEngagements || 0)
   }), { zones: 0, fronts: 0, aircraft: 0, uas: 0, naval: 0, engagements: 0 })
 
-  const stats = [
-    { label: 'ACTIVE ZONES', value: totals.zones, color: '#FF4444' },
-    { label: 'BATTLEFRONTS', value: totals.fronts, color: '#FF6644' },
-    { label: 'AIRCRAFT', value: `${(totals.aircraft / 1000).toFixed(1)}K`, color: '#FFB800' },
-    { label: 'UAS IN THEATER', value: `${(totals.uas / 1000).toFixed(1)}K`, color: '#FFB800' },
-    { label: 'NAVAL ASSETS', value: totals.naval, color: '#FFB800' },
-    { label: 'DAILY ENGAGEMENTS', value: totals.engagements, color: '#FFB800' }
-  ]
-
-  return (
-    <div className="global-stats">
-      <div className="global-stats-title">GLOBAL STATS</div>
-      <div className="global-stats-grid">
-        {stats.map(s => (
-          <div key={s.label} className="global-stat-item">
-            <div className="global-stat-value" style={{ color: s.color }}>{s.value}</div>
-            <div className="global-stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-export default function LeftPanel({ conflicts, onConflictSelect, selectedConflict }) {
-  const [threatLevel, setThreatLevel] = useState(72)
-  const [expandedConflict, setExpandedConflict] = useState(null)
-
-  // Fluctuating threat level
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setThreatLevel(prev => {
-        const delta = (Math.random() - 0.48) * 3
-        return Math.max(55, Math.min(95, prev + delta))
-      })
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Compute a global average kill chain from the highest intensity conflict
   const primaryConflict = conflicts.find(c => c.intensity === 'CRITICAL') || conflicts[0]
   const killChain = primaryConflict?.killChain
 
@@ -169,58 +37,134 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
     }
   }
 
+  const level = Math.round(threatLevel)
+  const threatColor = level > 80 ? '#FF4444' : level > 60 ? '#FF6644' : level > 40 ? '#FFB800' : '#44CC44'
+  const threatLabel = level > 80 ? 'CRITICAL' : level > 60 ? 'ELEVATED' : level > 40 ? 'GUARDED' : 'LOW'
+
+  const killSteps = killChain ? [
+    { key: 'detect', label: 'DETECT', color: '#0088FF' },
+    { key: 'classify', label: 'CLASSIFY', color: '#00AAFF' },
+    { key: 'track', label: 'TRACK', color: '#FFB800' },
+    { key: 'engage', label: 'ENGAGE', color: '#FF6644' },
+    { key: 'neutralize', label: 'KILL', color: '#FF4444' }
+  ] : []
+  const kcTotal = killSteps.reduce((s, step) => s + (killChain?.[step.key] || 0), 0)
+
   return (
-    <div className="left-panel">
-      <div className="panel-header">
-        <span className="panel-header-icon">&#9650;</span>
-        SITUATION OVERVIEW
+    <div className="war-panel-left">
+      {/* Header */}
+      <div className="war-header">
+        <div className="war-header-title">GOD'S EYE — GLOBAL BATTLESPACE</div>
+        <div className="war-header-sub">
+          CONFLICTS: OPEN-SOURCE INTEL&nbsp;
+          <span className="war-osint-badge">● OSINT</span>
+          &nbsp;//&nbsp;
+          ENGAGEMENTS:&nbsp;
+          <span className="war-sim-badge">◇ SIMULATED</span>
+        </div>
       </div>
 
-      <div className="left-panel-scroll">
-        <ThreatGauge level={Math.round(threatLevel)} />
-        <GlobalStats conflicts={conflicts} />
-        <KillChainBar killChain={killChain} />
+      {/* Threat Level */}
+      <div className="war-threat">
+        <div className="war-panel-title">GLOBAL THREAT LEVEL</div>
+        <div className="war-threat-gauge">
+          <div
+            className="war-threat-fill"
+            style={{
+              width: `${level}%`,
+              background: `linear-gradient(90deg, #44CC44, #FFB800, #FF6644, #FF4444)`,
+              color: threatColor
+            }}
+          />
+        </div>
+        <div className="war-threat-value" style={{ color: threatColor }}>
+          {level}% — {threatLabel}
+        </div>
+      </div>
 
-        <div className="conflict-zones-section">
-          <div className="section-title">
-            CONFLICT ZONES
-            <span className="section-count">{conflicts.length}</span>
-          </div>
+      {/* Global Stats */}
+      <div className="war-global-stats">
+        <div className="war-stat">
+          <div className="war-stat-value">{totals.zones}</div>
+          <div className="war-stat-label">ACTIVE ZONES</div>
+        </div>
+        <div className="war-stat">
+          <div className="war-stat-value">{totals.fronts}</div>
+          <div className="war-stat-label">BATTLEFRONTS</div>
+        </div>
+        <div className="war-stat">
+          <div className="war-stat-value">{(totals.aircraft / 1000).toFixed(1)}K</div>
+          <div className="war-stat-label">AIRCRAFT</div>
+        </div>
+        <div className="war-stat">
+          <div className="war-stat-value">{(totals.uas / 1000).toFixed(1)}K</div>
+          <div className="war-stat-label">UAS IN THEATER</div>
+        </div>
+        <div className="war-stat">
+          <div className="war-stat-value">{totals.naval}</div>
+          <div className="war-stat-label">NAVAL ASSETS</div>
+        </div>
+        <div className="war-stat">
+          <div className="war-stat-value">{(totals.engagements / 1000).toFixed(1)}K</div>
+          <div className="war-stat-label">DAILY ENGAGEMENTS</div>
+        </div>
+      </div>
 
-          <div className="conflict-zones-list">
-            {conflicts.map(conflict => (
-              <div key={conflict.id}>
-                <div
-                  className={`conflict-zone-item ${expandedConflict?.id === conflict.id ? 'expanded' : ''}`}
-                  onClick={() => handleConflictClick(conflict)}
-                >
-                  <div className="conflict-zone-header">
-                    <span
-                      className="conflict-intensity-dot"
-                      style={{ backgroundColor: getIntensityColor(conflict.intensity) }}
-                    />
-                    <span className="conflict-zone-name">{conflict.name}</span>
-                    <span
-                      className="conflict-intensity-badge"
-                      style={{ color: getIntensityColor(conflict.intensity), borderColor: getIntensityColor(conflict.intensity) }}
-                    >
-                      {conflict.intensity}
-                    </span>
-                  </div>
-                  <div className="conflict-zone-meta">
-                    <span>{conflict.region}</span>
-                    <span>{conflict.stats.dailyEngagements} ENG/DAY</span>
-                    <span>{conflict.fronts.length} FRONTS</span>
+      {/* Kill Chain */}
+      {killChain && (
+        <div className="war-killchain">
+          <div className="war-panel-title">KILL CHAIN — AVG RESPONSE</div>
+          <div className="war-killchain-total">{kcTotal.toFixed(1)}s TOTAL</div>
+          <div className="war-killchain-stages">
+            {killSteps.map(step => {
+              const val = killChain[step.key] || 0
+              return (
+                <div key={step.key} className="war-killchain-stage">
+                  <div
+                    className="war-killchain-bar"
+                    style={{
+                      width: `${(val / 10) * 100}%`,
+                      backgroundColor: step.color,
+                      color: step.color
+                    }}
+                  />
+                  <div className="war-killchain-label">
+                    <span>{step.label}</span>
+                    <span>{val}s</span>
                   </div>
                 </div>
-
-                {expandedConflict?.id === conflict.id && (
-                  <ConflictZone conflict={conflict} />
-                )}
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
+      )}
+
+      {/* Conflict Zones */}
+      <div className="war-zone-list">
+        <div className="war-panel-title">CONFLICT ZONES</div>
+        {conflicts.map(conflict => {
+          const color = getIntensityColor(conflict.intensity)
+          const isExpanded = expandedConflict?.id === conflict.id
+          return (
+            <div key={conflict.id}>
+              <div
+                className={`war-zone-item ${isExpanded ? 'war-zone-active' : ''}`}
+                onClick={() => handleConflictClick(conflict)}
+              >
+                <div className="war-zone-header">
+                  <span className="war-zone-status" style={{ backgroundColor: color }} />
+                  <span className="war-zone-name">{conflict.name}</span>
+                </div>
+                <div className="war-zone-meta">
+                  <span className="war-zone-type">{conflict.type?.toUpperCase()}</span>
+                  <span className="war-zone-intensity" style={{ color }}>{conflict.intensity}</span>
+                  <span className="war-zone-engagements">{conflict.stats.dailyEngagements}/day</span>
+                </div>
+              </div>
+              {isExpanded && <ConflictZone conflict={conflict} />}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
