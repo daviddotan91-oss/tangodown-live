@@ -1,20 +1,74 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import OrgDossier from './OrgDossier'
 
+function simulateForces(nodes, connections, size, damping = 1.0) {
+  const { w, h } = size
+  const pad = 60
+
+  // Repulsion between all nodes
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j]
+      let dx = b.x - a.x, dy = b.y - a.y
+      let dist = Math.sqrt(dx * dx + dy * dy)
+      if (dist < 1) { dx = Math.random() - 0.5; dy = Math.random() - 0.5; dist = 1 }
+      const minDist = (a.radius + b.radius) * 3.5
+      if (dist < minDist) {
+        const force = ((minDist - dist) / minDist) * 2.5 * damping
+        const fx = (dx / dist) * force
+        const fy = (dy / dist) * force
+        a.vx -= fx; a.vy -= fy
+        b.vx += fx; b.vy += fy
+      }
+    }
+  }
+
+  // Attraction along connections (keep connected nodes closer)
+  connections.forEach(conn => {
+    if (conn.type === 'adversary') return
+    const src = nodes.find(n => n.id === conn.source)
+    const tgt = nodes.find(n => n.id === conn.target)
+    if (!src || !tgt) return
+    const dx = tgt.x - src.x, dy = tgt.y - src.y
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    const idealDist = 180
+    if (dist > idealDist) {
+      const force = ((dist - idealDist) / dist) * 0.15 * damping
+      src.vx += dx * force; src.vy += dy * force
+      tgt.vx -= dx * force; tgt.vy -= dy * force
+    }
+  })
+
+  // Apply velocity with damping + keep in bounds
+  nodes.forEach(n => {
+    n.vx *= 0.85
+    n.vy *= 0.85
+    n.x += n.vx
+    n.y += n.vy
+    n.x = Math.max(pad, Math.min(w - pad, n.x))
+    n.y = Math.max(pad, Math.min(h - pad, n.y))
+  })
+}
+
 function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
-  const [nodes, setNodes] = useState([])
-  const [canvasSize, setCanvasSize] = useState({ w: 1200, h: 700 })
+  const nodesRef = useRef([])
   const animRef = useRef(null)
-  const dragRef = useRef(null)
+  const timeRef = useRef(0)
+  const sizeRef = useRef({ w: 1200, h: 700 })
 
   // Resize canvas to fill container
   useEffect(() => {
     const updateSize = () => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        setCanvasSize({ w: Math.floor(rect.width), h: Math.floor(rect.height) })
+      if (!containerRef.current || !canvasRef.current) return
+      const rect = containerRef.current.getBoundingClientRect()
+      const w = Math.floor(rect.width)
+      const h = Math.floor(rect.height)
+      if (w > 0 && h > 0) {
+        canvasRef.current.width = w
+        canvasRef.current.height = h
+        sizeRef.current = { w, h }
       }
     }
     updateSize()
@@ -22,54 +76,83 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
     return () => window.removeEventListener('resize', updateSize)
   }, [])
 
-  // Initialize node positions
+  // Initialize nodes + run force sim + draw loop
   useEffect(() => {
-    if (!organizations.length) return
-    const w = canvasSize.w
-    const h = canvasSize.h
-    const initial = organizations.map((org, i) => {
-      // Position by cluster — spread across the full canvas
-      const cluster = networks.clusters?.find(c => c.members.includes(org.id))
-      let cx = w / 2, cy = h / 2
-      if (cluster?.id === 'axis-of-resistance') { cx = w * 0.28; cy = h * 0.35 }
-      else if (cluster?.id === 'aq-network') { cx = w * 0.72; cy = h * 0.3 }
-      else if (cluster?.id === 'isis-network') { cx = w * 0.65; cy = h * 0.7 }
-      else { cx = w * 0.15 + (i % 5) * (w * 0.16); cy = h * 0.6 + Math.floor(i / 5) * (h * 0.12) }
+    const canvas = canvasRef.current
+    if (!canvas || !organizations.length) return
+    const ctx = canvas.getContext('2d')
+    const connections = networks.connections || []
+    const clusters = networks.clusters || []
 
-      const jitter = Math.min(w, h) * 0.06
+    // Build cluster centers — spread them well apart
+    const clusterPositions = {
+      'axis-of-resistance': { fx: 0.25, fy: 0.35 },
+      'aq-network': { fx: 0.75, fy: 0.28 },
+      'isis-network': { fx: 0.60, fy: 0.72 },
+    }
+
+    // Init nodes
+    const w = sizeRef.current.w
+    const h = sizeRef.current.h
+    let unclusteredIdx = 0
+    const unclusteredPositions = [
+      { fx: 0.12, fy: 0.75 }, { fx: 0.88, fy: 0.65 },
+      { fx: 0.45, fy: 0.85 }, { fx: 0.15, fy: 0.50 },
+      { fx: 0.85, fy: 0.45 }, { fx: 0.50, fy: 0.15 },
+      { fx: 0.30, fy: 0.80 }, { fx: 0.70, fy: 0.85 },
+    ]
+
+    nodesRef.current = organizations.map((org) => {
+      const cluster = clusters.find(c => c.members.includes(org.id))
+      const cp = cluster ? clusterPositions[cluster.id] : null
+      let cx, cy
+      if (cp) {
+        // Spread members within cluster using a circle layout
+        const memberIdx = cluster.members.indexOf(org.id)
+        const total = cluster.members.length
+        const angle = (memberIdx / total) * Math.PI * 2 - Math.PI / 2
+        const spread = Math.min(w, h) * 0.12
+        cx = cp.fx * w + Math.cos(angle) * spread
+        cy = cp.fy * h + Math.sin(angle) * spread
+      } else {
+        const up = unclusteredPositions[unclusteredIdx % unclusteredPositions.length]
+        cx = up.fx * w
+        cy = up.fy * h
+        unclusteredIdx++
+      }
+
       return {
         id: org.id,
-        x: cx + (Math.random() - 0.5) * jitter,
-        y: cy + (Math.random() - 0.5) * jitter,
+        x: cx, y: cy,
         vx: 0, vy: 0,
         name: org.name,
         color: org.color || '#FF4444',
-        radius: Math.min(30, Math.max(14, (org.estimatedStrength?.match(/[\d,]+/)?.[0]?.replace(/,/g, '') || 10000) / 8000 + 10))
+        radius: Math.min(28, Math.max(12, (org.estimatedStrength?.match(/[\d,]+/)?.[0]?.replace(/,/g, '') || 10000) / 8000 + 10)),
+        clusterId: cluster?.id || null,
       }
     })
-    setNodes(initial)
-  }, [organizations, networks, canvasSize])
 
-  // Force simulation + draw
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas || !nodes.length) return
-    const ctx = canvas.getContext('2d')
-    const w = canvas.width
-    const h = canvas.height
-    const connections = networks.connections || []
+    // Run force simulation for initial settling (100 ticks)
+    for (let tick = 0; tick < 120; tick++) {
+      simulateForces(nodesRef.current, connections, sizeRef.current)
+    }
 
-    let frameNodes = [...nodes.map(n => ({ ...n }))]
-    let time = 0
+    timeRef.current = 0
 
     const draw = () => {
-      time += 0.01
+      const w = sizeRef.current.w
+      const h = sizeRef.current.h
+      timeRef.current += 0.008
+
+      // Gentle ongoing forces (very damped)
+      simulateForces(nodesRef.current, connections, sizeRef.current, 0.02)
+
       ctx.clearRect(0, 0, w, h)
 
       // Draw connections
       connections.forEach(conn => {
-        const src = frameNodes.find(n => n.id === conn.source)
-        const tgt = frameNodes.find(n => n.id === conn.target)
+        const src = nodesRef.current.find(n => n.id === conn.source)
+        const tgt = nodesRef.current.find(n => n.id === conn.target)
         if (!src || !tgt) return
 
         const isAdversary = conn.type === 'adversary'
@@ -96,7 +179,7 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
 
         // Animated flow particle
         if (!isAdversary && conn.strength > 4) {
-          const t = (time * (1 + conn.strength * 0.1)) % 1
+          const t = (timeRef.current * (1 + conn.strength * 0.1)) % 1
           const px = src.x + (tgt.x - src.x) * t
           const py = src.y + (tgt.y - src.y) * t
           ctx.beginPath()
@@ -104,22 +187,12 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
           ctx.fillStyle = conn.type === 'funding' ? '#FFB800' : '#00AAFF'
           ctx.fill()
         }
-
-        // Connection label at midpoint
-        if (conn.label && conn.strength > 5) {
-          const mx = (src.x + tgt.x) / 2
-          const my = (src.y + tgt.y) / 2
-          ctx.font = '8px "JetBrains Mono", monospace'
-          ctx.fillStyle = 'rgba(96, 112, 128, 0.6)'
-          ctx.textAlign = 'center'
-          ctx.fillText(conn.label, mx, my - 4)
-        }
       })
 
       // Draw nodes
-      frameNodes.forEach(node => {
+      nodesRef.current.forEach(node => {
         const isSelected = selectedOrg?.id === node.id
-        const pulse = Math.sin(time * 3 + node.x * 0.01) * 0.15 + 1
+        const pulse = Math.sin(timeRef.current * 3 + node.x * 0.01) * 0.1 + 1
 
         // Outer glow
         if (isSelected) {
@@ -132,9 +205,9 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
         // Node circle
         ctx.beginPath()
         ctx.arc(node.x, node.y, node.radius * pulse, 0, Math.PI * 2)
-        ctx.fillStyle = node.color + (isSelected ? 'cc' : '66')
+        ctx.fillStyle = node.color + (isSelected ? 'cc' : '55')
         ctx.fill()
-        ctx.strokeStyle = isSelected ? '#ffffff' : node.color + 'aa'
+        ctx.strokeStyle = isSelected ? '#ffffff' : node.color + '99'
         ctx.lineWidth = isSelected ? 2 : 1
         ctx.stroke()
 
@@ -148,17 +221,17 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
         ctx.font = `${isSelected ? '11' : '9'}px "Orbitron", monospace`
         ctx.fillStyle = isSelected ? '#ffffff' : '#8899aa'
         ctx.textAlign = 'center'
-        ctx.fillText(node.name.toUpperCase(), node.x, node.y + node.radius + 14)
+        ctx.fillText(node.name.toUpperCase(), node.x, node.y + node.radius + 16)
       })
 
       // Cluster labels
-      networks.clusters?.forEach(cluster => {
-        const members = frameNodes.filter(n => cluster.members.includes(n.id))
+      clusters.forEach(cluster => {
+        const members = nodesRef.current.filter(n => cluster.members.includes(n.id))
         if (!members.length) return
         const cx = members.reduce((s, m) => s + m.x, 0) / members.length
-        const cy = Math.min(...members.map(m => m.y)) - 40
-        ctx.font = '8px "JetBrains Mono", monospace'
-        ctx.fillStyle = cluster.color + '88'
+        const cy = Math.min(...members.map(m => m.y)) - 45
+        ctx.font = '10px "JetBrains Mono", monospace'
+        ctx.fillStyle = (cluster.color || '#888888') + '88'
         ctx.textAlign = 'center'
         ctx.fillText(cluster.name.toUpperCase(), cx, cy)
       })
@@ -168,7 +241,7 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
 
     draw()
     return () => cancelAnimationFrame(animRef.current)
-  }, [nodes, networks, selectedOrg])
+  }, [organizations, networks, selectedOrg])
 
   // Click detection
   const handleClick = (e) => {
@@ -176,9 +249,9 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
     const x = (e.clientX - rect.left) * (canvasRef.current.width / rect.width)
     const y = (e.clientY - rect.top) * (canvasRef.current.height / rect.height)
 
-    for (const node of nodes) {
+    for (const node of nodesRef.current) {
       const dist = Math.sqrt((x - node.x) ** 2 + (y - node.y) ** 2)
-      if (dist < node.radius + 5) {
+      if (dist < node.radius + 8) {
         const org = organizations.find(o => o.id === node.id)
         if (org) onOrgSelect(org)
         return
@@ -190,8 +263,8 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
     <div className="network-graph-container" ref={containerRef}>
       <canvas
         ref={canvasRef}
-        width={canvasSize.w}
-        height={canvasSize.h}
+        width={1200}
+        height={700}
         className="network-graph-canvas"
         onClick={handleClick}
       />
