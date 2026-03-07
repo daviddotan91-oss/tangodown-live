@@ -34,12 +34,12 @@ function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
   canvas.height = H
   const ctx = canvas.getContext('2d')
 
-  // Deep navy ocean
-  ctx.fillStyle = '#050a14'
+  // Deep black ocean
+  ctx.fillStyle = '#0A0A0F'
   ctx.fillRect(0, 0, W, H)
 
   // Subtle grid lines
-  ctx.strokeStyle = '#0a1628'
+  ctx.strokeStyle = '#1a1510'
   ctx.lineWidth = 0.5
   for (let i = 0; i < 36; i++) {
     ctx.beginPath()
@@ -55,7 +55,7 @@ function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
   }
 
   // Draw land masses — fill
-  ctx.fillStyle = '#0b1a2e'
+  ctx.fillStyle = '#141018'
   landGeoJSON.features.forEach(feature => {
     const geom = feature.geometry
     if (geom.type === 'Polygon') {
@@ -71,8 +71,8 @@ function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
     }
   })
 
-  // Draw coastline outlines — faint cyan
-  ctx.strokeStyle = '#00c8ff18'
+  // Draw coastline outlines — faint red/amber
+  ctx.strokeStyle = '#FF444420'
   ctx.lineWidth = 1.2
   landGeoJSON.features.forEach(feature => {
     const geom = feature.geometry
@@ -96,7 +96,7 @@ function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
   })
 
   // Brighter coastline glow pass
-  ctx.strokeStyle = '#00c8ff08'
+  ctx.strokeStyle = '#FF440010'
   ctx.lineWidth = 3
   landGeoJSON.features.forEach(feature => {
     const geom = feature.geometry
@@ -121,7 +121,7 @@ function buildEarthTexture(landGeoJSON, countriesGeoJSON) {
 
   // Draw country borders
   if (countriesGeoJSON) {
-    ctx.strokeStyle = '#00c8ff0c'
+    ctx.strokeStyle = '#FFB80010'
     ctx.lineWidth = 0.6
     countriesGeoJSON.features.forEach(feature => {
       const geom = feature.geometry
@@ -210,31 +210,31 @@ function GlobeMesh({ conflicts, incidents, feed, naval, onIncidentClick, selecte
         <sphereGeometry args={[1.005, 64, 64]} />
         <meshStandardMaterial
           transparent
-          opacity={0.04}
-          color="#1a3a5c"
+          opacity={0.03}
+          color="#2a1510"
           depthWrite={false}
         />
       </mesh>
 
-      {/* Atmosphere Glow */}
+      {/* Atmosphere Glow — red/amber */}
       <mesh ref={atmosphereRef}>
         <sphereGeometry args={[1.08, 64, 64]} />
         <meshBasicMaterial
-          color="#00a0e0"
+          color="#FF4444"
           transparent
-          opacity={0.08}
+          opacity={0.06}
           side={THREE.BackSide}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Inner Glow */}
+      {/* Inner Glow — warm */}
       <mesh>
         <sphereGeometry args={[1.15, 64, 64]} />
         <meshBasicMaterial
-          color="#001a33"
+          color="#331a00"
           transparent
-          opacity={0.08}
+          opacity={0.06}
           side={THREE.BackSide}
           depthWrite={false}
         />
@@ -243,9 +243,9 @@ function GlobeMesh({ conflicts, incidents, feed, naval, onIncidentClick, selecte
       {/* Conflict zone hotspot glows */}
       {conflicts.map(conflict => {
         const pos = latLngToVector3(conflict.center[0], conflict.center[1], 1.001)
-        const color = conflict.intensity === 'CRITICAL' ? '#ff2d2d' :
-                      conflict.intensity === 'HIGH' ? '#ff8800' :
-                      conflict.intensity === 'MEDIUM' ? '#ffd700' : '#00ff88'
+        const color = conflict.intensity === 'CRITICAL' ? '#FF2244' :
+                      conflict.intensity === 'HIGH' ? '#FF6644' :
+                      conflict.intensity === 'MEDIUM' ? '#FFAA44' : '#44AA88'
         return (
           <mesh key={conflict.id} position={pos}>
             <sphereGeometry args={[conflict.radius * 0.025, 16, 16]} />
@@ -401,9 +401,9 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
 function Scene({ conflicts, incidents, feed, naval, flyToTarget, onIncidentClick, selectedIncident, onTourZone }) {
   return (
     <>
-      <ambientLight intensity={0.15} />
-      <directionalLight position={[5, 3, 5]} intensity={0.6} color="#88aacc" />
-      <pointLight position={[-5, -3, -5]} intensity={0.2} color="#001a33" />
+      <ambientLight intensity={0.12} />
+      <directionalLight position={[5, 3, 5]} intensity={0.5} color="#aa8866" />
+      <pointLight position={[-5, -3, -5]} intensity={0.15} color="#1a0a00" />
 
       <Stars
         radius={100}
@@ -458,9 +458,9 @@ class GlobeErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff2d2d', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF4444', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', flexDirection: 'column', gap: '8px' }}>
           <span>GLOBE RENDER ERROR</span>
-          <button onClick={() => this.setState({ hasError: false })} style={{ background: '#0a1628', border: '1px solid #00c8ff44', color: '#00c8ff', padding: '6px 16px', cursor: 'pointer', fontFamily: 'inherit', fontSize: '11px' }}>
+          <button onClick={() => this.setState({ hasError: false })} style={{ background: '#12121D', border: '1px solid #FFB80044', color: '#FFB800', padding: '6px 16px', cursor: 'pointer', fontFamily: 'inherit', fontSize: '11px' }}>
             RETRY
           </button>
         </div>

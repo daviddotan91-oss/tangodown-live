@@ -24,28 +24,28 @@ export function formatDate(date) {
 
 export function getEventColor(type) {
   const colors = {
-    'AIRSTRIKE': '#ff2d2d',
-    'NAVAL ENGAGEMENT': '#00c8ff',
-    'GROUND OP': '#ff8800',
-    'SPECIAL OP': '#ffffff',
-    'DRONE STRIKE': '#00c8ff',
-    'MISSILE LAUNCH': '#ffd700',
-    'INTERCEPT': '#00ff88',
-    'IED/AMBUSH': '#ff8800',
-    'ASSASSINATION': '#ff2d2d',
-    'RAID': '#ff8800'
+    'AIRSTRIKE': '#FF4444',
+    'NAVAL ENGAGEMENT': '#00AAFF',
+    'GROUND OP': '#FF6644',
+    'SPECIAL OP': '#FFB800',
+    'DRONE STRIKE': '#FF8800',
+    'MISSILE LAUNCH': '#FF2244',
+    'INTERCEPT': '#44CC44',
+    'IED/AMBUSH': '#FF6644',
+    'ASSASSINATION': '#FF4444',
+    'RAID': '#FFB800'
   }
-  return colors[type] || '#00c8ff'
+  return colors[type] || '#FF4444'
 }
 
 export function getIntensityColor(intensity) {
   const colors = {
-    'CRITICAL': '#ff2d2d',
-    'HIGH': '#ff8800',
-    'MEDIUM': '#ffd700',
-    'LOW': '#00ff88'
+    'CRITICAL': '#FF2244',
+    'HIGH': '#FF6644',
+    'MEDIUM': '#FFAA44',
+    'LOW': '#44AA88'
   }
-  return colors[intensity] || '#00c8ff'
+  return colors[intensity] || '#FF4444'
 }
 
 // Generate simulated incident from templates

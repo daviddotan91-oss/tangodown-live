@@ -14,7 +14,7 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
     <div className="org-dossier">
       <div className="dossier-header">
         <button className="dossier-close" onClick={onClose}>&#10005;</button>
-        <div className="dossier-org-color" style={{ backgroundColor: org.color || '#00c8ff' }} />
+        <div className="dossier-org-color" style={{ backgroundColor: org.color || '#FF4444' }} />
         <div className="dossier-title-section">
           <h2 className="dossier-org-name">{org.name}</h2>
           <div className="dossier-org-fullname">{org.fullName}</div>
@@ -146,14 +146,14 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
                   if (!otherOrg) return null
                   const isSource = conn.source === org.id
                   const typeColors = {
-                    funding: '#ffd700',
-                    command: '#ff2d2d',
-                    affiliate: '#00c8ff',
-                    training: '#00ff88',
-                    coordination: '#ff8800',
-                    membership: '#00c8ff',
-                    influence: '#ffd700',
-                    adversary: '#ff2d2d'
+                    funding: '#FFB800',
+                    command: '#FF4444',
+                    affiliate: '#00AAFF',
+                    training: '#44CC44',
+                    coordination: '#FF6644',
+                    membership: '#00AAFF',
+                    influence: '#FFB800',
+                    adversary: '#FF4444'
                   }
                   return (
                     <div
@@ -170,9 +170,9 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
                         <span
                           className="conn-type-badge"
                           style={{
-                            color: typeColors[conn.type] || '#00c8ff',
-                            borderColor: (typeColors[conn.type] || '#00c8ff') + '44',
-                            backgroundColor: (typeColors[conn.type] || '#00c8ff') + '11'
+                            color: typeColors[conn.type] || '#00AAFF',
+                            borderColor: (typeColors[conn.type] || '#00AAFF') + '44',
+                            backgroundColor: (typeColors[conn.type] || '#00AAFF') + '11'
                           }}
                         >
                           {conn.type.toUpperCase()}
@@ -185,7 +185,7 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
                             className="conn-strength-fill"
                             style={{
                               width: `${conn.strength * 10}%`,
-                              backgroundColor: typeColors[conn.type] || '#00c8ff'
+                              backgroundColor: typeColors[conn.type] || '#00AAFF'
                             }}
                           />
                         </div>

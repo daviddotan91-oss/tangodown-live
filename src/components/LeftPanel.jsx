@@ -24,10 +24,10 @@ function ThreatGauge({ level }) {
     // Threat level arc
     const angle = Math.PI + (level / 100) * Math.PI
     const gradient = ctx.createLinearGradient(0, 0, w, 0)
-    gradient.addColorStop(0, '#00ff88')
-    gradient.addColorStop(0.4, '#ffd700')
-    gradient.addColorStop(0.7, '#ff8800')
-    gradient.addColorStop(1, '#ff2d2d')
+    gradient.addColorStop(0, '#44CC44')
+    gradient.addColorStop(0.4, '#FFB800')
+    gradient.addColorStop(0.7, '#FF6644')
+    gradient.addColorStop(1, '#FF4444')
 
     ctx.beginPath()
     ctx.arc(w / 2, h - 10, 60, Math.PI, angle)
@@ -50,7 +50,7 @@ function ThreatGauge({ level }) {
     // Center dot
     ctx.beginPath()
     ctx.arc(w / 2, h - 10, 4, 0, Math.PI * 2)
-    ctx.fillStyle = '#00c8ff'
+    ctx.fillStyle = '#FFB800'
     ctx.fill()
 
   }, [level])
@@ -60,7 +60,7 @@ function ThreatGauge({ level }) {
       <div className="threat-gauge-title">GLOBAL THREAT LEVEL</div>
       <canvas ref={canvasRef} width={160} height={90} className="threat-gauge-canvas" />
       <div className="threat-gauge-value" style={{
-        color: level > 80 ? '#ff2d2d' : level > 60 ? '#ff8800' : level > 40 ? '#ffd700' : '#00ff88'
+        color: level > 80 ? '#FF4444' : level > 60 ? '#FF6644' : level > 40 ? '#FFB800' : '#44CC44'
       }}>
         {level}%
       </div>
@@ -74,11 +74,11 @@ function ThreatGauge({ level }) {
 function KillChainBar({ killChain }) {
   if (!killChain) return null
   const steps = [
-    { key: 'detect', label: 'DETECT', color: '#00c8ff' },
-    { key: 'classify', label: 'CLASSIFY', color: '#00c8ff' },
-    { key: 'track', label: 'TRACK', color: '#ffd700' },
-    { key: 'engage', label: 'ENGAGE', color: '#ff8800' },
-    { key: 'neutralize', label: 'NEUTRALIZE', color: '#ff2d2d' }
+    { key: 'detect', label: 'DETECT', color: '#00AAFF' },
+    { key: 'classify', label: 'CLASSIFY', color: '#00AAFF' },
+    { key: 'track', label: 'TRACK', color: '#FFB800' },
+    { key: 'engage', label: 'ENGAGE', color: '#FF6644' },
+    { key: 'neutralize', label: 'NEUTRALIZE', color: '#FF4444' }
   ]
   const total = steps.reduce((s, step) => s + (killChain[step.key] || 0), 0)
 
@@ -118,12 +118,12 @@ function GlobalStats({ conflicts }) {
   }), { zones: 0, fronts: 0, aircraft: 0, uas: 0, naval: 0, engagements: 0 })
 
   const stats = [
-    { label: 'ACTIVE ZONES', value: totals.zones, color: '#ff2d2d' },
-    { label: 'BATTLEFRONTS', value: totals.fronts, color: '#ff8800' },
-    { label: 'AIRCRAFT', value: `${(totals.aircraft / 1000).toFixed(1)}K`, color: '#00c8ff' },
-    { label: 'UAS IN THEATER', value: `${(totals.uas / 1000).toFixed(1)}K`, color: '#00c8ff' },
-    { label: 'NAVAL ASSETS', value: totals.naval, color: '#00c8ff' },
-    { label: 'DAILY ENGAGEMENTS', value: totals.engagements, color: '#ffd700' }
+    { label: 'ACTIVE ZONES', value: totals.zones, color: '#FF4444' },
+    { label: 'BATTLEFRONTS', value: totals.fronts, color: '#FF6644' },
+    { label: 'AIRCRAFT', value: `${(totals.aircraft / 1000).toFixed(1)}K`, color: '#FFB800' },
+    { label: 'UAS IN THEATER', value: `${(totals.uas / 1000).toFixed(1)}K`, color: '#FFB800' },
+    { label: 'NAVAL ASSETS', value: totals.naval, color: '#FFB800' },
+    { label: 'DAILY ENGAGEMENTS', value: totals.engagements, color: '#FFB800' }
   ]
 
   return (

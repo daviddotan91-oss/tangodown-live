@@ -169,8 +169,8 @@ export default function IntelView({ conflicts, incidents, naval }) {
                 row.trend === 'DETERIORATING' ? '\u2191' :
                 row.trend === 'STATIC' ? '\u2194' :
                 row.trend === 'VOLATILE' ? '\u21C5' : '\u2192'
-              const trendColor = (row.trend === 'ESCALATING' || row.trend === 'DETERIORATING') ? '#ff2d2d' :
-                row.trend === 'VOLATILE' ? '#ffd700' : '#00ff88'
+              const trendColor = (row.trend === 'ESCALATING' || row.trend === 'DETERIORATING') ? '#FF4444' :
+                row.trend === 'VOLATILE' ? '#FFB800' : '#44CC44'
               return (
                 <div key={i} className="intel-threat-row">
                   <span className="intel-td intel-td-region">{row.region}</span>

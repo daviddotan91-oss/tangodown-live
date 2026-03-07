@@ -240,16 +240,16 @@ export default function App() {
 
 function getEventColorInline(type) {
   const colors = {
-    'AIRSTRIKE': '#ff2d2d',
-    'NAVAL ENGAGEMENT': '#00c8ff',
-    'GROUND OP': '#ff8800',
-    'SPECIAL OP': '#ffffff',
-    'DRONE STRIKE': '#00c8ff',
-    'MISSILE LAUNCH': '#ffd700',
-    'INTERCEPT': '#00ff88',
-    'IED/AMBUSH': '#ff8800',
-    'ASSASSINATION': '#ff2d2d',
-    'RAID': '#ff8800'
+    'AIRSTRIKE': '#FF4444',
+    'NAVAL ENGAGEMENT': '#00AAFF',
+    'GROUND OP': '#FF6644',
+    'SPECIAL OP': '#FFB800',
+    'DRONE STRIKE': '#FF8800',
+    'MISSILE LAUNCH': '#FF2244',
+    'INTERCEPT': '#44CC44',
+    'IED/AMBUSH': '#FF6644',
+    'ASSASSINATION': '#FF4444',
+    'RAID': '#FFB800'
   }
-  return colors[type] || '#00c8ff'
+  return colors[type] || '#FF4444'
 }

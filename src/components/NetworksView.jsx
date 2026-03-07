@@ -28,7 +28,7 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
         y: cy + (Math.random() - 0.5) * jitter,
         vx: 0, vy: 0,
         name: org.name,
-        color: org.color || '#00c8ff',
+        color: org.color || '#FF4444',
         radius: Math.min(30, Math.max(14, (org.estimatedStrength?.match(/[\d,]+/)?.[0]?.replace(/,/g, '') || 10000) / 8000 + 10))
       }
     })
@@ -69,10 +69,10 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
         } else {
           ctx.setLineDash([])
           const alpha = Math.min(0.5, conn.strength / 15)
-          const flowColor = conn.type === 'funding' ? '#ffd700' :
-            conn.type === 'command' ? '#ff2d2d' :
-            conn.type === 'affiliate' ? '#00c8ff' :
-            conn.type === 'training' ? '#00ff88' : '#00c8ff'
+          const flowColor = conn.type === 'funding' ? '#FFB800' :
+            conn.type === 'command' ? '#FF4444' :
+            conn.type === 'affiliate' ? '#00AAFF' :
+            conn.type === 'training' ? '#44CC44' : '#00AAFF'
           ctx.strokeStyle = flowColor + Math.round(alpha * 255).toString(16).padStart(2, '0')
         }
         ctx.lineWidth = Math.max(1, conn.strength / 4)
@@ -86,7 +86,7 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
           const py = src.y + (tgt.y - src.y) * t
           ctx.beginPath()
           ctx.arc(px, py, 2, 0, Math.PI * 2)
-          ctx.fillStyle = conn.type === 'funding' ? '#ffd700' : '#00c8ff'
+          ctx.fillStyle = conn.type === 'funding' ? '#FFB800' : '#00AAFF'
           ctx.fill()
         }
 
@@ -182,11 +182,11 @@ function NetworkGraph({ organizations, networks, onOrgSelect, selectedOrg }) {
       />
       <div className="network-legend">
         <div className="network-legend-title">CONNECTION TYPES</div>
-        <div className="legend-item"><span className="legend-line" style={{ background: '#ffd700' }} />FUNDING</div>
-        <div className="legend-item"><span className="legend-line" style={{ background: '#ff2d2d' }} />COMMAND</div>
-        <div className="legend-item"><span className="legend-line" style={{ background: '#00c8ff' }} />AFFILIATE</div>
-        <div className="legend-item"><span className="legend-line" style={{ background: '#00ff88' }} />TRAINING</div>
-        <div className="legend-item"><span className="legend-line dashed" style={{ background: '#ff2d2d' }} />ADVERSARY</div>
+        <div className="legend-item"><span className="legend-line" style={{ background: '#FFB800' }} />FUNDING</div>
+        <div className="legend-item"><span className="legend-line" style={{ background: '#FF4444' }} />COMMAND</div>
+        <div className="legend-item"><span className="legend-line" style={{ background: '#00AAFF' }} />AFFILIATE</div>
+        <div className="legend-item"><span className="legend-line" style={{ background: '#44CC44' }} />TRAINING</div>
+        <div className="legend-item"><span className="legend-line dashed" style={{ background: '#FF4444' }} />ADVERSARY</div>
       </div>
     </div>
   )
@@ -200,7 +200,7 @@ function OrgGrid({ organizations, onOrgSelect, selectedOrg }) {
           key={org.id}
           className={`org-grid-card ${selectedOrg?.id === org.id ? 'selected' : ''}`}
           onClick={() => onOrgSelect(org)}
-          style={{ borderLeftColor: org.color || '#00c8ff' }}
+          style={{ borderLeftColor: org.color || '#FF4444' }}
         >
           <div className="org-grid-name">{org.name}</div>
           <div className="org-grid-fullname">{org.fullName}</div>

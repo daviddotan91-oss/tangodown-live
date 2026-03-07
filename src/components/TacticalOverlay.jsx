@@ -103,7 +103,7 @@ function NavalMarker({ ship, index }) {
   const pos = useMemo(() => latLngToVector3(ship.lat, ship.lng, 1.006), [ship.lat, ship.lng])
 
   const isHostile = ship.force === 'hostile'
-  const color = isHostile ? '#ff2d2d' : '#00c8ff'
+  const color = isHostile ? '#FF4444' : '#44CC44'
 
   // Size based on ship type
   const size = ship.type?.includes('Carrier') ? 0.012 :
@@ -210,7 +210,7 @@ function TheaterLink({ ship, conflicts }) {
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     const isHostile = ship.force === 'hostile'
     const mat = new THREE.LineBasicMaterial({
-      color: isHostile ? '#ff2d2d' : '#00c8ff',
+      color: isHostile ? '#FF4444' : '#44CC44',
       transparent: true,
       opacity: 0.08
     })

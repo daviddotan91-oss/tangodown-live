@@ -5,10 +5,10 @@ export default function LeaderCard({ leader, status }) {
   const isEliminated = status === 'eliminated'
 
   const threatColors = {
-    'CRITICAL': '#ff2d2d',
-    'HIGH': '#ff8800',
-    'MEDIUM': '#ffd700',
-    'LOW': '#00ff88'
+    'CRITICAL': '#FF4444',
+    'HIGH': '#FF6644',
+    'MEDIUM': '#FFB800',
+    'LOW': '#44CC44'
   }
 
   return (

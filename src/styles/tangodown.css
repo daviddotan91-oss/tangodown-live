@@ -3,40 +3,46 @@
    Master Stylesheet
    ═══════════════════════════════════════════════════════ */
 
-/* ─── CSS VARIABLES ─── */
+/* ─── CSS VARIABLES — ONDAS-INSPIRED PALETTE ─── */
 :root {
-  --bg-primary: #060a12;
-  --bg-secondary: #0a1020;
-  --bg-panel: #0a0f1aee;
-  --bg-panel-solid: #0a0f1a;
-  --bg-card: #0d1525;
-  --bg-hover: #111d33;
-  --border-primary: #0f2a4a;
-  --border-glow: #00c8ff33;
-  --cyan: #00c8ff;
-  --cyan-dim: #00c8ff88;
-  --cyan-ghost: #00c8ff22;
-  --red: #ff2d2d;
-  --red-dim: #ff2d2d88;
-  --red-ghost: #ff2d2d22;
-  --green: #00ff88;
-  --green-dim: #00ff8888;
-  --green-ghost: #00ff8822;
-  --yellow: #ffd700;
-  --yellow-dim: #ffd70088;
-  --orange: #ff8800;
-  --orange-dim: #ff880088;
-  --white: #e0e8f0;
-  --white-dim: #8899aa;
-  --text-primary: #c8d8e8;
-  --text-secondary: #607080;
-  --text-muted: #3a4a5a;
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Rajdhani', sans-serif;
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #0D0D14;
+  --bg-panel: #0F0F18ee;
+  --bg-panel-solid: #0F0F18;
+  --bg-card: #12121D;
+  --bg-hover: #1a1a28;
+  --border-primary: #2a2218;
+  --border-glow: #FF444433;
+  --cyan: #FF4444;
+  --cyan-dim: #FF444488;
+  --cyan-ghost: #FF444418;
+  --red: #FF4444;
+  --red-dim: #FF444488;
+  --red-ghost: #FF444422;
+  --green: #44CC44;
+  --green-dim: #44CC4488;
+  --green-ghost: #44CC4422;
+  --yellow: #FFB800;
+  --yellow-dim: #FFB80088;
+  --orange: #FF6644;
+  --orange-dim: #FF664488;
+  --white: #E0E0E8;
+  --white-dim: #8888A0;
+  --text-primary: #E0E0E8;
+  --text-secondary: #8888A0;
+  --text-muted: #555570;
+  --font-display: 'JetBrains Mono', 'Space Grotesk', monospace;
+  --font-body: 'JetBrains Mono', 'Rajdhani', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --panel-width: 380px;
-  --nav-height: 52px;
-  --bottom-height: 32px;
+  --nav-height: 42px;
+  --bottom-height: 28px;
+  --accent-gold: #FFB800;
+  --accent-gold-dim: #8a6400;
+  --accent-gold-ghost: #FFB80018;
+  --intel-blue: #00AAFF;
+  --intel-blue-dim: #00AAFF88;
+  --intel-blue-ghost: #00AAFF18;
 }
 
 /* ─── RESET & BASE ─── */
@@ -73,7 +79,7 @@ html, body, #root {
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--cyan-dim);
+  background: var(--accent-gold-dim);
 }
 
 /* ─── APP LAYOUT ─── */
@@ -3908,5 +3914,5 @@ html, body, #root {
   border-radius: 2px;
 }
 .intel-content::-webkit-scrollbar-thumb:hover {
-  background: var(--cyan-dim);
+  background: var(--accent-gold-dim);
 }
