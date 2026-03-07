@@ -1,0 +1,42 @@
+{
+  "connections": [
+    { "source": "irgc", "target": "hezbollah", "type": "funding", "label": "$700M-1B/yr", "strength": 10 },
+    { "source": "irgc", "target": "hamas", "type": "funding", "label": "$100M/yr", "strength": 7 },
+    { "source": "irgc", "target": "houthis", "type": "funding", "label": "Weapons + training", "strength": 8 },
+    { "source": "irgc", "target": "pij", "type": "funding", "label": "$30-50M/yr", "strength": 6 },
+    { "source": "irgc", "target": "kataib-hezbollah", "type": "command", "label": "Direct IRGC-QF control", "strength": 9 },
+    { "source": "irgc", "target": "pmf", "type": "influence", "label": "Key militia funding", "strength": 7 },
+    { "source": "hezbollah", "target": "hamas", "type": "training", "label": "Military training", "strength": 5 },
+    { "source": "hezbollah", "target": "houthis", "type": "training", "label": "Missile/drone tech transfer", "strength": 5 },
+    { "source": "al-qaeda", "target": "al-shabaab", "type": "affiliate", "label": "AQ affiliate", "strength": 7 },
+    { "source": "al-qaeda", "target": "jnim", "type": "affiliate", "label": "AQ Sahel affiliate", "strength": 8 },
+    { "source": "hamas", "target": "pij", "type": "coordination", "label": "Gaza joint operations", "strength": 6 },
+    { "source": "kataib-hezbollah", "target": "pmf", "type": "membership", "label": "PMF constituent", "strength": 8 },
+    { "source": "isis", "target": "boko-haram", "type": "affiliate", "label": "ISWAP (splinter)", "strength": 4 },
+    { "source": "wagner", "target": "jnim", "type": "adversary", "label": "Combat in Mali", "strength": 3 },
+    { "source": "pkk", "target": "isis", "type": "adversary", "label": "SDF vs ISIS in NE Syria", "strength": 4 }
+  ],
+  "clusters": [
+    {
+      "id": "axis-of-resistance",
+      "name": "Iran's Axis of Resistance",
+      "description": "Network of Iranian-backed armed groups spanning the Middle East, coordinated by the IRGC Quds Force. United by opposition to Israel, the US, and Western influence in the region.",
+      "members": ["irgc", "hezbollah", "hamas", "pij", "houthis", "kataib-hezbollah", "pmf"],
+      "color": "#2e7d32"
+    },
+    {
+      "id": "aq-network",
+      "name": "Al-Qaeda Network",
+      "description": "Decentralized global jihadist network founded by Osama bin Laden. Operates through regional affiliates across Africa, the Middle East, and South Asia.",
+      "members": ["al-qaeda", "al-shabaab", "jnim"],
+      "color": "#8b0000"
+    },
+    {
+      "id": "isis-network",
+      "name": "ISIS / Islamic State Network",
+      "description": "Remnants of the self-declared caliphate, now operating as insurgent cells and through global affiliates (provinces).",
+      "members": ["isis", "boko-haram"],
+      "color": "#1a1a1a"
+    }
+  ]
+}

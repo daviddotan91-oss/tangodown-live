@@ -1,0 +1,305 @@
+[
+  {
+    "id": "israel-palestine",
+    "name": "Israel — Palestine",
+    "region": "MIDDLE EAST",
+    "status": "ACTIVE",
+    "intensity": "CRITICAL",
+    "startDate": "2023-10-07",
+    "center": [31.5, 34.8],
+    "radius": 2.5,
+    "parties": ["Israel (IDF)", "Hamas", "Palestinian Islamic Jihad", "Hezbollah"],
+    "description": "Multi-front conflict following Hamas' October 7 attack. IDF operations in Gaza Strip, West Bank, and northern border with Lebanon.",
+    "stats": {
+      "dailyEngagements": 85,
+      "aircraftInTheater": 320,
+      "uasInTheater": 180,
+      "navalAssets": 28,
+      "activePersonnel": 360000
+    },
+    "fronts": [
+      { "name": "Gaza Strip — Northern Corridor", "type": "urban", "intensity": "CRITICAL", "uasPerDay": 45, "center": [31.52, 34.47] },
+      { "name": "Gaza Strip — Rafah Crossing", "type": "urban", "intensity": "HIGH", "uasPerDay": 30, "center": [31.24, 34.24] },
+      { "name": "Gaza Strip — Khan Younis", "type": "urban", "intensity": "HIGH", "uasPerDay": 25, "center": [31.34, 34.30] },
+      { "name": "Northern Border — Lebanon", "type": "conventional", "intensity": "HIGH", "uasPerDay": 20, "center": [33.1, 35.2] },
+      { "name": "West Bank — Jenin/Tulkarm", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 8, "center": [32.3, 35.2] }
+    ],
+    "killChain": { "detect": 12, "classify": 8, "track": 15, "engage": 5, "neutralize": 3 }
+  },
+  {
+    "id": "ukraine-russia",
+    "name": "Ukraine — Russia",
+    "region": "EUROPE",
+    "status": "ACTIVE",
+    "intensity": "CRITICAL",
+    "startDate": "2022-02-24",
+    "center": [48.5, 37.0],
+    "radius": 5.0,
+    "parties": ["Ukraine (ZSU)", "Russia (VSRF)", "Wagner Group"],
+    "description": "Full-scale conventional war. Frontlines spanning 1,200km across eastern and southern Ukraine. Extensive drone warfare, artillery exchanges, and air defense operations.",
+    "stats": {
+      "dailyEngagements": 120,
+      "aircraftInTheater": 580,
+      "uasInTheater": 3500,
+      "navalAssets": 45,
+      "activePersonnel": 900000
+    },
+    "fronts": [
+      { "name": "Bakhmut — Chasiv Yar Axis", "type": "conventional", "intensity": "CRITICAL", "uasPerDay": 200, "center": [48.59, 37.99] },
+      { "name": "Avdiivka — Pokrovsk Axis", "type": "conventional", "intensity": "CRITICAL", "uasPerDay": 180, "center": [48.14, 37.74] },
+      { "name": "Zaporizhzhia — Robotyne", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 60, "center": [47.4, 35.8] },
+      { "name": "Kherson — Dnipro River", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 40, "center": [46.6, 32.6] },
+      { "name": "Kursk — Ukrainian Incursion", "type": "conventional", "intensity": "HIGH", "uasPerDay": 90, "center": [51.4, 35.2] },
+      { "name": "Kharkiv — Northern Front", "type": "conventional", "intensity": "HIGH", "uasPerDay": 70, "center": [50.0, 36.2] }
+    ],
+    "killChain": { "detect": 8, "classify": 5, "track": 10, "engage": 12, "neutralize": 8 }
+  },
+  {
+    "id": "red-sea-houthi",
+    "name": "Red Sea — Houthi Campaign",
+    "region": "MIDDLE EAST",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2023-11-19",
+    "center": [14.0, 43.0],
+    "radius": 4.0,
+    "parties": ["United States (USN/USAF)", "United Kingdom (RN)", "Houthis / Ansar Allah", "Iran (IRGC advisory)"],
+    "description": "Houthi anti-shipping campaign targeting commercial and military vessels in the Red Sea and Gulf of Aden. US-led coalition conducting strikes on Houthi positions in Yemen.",
+    "stats": {
+      "dailyEngagements": 12,
+      "aircraftInTheater": 95,
+      "uasInTheater": 45,
+      "navalAssets": 35,
+      "activePersonnel": 30000
+    },
+    "fronts": [
+      { "name": "Bab el-Mandeb Strait", "type": "naval", "intensity": "HIGH", "uasPerDay": 8, "center": [12.6, 43.3] },
+      { "name": "Southern Red Sea", "type": "naval", "intensity": "HIGH", "uasPerDay": 5, "center": [15.0, 42.0] },
+      { "name": "Sanaa — Houthi Interior", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 3, "center": [15.35, 44.2] }
+    ],
+    "killChain": { "detect": 15, "classify": 10, "track": 20, "engage": 8, "neutralize": 5 }
+  },
+  {
+    "id": "syria-civil",
+    "name": "Syria — Multi-Party Conflict",
+    "region": "MIDDLE EAST",
+    "status": "ACTIVE",
+    "intensity": "MEDIUM",
+    "startDate": "2011-03-15",
+    "center": [35.0, 38.0],
+    "radius": 3.0,
+    "parties": ["Syrian Government (SAA)", "HTS / Rebel Groups", "SDF / Kurdish Forces", "Turkey (TSK)", "Russia (VKS)", "United States (CENTCOM)", "Iran (IRGC)", "ISIS remnants"],
+    "description": "Protracted civil war with multiple state and non-state actors. US maintains presence in northeast Syria. Israeli strikes on Iranian targets. Turkish operations against Kurdish forces.",
+    "stats": {
+      "dailyEngagements": 15,
+      "aircraftInTheater": 120,
+      "uasInTheater": 85,
+      "navalAssets": 8,
+      "activePersonnel": 250000
+    },
+    "fronts": [
+      { "name": "Idlib Province", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 12, "center": [35.9, 36.6] },
+      { "name": "Northeast — Al-Hasakah", "type": "guerrilla", "intensity": "LOW", "uasPerDay": 5, "center": [36.5, 40.7] },
+      { "name": "Deir ez-Zor — Euphrates Valley", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 8, "center": [35.3, 40.1] }
+    ],
+    "killChain": { "detect": 20, "classify": 12, "track": 25, "engage": 10, "neutralize": 8 }
+  },
+  {
+    "id": "sudan-civil",
+    "name": "Sudan — Civil War",
+    "region": "AFRICA",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2023-04-15",
+    "center": [15.6, 32.5],
+    "radius": 4.0,
+    "parties": ["Sudanese Armed Forces (SAF)", "Rapid Support Forces (RSF)", "Various militia groups"],
+    "description": "Civil war between SAF and RSF. Massive humanitarian crisis with millions displaced. Heavy urban combat in Khartoum and Darfur.",
+    "stats": {
+      "dailyEngagements": 35,
+      "aircraftInTheater": 30,
+      "uasInTheater": 20,
+      "navalAssets": 0,
+      "activePersonnel": 150000
+    },
+    "fronts": [
+      { "name": "Khartoum Metropolitan", "type": "urban", "intensity": "HIGH", "uasPerDay": 5, "center": [15.6, 32.5] },
+      { "name": "Darfur — El Fasher", "type": "conventional", "intensity": "CRITICAL", "uasPerDay": 3, "center": [13.6, 25.3] },
+      { "name": "Gezira State", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 2, "center": [14.5, 33.5] }
+    ],
+    "killChain": { "detect": 30, "classify": 20, "track": 35, "engage": 15, "neutralize": 12 }
+  },
+  {
+    "id": "myanmar-civil",
+    "name": "Myanmar — Civil War",
+    "region": "ASIA-PACIFIC",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2021-02-01",
+    "center": [19.7, 96.0],
+    "radius": 3.5,
+    "parties": ["Myanmar Military (Tatmadaw)", "National Unity Government (NUG)", "Ethnic Armed Organizations", "People's Defence Force"],
+    "description": "Post-coup civil war. Military junta facing nationwide resistance from ethnic armies and people's defense forces. Junta losing territorial control.",
+    "stats": {
+      "dailyEngagements": 25,
+      "aircraftInTheater": 45,
+      "uasInTheater": 15,
+      "navalAssets": 12,
+      "activePersonnel": 400000
+    },
+    "fronts": [
+      { "name": "Shan State — Northern Alliance", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 4, "center": [22.0, 98.0] },
+      { "name": "Chin State — Resistance Front", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [21.5, 93.5] },
+      { "name": "Sagaing Region", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 3, "center": [22.0, 95.0] }
+    ],
+    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 }
+  },
+  {
+    "id": "sahel-insurgency",
+    "name": "Sahel — Jihadist Insurgency",
+    "region": "AFRICA",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2012-01-01",
+    "center": [14.0, 2.0],
+    "radius": 5.0,
+    "parties": ["Mali Armed Forces", "Burkina Faso Armed Forces", "Niger Armed Forces", "Wagner Group / Africa Corps", "JNIM (Al-Qaeda affiliate)", "ISGS (ISIS affiliate)"],
+    "description": "Multi-country jihadist insurgency across Mali, Burkina Faso, and Niger. Russian Wagner/Africa Corps deployed. French forces withdrawn.",
+    "stats": {
+      "dailyEngagements": 18,
+      "aircraftInTheater": 25,
+      "uasInTheater": 30,
+      "navalAssets": 0,
+      "activePersonnel": 80000
+    },
+    "fronts": [
+      { "name": "Liptako-Gourma Tri-Border", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 6, "center": [14.5, 0.5] },
+      { "name": "Northern Mali — Kidal", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 3, "center": [18.4, 1.4] },
+      { "name": "Burkina Faso — Northern Provinces", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 4, "center": [14.0, -1.5] }
+    ],
+    "killChain": { "detect": 45, "classify": 30, "track": 50, "engage": 25, "neutralize": 20 }
+  },
+  {
+    "id": "somalia-alshabaab",
+    "name": "Somalia — Al-Shabaab Insurgency",
+    "region": "AFRICA",
+    "status": "ACTIVE",
+    "intensity": "MEDIUM",
+    "startDate": "2006-01-01",
+    "center": [2.0, 45.3],
+    "radius": 3.5,
+    "parties": ["Somali National Army", "AMISOM / ATMIS", "United States (AFRICOM)", "Al-Shabaab", "ISIS-Somalia"],
+    "description": "Long-running insurgency. US drone strikes and special operations supporting Somali and AU forces against Al-Shabaab.",
+    "stats": {
+      "dailyEngagements": 8,
+      "aircraftInTheater": 15,
+      "uasInTheater": 25,
+      "navalAssets": 8,
+      "activePersonnel": 45000
+    },
+    "fronts": [
+      { "name": "Lower Shabelle", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 5, "center": [1.8, 44.5] },
+      { "name": "Mogadishu Environs", "type": "urban", "intensity": "MEDIUM", "uasPerDay": 3, "center": [2.04, 45.34] },
+      { "name": "Galmudug — Central Front", "type": "guerrilla", "intensity": "LOW", "uasPerDay": 2, "center": [5.3, 46.6] }
+    ],
+    "killChain": { "detect": 35, "classify": 20, "track": 40, "engage": 15, "neutralize": 10 }
+  },
+  {
+    "id": "drc-conflict",
+    "name": "DRC — Eastern Congo Conflict",
+    "region": "AFRICA",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2022-03-01",
+    "center": [-1.5, 29.0],
+    "radius": 2.5,
+    "parties": ["DRC Armed Forces (FARDC)", "M23 Rebels", "Rwanda (RDF — alleged support)", "MONUSCO", "Various militia (ADF, CODECO)"],
+    "description": "Resurgence of M23 rebellion in eastern DRC with alleged Rwandan support. Intense fighting around Goma. Multiple armed groups active.",
+    "stats": {
+      "dailyEngagements": 20,
+      "aircraftInTheater": 12,
+      "uasInTheater": 8,
+      "navalAssets": 0,
+      "activePersonnel": 60000
+    },
+    "fronts": [
+      { "name": "North Kivu — Goma Axis", "type": "conventional", "intensity": "HIGH", "uasPerDay": 3, "center": [-1.67, 29.22] },
+      { "name": "Ituri Province", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [1.5, 30.5] }
+    ],
+    "killChain": { "detect": 50, "classify": 35, "track": 55, "engage": 30, "neutralize": 25 }
+  },
+  {
+    "id": "iran-israel-shadow",
+    "name": "Iran — Israel Shadow War",
+    "region": "MIDDLE EAST",
+    "status": "ACTIVE",
+    "intensity": "HIGH",
+    "startDate": "2018-01-01",
+    "center": [32.4, 53.7],
+    "radius": 6.0,
+    "parties": ["Israel (Mossad, IAF)", "Iran (IRGC, Quds Force)", "Hezbollah", "Iraqi militias"],
+    "description": "Covert and overt operations between Israel and Iran across multiple theaters. Israeli strikes on Iranian nuclear facilities, IRGC assets in Syria, and direct exchanges.",
+    "stats": {
+      "dailyEngagements": 5,
+      "aircraftInTheater": 200,
+      "uasInTheater": 90,
+      "navalAssets": 15,
+      "activePersonnel": 650000
+    },
+    "fronts": [
+      { "name": "Syrian Theater — Israeli Strikes", "type": "conventional", "intensity": "MEDIUM", "uasPerDay": 3, "center": [33.5, 36.3] },
+      { "name": "Iranian Nuclear Sites", "type": "special operations", "intensity": "LOW", "uasPerDay": 0, "center": [33.7, 51.6] },
+      { "name": "Iraqi Militia Corridor", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 5, "center": [33.3, 44.4] }
+    ],
+    "killChain": { "detect": 10, "classify": 6, "track": 8, "engage": 4, "neutralize": 2 }
+  },
+  {
+    "id": "ethiopia-internal",
+    "name": "Ethiopia — Internal Conflicts",
+    "region": "AFRICA",
+    "status": "ACTIVE",
+    "intensity": "MEDIUM",
+    "startDate": "2020-11-04",
+    "center": [9.0, 38.7],
+    "radius": 3.0,
+    "parties": ["Ethiopian National Defense Force (ENDF)", "Amhara Fano Militia", "Oromo Liberation Army (OLA)", "Tigray Forces (TDF)"],
+    "description": "Post-Tigray war instability. Amhara Fano insurgency, OLA operations in Oromia. Fragile ceasefire in Tigray.",
+    "stats": {
+      "dailyEngagements": 12,
+      "aircraftInTheater": 20,
+      "uasInTheater": 15,
+      "navalAssets": 0,
+      "activePersonnel": 200000
+    },
+    "fronts": [
+      { "name": "Amhara Region — Fano Front", "type": "guerrilla", "intensity": "HIGH", "uasPerDay": 4, "center": [11.5, 37.5] },
+      { "name": "Oromia — OLA Operations", "type": "guerrilla", "intensity": "MEDIUM", "uasPerDay": 2, "center": [8.0, 39.0] }
+    ],
+    "killChain": { "detect": 40, "classify": 25, "track": 45, "engage": 20, "neutralize": 15 }
+  },
+  {
+    "id": "south-china-sea",
+    "name": "South China Sea — Maritime Tensions",
+    "region": "ASIA-PACIFIC",
+    "status": "CONTESTED",
+    "intensity": "LOW",
+    "startDate": "2013-01-01",
+    "center": [12.0, 114.0],
+    "radius": 5.0,
+    "parties": ["China (PLA Navy)", "Philippines (AFP)", "Vietnam (VPN)", "United States (USN)", "Taiwan (ROCN)"],
+    "description": "Escalating maritime confrontations over disputed territories. Chinese coast guard aggression against Philippine vessels. US freedom of navigation operations.",
+    "stats": {
+      "dailyEngagements": 3,
+      "aircraftInTheater": 250,
+      "uasInTheater": 40,
+      "navalAssets": 120,
+      "activePersonnel": 80000
+    },
+    "fronts": [
+      { "name": "Second Thomas Shoal", "type": "naval", "intensity": "MEDIUM", "uasPerDay": 2, "center": [9.8, 115.9] },
+      { "name": "Scarborough Shoal", "type": "naval", "intensity": "LOW", "uasPerDay": 1, "center": [15.2, 117.8] },
+      { "name": "Taiwan Strait", "type": "naval", "intensity": "LOW", "uasPerDay": 5, "center": [24.0, 119.0] }
+    ],
+    "killChain": { "detect": 5, "classify": 3, "track": 4, "engage": 0, "neutralize": 0 }
+  }
+]
