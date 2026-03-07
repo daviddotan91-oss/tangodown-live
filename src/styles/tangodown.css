@@ -591,83 +591,138 @@ html, body, #root {
   display: flex; align-items: center; gap: 6px;
 }
 
-/* Threat gauge */
-.war-threat { padding: 8px 0; }
-
-.war-threat-gauge {
-  width: 100%; height: 6px;
-  background: rgba(255, 0, 0, 0.08);
-  border-radius: 3px; overflow: hidden;
-  margin: 6px 0 4px;
-}
-
-.war-threat-fill {
-  height: 100%; border-radius: 3px;
-  transition: width 1s ease;
-  box-shadow: 0 0 8px currentColor;
-}
-
-.war-threat-value {
-  font-family: var(--font-mono);
-  font-size: 0.55rem; font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-/* Global stats grid */
-.war-global-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 6px; padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 0, 0, 0.08);
-}
-
-.war-stat {
-  text-align: center; padding: 6px 4px;
-  background: rgba(255, 0, 0, 0.04);
-  border: 1px solid rgba(255, 0, 0, 0.06);
-  border-radius: 3px;
-}
-
-.war-stat-value {
-  font-family: var(--font-mono);
-  font-size: 0.75rem; font-weight: 700;
-  color: #CCCCCC; display: block;
-}
-
-.war-stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.4rem; color: rgba(255, 150, 150, 0.5);
-  letter-spacing: 0.1em; margin-top: 2px; display: block;
-}
-
-/* Kill chain */
-.war-killchain {
+/* Ops Tempo */
+.ops-tempo {
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 0, 0, 0.08);
 }
 
-.war-killchain-total {
-  font-family: var(--font-mono);
-  font-size: 0.65rem; font-weight: 700;
-  color: #FF8800; margin-bottom: 8px;
+.ops-tempo-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 8px;
 }
 
-.war-killchain-stages {
+.ops-defcon {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 2px 8px; border: 1px solid;
+  border-radius: 3px;
+  animation: warPulse 2s ease-in-out infinite;
+}
+
+.ops-tempo-display {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.ops-tempo-rings {
+  position: relative; width: 80px; height: 80px; flex-shrink: 0;
+}
+
+.ops-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid;
+  animation: opsPulse ease-in-out infinite;
+}
+
+.ops-ring-outer { top: 0; left: 0; right: 0; bottom: 0; }
+.ops-ring-mid { top: 8px; left: 8px; right: 8px; bottom: 8px; }
+.ops-ring-inner { top: 16px; left: 16px; right: 16px; bottom: 16px; }
+
+.ops-tempo-core {
+  position: absolute;
+  top: 22px; left: 22px; right: 22px; bottom: 22px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+
+.ops-tempo-value {
+  font-family: var(--font-mono);
+  font-size: 0.9rem; font-weight: 700; line-height: 1;
+}
+
+.ops-tempo-unit {
+  font-family: var(--font-mono);
+  font-size: 0.32rem; color: rgba(200, 200, 200, 0.4);
+  letter-spacing: 0.15em; margin-top: 2px;
+}
+
+.ops-tempo-stats {
+  display: flex; flex-direction: column; gap: 6px; flex: 1;
+}
+
+.ops-tempo-stat {
+  display: flex; flex-direction: column;
+}
+
+.ops-tempo-stat-val {
+  font-family: var(--font-mono);
+  font-size: 0.6rem; font-weight: 700; color: #CCCCCC;
+}
+
+.ops-tempo-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.35rem; color: rgba(200, 200, 200, 0.35);
+  letter-spacing: 0.1em;
+}
+
+.ops-tempo-trend {
+  font-family: var(--font-mono);
+  font-size: 0.5rem; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@keyframes opsPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+
+/* Weapons Active */
+.weapons-active {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.08);
+}
+
+.weapons-list {
   display: flex; flex-direction: column; gap: 4px;
 }
 
-.war-killchain-stage { position: relative; }
-
-.war-killchain-bar {
-  height: 4px; border-radius: 2px;
-  transition: width 0.8s ease;
-  box-shadow: 0 0 4px currentColor;
+.weapon-row {
+  display: flex; align-items: center; gap: 6px; padding: 2px 0;
 }
 
-.war-killchain-label {
-  display: flex; justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.42rem; margin-top: 1px;
-  color: rgba(200, 200, 200, 0.6);
+.weapon-info {
+  width: 110px; flex-shrink: 0; overflow: hidden;
+}
+
+.weapon-name {
+  font-family: var(--font-mono); font-size: 0.4rem;
+  color: #CCCCCC; display: block;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.weapon-operator {
+  font-family: var(--font-mono); font-size: 0.32rem;
+  color: rgba(200, 200, 200, 0.3); display: block;
+}
+
+.weapon-bar-track {
+  flex: 1; height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px; overflow: hidden;
+}
+
+.weapon-bar-fill {
+  height: 100%; border-radius: 2px;
+  transition: width 0.8s ease;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.weapon-count {
+  font-family: var(--font-mono); font-size: 0.38rem;
+  color: rgba(200, 200, 200, 0.5);
+  width: 28px; text-align: right; flex-shrink: 0;
 }
 
 /* Conflict zone list */
@@ -726,6 +781,23 @@ html, body, #root {
   font-size: 0.4rem; color: rgba(255, 100, 100, 0.6);
 }
 
+.war-zone-engagement-bar {
+  height: 3px; background: rgba(255, 255, 255, 0.04);
+  border-radius: 2px; margin: 4px 0 3px 12px;
+  overflow: hidden;
+}
+
+.war-zone-eng-fill {
+  height: 100%; border-radius: 2px;
+  transition: width 0.8s ease;
+  box-shadow: 0 0 4px currentColor;
+}
+
+.war-zone-fronts-count {
+  font-family: var(--font-mono);
+  font-size: 0.4rem; color: rgba(200, 200, 200, 0.4);
+}
+
 @keyframes warPulse {
   0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(255, 0, 0, 0.8); }
   50% { opacity: 0.4; box-shadow: 0 0 12px rgba(255, 0, 0, 0.4); }
@@ -774,10 +846,16 @@ html, body, #root {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.war-feed-ts {
+.war-feed-relative {
   font-family: var(--font-mono);
-  font-size: 0.4rem; color: rgba(200, 200, 200, 0.3);
-  flex-shrink: 0;
+  font-size: 0.42rem; color: rgba(200, 200, 200, 0.35);
+  width: 26px; text-align: right; flex-shrink: 0;
+}
+
+.war-feed-force-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 1px;
+  box-shadow: 0 0 4px currentColor;
 }
 
 .war-feed-action {
@@ -793,51 +871,102 @@ html, body, #root {
   white-space: nowrap;
 }
 
-.war-feed-zone {
+/* Confirmed Strikes */
+.confirmed-strikes {
+  padding: 6px 0;
+  border-top: 1px solid rgba(68, 204, 68, 0.1);
+}
+
+.strike-card {
+  padding: 5px 6px; margin-bottom: 3px;
+  background: rgba(68, 204, 68, 0.03);
+  border: 1px solid rgba(68, 204, 68, 0.08);
+  border-radius: 3px;
+  border-left: 2px solid rgba(68, 204, 68, 0.3);
+}
+
+.strike-top {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 2px;
+}
+
+.strike-date {
   font-family: var(--font-mono);
-  font-size: 0.38rem; color: rgba(255, 100, 100, 0.4);
-  flex-shrink: 0;
+  font-size: 0.38rem; color: rgba(200, 200, 200, 0.4);
+  letter-spacing: 0.05em;
 }
 
-/* Naval tracker */
-.war-naval {
+.strike-result {
+  font-family: var(--font-mono);
+  font-size: 0.38rem; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.strike-target {
+  font-family: var(--font-mono);
+  font-size: 0.42rem; color: #CCCCCC; margin-bottom: 2px;
+}
+
+.strike-bottom {
+  display: flex; gap: 8px;
+}
+
+.strike-weapon {
+  font-family: var(--font-mono);
+  font-size: 0.35rem; color: rgba(255, 136, 0, 0.6);
+}
+
+.strike-platform {
+  font-family: var(--font-mono);
+  font-size: 0.35rem; color: rgba(0, 170, 255, 0.5);
+}
+
+/* Fleet Command */
+.fleet-command {
   padding: 4px 0;
-  border-top: 1px solid rgba(255, 0, 0, 0.08);
+  border-top: 1px solid rgba(0, 170, 255, 0.1);
 }
 
-.war-naval-list {
-  max-height: 200px; overflow-y: auto;
-  scrollbar-width: none;
-}
-.war-naval-list::-webkit-scrollbar { display: none; }
+.fleet-theater { margin-bottom: 6px; }
 
-.war-naval-row {
+.fleet-theater-label {
+  font-family: var(--font-mono);
+  font-size: 0.38rem; color: rgba(0, 170, 255, 0.5);
+  letter-spacing: 0.15em; padding: 3px 0;
+  border-bottom: 1px solid rgba(0, 170, 255, 0.08);
+  margin-bottom: 2px;
+}
+
+.fleet-ship {
   display: flex; align-items: center; gap: 6px;
-  padding: 3px 4px; cursor: pointer;
+  padding: 2px 4px; cursor: pointer;
   border-radius: 2px; transition: background 0.15s;
 }
 
-.war-naval-row:hover { background: rgba(0, 170, 255, 0.06); }
+.fleet-ship:hover { background: rgba(0, 170, 255, 0.06); }
 
-.war-naval-icon {
+.fleet-ship-icon {
   font-size: 0.45rem; color: #00AAFF;
   flex-shrink: 0; width: 12px; text-align: center;
 }
 
-.war-naval-info {
+.fleet-ship-icon.hostile { color: #FF4444; }
+
+.fleet-ship-info {
   display: flex; flex-direction: column; overflow: hidden;
 }
 
-.war-naval-name {
+.fleet-ship-name {
   font-family: var(--font-mono);
   font-size: 0.4rem; color: #CCCCCC;
   font-weight: 600; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
 
-.war-naval-meta {
+.fleet-ship-type {
   font-family: var(--font-mono);
-  font-size: 0.35rem; color: rgba(200, 200, 200, 0.35);
+  font-size: 0.32rem; color: rgba(200, 200, 200, 0.3);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1417,8 +1546,8 @@ html, body, #root {
 .org-dossier { width: 440px; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
 
 .dossier-header { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--border-primary); background: linear-gradient(180deg, #1a0a0a, var(--bg-panel-solid)); position: relative; flex-shrink: 0; }
-.dossier-close { position: absolute; top: 8px; right: 8px; font-size: 14px; color: var(--text-muted); background: transparent; border: none; cursor: pointer; padding: 4px 8px; border-radius: 2px; }
-.dossier-close:hover { color: var(--red); background: var(--red-ghost); }
+.dossier-close { position: absolute; top: 10px; right: 10px; font-size: 16px; color: var(--text-secondary); background: var(--bg-card); border: 1px solid var(--border-primary); cursor: pointer; padding: 4px 10px; border-radius: 3px; z-index: 2; transition: all 0.15s; }
+.dossier-close:hover { color: var(--red); background: var(--red-ghost); border-color: var(--red-dim); }
 .dossier-org-color { width: 4px; height: 36px; border-radius: 2px; flex-shrink: 0; }
 .dossier-title-section { flex: 1; min-width: 0; }
 .dossier-org-name { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: 3px; }
@@ -1543,6 +1672,68 @@ html, body, #root {
 .search-no-results { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-align: center; padding: 30px; letter-spacing: 2px; }
 .search-hints { padding: 16px; }
 .search-hint { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-align: center; }
+
+/* ─── Weapon Intel Cards ─── */
+.weapons-intel-list { display: flex; flex-direction: column; gap: 2px; }
+.weapon-intel-card { border: 1px solid var(--border-primary); border-radius: 3px; cursor: pointer; transition: all 0.15s; overflow: hidden; background: var(--bg-card); }
+.weapon-intel-card:hover { background: var(--bg-hover); border-color: var(--orange-dim); }
+.weapon-intel-card.expanded { border-color: var(--orange-dim); background: var(--bg-hover); }
+.weapon-intel-header { display: flex; align-items: center; gap: 8px; padding: 6px 10px; }
+.weapon-intel-icon { font-size: 10px; color: var(--orange); flex-shrink: 0; width: 14px; text-align: center; }
+.weapon-intel-name { font-family: var(--font-mono); font-size: 9px; color: var(--text-primary); flex: 1; letter-spacing: 0.3px; }
+.weapon-intel-recent-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 6px var(--red); flex-shrink: 0; animation: blink 2s ease-in-out infinite; }
+.weapon-intel-details { padding: 0 10px 10px; border-top: 1px solid var(--border-primary); animation: weaponExpand 0.2s ease; }
+@keyframes weaponExpand { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 300px; } }
+.weapon-detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.03); gap: 8px; }
+.weapon-detail-label { font-family: var(--font-mono); font-size: 7px; font-weight: 600; color: var(--text-muted); letter-spacing: 1.5px; flex-shrink: 0; padding-top: 2px; }
+.weapon-detail-value { font-family: var(--font-mono); font-size: 9px; color: var(--text-secondary); text-align: right; line-height: 1.3; }
+.weapon-detail-value.highlight { color: var(--orange); font-weight: 700; }
+.weapon-detail-value.result { color: var(--green); font-weight: 600; }
+.weapon-last-strike { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--red-dim); }
+.weapon-strike-title { font-family: var(--font-display); font-size: 7px; font-weight: 700; color: var(--red); letter-spacing: 2px; margin-bottom: 4px; }
+.weapon-strike-date { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+.weapon-strike-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 3px 0; gap: 8px; }
+.weapon-no-data { font-family: var(--font-mono); font-size: 8px; color: var(--text-muted); text-align: center; padding: 10px 0; letter-spacing: 2px; }
+
+/* ─── Flash Traffic Alert ─── */
+.flash-traffic { position: fixed; top: 44px; left: 50%; transform: translateX(-50%); z-index: 500; cursor: pointer; animation: flashSlam 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes flashSlam {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
+  60% { transform: translateX(-50%) translateY(2px) scale(1.02); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+.flash-traffic-inner { background: linear-gradient(180deg, #1a0808, #120606); border: 1px solid var(--red); border-radius: 4px; padding: 12px 20px; min-width: 380px; max-width: 520px; box-shadow: 0 0 40px rgba(255,68,68,0.25), 0 0 80px rgba(255,68,68,0.1), inset 0 0 30px rgba(255,68,68,0.05); position: relative; overflow: hidden; }
+.flash-traffic-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); animation: flashScan 1.5s ease-in-out infinite; }
+@keyframes flashScan { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.flash-traffic-label { font-family: var(--font-display); font-size: 9px; font-weight: 800; color: var(--red); letter-spacing: 4px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; animation: flashPulse 0.8s ease-in-out infinite; }
+@keyframes flashPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.flash-traffic-icon { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red), 0 0 20px var(--red-dim); }
+.flash-traffic-type { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 2px; margin-bottom: 2px; }
+.flash-traffic-location { font-family: var(--font-body); font-size: 13px; color: var(--white); font-weight: 600; margin-bottom: 4px; }
+.flash-traffic-desc { font-family: var(--font-mono); font-size: 9px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 6px; }
+.flash-traffic-action { font-family: var(--font-mono); font-size: 8px; color: var(--text-muted); letter-spacing: 2px; text-align: center; border-top: 1px solid var(--border-primary); padding-top: 6px; transition: color 0.15s; }
+.flash-traffic:hover .flash-traffic-action { color: var(--red); }
+
+/* ─── Feed Filter Bar ─── */
+.war-header-actions { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); }
+.feed-filter-toggle { font-family: var(--font-mono); font-size: 8px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border-primary); padding: 3px 8px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.15s; }
+.feed-filter-toggle:hover { color: var(--text-primary); border-color: var(--cyan-dim); }
+.feed-filter-toggle.active { color: var(--cyan); border-color: var(--cyan-dim); background: var(--cyan-ghost); }
+.feed-filter-toggle.has-filters { color: var(--cyan); }
+.filter-count { font-size: 8px; background: var(--cyan); color: var(--bg-primary); border-radius: 6px; padding: 0 4px; min-width: 14px; text-align: center; font-weight: 700; }
+.feed-filter-bar { padding: 8px 12px; border-bottom: 1px solid var(--border-primary); background: linear-gradient(180deg, var(--bg-card), var(--bg-panel-solid)); animation: filterSlide 0.15s ease; }
+@keyframes filterSlide { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 200px; } }
+.feed-filter-section { margin-bottom: 6px; }
+.feed-filter-label { font-family: var(--font-mono); font-size: 7px; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 4px; }
+.feed-filter-btns { display: flex; flex-wrap: wrap; gap: 3px; }
+.feed-filter-btn { font-family: var(--font-mono); font-size: 7px; font-weight: 600; color: var(--text-muted); background: transparent; border: 1px solid var(--border-primary); padding: 2px 6px; border-radius: 2px; cursor: pointer; transition: all 0.12s; letter-spacing: 0.5px; }
+.feed-filter-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
+.feed-filter-btn.active { color: var(--cyan); border-color: var(--cyan-dim); background: var(--cyan-ghost); }
+.feed-filter-btn.allied.active { color: var(--green); border-color: var(--green-dim); background: var(--green-ghost); }
+.feed-filter-btn.hostile.active { color: var(--red); border-color: var(--red-dim); background: var(--red-ghost); }
+.feed-filter-clear { font-family: var(--font-mono); font-size: 7px; color: var(--text-muted); background: transparent; border: 1px solid var(--border-primary); padding: 3px 8px; border-radius: 2px; cursor: pointer; letter-spacing: 1px; width: 100%; margin-top: 4px; transition: all 0.12s; }
+.feed-filter-clear:hover { color: var(--red); border-color: var(--red-dim); }
+.war-feed-empty { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); text-align: center; padding: 20px; letter-spacing: 2px; }
 
 /* Phase 2 Responsive */
 @media (max-width: 1200px) { .networks-dossier-panel.open { width: 380px; } .org-dossier { width: 380px; } .dossier-empty { width: 380px; } .net-sidebar { width: 260px; } }

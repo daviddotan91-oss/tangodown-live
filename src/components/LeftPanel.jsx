@@ -1,32 +1,49 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { getIntensityColor } from '../utils/dataUtils'
 import ConflictZone from './ConflictZone'
 
-export default function LeftPanel({ conflicts, onConflictSelect, selectedConflict }) {
-  const [threatLevel, setThreatLevel] = useState(91)
+export default function LeftPanel({ conflicts, onConflictSelect, selectedConflict, feed = [] }) {
   const [expandedConflict, setExpandedConflict] = useState(null)
+  const [opsRate, setOpsRate] = useState(0)
+  const [opsTrend, setOpsTrend] = useState('stable')
 
+  // Real-time ops tempo from feed
   useEffect(() => {
-    const interval = setInterval(() => {
-      setThreatLevel(prev => {
-        const delta = (Math.random() - 0.48) * 3
-        return Math.max(55, Math.min(98, prev + delta))
-      })
-    }, 2000)
+    const calc = () => {
+      const now = Date.now()
+      const last60 = feed.filter(f => now - new Date(f.timestamp).getTime() < 60000).length
+      const prev60 = feed.filter(f => {
+        const age = now - new Date(f.timestamp).getTime()
+        return age >= 60000 && age < 120000
+      }).length
+      setOpsTrend(last60 > prev60 ? 'rising' : last60 < prev60 ? 'falling' : 'stable')
+      setOpsRate(last60)
+    }
+    calc()
+    const interval = setInterval(calc, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [feed])
 
-  const totals = conflicts.reduce((acc, c) => ({
-    zones: acc.zones + 1,
-    fronts: acc.fronts + (c.fronts?.length || 0),
-    aircraft: acc.aircraft + (c.stats?.aircraftInTheater || 0),
-    uas: acc.uas + (c.stats?.uasInTheater || 0),
-    naval: acc.naval + (c.stats?.navalAssets || 0),
-    engagements: acc.engagements + (c.stats?.dailyEngagements || 0)
-  }), { zones: 0, fronts: 0, aircraft: 0, uas: 0, naval: 0, engagements: 0 })
+  const criticalCount = conflicts.filter(c => c.intensity === 'CRITICAL').length
+  const highCount = conflicts.filter(c => c.intensity === 'HIGH').length
+  const defcon = criticalCount >= 3 ? 1 : criticalCount >= 2 ? 2 : criticalCount >= 1 ? 3 : highCount >= 2 ? 4 : 5
+  const defconColor = { 1: '#FF0000', 2: '#FF4444', 3: '#FF8800', 4: '#FFB800', 5: '#44CC44' }[defcon]
 
-  const primaryConflict = conflicts.find(c => c.intensity === 'CRITICAL') || conflicts[0]
-  const killChain = primaryConflict?.killChain
+  const dailyRate = conflicts.reduce((s, c) => s + (c.stats?.dailyEngagements || 0), 0)
+  const perMinute = (dailyRate / 1440).toFixed(1)
+
+  const topWeapons = useMemo(() => {
+    return conflicts
+      .flatMap(c => (c.weapons || []).map(w => ({ ...w, conflict: c.name })))
+      .sort((a, b) => (b.dailyUse || 0) - (a.dailyUse || 0))
+      .slice(0, 8)
+  }, [conflicts])
+  const maxWeaponUse = topWeapons[0]?.dailyUse || 1
+
+  const isHostile = (operator) => {
+    const hostiles = ['Russia', 'Hamas', 'Hezbollah', 'Houthi', 'Wagner', 'Islamic Jihad', 'Al-Shabaab', 'Boko Haram', 'ISIS', 'ISIL', 'Taliban', 'RSF', 'Junta']
+    return hostiles.some(h => operator?.includes(h))
+  }
 
   const handleConflictClick = (conflict) => {
     if (expandedConflict?.id === conflict.id) {
@@ -37,114 +54,90 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
     }
   }
 
-  const level = Math.round(threatLevel)
-  const threatColor = level > 80 ? '#FF4444' : level > 60 ? '#FF6644' : level > 40 ? '#FFB800' : '#44CC44'
-  const threatLabel = level > 80 ? 'CRITICAL' : level > 60 ? 'ELEVATED' : level > 40 ? 'GUARDED' : 'LOW'
-
-  const killSteps = killChain ? [
-    { key: 'detect', label: 'DETECT', color: '#0088FF' },
-    { key: 'classify', label: 'CLASSIFY', color: '#00AAFF' },
-    { key: 'track', label: 'TRACK', color: '#FFB800' },
-    { key: 'engage', label: 'ENGAGE', color: '#FF6644' },
-    { key: 'neutralize', label: 'KILL', color: '#FF4444' }
-  ] : []
-  const kcTotal = killSteps.reduce((s, step) => s + (killChain?.[step.key] || 0), 0)
+  const maxEng = Math.max(...conflicts.map(c => c.stats?.dailyEngagements || 0), 1)
 
   return (
     <div className="war-panel-left">
       {/* Header */}
       <div className="war-header">
-        <div className="war-header-title">GOD'S EYE — GLOBAL BATTLESPACE</div>
+        <div className="war-header-title">LION'S EYE — GLOBAL BATTLESPACE</div>
         <div className="war-header-sub">
-          CONFLICTS: OPEN-SOURCE INTEL&nbsp;
+          OPEN-SOURCE INTEL&nbsp;
           <span className="war-osint-badge">● OSINT</span>
           &nbsp;//&nbsp;
-          ENGAGEMENTS:&nbsp;
           <span className="war-sim-badge">◇ SIMULATED</span>
         </div>
       </div>
 
-      {/* Threat Level */}
-      <div className="war-threat">
-        <div className="war-panel-title">GLOBAL THREAT LEVEL</div>
-        <div className="war-threat-gauge">
-          <div
-            className="war-threat-fill"
-            style={{
-              width: `${level}%`,
-              background: `linear-gradient(90deg, #44CC44, #FFB800, #FF6644, #FF4444)`,
-              color: threatColor
-            }}
-          />
+      {/* OPS TEMPO */}
+      <div className="ops-tempo">
+        <div className="ops-tempo-header">
+          <span className="war-panel-title" style={{ marginBottom: 0 }}>OPS TEMPO</span>
+          <span className="ops-defcon" style={{ color: defconColor, borderColor: defconColor + '66' }}>
+            DEFCON {defcon}
+          </span>
         </div>
-        <div className="war-threat-value" style={{ color: threatColor }}>
-          {level}% — {threatLabel}
-        </div>
-      </div>
-
-      {/* Global Stats */}
-      <div className="war-global-stats">
-        <div className="war-stat">
-          <div className="war-stat-value">{totals.zones}</div>
-          <div className="war-stat-label">ACTIVE ZONES</div>
-        </div>
-        <div className="war-stat">
-          <div className="war-stat-value">{totals.fronts}</div>
-          <div className="war-stat-label">BATTLEFRONTS</div>
-        </div>
-        <div className="war-stat">
-          <div className="war-stat-value">{(totals.aircraft / 1000).toFixed(1)}K</div>
-          <div className="war-stat-label">AIRCRAFT</div>
-        </div>
-        <div className="war-stat">
-          <div className="war-stat-value">{(totals.uas / 1000).toFixed(1)}K</div>
-          <div className="war-stat-label">UAS IN THEATER</div>
-        </div>
-        <div className="war-stat">
-          <div className="war-stat-value">{totals.naval}</div>
-          <div className="war-stat-label">NAVAL ASSETS</div>
-        </div>
-        <div className="war-stat">
-          <div className="war-stat-value">{(totals.engagements / 1000).toFixed(1)}K</div>
-          <div className="war-stat-label">DAILY ENGAGEMENTS</div>
-        </div>
-      </div>
-
-      {/* Kill Chain */}
-      {killChain && (
-        <div className="war-killchain">
-          <div className="war-panel-title">KILL CHAIN — AVG RESPONSE</div>
-          <div className="war-killchain-total">{kcTotal.toFixed(1)}s TOTAL</div>
-          <div className="war-killchain-stages">
-            {killSteps.map(step => {
-              const val = killChain[step.key] || 0
-              return (
-                <div key={step.key} className="war-killchain-stage">
-                  <div
-                    className="war-killchain-bar"
-                    style={{
-                      width: `${(val / 10) * 100}%`,
-                      backgroundColor: step.color,
-                      color: step.color
-                    }}
-                  />
-                  <div className="war-killchain-label">
-                    <span>{step.label}</span>
-                    <span>{val}s</span>
-                  </div>
-                </div>
-              )
-            })}
+        <div className="ops-tempo-display">
+          <div className="ops-tempo-rings">
+            <div className="ops-ring ops-ring-outer" style={{ borderColor: defconColor + '33', animationDuration: `${Math.max(0.8, 3 - opsRate * 0.15)}s` }} />
+            <div className="ops-ring ops-ring-mid" style={{ borderColor: defconColor + '55', animationDuration: `${Math.max(0.6, 2.5 - opsRate * 0.12)}s` }} />
+            <div className="ops-ring ops-ring-inner" style={{ borderColor: defconColor + '88', animationDuration: `${Math.max(0.4, 2 - opsRate * 0.1)}s` }} />
+            <div className="ops-tempo-core" style={{ backgroundColor: defconColor + '15', boxShadow: `0 0 20px ${defconColor}33` }}>
+              <div className="ops-tempo-value" style={{ color: defconColor }}>{perMinute}</div>
+              <div className="ops-tempo-unit">ENG/MIN</div>
+            </div>
+          </div>
+          <div className="ops-tempo-stats">
+            <div className="ops-tempo-stat">
+              <span className="ops-tempo-stat-val">{dailyRate.toLocaleString()}</span>
+              <span className="ops-tempo-stat-label">DAILY ENGAGEMENTS</span>
+            </div>
+            <div className="ops-tempo-stat">
+              <span className="ops-tempo-stat-val">{opsRate}</span>
+              <span className="ops-tempo-stat-label">LAST 60 SECONDS</span>
+            </div>
+            <div className="ops-tempo-stat">
+              <span className="ops-tempo-trend" style={{ color: opsTrend === 'rising' ? '#FF4444' : opsTrend === 'falling' ? '#44CC44' : '#FFB800' }}>
+                {opsTrend === 'rising' ? '▲ RISING' : opsTrend === 'falling' ? '▼ FALLING' : '● STEADY'}
+              </span>
+              <span className="ops-tempo-stat-label">TREND</span>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* WEAPONS ACTIVE */}
+      <div className="weapons-active">
+        <div className="war-panel-title">WEAPONS ACTIVE — ALL THEATERS</div>
+        <div className="weapons-list">
+          {topWeapons.map((w, i) => (
+            <div key={i} className="weapon-row">
+              <div className="weapon-info">
+                <span className="weapon-name">{w.name}</span>
+                <span className="weapon-operator">{w.operator}</span>
+              </div>
+              <div className="weapon-bar-track">
+                <div
+                  className="weapon-bar-fill"
+                  style={{
+                    width: `${(w.dailyUse / maxWeaponUse) * 100}%`,
+                    backgroundColor: isHostile(w.operator) ? '#FF4444' : '#00AAFF'
+                  }}
+                />
+              </div>
+              <span className="weapon-count">{w.dailyUse}/d</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Conflict Zones */}
       <div className="war-zone-list">
-        <div className="war-panel-title">CONFLICT ZONES</div>
+        <div className="war-panel-title">CONFLICT ZONES — {conflicts.length} ACTIVE</div>
         {conflicts.map(conflict => {
           const color = getIntensityColor(conflict.intensity)
           const isExpanded = expandedConflict?.id === conflict.id
+          const engPct = ((conflict.stats?.dailyEngagements || 0) / maxEng) * 100
           return (
             <div key={conflict.id}>
               <div
@@ -154,11 +147,15 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
                 <div className="war-zone-header">
                   <span className="war-zone-status" style={{ backgroundColor: color }} />
                   <span className="war-zone-name">{conflict.name}</span>
+                  <span className="war-zone-intensity" style={{ color }}>{conflict.intensity}</span>
+                </div>
+                <div className="war-zone-engagement-bar">
+                  <div className="war-zone-eng-fill" style={{ width: `${engPct}%`, backgroundColor: color + 'aa' }} />
                 </div>
                 <div className="war-zone-meta">
                   <span className="war-zone-type">{conflict.type?.toUpperCase()}</span>
-                  <span className="war-zone-intensity" style={{ color }}>{conflict.intensity}</span>
                   <span className="war-zone-engagements">{conflict.stats.dailyEngagements}/day</span>
+                  <span className="war-zone-fronts-count">{conflict.fronts?.length || 0} FRONTS</span>
                 </div>
               </div>
               {isExpanded && <ConflictZone conflict={conflict} />}

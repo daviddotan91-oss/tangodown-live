@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react'
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import Globe from './components/Globe'
 import TopNav from './components/TopNav'
 import BottomBar from './components/BottomBar'
@@ -109,6 +109,38 @@ export default function App() {
     return feed.slice(0, 100)
   }, [feed])
 
+  // Flash Traffic alert system — dramatic alerts for major simulated events
+  const [flashTraffic, setFlashTraffic] = useState(null)
+  const flashTimerRef = useRef(null)
+  const lastFlashRef = useRef(0)
+
+  useEffect(() => {
+    const FLASH_TYPES = ['AIRSTRIKE', 'MISSILE LAUNCH', 'DRONE STRIKE', 'ASSASSINATION', 'SPECIAL OP']
+    const interval = setInterval(() => {
+      if (Date.now() - lastFlashRef.current < 40000) return // min 40s between flashes
+      // Pick a recent high-impact incident
+      const candidate = feed.find(inc =>
+        FLASH_TYPES.includes(inc.type) &&
+        inc.simulated &&
+        Date.now() - new Date(inc.timestamp).getTime() < 15000
+      )
+      if (candidate) {
+        lastFlashRef.current = Date.now()
+        setFlashTraffic(candidate)
+        clearTimeout(flashTimerRef.current)
+        flashTimerRef.current = setTimeout(() => setFlashTraffic(null), 7000)
+      }
+    }, 5000)
+    return () => { clearInterval(interval); clearTimeout(flashTimerRef.current) }
+  }, [feed])
+
+  const handleFlashClick = useCallback(() => {
+    if (!flashTraffic) return
+    setActiveView('godseye')
+    handleIncidentFlyTo(flashTraffic)
+    setFlashTraffic(null)
+  }, [flashTraffic, handleIncidentFlyTo])
+
   if (loading) {
     return (
       <div className="loading-screen">
@@ -150,10 +182,12 @@ export default function App() {
                   conflicts={conflicts}
                   onConflictSelect={handleConflictSelect}
                   selectedConflict={selectedConflict}
+                  feed={feed}
                 />
                 <RightPanel
                   feed={filteredFeed}
                   naval={naval}
+                  conflicts={conflicts}
                   onIncidentClick={handleIncidentClick}
                   onShipClick={handleShipClick}
                   feedFilter={feedFilter}
@@ -229,6 +263,24 @@ export default function App() {
           }
         }}
       />
+
+      {/* Flash Traffic Alert */}
+      {flashTraffic && (
+        <div className="flash-traffic" onClick={handleFlashClick}>
+          <div className="flash-traffic-inner">
+            <div className="flash-traffic-label">
+              <span className="flash-traffic-icon" />
+              FLASH TRAFFIC
+            </div>
+            <div className="flash-traffic-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
+              {flashTraffic.type}
+            </div>
+            <div className="flash-traffic-location">{flashTraffic.location}</div>
+            <div className="flash-traffic-desc">{flashTraffic.description}</div>
+            <div className="flash-traffic-action">CLICK TO LOCATE</div>
+          </div>
+        </div>
+      )}
 
       {/* Disclaimer */}
       <div className="disclaimer-footer">
