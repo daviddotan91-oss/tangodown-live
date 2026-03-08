@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "classification": "UNCLASSIFIED // OSINT",
+    "lastUpdated": "2026-03-08",
+    "description": "Curated headline intelligence — defense, geopolitics, national security"
+  },
+  "sources": {
+    "fox": { "name": "FOX NEWS", "color": "#003366" },
+    "nypost": { "name": "NY POST", "color": "#CC0000" },
+    "jpost": { "name": "JERUSALEM POST", "color": "#1a5276" },
+    "toi": { "name": "TIMES OF ISRAEL", "color": "#0066CC" },
+    "breitbart": { "name": "BREITBART", "color": "#FF6600" },
+    "dailycaller": { "name": "DAILY CALLER", "color": "#CC0000" },
+    "i24": { "name": "i24NEWS", "color": "#E40046" },
+    "dailywire": { "name": "DAILY WIRE", "color": "#1C1C1C" },
+    "ynet": { "name": "YNET", "color": "#FF0000" },
+    "washexaminer": { "name": "WASH. EXAMINER", "color": "#002244" },
+    "freebeacon": { "name": "FREE BEACON", "color": "#B22222" },
+    "newsmax": { "name": "NEWSMAX", "color": "#003399" }
+  },
+  "xAccounts": [
+    { "handle": "Israel", "name": "State of Israel", "category": "ISRAEL", "desc": "Official State of Israel account" },
+    { "handle": "IDF", "name": "Israel Defense Forces", "category": "ISRAEL", "desc": "Official IDF account" },
+    { "handle": "IsraeliPM", "name": "Prime Minister of Israel", "category": "ISRAEL", "desc": "PM Netanyahu's office" },
+    { "handle": "IsraelMFA", "name": "Israel Foreign Ministry", "category": "ISRAEL", "desc": "Ministry of Foreign Affairs" },
+    { "handle": "kann_news", "name": "Kan News", "category": "ISRAEL", "desc": "Israeli public broadcaster" },
+    { "handle": "JPostNews", "name": "Jerusalem Post", "category": "ISRAEL", "desc": "English-language Israeli daily" },
+    { "handle": "TimesofIsrael", "name": "Times of Israel", "category": "ISRAEL", "desc": "Israeli news and analysis" },
+    { "handle": "iaborrowedland", "name": "A Borrowed Land", "category": "ISRAEL", "desc": "Pro-Israel commentary and news" },
+
+    { "handle": "POTUS", "name": "President Trump", "category": "USA", "desc": "47th President of the United States" },
+    { "handle": "realDonaldTrump", "name": "Donald J. Trump", "category": "USA", "desc": "President Donald J. Trump" },
+    { "handle": "SecDef", "name": "Secretary of Defense", "category": "USA", "desc": "U.S. Department of Defense" },
+    { "handle": "DeptofDefense", "name": "U.S. DoD", "category": "USA", "desc": "Department of Defense" },
+    { "handle": "StateDept", "name": "State Department", "category": "USA", "desc": "U.S. Department of State" },
+    { "handle": "USArmy", "name": "U.S. Army", "category": "USA", "desc": "United States Army" },
+    { "handle": "USNavy", "name": "U.S. Navy", "category": "USA", "desc": "United States Navy" },
+
+    { "handle": "FoxNews", "name": "Fox News", "category": "NEWS", "desc": "Breaking news and politics" },
+    { "handle": "BreitbartNews", "name": "Breitbart News", "category": "NEWS", "desc": "Conservative news network" },
+    { "handle": "DailyCaller", "name": "Daily Caller", "category": "NEWS", "desc": "Political news and analysis" },
+    { "handle": "realDailyWire", "name": "Daily Wire", "category": "NEWS", "desc": "Ben Shapiro's news network" },
+    { "handle": "Newsmax", "name": "Newsmax", "category": "NEWS", "desc": "Independent news network" },
+    { "handle": "nypost", "name": "New York Post", "category": "NEWS", "desc": "NYC's oldest newspaper" },
+    { "handle": "dcexaminer", "name": "Washington Examiner", "category": "NEWS", "desc": "DC political coverage" },
+    { "handle": "FreeBeacon", "name": "Free Beacon", "category": "NEWS", "desc": "Political news and investigations" }
+  ],
+  "headlines": [
+    {
+      "id": "h1",
+      "source": "fox",
+      "text": "Trump orders military to accelerate Iron Beam deployment timeline",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h2",
+      "source": "jpost",
+      "text": "IDF confirms elimination of senior Hezbollah operative in precision strike",
+      "category": "ISRAEL",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "h3",
+      "source": "breitbart",
+      "text": "Pentagon: U.S. carrier strike group repositioned to Eastern Mediterranean",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h4",
+      "source": "toi",
+      "text": "Iron Dome intercepts record 97% of projectiles in latest barrage",
+      "category": "ISRAEL",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h5",
+      "source": "dailycaller",
+      "text": "Trump sanctions Iranian oil exports — 'Maximum pressure is back'",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h6",
+      "source": "i24",
+      "text": "Mossad operation disrupts Iranian weapons shipment to Houthis",
+      "category": "ISRAEL",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "h7",
+      "source": "nypost",
+      "text": "U.S. Special Forces deploy to Red Sea to counter Houthi threat",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h8",
+      "source": "fox",
+      "text": "Trump: 'America stands with Israel — no daylight between us'",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h9",
+      "source": "jpost",
+      "text": "Israeli tech firms win $2.4B Pentagon contract for AI defense systems",
+      "category": "ISRAEL",
+      "priority": "MEDIUM"
+    },
+    {
+      "id": "h10",
+      "source": "dailywire",
+      "text": "Shapiro: 'The Abraham Accords expansion is Trump's greatest legacy'",
+      "category": "USA",
+      "priority": "MEDIUM"
+    },
+    {
+      "id": "h11",
+      "source": "freebeacon",
+      "text": "Classified briefing reveals Iran 3 months from nuclear breakout",
+      "category": "ISRAEL",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "h12",
+      "source": "newsmax",
+      "text": "GOP pushes $3.5B supplemental aid package for Israel defense",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h13",
+      "source": "toi",
+      "text": "Arrow 3 successfully intercepts ballistic missile in exo-atmospheric test",
+      "category": "ISRAEL",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h14",
+      "source": "washexaminer",
+      "text": "Trump admin designates IRGC-linked networks in 12 countries",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h15",
+      "source": "fox",
+      "text": "U.S.-Israel joint military exercise 'Juniper Cobra' largest ever",
+      "category": "USA",
+      "priority": "MEDIUM"
+    },
+    {
+      "id": "h16",
+      "source": "i24",
+      "text": "Shin Bet foils major terror attack planned for Tel Aviv",
+      "category": "ISRAEL",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "h17",
+      "source": "breitbart",
+      "text": "Trump moves to reinstate all sanctions on Iranian regime",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h18",
+      "source": "ynet",
+      "text": "IAF strikes 40 Hezbollah targets in southern Lebanon overnight",
+      "category": "ISRAEL",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h19",
+      "source": "dailycaller",
+      "text": "SecDef: 'Any attack on Israel will be met with overwhelming force'",
+      "category": "USA",
+      "priority": "HIGH"
+    },
+    {
+      "id": "h20",
+      "source": "jpost",
+      "text": "Netanyahu and Trump announce expanded defense cooperation pact",
+      "category": "ISRAEL",
+      "priority": "HIGH"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import SearchOverlay from './components/SearchOverlay'
 import ArsenalView from './components/ArsenalView'
 import BroadcastView from './components/BroadcastView'
 import BootSequence from './components/BootSequence'
+import { HeadlineTicker, XFeedPanel } from './components/IntelFeed'
 import { useConflictData } from './hooks/useConflictData'
 import { useLiveFeed } from './hooks/useLiveFeed'
 import { initAudio, playClick, playTabSwitch, playGlitch, playFlashTraffic, playImpact, toggleMute, isMuted, startAmbient } from './utils/soundManager'
@@ -30,6 +31,8 @@ export default function App() {
   const [networks, setNetworks] = useState({ connections: [], clusters: [] })
   const [arsenal, setArsenal] = useState({ airDefense: [], uas: [], platforms: [], defenseTech: [] })
   const [broadcast, setBroadcast] = useState({ countries: [] })
+  const [headlinesData, setHeadlinesData] = useState({ headlines: [], sources: {}, xAccounts: [] })
+  const [xFeedOpen, setXFeedOpen] = useState(false)
 
   // Boot sequence state
   const [bootComplete, setBootComplete] = useState(false)
@@ -70,20 +73,22 @@ export default function App() {
     }, 80)
   }, [activeView])
 
-  // Load organizations, leaders, and networks
+  // Load organizations, leaders, networks, and headlines
   useEffect(() => {
     Promise.all([
       fetch('/data/organizations.json').then(r => r.json()),
       fetch('/data/leaders.json').then(r => r.json()),
       fetch('/data/networks.json').then(r => r.json()),
       fetch('/data/arsenal.json').then(r => r.json()),
-      fetch('/data/broadcast.json').then(r => r.json())
-    ]).then(([orgs, ldrs, nets, ars, bcast]) => {
+      fetch('/data/broadcast.json').then(r => r.json()),
+      fetch('/data/headlines.json').then(r => r.json())
+    ]).then(([orgs, ldrs, nets, ars, bcast, hdl]) => {
       setOrganizations(orgs)
       setLeaders(ldrs)
       setNetworks(nets)
       setArsenal(ars)
       setBroadcast(bcast)
+      setHeadlinesData(hdl)
     }).catch(() => {})
   }, [])
 
@@ -136,6 +141,10 @@ export default function App() {
         case 'm':
         case 'M':
           setSoundMuted(toggleMute())
+          break
+        case 'x':
+        case 'X':
+          setXFeedOpen(prev => !prev)
           break
         default:
           switch (e.key.toLowerCase()) {
@@ -261,6 +270,26 @@ export default function App() {
         setActiveView={switchView}
         stats={globalStats}
       />
+
+      {/* Headline Ticker Bar */}
+      {activeView === 'godseye' && (
+        <HeadlineTicker
+          headlines={headlinesData.headlines || []}
+          sources={headlinesData.sources || {}}
+        />
+      )}
+
+      {/* X Intel Feed Toggle Button */}
+      {activeView === 'godseye' && (
+        <button
+          className={`xfeed-toggle-btn ${xFeedOpen ? 'active' : ''}`}
+          onClick={() => { setXFeedOpen(prev => !prev); playClick() }}
+          title="Toggle X Intel Feed (X)"
+        >
+          <span className="xfeed-toggle-x">𝕏</span>
+          INTEL
+        </button>
+      )}
 
       <div className="main-content">
         {activeView === 'godseye' && (
@@ -403,6 +432,15 @@ export default function App() {
           </div>
         </>
       )}
+
+      {/* X Intel Feed Panel */}
+      <XFeedPanel
+        isOpen={xFeedOpen}
+        onClose={() => setXFeedOpen(false)}
+        xAccounts={headlinesData.xAccounts || []}
+        headlines={headlinesData.headlines || []}
+        sources={headlinesData.sources || {}}
+      />
 
       {/* Disclaimer */}
       <div className="disclaimer-footer">
