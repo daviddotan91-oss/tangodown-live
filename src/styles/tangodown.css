@@ -2252,6 +2252,28 @@ html, body, #root {
 .intel-tab:hover { color: var(--white); background: var(--bg-hover); }
 .intel-tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
 .intel-content { flex: 1; overflow-y: auto; padding: 24px 32px; }
+/* Intel — Executive Summary */
+.intel-exec-summary {
+  background: var(--bg-card); border: 1px solid var(--border-primary); border-left: 3px solid var(--cyan);
+  border-radius: 4px; padding: 16px 20px; margin-bottom: 20px;
+}
+.intel-exec-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-primary);
+}
+.intel-exec-stamp {
+  font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700;
+  color: var(--cyan); letter-spacing: 2px;
+}
+.intel-exec-date {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px;
+}
+.intel-exec-line {
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; color: var(--white-dim);
+  line-height: 1.6; margin: 0 0 8px 0;
+}
+.intel-exec-line:last-child { margin-bottom: 0; }
+
 .intel-metrics-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
 .intel-metric-block { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: 4px; padding: 16px 20px; text-align: center; }
 .intel-metric-big { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 700; color: var(--white); display: block; }

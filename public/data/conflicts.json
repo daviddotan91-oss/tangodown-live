@@ -61,7 +61,7 @@
     "startDate": "2022-02-24",
     "center": [48.5, 37.0],
     "radius": 5.0,
-    "parties": ["Ukraine (ZSU)", "Russia (VSRF)", "Wagner Group"],
+    "parties": ["Ukraine (ZSU)", "Russia (VSRF)", "Russian Africa Corps (ex-Wagner)"],
     "description": "Full-scale conventional war. Frontlines spanning 1,200km across eastern and southern Ukraine. Extensive drone warfare, artillery exchanges, and air defense operations.",
     "stats": {
       "dailyEngagements": 120,

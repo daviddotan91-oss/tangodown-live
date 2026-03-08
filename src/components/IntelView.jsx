@@ -5,7 +5,7 @@ const THREAT_MATRIX = [
   { region: 'MIDDLE EAST', level: 'CRITICAL', trend: 'ESCALATING', summary: 'Multi-front conflict in Israel-Palestine, Houthi anti-shipping campaign in Red Sea, Iranian proxy operations across the theater.' },
   { region: 'EUROPE', level: 'CRITICAL', trend: 'STATIC', summary: 'Full-scale conventional war in Ukraine. 1,200km frontline, mass drone warfare, nuclear escalation risk persists.' },
   { region: 'EAST ASIA', level: 'HIGH', trend: 'ESCALATING', summary: 'Increasing Chinese maritime aggression in South China Sea. Philippine resupply missions regularly contested.' },
-  { region: 'SAHEL', level: 'HIGH', trend: 'DETERIORATING', summary: 'JNIM and ISGS expand territory following withdrawal of French forces. Wagner Group active in Mali and Burkina Faso.' },
+  { region: 'SAHEL', level: 'HIGH', trend: 'DETERIORATING', summary: 'JNIM and ISGS expand territory following withdrawal of French forces. Russian Africa Corps (formerly Wagner) active in Mali and Burkina Faso.' },
   { region: 'EAST AFRICA', level: 'HIGH', trend: 'VOLATILE', summary: 'Al-Shabaab maintains operational capability in Somalia. Sudan civil war intensifies with RSF siege operations.' },
   { region: 'CENTRAL AFRICA', level: 'MEDIUM', trend: 'ESCALATING', summary: 'M23 rebel offensive in eastern DRC threatens Goma. MONUSCO withdrawal complicates stability operations.' },
   { region: 'SOUTHEAST ASIA', level: 'MEDIUM', trend: 'SHIFTING', summary: 'Myanmar resistance forces gain ground against Tatmadaw. Brotherhood Alliance controls key border crossings.' }
@@ -91,6 +91,24 @@ export default function IntelView({ conflicts, incidents, naval }) {
     return [...conflicts].sort((a, b) => (order[a.intensity] ?? 4) - (order[b.intensity] ?? 4))
   }, [conflicts])
 
+  // Auto-generated executive summary
+  const execSummary = useMemo(() => {
+    const critical = conflicts.filter(c => c.intensity === 'CRITICAL')
+    const high = conflicts.filter(c => c.intensity === 'HIGH')
+    const alliedNaval = naval.filter(s => s.force === 'allied').length
+    const hostileNaval = naval.filter(s => s.force === 'hostile').length
+    const topZone = sortedConflicts[0]
+
+    const lines = []
+    lines.push(`GLOBAL THREAT ASSESSMENT: ${critical.length} CRITICAL and ${high.length} HIGH intensity conflict zones active across ${conflicts.length} theaters of operation.`)
+    if (topZone) {
+      lines.push(`PRIMARY THEATER: ${topZone.name.toUpperCase()} — ${topZone.stats.dailyEngagements} daily engagements, ${topZone.fronts?.length || 0} active fronts, ${topZone.stats.activePersonnel?.toLocaleString()} personnel deployed.`)
+    }
+    lines.push(`NAVAL POSTURE: ${alliedNaval} allied and ${hostileNaval} adversary vessels tracked. ${globalMetrics.totalAircraft.toLocaleString()} aircraft and ${globalMetrics.totalUAS.toLocaleString()} UAS platforms in theater globally.`)
+    lines.push(`ASSESSMENT: Global instability index remains ELEVATED. Multiple concurrent high-intensity conflicts stress allied force projection capability. Recommend sustained ISR coverage across all theaters.`)
+    return lines
+  }, [conflicts, naval, sortedConflicts, globalMetrics])
+
   return (
     <div className="intel-view">
       {/* Header */}
@@ -125,6 +143,17 @@ export default function IntelView({ conflicts, incidents, naval }) {
         {/* SITREP Tab */}
         {activeTab === 'sitrep' && (
           <div className="intel-sitrep-tab">
+            {/* Executive Summary */}
+            <div className="intel-exec-summary">
+              <div className="intel-exec-header">
+                <span className="intel-exec-stamp">EXECUTIVE SUMMARY</span>
+                <span className="intel-exec-date">{new Date().toISOString().slice(0, 10)} // {new Date().toISOString().slice(11, 19)}Z</span>
+              </div>
+              {execSummary.map((line, i) => (
+                <p key={i} className="intel-exec-line">{line}</p>
+              ))}
+            </div>
+
             {/* Key Metrics Bar */}
             <div className="intel-metrics-bar">
               <div className="intel-metric-block">
@@ -166,7 +195,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
             {THREAT_MATRIX.map((row, i) => {
               const color = getIntensityColor(row.level)
               const trendIcon = row.trend === 'ESCALATING' ? '\u2191' :
-                row.trend === 'DETERIORATING' ? '\u2191' :
+                row.trend === 'DETERIORATING' ? '\u2193' :
                 row.trend === 'STATIC' ? '\u2194' :
                 row.trend === 'VOLATILE' ? '\u21C5' : '\u2192'
               const trendColor = (row.trend === 'ESCALATING' || row.trend === 'DETERIORATING') ? '#FF4444' :
