@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { getIntensityColor, getEventColor } from '../utils/dataUtils'
 import ConflictZone from './ConflictZone'
+import InfoTooltip from './InfoTooltip'
 
 function formatKillDate(dateStr) {
   const d = new Date(dateStr)
@@ -89,7 +90,7 @@ function DailySitrep({ conflicts, feed, leaders }) {
       <div className="sitrep-headline-grid">
         <div className="sitrep-headline-stat">
           <span className="sitrep-hl-val" style={{ color: '#FF4444' }}>{stats24h.total}</span>
-          <span className="sitrep-hl-label">OPS / 24HR</span>
+          <span className="sitrep-hl-label">OPS / 24HR<InfoTooltip text="Total military operations tracked across all theaters in the last 24 hours." position="bottom" /></span>
         </div>
         <div className="sitrep-headline-stat">
           <span className="sitrep-hl-val" style={{ color: '#00AAFF' }}>{stats24h.forceCounts.allied}</span>
@@ -101,13 +102,13 @@ function DailySitrep({ conflicts, feed, leaders }) {
         </div>
         <div className="sitrep-headline-stat">
           <span className="sitrep-hl-val" style={{ color: '#44CC44' }}>{recentEliminations.length}</span>
-          <span className="sitrep-hl-label">HVT ELIM</span>
+          <span className="sitrep-hl-label">HVT ELIM<InfoTooltip text="High-Value Target Eliminations — confirmed kills of senior commanders, operatives, or leaders in the last 90 days." position="bottom" /></span>
         </div>
       </div>
 
       {/* OPERATION BREAKDOWN */}
       <div className="sitrep-block">
-        <div className="sitrep-block-title">OPERATION BREAKDOWN — 24HR</div>
+        <div className="sitrep-block-title">OPERATION BREAKDOWN — 24HR<InfoTooltip text="Breakdown of military operations by type — airstrikes, drone strikes, ground ops, missile launches, intercepts, and more." position="right" /></div>
         <div className="sitrep-ops-list">
           {stats24h.topTypes.slice(0, 6).map(([type, count]) => {
             const pct = (count / stats24h.total) * 100
@@ -128,7 +129,7 @@ function DailySitrep({ conflicts, feed, leaders }) {
 
       {/* HOTTEST THEATERS */}
       <div className="sitrep-block">
-        <div className="sitrep-block-title">HOTTEST THEATERS</div>
+        <div className="sitrep-block-title">HOTTEST THEATERS<InfoTooltip text="Conflict zones ranked by number of operations in the last 24 hours. Color indicates threat intensity." position="right" /></div>
         <div className="sitrep-theater-list">
           {stats24h.topTheaters.map(([id, count]) => {
             const c = conflictMap[id]
@@ -150,7 +151,7 @@ function DailySitrep({ conflicts, feed, leaders }) {
       {recentStrikes.length > 0 && (
         <div className="sitrep-block">
           <div className="sitrep-block-title">
-            CONFIRMED STRIKES
+            CONFIRMED STRIKES<InfoTooltip text="Verified military strikes from OSINT sources — includes date, target, weapon system, delivery platform, and battle damage assessment." position="right" />
             <span className="sitrep-osint-tag">OSINT</span>
           </div>
           <div className="sitrep-strikes-list">
@@ -174,7 +175,7 @@ function DailySitrep({ conflicts, feed, leaders }) {
 
       {/* TOP WEAPONS IN USE */}
       <div className="sitrep-block">
-        <div className="sitrep-block-title">WEAPONS — DAILY EXPENDITURE</div>
+        <div className="sitrep-block-title">WEAPONS — DAILY EXPENDITURE<InfoTooltip text="Estimated daily usage rates of key weapon systems across all theaters. Based on OSINT reporting and conflict analysis." position="right" /></div>
         <div className="sitrep-weapons-list">
           {topWeapons.map((w, i) => {
             const pct = (w.dailyUse / totalDailyUse) * 100
@@ -198,7 +199,7 @@ function DailySitrep({ conflicts, feed, leaders }) {
       {recentEliminations.length > 0 && (
         <div className="sitrep-block">
           <div className="sitrep-block-title">
-            <span className="sitrep-elim-x">╳</span> RECENT ELIMINATIONS
+            <span className="sitrep-elim-x">╳</span> RECENT ELIMINATIONS<InfoTooltip text="High-value targets confirmed eliminated in the last 90 days — includes terror leaders, military commanders, and senior operatives." position="right" />
           </div>
           <div className="sitrep-elim-list">
             {recentEliminations.map(target => (
@@ -292,12 +293,12 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
       <div className="war-header">
         <div className="war-header-top-row">
           <div>
-            <div className="war-header-title">LION'S EYE — GLOBAL BATTLESPACE</div>
+            <div className="war-header-title">LION'S EYE — GLOBAL BATTLESPACE<InfoTooltip text="Primary command view. Real-time 3D globe showing all active conflict zones, aircraft deployments, naval assets, and engagement arcs worldwide." position="right" /></div>
             <div className="war-header-sub">
               OPEN-SOURCE INTEL&nbsp;
-              <span className="war-osint-badge">● OSINT</span>
+              <span className="war-osint-badge">● OSINT</span><InfoTooltip text="Open-Source Intelligence — data sourced from publicly available news, satellite imagery, social media, and official military reports." position="right" />
               &nbsp;//&nbsp;
-              <span className="war-sim-badge">◇ SIMULATED</span>
+              <span className="war-sim-badge">◇ SIMULATED</span><InfoTooltip text="Engagement events generated from verified conflict patterns. Timing and details are simulated based on real operational tempo data." position="right" />
             </div>
           </div>
           <span className="ops-defcon" style={{ color: defconColor, borderColor: defconColor + '66' }}>
@@ -308,7 +309,7 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
         <div className="ops-tempo-mini">
           <div className="ops-mini-stat">
             <span className="ops-mini-val" style={{ color: defconColor }}>{perMinute}</span>
-            <span className="ops-mini-label">ENG/MIN</span>
+            <span className="ops-mini-label">ENG/MIN<InfoTooltip text="Engagements per minute — the current rate of combat events being tracked globally." position="bottom" /></span>
           </div>
           <div className="ops-mini-divider" />
           <div className="ops-mini-stat">

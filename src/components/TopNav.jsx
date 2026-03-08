@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import InfoTooltip from './InfoTooltip'
 
 const DEFCON_COLORS = { 1: '#FF0000', 2: '#FF4444', 3: '#FF8800', 4: '#FFB800', 5: '#44CC44' }
 
@@ -85,25 +86,26 @@ export default function TopNav({ activeView, setActiveView, stats }) {
         </div>
         <span className={`top-bar-defcon ${stats.defcon <= 2 ? 'defcon-critical' : ''}`} style={{ color: defconColor, borderColor: defconColor + '66', '--defcon-color': defconColor }}>
           DEFCON {stats.defcon}
+          <InfoTooltip text="Defense Readiness Condition. DEFCON 1 = maximum readiness (nuclear war imminent). DEFCON 5 = peacetime. Calculated from active conflict intensity and engagement rates." position="bottom" />
         </span>
       </div>
 
       <div className="top-bar-right">
         <div className="top-bar-stats">
           <div className="top-bar-stat">
-            <span className="top-bar-stat-value">{stats.incidents || 0}</span> INC
+            <span className="top-bar-stat-value">{stats.incidents || 0}</span> INC<InfoTooltip text="Total reported incidents across all conflict zones in the current tracking period." position="bottom" />
           </div>
           <div className="top-bar-stat">
-            <span className="top-bar-stat-value">{fmtM(stats.personnel || 0)}</span> PERS
+            <span className="top-bar-stat-value">{fmtM(stats.personnel || 0)}</span> PERS<InfoTooltip text="Total active military personnel deployed across all tracked theaters of operation." position="bottom" />
           </div>
           <div className="top-bar-stat">
-            <span className="top-bar-stat-value">{fmtK(stats.aircraft || 0)}</span> AIR
+            <span className="top-bar-stat-value">{fmtK(stats.aircraft || 0)}</span> AIR<InfoTooltip text="Fixed-wing aircraft and helicopters currently deployed in active conflict zones." position="bottom" />
           </div>
           <div className="top-bar-stat">
-            <span className="top-bar-stat-value">{fmtK(stats.uas || 0)}</span> UAS
+            <span className="top-bar-stat-value">{fmtK(stats.uas || 0)}</span> UAS<InfoTooltip text="Unmanned Aerial Systems — includes reconnaissance drones, strike UCAVs, loitering munitions, and FPV kamikaze drones." position="bottom" />
           </div>
           <div className="top-bar-stat">
-            <span className="top-bar-stat-value">{stats.fronts || 0}</span> FRONTS
+            <span className="top-bar-stat-value">{stats.fronts || 0}</span> FRONTS<InfoTooltip text="Active frontlines and areas of contact where combat operations are ongoing." position="bottom" />
           </div>
         </div>
         <span className="top-bar-divider">|</span>

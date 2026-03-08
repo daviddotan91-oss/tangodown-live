@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react'
 import { feature } from 'topojson-client'
+import InfoTooltip from './InfoTooltip'
 
 const REGIONS = ['ALL', 'MIDDLE EAST', 'EUROPE', 'ASIA', 'AFRICA', 'AMERICAS', 'OCEANIA']
 
@@ -395,12 +396,12 @@ export default function BroadcastView({ broadcast = {} }) {
             <div className="broadcast-tabs">
               <button className={`broadcast-tab ${activeTab === 'tv' ? 'broadcast-tab--active' : ''}`}
                 onClick={() => setActiveTab('tv')}>
-                <span className="broadcast-tab-icon">📺</span> TV CHANNELS
+                <span className="broadcast-tab-icon">📺</span> TV CHANNELS<InfoTooltip text="Live TV channels from this country — click any channel to watch the YouTube live stream in a new tab." position="bottom" />
                 <span className="broadcast-tab-count">{tvCount}</span>
               </button>
               <button className={`broadcast-tab ${activeTab === 'radio' ? 'broadcast-tab--active' : ''}`}
                 onClick={() => setActiveTab('radio')}>
-                <span className="broadcast-tab-icon">📻</span> RADIO STATIONS
+                <span className="broadcast-tab-icon">📻</span> RADIO STATIONS<InfoTooltip text="Live radio streams from this country — click to listen directly in the browser with volume control." position="bottom" />
                 <span className="broadcast-tab-count">{radioCount}</span>
               </button>
             </div>

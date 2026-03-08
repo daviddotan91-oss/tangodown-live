@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react'
+import InfoTooltip from './InfoTooltip'
 
 /* ═══════════════════════════════════════════════════════
    HEADLINE TICKER — scrolling news bar below TopNav
@@ -100,7 +101,7 @@ export function XFeedPanel({ isOpen, onClose, xAccounts = [], headlines = [], so
       <div className="xfeed-header">
         <div className="xfeed-title">
           <span className="xfeed-x-logo">𝕏</span>
-          INTEL FEED
+          INTEL FEED<InfoTooltip text="Curated headlines from verified defense and intelligence sources, plus 𝕏 accounts tracking conflicts in real-time." position="left" />
         </div>
         <div className="xfeed-header-actions">
           <kbd className="xfeed-hotkey">X</kbd>

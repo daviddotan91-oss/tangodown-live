@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Globe from './Globe'
 import { getEventColor, formatUTC, formatDate } from '../utils/dataUtils'
+import InfoTooltip from './InfoTooltip'
 import { playClick } from '../utils/soundManager'
 
 const OPERATIONS = [
@@ -207,7 +208,7 @@ export default function ReplayView({ conflicts, incidents, naval }) {
 
       {/* Operation Title */}
       <div className="replay-title-overlay">
-        <div className="replay-title">{selectedOp.name}</div>
+        <div className="replay-title">{selectedOp.name}<InfoTooltip text="Timeline replay of historical conflict events. Use the playback controls to step through engagements chronologically on the 3D globe." position="right" /></div>
         <div className="replay-subtitle">{selectedOp.subtitle}</div>
       </div>
 
@@ -269,7 +270,7 @@ export default function ReplayView({ conflicts, incidents, naval }) {
       {/* Event log — scrolling feed during playback */}
       {recentEvents.length > 0 && progress > 0 && (
         <div className="replay-event-log">
-          <div className="replay-log-header">EVENT LOG</div>
+          <div className="replay-log-header">EVENT LOG<InfoTooltip text="Chronological log of all events in this replay. Click any entry to jump to that point in the timeline." position="left" /></div>
           {recentEvents.map(inc => (
             <div key={inc.id} className="replay-log-entry">
               <span className="replay-log-time">{formatUTC(inc.timestamp)}</span>

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { getEventColor } from '../utils/dataUtils'
+import InfoTooltip from './InfoTooltip'
 
 const FEED_TYPES = ['AIRSTRIKE', 'DRONE STRIKE', 'NAVAL ENGAGEMENT', 'GROUND OP', 'MISSILE LAUNCH', 'INTERCEPT', 'IED/AMBUSH', 'RAID']
 
@@ -69,7 +70,7 @@ export default function RightPanel({ feed, naval, conflicts = [], onIncidentClic
     <div className="war-panel-right">
       {/* Feed Header */}
       <div className="war-header">
-        <div className="war-header-title">LIVE ENGAGEMENT FEED</div>
+        <div className="war-header-title">LIVE ENGAGEMENT FEED<InfoTooltip text="Real-time feed of simulated combat events based on verified conflict patterns. Each entry shows event type, location, force attribution, and timestamp." position="left" /></div>
         <div className="war-header-actions">
           <span className="war-feed-live-dot" /> LIVE
           <button
@@ -119,7 +120,7 @@ export default function RightPanel({ feed, naval, conflicts = [], onIncidentClic
 
       {/* Fleet Command */}
       <div className="fleet-command">
-        <div className="war-panel-title">FLEET COMMAND — {naval.length} VESSELS</div>
+        <div className="war-panel-title">FLEET COMMAND — {naval.length} VESSELS<InfoTooltip text="Naval assets tracked globally — aircraft carriers, destroyers, frigates, corvettes, and submarines. Grouped by theater of operations." position="left" /></div>
         {navalByTheater.map(([theater, ships]) => (
           <div key={theater} className="fleet-theater">
             <div className="fleet-theater-label">{theater.toUpperCase()}</div>

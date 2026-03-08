@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { feature } from 'topojson-client'
 import OrgDossier from './OrgDossier'
+import InfoTooltip from './InfoTooltip'
 
 /* ──────────────────────────────────────────────
    Equirectangular projection helpers
@@ -466,7 +467,7 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
         onMouseMove={handleMouseMove}
       />
       <div className="net-legend">
-        <div className="net-legend-title">LINK TYPES</div>
+        <div className="net-legend-title">LINK TYPES<InfoTooltip text="Lines connecting organizations represent verified relationships — funding flows, command structures, affiliate ties, training pipelines, and adversarial conflicts." position="right" /></div>
         <div className="net-legend-row"><span className="net-legend-line" style={{ background: '#FFB800' }} /><span>FUNDING</span></div>
         <div className="net-legend-row"><span className="net-legend-line" style={{ background: '#FF4444' }} /><span>COMMAND</span></div>
         <div className="net-legend-row"><span className="net-legend-line" style={{ background: '#00AAFF' }} /><span>AFFILIATE</span></div>
@@ -475,7 +476,7 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
       </div>
       <div className="net-map-label">
         <span className="net-map-label-dot" />
-        GEOSPATIAL NETWORK OVERLAY
+        GEOSPATIAL NETWORK OVERLAY<InfoTooltip text="Geographic map showing operational areas, headquarters, and territorial control of selected organizations." position="right" />
       </div>
       {selectedOrg && (
         <div className="net-graph-selected-label">
@@ -517,7 +518,7 @@ function OrgListSidebar({ organizations, networks, leaders, selectedOrg, onOrgSe
   return (
     <div className="net-sidebar">
       <div className="net-sidebar-header">
-        <div className="net-sidebar-title">THREAT ORGANIZATIONS</div>
+        <div className="net-sidebar-title">THREAT ORGANIZATIONS<InfoTooltip text="Tracked terror and militant organizations grouped by alliance network. Click any org to view its intelligence dossier, leadership, and connections." position="right" /></div>
         <div className="net-sidebar-count">{organizations.length}</div>
       </div>
       <div className="net-sidebar-list">

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { getIntensityColor, formatDate } from '../utils/dataUtils'
+import InfoTooltip from './InfoTooltip'
 
 const THREAT_MATRIX = [
   { region: 'MIDDLE EAST', level: 'CRITICAL', trend: 'ESCALATING', summary: 'Multi-front conflict in Israel-Palestine, Houthi anti-shipping campaign in Red Sea, Iranian proxy operations across the theater.' },
@@ -114,7 +115,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
       {/* Header */}
       <div className="intel-header">
         <div className="intel-header-left">
-          <div className="intel-header-title">INTELLIGENCE BRIEFING</div>
+          <div className="intel-header-title">INTELLIGENCE BRIEFING<InfoTooltip text="Comprehensive daily intelligence summary — situation reports, threat assessments, and force posture analysis compiled from open-source data." position="bottom" /></div>
           <div className="intel-header-sub">DAILY SITUATION REPORT — {new Date().toISOString().slice(0, 10)}</div>
         </div>
         <div className="intel-header-class">
@@ -125,16 +126,16 @@ export default function IntelView({ conflicts, incidents, naval }) {
       {/* Tab Bar */}
       <div className="intel-tabs">
         {[
-          { id: 'sitrep', label: 'SITUATION REPORT' },
-          { id: 'threat', label: 'THREAT MATRIX' },
-          { id: 'overview', label: 'FORCE OVERVIEW' }
+          { id: 'sitrep', label: 'SITUATION REPORT', tip: 'Executive summary of all active conflicts with key metrics and recent developments.' },
+          { id: 'threat', label: 'THREAT MATRIX', tip: 'Regional threat levels, trends, and analyst assessments for each geographic area of concern.' },
+          { id: 'overview', label: 'FORCE OVERVIEW', tip: 'Military force posture — personnel, aircraft, naval assets, and response time metrics.' }
         ].map(tab => (
           <button
             key={tab.id}
             className={`intel-tab ${activeTab === tab.id ? 'active' : ''}`}
             onClick={() => setActiveTab(tab.id)}
           >
-            {tab.label}
+            {tab.label}<InfoTooltip text={tab.tip} position="bottom" />
           </button>
         ))}
       </div>
@@ -225,7 +226,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
           <div className="intel-overview-tab">
             <div className="intel-overview-grid">
               <div className="intel-overview-card">
-                <div className="intel-overview-card-title">GLOBAL FORCE POSTURE</div>
+                <div className="intel-overview-card-title">GLOBAL FORCE POSTURE<InfoTooltip text="Aggregate military assets currently deployed across all tracked theaters worldwide." position="bottom" /></div>
                 <div className="intel-overview-stats">
                   <div className="intel-ov-stat">
                     <span className="intel-ov-val">{globalMetrics.totalPersonnel.toLocaleString()}</span>
@@ -247,7 +248,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
               </div>
 
               <div className="intel-overview-card">
-                <div className="intel-overview-card-title">NAVAL ORDER OF BATTLE</div>
+                <div className="intel-overview-card-title">NAVAL ORDER OF BATTLE<InfoTooltip text="Disposition of tracked naval forces — allied vs adversary vessels across all maritime theaters." position="bottom" /></div>
                 <div className="intel-naval-list">
                   {naval.map(ship => (
                     <div key={ship.id} className="intel-naval-row">
@@ -285,7 +286,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
               </div>
 
               <div className="intel-overview-card">
-                <div className="intel-overview-card-title">KILL CHAIN RESPONSE TIMES</div>
+                <div className="intel-overview-card-title">KILL CHAIN RESPONSE TIMES<InfoTooltip text="Estimated time from target detection to engagement for different weapon systems and operational scenarios." position="bottom" /></div>
                 <div className="intel-killchain-list">
                   {sortedConflicts.filter(c => c.killChain).slice(0, 6).map(c => {
                     const kc = c.killChain

@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react'
+import InfoTooltip from './InfoTooltip'
 
 const TABS = [
-  { id: 'airdefense', label: 'AIR DEFENSE', icon: '◇' },
-  { id: 'uas', label: 'UAS / DRONES', icon: '△' },
-  { id: 'platforms', label: 'WEAPONS PLATFORMS', icon: '▸' },
-  { id: 'defensetech', label: 'DEFENSE TECH', icon: '⬡' },
+  { id: 'airdefense', label: 'AIR DEFENSE', icon: '◇', tip: 'Surface-to-air missile systems, CIWS, and interceptor networks — Iron Dome, Patriot, S-400, and more.' },
+  { id: 'uas', label: 'UAS / DRONES', icon: '△', tip: 'Unmanned aerial systems catalog — reconnaissance, strike, loitering munitions, and FPV platforms from all nations.' },
+  { id: 'platforms', label: 'WEAPONS PLATFORMS', icon: '▸', tip: 'Combat aircraft, armored vehicles, missile systems, and anti-tank guided weapons in active service.' },
+  { id: 'defensetech', label: 'DEFENSE TECH', icon: '⬡', tip: 'Defense technology companies and their products — from AI-guided systems to directed energy weapons.' },
 ]
 
 const TYPE_COLORS = {
@@ -334,6 +335,7 @@ export default function ArsenalView({ arsenal = {} }) {
             onClick={() => handleTabChange(t.id)}>
             <span className="arsenal-tab-icon">{t.icon}</span>
             <span className="arsenal-tab-label">{t.label}</span>
+            <InfoTooltip text={t.tip} position="bottom" />
           </button>
         ))}
       </div>
