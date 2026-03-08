@@ -61,6 +61,69 @@
           "youtubeId": "s1HuRKzdOOY",
           "youtubeChannelId": "UCRiJlSzmzNu01m01K-8v3zA",
           "description": "Right-leaning Israeli news and current affairs channel"
+        },
+        {
+          "id": "i24news-fr",
+          "name": "i24NEWS French",
+          "language": "French",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCfv4ygS3FcnUvXLPGRDkFJA",
+          "description": "i24NEWS French-language broadcast — Israeli international news"
+        },
+        {
+          "id": "i24news-ar",
+          "name": "i24NEWS Arabic",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UC5UBMhIkWdO0TDv-N6g0BuA",
+          "description": "i24NEWS Arabic-language broadcast — Israeli perspective for Arab audiences"
+        },
+        {
+          "id": "kan-news-hebrew",
+          "name": "Kan News (Live)",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCMhIaf8JjzVMHGQ5hDZrCMg",
+          "description": "Kan public broadcaster — live news desk and breaking coverage"
+        },
+        {
+          "id": "ynet-live",
+          "name": "Ynet Live",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCxDMGeeXL2LHb2a5GMT4bEQ",
+          "description": "Yedioth Ahronoth digital news — Israel's most-read news site live"
+        },
+        {
+          "id": "walla-news",
+          "name": "Walla! News",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UC_MU_HjzqaGME1Vk-M_TSbw",
+          "description": "Walla! News — major Israeli digital news platform live broadcast"
+        },
+        {
+          "id": "knesset-channel",
+          "name": "Knesset Channel",
+          "language": "Hebrew",
+          "type": "GOV",
+          "youtubeId": null,
+          "youtubeChannelId": "UCt41HJ9Eu6bPmYwrRCkV5pA",
+          "description": "Israeli Parliament (Knesset) official channel — live sessions and committees"
+        },
+        {
+          "id": "jerusalem-post-live",
+          "name": "Jerusalem Post Live",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UC4ItRDhICq49DKWG3VmE7XA",
+          "description": "The Jerusalem Post — English-language Israeli news and analysis"
         }
       ],
       "radio": [
@@ -70,15 +133,15 @@
           "language": "Hebrew",
           "type": "NEWS/MILITARY",
           "streamUrl": "https://glzwizzlv.bynetcdn.com/glglz_mp3",
-          "description": "Israel Defense Forces official radio station — military and news"
+          "description": "Israel Defense Forces official news radio — military updates and alerts"
         },
         {
           "id": "kan-bet",
           "name": "Kan Reshet Bet",
           "language": "Hebrew",
-          "type": "NEWS",
+          "type": "NEWS/TALK",
           "streamUrl": "https://kanlivep2event-i.akamaihd.net/hls/live/747757/kan_bet/playlist.m3u8",
-          "description": "Israeli public radio — primary news and talk station"
+          "description": "Israeli public radio — primary talk and news station, national debates"
         },
         {
           "id": "galei-zahal",
@@ -87,6 +150,54 @@
           "type": "MILITARY/MUSIC",
           "streamUrl": "https://glzwizzlv.bynetcdn.com/glz_mp3",
           "description": "IDF popular radio station — music, culture, and news updates"
+        },
+        {
+          "id": "kan-gimel",
+          "name": "Kan Gimel (Reshet Gimel)",
+          "language": "Hebrew",
+          "type": "MUSIC/NEWS",
+          "streamUrl": "https://kanlivep2event-i.akamaihd.net/hls/live/747759/kan_gimel/playlist.m3u8",
+          "description": "Israeli public radio — popular music with hourly news bulletins"
+        },
+        {
+          "id": "kan-moreshet",
+          "name": "Kan Moreshet",
+          "language": "Hebrew",
+          "type": "CULTURE",
+          "streamUrl": "https://kanlivep2event-i.akamaihd.net/hls/live/747761/kan_moreshet/playlist.m3u8",
+          "description": "Israeli public radio — cultural heritage and Middle Eastern music"
+        },
+        {
+          "id": "kan-reka",
+          "name": "Kan Reka (Multicultural)",
+          "language": "Multiple",
+          "type": "MULTICULTURAL",
+          "streamUrl": "https://kanlivep2event-i.akamaihd.net/hls/live/747762/kan_reka/playlist.m3u8",
+          "description": "Israeli multilingual radio — Russian, Amharic, Arabic, French, English broadcasts"
+        },
+        {
+          "id": "103fm",
+          "name": "103FM Tel Aviv",
+          "language": "Hebrew",
+          "type": "NEWS/TALK",
+          "streamUrl": "https://103fm.maariv.co.il/live_mp3",
+          "description": "Tel Aviv-based talk radio — news, politics, and culture"
+        },
+        {
+          "id": "eco99fm",
+          "name": "Eco 99 FM",
+          "language": "Hebrew",
+          "type": "MUSIC",
+          "streamUrl": "https://eco99.mediacast.co.il/99fm_aac",
+          "description": "Israel's leading music station — rock, pop, and Israeli music"
+        },
+        {
+          "id": "radio-darom",
+          "name": "Radio Darom (South)",
+          "language": "Hebrew",
+          "type": "REGIONAL",
+          "streamUrl": "https://radiodarom.mediacast.co.il/radiodarom_mp3",
+          "description": "Southern Israel regional radio — Beer Sheva and Negev area"
         }
       ]
     },
@@ -143,6 +254,96 @@
           "youtubeId": "GnKQb22N0Vk",
           "youtubeChannelId": "UCb2d3EN4LHl2pODW1MYtyvA",
           "description": "U.S. government and political proceedings — unfiltered"
+        },
+        {
+          "id": "cnn-live",
+          "name": "CNN Live",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+          "description": "CNN — Cable News Network, 24/7 breaking news and analysis"
+        },
+        {
+          "id": "msnbc-live",
+          "name": "MSNBC Live",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCaXkIU1QidjPwiAYu6GcHjg",
+          "description": "MSNBC — progressive-leaning 24/7 news and political commentary"
+        },
+        {
+          "id": "newsmax",
+          "name": "Newsmax TV",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCx6h-dWzJ5NpAlja1YsApdg",
+          "description": "Newsmax — conservative news channel with 24/7 live coverage"
+        },
+        {
+          "id": "bloomberg-live",
+          "name": "Bloomberg TV",
+          "language": "English",
+          "type": "FINANCIAL",
+          "youtubeId": null,
+          "youtubeChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+          "description": "Bloomberg Television — global financial news and markets"
+        },
+        {
+          "id": "cnbc-live",
+          "name": "CNBC Live",
+          "language": "English",
+          "type": "FINANCIAL",
+          "youtubeId": null,
+          "youtubeChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+          "description": "CNBC — business and financial market coverage"
+        },
+        {
+          "id": "pbs-newshour",
+          "name": "PBS NewsHour",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": null,
+          "youtubeChannelId": "UC6ZFN9Tx6xh-skXCuRHCDpQ",
+          "description": "PBS NewsHour — in-depth public affairs news and analysis"
+        },
+        {
+          "id": "ap-live",
+          "name": "Associated Press Live",
+          "language": "English",
+          "type": "NEWS AGENCY",
+          "youtubeId": null,
+          "youtubeChannelId": "UC52X5wxOL_s5yw0dQk7NtgA",
+          "description": "The Associated Press — independent global news organization"
+        },
+        {
+          "id": "reuters-live",
+          "name": "Reuters Live",
+          "language": "English",
+          "type": "NEWS AGENCY",
+          "youtubeId": null,
+          "youtubeChannelId": "UChqUTb7kYRX8-EiaN3XFrSQ",
+          "description": "Reuters — international wire service live news coverage"
+        },
+        {
+          "id": "cspan2",
+          "name": "C-SPAN 2 (Senate)",
+          "language": "English",
+          "type": "GOV",
+          "youtubeId": null,
+          "youtubeChannelId": "UCb2d3EN4LHl2pODW1MYtyvA",
+          "description": "U.S. Senate proceedings and congressional coverage"
+        },
+        {
+          "id": "weather-channel",
+          "name": "The Weather Channel",
+          "language": "English",
+          "type": "WEATHER",
+          "youtubeId": null,
+          "youtubeChannelId": "UC7TbVv6NBbGpTmnUJ51yBkQ",
+          "description": "24/7 weather coverage — severe weather alerts and forecasts"
         }
       ],
       "radio": [
@@ -161,6 +362,70 @@
           "type": "MILITARY",
           "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/AFN_NEWSHD.mp3",
           "description": "U.S. Department of Defense broadcast service for military personnel"
+        },
+        {
+          "id": "bbc-ws-us",
+          "name": "BBC World Service (US Feed)",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+          "description": "BBC World Service — global English-language news, available in the US"
+        },
+        {
+          "id": "wnyc",
+          "name": "WNYC FM (New York)",
+          "language": "English",
+          "type": "NEWS/TALK",
+          "streamUrl": "https://fm939.wnyc.org/wnycfm-web",
+          "description": "New York City's premier public radio — NPR affiliate, news and talk"
+        },
+        {
+          "id": "kcrw",
+          "name": "KCRW (Los Angeles)",
+          "language": "English",
+          "type": "NEWS/CULTURE",
+          "streamUrl": "https://kcrw.streamguys1.com/kcrw_192k_mp3_on_air",
+          "description": "Santa Monica/LA public radio — NPR news, culture, and music"
+        },
+        {
+          "id": "wbur",
+          "name": "WBUR (Boston)",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://streams.audio.wbur.org/wbur-aac",
+          "description": "Boston's NPR station — news, analysis, and On Point"
+        },
+        {
+          "id": "wtop",
+          "name": "WTOP (Washington DC)",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://wtop.streamguys1.com/wtop",
+          "description": "Washington DC's all-news radio — federal government and politics"
+        },
+        {
+          "id": "kqed",
+          "name": "KQED FM (San Francisco)",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://streams.kqed.org/kqedradio",
+          "description": "Bay Area public radio — NPR news and Forum with Scott Shafer"
+        },
+        {
+          "id": "sirius-potus",
+          "name": "SiriusXM POTUS (P.O.T.U.S.)",
+          "language": "English",
+          "type": "POLITICS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SIRIUSXM_POTUS.mp3",
+          "description": "SiriusXM political talk — nonpartisan politics channel"
+        },
+        {
+          "id": "fox-news-radio",
+          "name": "Fox News Radio",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/FOXNEWSRADIO.mp3",
+          "description": "Fox News Radio — hourly news updates and talk shows"
         }
       ]
     },
