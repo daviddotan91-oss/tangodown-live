@@ -6,7 +6,7 @@
 
 let audioCtx = null
 let masterGain = null
-let muted = false
+let muted = true
 let initialized = false
 
 function getCtx() {

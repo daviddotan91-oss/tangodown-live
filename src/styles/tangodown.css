@@ -2808,13 +2808,17 @@ html, body, #root {
    ═══════════════════════════════════════════════════════ */
 
 .sound-toggle {
-  position: fixed; top: 8px; right: 12px; z-index: 999;
-  background: transparent; border: 1px solid var(--border-primary);
-  border-radius: 3px; padding: 3px 6px;
-  font-size: 12px; cursor: pointer;
-  opacity: 0.4; transition: opacity 0.2s;
+  position: fixed; bottom: 28px; left: 12px; z-index: 999;
+  background: rgba(10, 10, 15, 0.85); border: 1px solid var(--accent-red);
+  border-radius: 3px; padding: 4px 10px;
+  font-family: var(--font-mono); font-size: 11px; cursor: pointer;
+  color: var(--accent-red); letter-spacing: 0.08em;
+  opacity: 0.7; transition: opacity 0.2s, border-color 0.2s;
+  display: flex; align-items: center; gap: 6px;
 }
-.sound-toggle:hover { opacity: 0.9; }
+.sound-toggle:hover { opacity: 1; border-color: #FF4444; }
+.sound-toggle.active { border-color: #00FF88; color: #00FF88; }
+.sound-toggle .sound-icon { font-size: 14px; }
 
 /* ═══════════════════════════════════════════════════════
    FLASH TRAFFIC — ENHANCED (Full Screen)
@@ -3404,7 +3408,7 @@ html, body, #root {
 
   .status-bar { font-size: 8px; padding: 2px 8px; }
   .disclaimer-footer { display: none; }
-  .sound-toggle { top: auto; bottom: 28px; right: 8px; font-size: 10px; }
+  .sound-toggle { bottom: 28px; left: 8px; font-size: 9px; padding: 3px 8px; }
 }
 
 @media (max-width: 480px) {

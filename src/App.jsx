@@ -47,7 +47,7 @@ export default function App() {
   const prevViewRef = useRef('godseye')
 
   // Sound-enabled mute state (for UI button)
-  const [soundMuted, setSoundMuted] = useState(false)
+  const [soundMuted, setSoundMuted] = useState(true)
 
   // Initialize audio on first user interaction
   useEffect(() => {
@@ -272,8 +272,9 @@ export default function App() {
       {flashBorderPulse && <div className="flash-border-pulse" />}
 
       {/* Mute indicator */}
-      <button className="sound-toggle" onClick={() => setSoundMuted(toggleMute())} title="Toggle Sound (M)">
-        {soundMuted ? '🔇' : '🔊'}
+      <button className={`sound-toggle ${!soundMuted ? 'active' : ''}`} onClick={() => setSoundMuted(toggleMute())} title="Toggle Sound (M)">
+        <span className="sound-icon">{soundMuted ? '🔇' : '🔊'}</span>
+        <span>{soundMuted ? 'SOUND OFF' : 'SOUND ON'}</span>
       </button>
 
       <TopNav
