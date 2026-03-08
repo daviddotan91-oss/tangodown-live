@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { getIntensityColor, formatDate } from '../utils/dataUtils'
 import InfoTooltip from './InfoTooltip'
+import Chokepoints from './Chokepoints'
 
 const THREAT_MATRIX = [
   { region: 'MIDDLE EAST', level: 'CRITICAL', trend: 'ESCALATING', summary: 'Multi-front conflict in Israel-Palestine, Houthi anti-shipping campaign in Red Sea, Iranian proxy operations across the theater.' },
@@ -128,6 +129,7 @@ export default function IntelView({ conflicts, incidents, naval }) {
         {[
           { id: 'sitrep', label: 'SITUATION REPORT', tip: 'Executive summary of all active conflicts with key metrics and recent developments.' },
           { id: 'threat', label: 'THREAT MATRIX', tip: 'Regional threat levels, trends, and analyst assessments for each geographic area of concern.' },
+          { id: 'chokepoints', label: 'CHOKEPOINTS', tip: 'Status of critical maritime chokepoints — Suez, Hormuz, Bab el-Mandeb, Malacca, Taiwan Strait, Panama Canal.' },
           { id: 'overview', label: 'FORCE OVERVIEW', tip: 'Military force posture — personnel, aircraft, naval assets, and response time metrics.' }
         ].map(tab => (
           <button
@@ -218,6 +220,13 @@ export default function IntelView({ conflicts, incidents, naval }) {
                 </div>
               )
             })}
+          </div>
+        )}
+
+        {/* Chokepoints Tab */}
+        {activeTab === 'chokepoints' && (
+          <div className="intel-chokepoints-tab">
+            <Chokepoints />
           </div>
         )}
 

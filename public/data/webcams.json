@@ -1,0 +1,122 @@
+[
+  {
+    "id": "telaviv",
+    "name": "Tel Aviv",
+    "region": "MIDDLE EAST",
+    "youtubeChannel": "UCE1byKn5MBVzPGOyLSZ2OlA",
+    "description": "Mediterranean coastline — Israel's tech and cultural capital",
+    "lat": 32.08,
+    "lng": 34.78,
+    "status": "LIVE"
+  },
+  {
+    "id": "jerusalem",
+    "name": "Jerusalem — Western Wall",
+    "region": "MIDDLE EAST",
+    "youtubeChannel": "UCU3iHmAjSWCGpyUgEE6IhNA",
+    "description": "Western Wall Plaza — 24/7 live feed from the Old City",
+    "lat": 31.77,
+    "lng": 35.23,
+    "status": "LIVE"
+  },
+  {
+    "id": "haifa",
+    "name": "Haifa Port",
+    "region": "MIDDLE EAST",
+    "youtubeChannel": "UCVNLAerX8MdR7CXpBqrifAg",
+    "description": "Haifa — Israel's northern port city and naval base",
+    "lat": 32.79,
+    "lng": 34.99,
+    "status": "LIVE"
+  },
+  {
+    "id": "kyiv",
+    "name": "Kyiv — Independence Square",
+    "region": "EUROPE",
+    "youtubeChannel": "UCz-2w-Z82o3L3-mSvh0JEmg",
+    "description": "Maidan Nezalezhnosti — heart of Ukraine's capital",
+    "lat": 50.45,
+    "lng": 30.52,
+    "status": "LIVE"
+  },
+  {
+    "id": "odesa",
+    "name": "Odesa — Black Sea Port",
+    "region": "EUROPE",
+    "youtubeChannel": "UC_FG-CGNVgPDdC-8TyiVABg",
+    "description": "Ukraine's primary naval port on the Black Sea",
+    "lat": 46.48,
+    "lng": 30.73,
+    "status": "LIVE"
+  },
+  {
+    "id": "taipei",
+    "name": "Taipei — Skyline",
+    "region": "ASIA-PACIFIC",
+    "youtubeChannel": "UCLYBKiSwMfTjmMl-KNZmerA",
+    "description": "Taiwan's capital — Taipei 101 and city panorama",
+    "lat": 25.03,
+    "lng": 121.56,
+    "status": "LIVE"
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo — Shibuya",
+    "region": "ASIA-PACIFIC",
+    "youtubeChannel": "UCgdHxnHSXvcAi4PaMIY1Ktg",
+    "description": "Shibuya crossing — world's busiest intersection",
+    "lat": 35.66,
+    "lng": 139.70,
+    "status": "LIVE"
+  },
+  {
+    "id": "seoul",
+    "name": "Seoul — Gangnam",
+    "region": "ASIA-PACIFIC",
+    "youtubeChannel": "UC21PSKbDNJFzL79E77oJrpA",
+    "description": "South Korea's capital — urban surveillance feed",
+    "lat": 37.50,
+    "lng": 127.02,
+    "status": "LIVE"
+  },
+  {
+    "id": "dubai",
+    "name": "Dubai — Marina",
+    "region": "MIDDLE EAST",
+    "youtubeChannel": "UC1giRVKpPdoef_TjDGK_59A",
+    "description": "Dubai Marina skyline — Persian Gulf strategic hub",
+    "lat": 25.08,
+    "lng": 55.14,
+    "status": "LIVE"
+  },
+  {
+    "id": "istanbul",
+    "name": "Istanbul — Bosphorus",
+    "region": "EUROPE",
+    "youtubeChannel": "UCwt3k_Rl6UhO9b7IVqN_hug",
+    "description": "Bosphorus Strait — NATO's eastern maritime gateway",
+    "lat": 41.01,
+    "lng": 28.97,
+    "status": "LIVE"
+  },
+  {
+    "id": "london",
+    "name": "London — Thames",
+    "region": "EUROPE",
+    "youtubeChannel": "UCCngzVLa0w0I3zAgKxUcbwg",
+    "description": "River Thames — Parliament and Tower Bridge",
+    "lat": 51.50,
+    "lng": -0.12,
+    "status": "LIVE"
+  },
+  {
+    "id": "newyork",
+    "name": "New York — Times Square",
+    "region": "AMERICAS",
+    "youtubeChannel": "UCKHi-KvOE_FVpJSz3H0hoBw",
+    "description": "Times Square — 24/7 EarthCam live feed",
+    "lat": 40.76,
+    "lng": -73.99,
+    "status": "LIVE"
+  }
+]

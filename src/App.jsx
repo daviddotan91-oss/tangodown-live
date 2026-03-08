@@ -13,6 +13,9 @@ import BroadcastView from './components/BroadcastView'
 import BootSequence from './components/BootSequence'
 import { HeadlineTicker, XFeedPanel } from './components/IntelFeed'
 import DailyBriefing, { shouldShowBriefing, markVisit } from './components/DailyBriefing'
+import LiveWebcams from './components/LiveWebcams'
+import WorldClock from './components/WorldClock'
+import LiveNewsPanel from './components/LiveNewsPanel'
 import { useConflictData } from './hooks/useConflictData'
 import { useLiveFeed } from './hooks/useLiveFeed'
 import { initAudio, playClick, playTabSwitch, playGlitch, playFlashTraffic, playImpact, toggleMute, isMuted, startAmbient } from './utils/soundManager'
@@ -340,6 +343,12 @@ export default function App() {
               </>
             )}
 
+            {/* Live Webcams Panel */}
+            {panelsVisible && <LiveWebcams />}
+
+            {/* Live News Panel */}
+            {panelsVisible && <LiveNewsPanel />}
+
             {/* Selected Incident Detail Overlay */}
             {selectedIncident && (
               <div className="incident-detail-overlay">
@@ -398,6 +407,7 @@ export default function App() {
         )}
       </div>
 
+      <WorldClock />
       <BottomBar stats={globalStats} conflicts={conflicts} leaders={leaders} naval={naval} />
 
       {/* Search Overlay */}
