@@ -2858,66 +2858,16 @@ html, body, #root {
 }
 
 .info-tooltip-bubble {
-  position: absolute;
-  z-index: 10000;
+  position: fixed;
+  z-index: 99999;
   width: 240px;
   padding: 10px 12px;
-  background: rgba(12, 12, 18, 0.96);
-  border: 1px solid rgba(255, 0, 0, 0.25);
+  background: rgba(12, 12, 18, 0.97);
+  border: 1px solid rgba(255, 0, 0, 0.3);
   border-radius: 3px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7), 0 0 12px rgba(255, 0, 0, 0.08);
   pointer-events: none;
   animation: tooltipFadeIn 0.15s ease;
-}
-
-.info-tooltip-bubble::before {
-  content: '';
-  position: absolute;
-  width: 6px; height: 6px;
-  background: rgba(12, 12, 18, 0.96);
-  border: 1px solid rgba(255, 0, 0, 0.25);
-  transform: rotate(45deg);
-}
-
-/* Positions */
-.info-tooltip-bottom {
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-}
-.info-tooltip-bottom::before {
-  top: -4px; left: 50%; transform: translateX(-50%) rotate(45deg);
-  border-right: none; border-bottom: none;
-}
-
-.info-tooltip-top {
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-}
-.info-tooltip-top::before {
-  bottom: -4px; left: 50%; transform: translateX(-50%) rotate(45deg);
-  border-left: none; border-top: none;
-}
-
-.info-tooltip-right {
-  left: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-}
-.info-tooltip-right::before {
-  left: -4px; top: 50%; transform: translateY(-50%) rotate(45deg);
-  border-right: none; border-top: none;
-}
-
-.info-tooltip-left {
-  right: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-}
-.info-tooltip-left::before {
-  right: -4px; top: 50%; transform: translateY(-50%) rotate(45deg);
-  border-left: none; border-bottom: none;
 }
 
 .info-tooltip-text {
@@ -2930,8 +2880,8 @@ html, body, #root {
 }
 
 @keyframes tooltipFadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* ═══════════════════════════════════════════════════════
