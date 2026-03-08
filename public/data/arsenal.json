@@ -32,9 +32,9 @@
       "type": "MEDIUM",
       "range": "40-300 km",
       "interceptor": "Stunner / SkyCeptor missile",
-      "interceptRate": 85,
+      "interceptRate": 90,
       "deployedUnits": 5,
-      "interceptions": 0,
+      "interceptions": 15,
       "details": [
         { "label": "INTERCEPTOR", "value": "Stunner / SkyCeptor missile" },
         { "label": "MANUFACTURER", "value": "Rafael / Raytheon" },
@@ -78,9 +78,9 @@
       "type": "BMD",
       "range": "Exo-atmospheric (100+ km altitude, 2,400 km range)",
       "interceptor": "Arrow 3 KKV (kinetic kill vehicle)",
-      "interceptRate": 0,
+      "interceptRate": 95,
       "deployedUnits": 3,
-      "interceptions": 0,
+      "interceptions": 5,
       "details": [
         { "label": "INTERCEPTOR", "value": "Arrow 3 KKV (kinetic kill vehicle)" },
         { "label": "MANUFACTURER", "value": "IAI / Boeing" },

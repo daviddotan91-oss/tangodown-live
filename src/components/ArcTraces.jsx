@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { latLngToVector3, greatCirclePoints } from '../utils/geoUtils'
 import { getEventColor } from '../utils/dataUtils'
+import { playImpact } from '../utils/soundManager'
 
 function ArcTrace({ origin, destination, color, altitude, onComplete }) {
   const lineRef = useRef()
@@ -234,6 +235,7 @@ export default function ArcTraces({ feed, conflicts }) {
         lng: arcDest[1],
         color
       }])
+      playImpact()
     }, 1250)
     impactTimers.current.push(timer)
 

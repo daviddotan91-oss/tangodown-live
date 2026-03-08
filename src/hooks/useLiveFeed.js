@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { generateSimulatedIncident } from '../utils/dataUtils'
+import { playIncidentBeep } from '../utils/soundManager'
 
 export function useLiveFeed(conflicts, initialIncidents) {
   const [feed, setFeed] = useState([])
@@ -25,6 +26,7 @@ export function useLiveFeed(conflicts, initialIncidents) {
       const newIncident = generateSimulatedIncident(conflictsRef.current)
       if (newIncident) {
         setFeed(prev => [newIncident, ...prev].slice(0, 200))
+        playIncidentBeep()
       }
     }, 3000 + Math.random() * 2000) // 3-5 seconds
 
