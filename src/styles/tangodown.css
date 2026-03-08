@@ -621,7 +621,7 @@ html, body, #root {
 
 .war-header-sub {
   font-family: var(--font-mono);
-  font-size: 0.45rem; color: rgba(255, 60, 60, 0.6);
+  font-size: 0.52rem; color: rgba(255, 60, 60, 0.6);
   letter-spacing: 0.1em; margin-top: 2px;
 }
 
@@ -629,14 +629,14 @@ html, body, #root {
   color: #44CC44; font-weight: 600;
   border: 1px solid rgba(68, 204, 68, 0.3);
   padding: 0 4px; border-radius: 2px;
-  font-size: 0.4rem;
+  font-size: 0.48rem;
 }
 
 .war-sim-badge {
   color: var(--text-muted);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 4px; border-radius: 2px;
-  font-size: 0.4rem;
+  font-size: 0.48rem;
 }
 
 .war-panel-title {
@@ -659,7 +659,7 @@ html, body, #root {
 
 .ops-defcon {
   font-family: var(--font-mono);
-  font-size: 0.55rem; font-weight: 700;
+  font-size: 0.62rem; font-weight: 700;
   letter-spacing: 0.15em;
   padding: 2px 8px; border: 1px solid;
   border-radius: 3px;
@@ -694,12 +694,12 @@ html, body, #root {
 
 .ops-tempo-value {
   font-family: var(--font-mono);
-  font-size: 0.9rem; font-weight: 700; line-height: 1;
+  font-size: 1.0rem; font-weight: 700; line-height: 1;
 }
 
 .ops-tempo-unit {
   font-family: var(--font-mono);
-  font-size: 0.32rem; color: rgba(200, 200, 200, 0.4);
+  font-size: 0.4rem; color: rgba(200, 200, 200, 0.4);
   letter-spacing: 0.15em; margin-top: 2px;
 }
 
@@ -713,18 +713,18 @@ html, body, #root {
 
 .ops-tempo-stat-val {
   font-family: var(--font-mono);
-  font-size: 0.6rem; font-weight: 700; color: #CCCCCC;
+  font-size: 0.68rem; font-weight: 700; color: #CCCCCC;
 }
 
 .ops-tempo-stat-label {
   font-family: var(--font-mono);
-  font-size: 0.35rem; color: rgba(200, 200, 200, 0.35);
+  font-size: 0.42rem; color: rgba(200, 200, 200, 0.35);
   letter-spacing: 0.1em;
 }
 
 .ops-tempo-trend {
   font-family: var(--font-mono);
-  font-size: 0.5rem; font-weight: 700;
+  font-size: 0.56rem; font-weight: 700;
   letter-spacing: 0.05em;
 }
 
@@ -745,7 +745,7 @@ html, body, #root {
 
 .kill-board-tab {
   flex: 1; padding: 5px 6px;
-  font-family: var(--font-mono); font-size: 0.42rem;
+  font-family: var(--font-mono); font-size: 0.5rem;
   font-weight: 700; letter-spacing: 0.08em;
   background: rgba(255, 0, 0, 0.04);
   border: 1px solid rgba(255, 0, 0, 0.1);
@@ -828,14 +828,14 @@ html, body, #root {
 
 .kill-name {
   font-family: var(--font-mono);
-  font-size: 0.46rem; font-weight: 700;
+  font-size: 0.54rem; font-weight: 700;
   color: #DDDDDD; letter-spacing: 0.05em;
   flex: 1; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
 
 .kill-org-badge {
-  font-family: var(--font-mono); font-size: 0.32rem;
+  font-family: var(--font-mono); font-size: 0.4rem;
   font-weight: 600; padding: 1px 5px;
   border: 1px solid; border-radius: 2px;
   letter-spacing: 0.05em; flex-shrink: 0;
@@ -845,7 +845,7 @@ html, body, #root {
 .kill-card-row2 { padding-left: 20px; margin-top: 1px; }
 
 .kill-title {
-  font-family: var(--font-mono); font-size: 0.34rem;
+  font-family: var(--font-mono); font-size: 0.42rem;
   color: rgba(200, 200, 200, 0.4);
 }
 
@@ -855,12 +855,12 @@ html, body, #root {
 }
 
 .kill-date {
-  font-family: var(--font-mono); font-size: 0.36rem;
+  font-family: var(--font-mono); font-size: 0.44rem;
   color: rgba(200, 200, 200, 0.45); letter-spacing: 0.05em;
 }
 
 .kill-method {
-  font-family: var(--font-mono); font-size: 0.36rem;
+  font-family: var(--font-mono); font-size: 0.44rem;
   color: rgba(255, 100, 100, 0.5);
 }
 
@@ -872,7 +872,7 @@ html, body, #root {
 }
 
 .kill-location {
-  font-family: var(--font-mono); font-size: 0.34rem;
+  font-family: var(--font-mono); font-size: 0.42rem;
   color: rgba(200, 200, 200, 0.35);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -883,7 +883,7 @@ html, body, #root {
 }
 
 .kill-bounty {
-  font-family: var(--font-mono); font-size: 0.38rem;
+  font-family: var(--font-mono); font-size: 0.46rem;
   color: #FF4444; font-weight: 600;
 }
 
@@ -896,7 +896,7 @@ html, body, #root {
   position: absolute; top: 50%; right: 6px;
   transform: translateY(-50%) rotate(-15deg);
   font-family: var(--font-mono);
-  font-size: 0.55rem; font-weight: 900;
+  font-size: 0.62rem; font-weight: 900;
   letter-spacing: 0.2em;
   color: rgba(255, 68, 68, 0.15);
   pointer-events: none;
