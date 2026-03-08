@@ -1027,6 +1027,8 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
       dampingFactor={0.05}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
+      autoRotate
+      autoRotateSpeed={0.15}
     />
   )
 }

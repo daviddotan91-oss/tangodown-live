@@ -103,7 +103,7 @@ function NavalMarker({ ship, index }) {
   const pos = useMemo(() => latLngToVector3(ship.lat, ship.lng, 1.006), [ship.lat, ship.lng])
 
   const isHostile = ship.force === 'hostile'
-  const color = isHostile ? '#FF4444' : '#44CC44'
+  const color = isHostile ? '#FF8800' : '#00AAFF'
 
   // Size based on ship type
   const size = ship.type?.includes('Carrier') ? 0.012 :

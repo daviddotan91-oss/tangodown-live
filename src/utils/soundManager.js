@@ -169,11 +169,14 @@ export function playBootComplete() {
 
 // ── Ambient Hum (start/stop) ──
 let ambientOsc = null
+let ambientOsc2 = null
 let ambientGain = null
 
 export function startAmbient() {
   if (muted || ambientOsc) return
   const ctx = getCtx()
+
+  // Primary: low sawtooth hum
   ambientOsc = ctx.createOscillator()
   ambientGain = ctx.createGain()
   const filter = ctx.createBiquadFilter()
@@ -188,6 +191,26 @@ export function startAmbient() {
   filter.connect(ambientGain)
   ambientGain.connect(getMaster())
   ambientOsc.start(ctx.currentTime)
+
+  // Secondary: sine sub-bass with LFO modulation
+  ambientOsc2 = ctx.createOscillator()
+  const gain2 = ctx.createGain()
+  const lfo = ctx.createOscillator()
+  const lfoGain = ctx.createGain()
+  ambientOsc2.type = 'sine'
+  ambientOsc2.frequency.setValueAtTime(40, ctx.currentTime)
+  gain2.gain.setValueAtTime(0, ctx.currentTime)
+  gain2.gain.linearRampToValueAtTime(0.012, ctx.currentTime + 3)
+  // LFO slowly modulates the sub-bass frequency
+  lfo.type = 'sine'
+  lfo.frequency.setValueAtTime(0.08, ctx.currentTime) // very slow wobble
+  lfoGain.gain.setValueAtTime(3, ctx.currentTime)
+  lfo.connect(lfoGain)
+  lfoGain.connect(ambientOsc2.frequency)
+  ambientOsc2.connect(gain2)
+  gain2.connect(getMaster())
+  ambientOsc2.start(ctx.currentTime)
+  lfo.start(ctx.currentTime)
 }
 
 export function stopAmbient() {
@@ -196,11 +219,14 @@ export function stopAmbient() {
       ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5)
       setTimeout(() => {
         try { ambientOsc.stop() } catch (e) {}
+        try { ambientOsc2?.stop() } catch (e) {}
         ambientOsc = null
+        ambientOsc2 = null
         ambientGain = null
       }, 600)
     } catch (e) {
       ambientOsc = null
+      ambientOsc2 = null
       ambientGain = null
     }
   }

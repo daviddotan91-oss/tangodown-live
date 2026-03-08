@@ -2,7 +2,7 @@
   {
     "id": "inc-001",
     "type": "AIRSTRIKE",
-    "timestamp": "2024-12-15T03:22:00Z",
+    "timestamp": "2026-03-08T03:22:00Z",
     "location": "Northern Gaza Strip",
     "lat": 31.52,
     "lng": 34.47,
@@ -14,7 +14,7 @@
   {
     "id": "inc-002",
     "type": "DRONE STRIKE",
-    "timestamp": "2024-12-15T04:15:00Z",
+    "timestamp": "2026-03-08T04:15:00Z",
     "location": "Zaporizhzhia Front, Ukraine",
     "lat": 47.4,
     "lng": 35.8,
@@ -26,7 +26,7 @@
   {
     "id": "inc-003",
     "type": "NAVAL ENGAGEMENT",
-    "timestamp": "2024-12-15T05:30:00Z",
+    "timestamp": "2026-03-08T05:30:00Z",
     "location": "Southern Red Sea",
     "lat": 13.8,
     "lng": 42.5,
@@ -38,7 +38,7 @@
   {
     "id": "inc-004",
     "type": "GROUND OP",
-    "timestamp": "2024-12-15T06:00:00Z",
+    "timestamp": "2026-03-08T06:00:00Z",
     "location": "Avdiivka, Donetsk",
     "lat": 48.14,
     "lng": 37.74,
@@ -50,7 +50,7 @@
   {
     "id": "inc-005",
     "type": "MISSILE LAUNCH",
-    "timestamp": "2024-12-15T07:45:00Z",
+    "timestamp": "2026-03-08T07:45:00Z",
     "location": "Khan Younis, Gaza",
     "lat": 31.34,
     "lng": 34.30,
@@ -62,7 +62,7 @@
   {
     "id": "inc-006",
     "type": "INTERCEPT",
-    "timestamp": "2024-12-15T07:46:00Z",
+    "timestamp": "2026-03-08T07:46:00Z",
     "location": "Sderot, Israel",
     "lat": 31.52,
     "lng": 34.60,
@@ -74,7 +74,7 @@
   {
     "id": "inc-007",
     "type": "AIRSTRIKE",
-    "timestamp": "2024-12-15T08:30:00Z",
+    "timestamp": "2026-03-08T08:30:00Z",
     "location": "Bakhmut, Donetsk",
     "lat": 48.59,
     "lng": 37.99,
@@ -86,7 +86,7 @@
   {
     "id": "inc-008",
     "type": "DRONE STRIKE",
-    "timestamp": "2024-12-15T09:12:00Z",
+    "timestamp": "2026-03-08T09:12:00Z",
     "location": "Hodeidah, Yemen",
     "lat": 14.8,
     "lng": 42.95,
@@ -98,7 +98,7 @@
   {
     "id": "inc-009",
     "type": "IED/AMBUSH",
-    "timestamp": "2024-12-15T10:00:00Z",
+    "timestamp": "2026-03-08T10:00:00Z",
     "location": "Liptako-Gourma, Sahel",
     "lat": 14.5,
     "lng": 0.5,
@@ -110,7 +110,7 @@
   {
     "id": "inc-010",
     "type": "SPECIAL OP",
-    "timestamp": "2024-12-15T11:30:00Z",
+    "timestamp": "2026-03-08T11:30:00Z",
     "location": "Lower Shabelle, Somalia",
     "lat": 1.8,
     "lng": 44.5,
@@ -122,7 +122,7 @@
   {
     "id": "inc-011",
     "type": "AIRSTRIKE",
-    "timestamp": "2024-12-15T12:15:00Z",
+    "timestamp": "2026-03-08T12:15:00Z",
     "location": "Rafah, Gaza",
     "lat": 31.24,
     "lng": 34.24,
@@ -134,7 +134,7 @@
   {
     "id": "inc-012",
     "type": "GROUND OP",
-    "timestamp": "2024-12-15T13:00:00Z",
+    "timestamp": "2026-03-08T13:00:00Z",
     "location": "North Kivu, DRC",
     "lat": -1.67,
     "lng": 29.22,
@@ -146,7 +146,7 @@
   {
     "id": "inc-013",
     "type": "MISSILE LAUNCH",
-    "timestamp": "2024-12-15T14:30:00Z",
+    "timestamp": "2026-03-08T14:30:00Z",
     "location": "Kursk Oblast, Russia",
     "lat": 51.4,
     "lng": 35.2,
@@ -158,7 +158,7 @@
   {
     "id": "inc-014",
     "type": "DRONE STRIKE",
-    "timestamp": "2024-12-15T15:45:00Z",
+    "timestamp": "2026-03-08T15:45:00Z",
     "location": "Idlib Province, Syria",
     "lat": 35.9,
     "lng": 36.6,
@@ -170,7 +170,7 @@
   {
     "id": "inc-015",
     "type": "NAVAL ENGAGEMENT",
-    "timestamp": "2024-12-15T16:20:00Z",
+    "timestamp": "2026-03-08T16:20:00Z",
     "location": "Bab el-Mandeb Strait",
     "lat": 12.6,
     "lng": 43.3,
@@ -182,7 +182,7 @@
   {
     "id": "inc-016",
     "type": "AIRSTRIKE",
-    "timestamp": "2024-12-15T17:00:00Z",
+    "timestamp": "2026-03-08T17:00:00Z",
     "location": "Khartoum, Sudan",
     "lat": 15.6,
     "lng": 32.5,
@@ -194,7 +194,7 @@
   {
     "id": "inc-017",
     "type": "GROUND OP",
-    "timestamp": "2024-12-15T18:30:00Z",
+    "timestamp": "2026-03-08T18:30:00Z",
     "location": "Shan State, Myanmar",
     "lat": 22.0,
     "lng": 98.0,
@@ -206,7 +206,7 @@
   {
     "id": "inc-018",
     "type": "INTERCEPT",
-    "timestamp": "2024-12-15T19:15:00Z",
+    "timestamp": "2026-03-08T19:15:00Z",
     "location": "Northern Israel",
     "lat": 33.1,
     "lng": 35.2,
@@ -218,7 +218,7 @@
   {
     "id": "inc-019",
     "type": "ASSASSINATION",
-    "timestamp": "2024-12-15T20:00:00Z",
+    "timestamp": "2026-03-08T20:00:00Z",
     "location": "Damascus, Syria",
     "lat": 33.5,
     "lng": 36.3,
@@ -230,7 +230,7 @@
   {
     "id": "inc-020",
     "type": "RAID",
-    "timestamp": "2024-12-15T21:45:00Z",
+    "timestamp": "2026-03-08T21:45:00Z",
     "location": "Jenin, West Bank",
     "lat": 32.46,
     "lng": 35.3,
@@ -242,7 +242,7 @@
   {
     "id": "inc-021",
     "type": "DRONE STRIKE",
-    "timestamp": "2024-12-15T22:30:00Z",
+    "timestamp": "2026-03-08T22:30:00Z",
     "location": "Kherson Front, Ukraine",
     "lat": 46.6,
     "lng": 32.6,
@@ -254,7 +254,7 @@
   {
     "id": "inc-022",
     "type": "AIRSTRIKE",
-    "timestamp": "2024-12-15T23:00:00Z",
+    "timestamp": "2026-03-08T23:00:00Z",
     "location": "El Fasher, Darfur",
     "lat": 13.6,
     "lng": 25.3,
@@ -266,7 +266,7 @@
   {
     "id": "inc-023",
     "type": "MISSILE LAUNCH",
-    "timestamp": "2024-12-16T00:15:00Z",
+    "timestamp": "2026-03-08T00:15:00Z",
     "location": "Dnipropetrovsk, Ukraine",
     "lat": 48.46,
     "lng": 35.04,
@@ -278,7 +278,7 @@
   {
     "id": "inc-024",
     "type": "GROUND OP",
-    "timestamp": "2024-12-16T01:30:00Z",
+    "timestamp": "2026-03-08T01:30:00Z",
     "location": "Amhara Region, Ethiopia",
     "lat": 11.5,
     "lng": 37.5,
@@ -290,7 +290,7 @@
   {
     "id": "inc-025",
     "type": "NAVAL ENGAGEMENT",
-    "timestamp": "2024-12-16T02:00:00Z",
+    "timestamp": "2026-03-08T02:00:00Z",
     "location": "Second Thomas Shoal, SCS",
     "lat": 9.8,
     "lng": 115.9,

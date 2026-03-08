@@ -50,10 +50,31 @@ export function getIntensityColor(intensity) {
 
 // Generate simulated incident from templates
 export function generateSimulatedIncident(conflicts, existingIncidents) {
-  const types = ['AIRSTRIKE', 'DRONE STRIKE', 'GROUND OP', 'MISSILE LAUNCH', 'INTERCEPT', 'NAVAL ENGAGEMENT', 'IED/AMBUSH', 'RAID']
-  const type = types[Math.floor(Math.random() * types.length)]
+  // Weighted type selection — rarer types have lower probability
+  const weighted = [
+    { type: 'AIRSTRIKE', w: 20 },
+    { type: 'DRONE STRIKE', w: 22 },
+    { type: 'GROUND OP', w: 15 },
+    { type: 'MISSILE LAUNCH', w: 12 },
+    { type: 'INTERCEPT', w: 12 },
+    { type: 'NAVAL ENGAGEMENT', w: 8 },
+    { type: 'IED/AMBUSH', w: 5 },
+    { type: 'RAID', w: 3 },
+    { type: 'SPECIAL OP', w: 2 },
+    { type: 'ASSASSINATION', w: 1 },
+  ]
+  const totalW = weighted.reduce((s, w) => s + w.w, 0)
+  let r = Math.random() * totalW
+  let type = 'AIRSTRIKE'
+  for (const entry of weighted) {
+    r -= entry.w
+    if (r <= 0) { type = entry.type; break }
+  }
 
-  const activeConflicts = conflicts.filter(c => c.intensity === 'CRITICAL' || c.intensity === 'HIGH')
+  // Include MEDIUM intensity zones occasionally (30% chance)
+  const activeConflicts = conflicts.filter(c =>
+    c.intensity === 'CRITICAL' || c.intensity === 'HIGH' || (c.intensity === 'MEDIUM' && Math.random() < 0.3)
+  )
   const conflict = activeConflicts[Math.floor(Math.random() * activeConflicts.length)]
   if (!conflict) return null
 
@@ -101,6 +122,16 @@ export function generateSimulatedIncident(conflicts, existingIncidents) {
       `Special forces conducted raid on militant hideout in ${front.name}.`,
       `Counter-terrorism operation — suspects detained, weapons seized.`,
       `Targeted raid on weapons manufacturing site.`
+    ],
+    'SPECIAL OP': [
+      `Covert operation conducted behind enemy lines near ${front.name}.`,
+      `Special operations forces extracted high-value intelligence from ${front.name} sector.`,
+      `Joint special operations task force completed classified objective in ${front.name}.`
+    ],
+    'ASSASSINATION': [
+      `High-value target eliminated via precision strike in ${front.name} area.`,
+      `Targeted killing of senior militant commander confirmed near ${front.name}.`,
+      `Intelligence-led operation neutralized key operative in ${front.name} sector.`
     ]
   }
 
