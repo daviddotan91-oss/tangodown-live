@@ -10,8 +10,10 @@ import IntelView from './components/IntelView'
 import SearchOverlay from './components/SearchOverlay'
 import ArsenalView from './components/ArsenalView'
 import BroadcastView from './components/BroadcastView'
+import BootSequence from './components/BootSequence'
 import { useConflictData } from './hooks/useConflictData'
 import { useLiveFeed } from './hooks/useLiveFeed'
+import { initAudio, playClick, playTabSwitch, playGlitch, playFlashTraffic, playImpact, toggleMute, isMuted, startAmbient } from './utils/soundManager'
 
 export default function App() {
   const { conflicts, incidents, naval, loading } = useConflictData()
@@ -28,6 +30,45 @@ export default function App() {
   const [networks, setNetworks] = useState({ connections: [], clusters: [] })
   const [arsenal, setArsenal] = useState({ airDefense: [], uas: [], platforms: [], defenseTech: [] })
   const [broadcast, setBroadcast] = useState({ countries: [] })
+
+  // Boot sequence state
+  const [bootComplete, setBootComplete] = useState(false)
+  const [audioInitialized, setAudioInitialized] = useState(false)
+
+  // CRT Glitch transition state
+  const [glitching, setGlitching] = useState(false)
+  const prevViewRef = useRef('godseye')
+
+  // Sound-enabled mute state (for UI button)
+  const [soundMuted, setSoundMuted] = useState(false)
+
+  // Initialize audio on first user interaction
+  useEffect(() => {
+    const initOnInteraction = () => {
+      if (!audioInitialized) {
+        initAudio()
+        setAudioInitialized(true)
+      }
+    }
+    window.addEventListener('click', initOnInteraction, { once: true })
+    window.addEventListener('keydown', initOnInteraction, { once: true })
+    return () => {
+      window.removeEventListener('click', initOnInteraction)
+      window.removeEventListener('keydown', initOnInteraction)
+    }
+  }, [audioInitialized])
+
+  // View switch with CRT glitch
+  const switchView = useCallback((newView) => {
+    if (newView === activeView) return
+    playGlitch()
+    setGlitching(true)
+    prevViewRef.current = activeView
+    setTimeout(() => {
+      setActiveView(newView)
+      setTimeout(() => setGlitching(false), 100)
+    }, 80)
+  }, [activeView])
 
   // Load organizations, leaders, and networks
   useEffect(() => {
@@ -52,16 +93,19 @@ export default function App() {
 
   const handleIncidentClick = useCallback((incident) => {
     setSelectedIncident(incident)
+    playClick()
   }, [])
 
   const handleConflictSelect = useCallback((conflict) => {
     setSelectedConflict(conflict)
+    playClick()
     if (conflict?.center) {
       setFlyToTarget([...conflict.center])
     }
   }, [])
 
   const handleShipClick = useCallback((ship) => {
+    playClick()
     if (ship?.lat && ship?.lng) {
       setFlyToTarget([ship.lat, ship.lng])
     }
@@ -89,21 +133,25 @@ export default function App() {
           setSelectedIncident(null)
           setSearchOpen(false)
           break
+        case 'm':
+        case 'M':
+          setSoundMuted(toggleMute())
+          break
         default:
           switch (e.key.toLowerCase()) {
-            case 'w': setActiveView('godseye'); break
-            case 'n': setActiveView('networks'); break
-            case 'r': setActiveView('replay'); break
-            case 'i': setActiveView('intel'); break
-            case 'a': setActiveView('arsenal'); break
-            case 'b': setActiveView('broadcast'); break
+            case 'w': switchView('godseye'); break
+            case 'n': switchView('networks'); break
+            case 'r': switchView('replay'); break
+            case 'i': switchView('intel'); break
+            case 'a': switchView('arsenal'); break
+            case 'b': switchView('broadcast'); break
             case 'f': setPanelsVisible(prev => !prev); break
           }
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
+  }, [switchView])
 
   // Calculate global stats
   const globalStats = useMemo(() => {
@@ -133,6 +181,7 @@ export default function App() {
 
   // Flash Traffic alert system — dramatic alerts for major simulated events
   const [flashTraffic, setFlashTraffic] = useState(null)
+  const [flashBorderPulse, setFlashBorderPulse] = useState(false)
   const flashTimerRef = useRef(null)
   const lastFlashRef = useRef(0)
 
@@ -149,19 +198,37 @@ export default function App() {
       if (candidate) {
         lastFlashRef.current = Date.now()
         setFlashTraffic(candidate)
+        playFlashTraffic()
+        // Red border pulse on entire viewport
+        setFlashBorderPulse(true)
+        setTimeout(() => setFlashBorderPulse(false), 1500)
+        // Auto-fly to location
+        if (activeView === 'godseye' && candidate.lat && candidate.lng) {
+          setFlyToTarget([candidate.lat, candidate.lng])
+        }
         clearTimeout(flashTimerRef.current)
-        flashTimerRef.current = setTimeout(() => setFlashTraffic(null), 7000)
+        flashTimerRef.current = setTimeout(() => setFlashTraffic(null), 8000)
       }
     }, 5000)
     return () => { clearInterval(interval); clearTimeout(flashTimerRef.current) }
-  }, [feed])
+  }, [feed, activeView])
 
   const handleFlashClick = useCallback(() => {
     if (!flashTraffic) return
-    setActiveView('godseye')
+    switchView('godseye')
     handleIncidentFlyTo(flashTraffic)
     setFlashTraffic(null)
-  }, [flashTraffic, handleIncidentFlyTo])
+  }, [flashTraffic, handleIncidentFlyTo, switchView])
+
+  const handleBootComplete = useCallback(() => {
+    setBootComplete(true)
+    startAmbient()
+  }, [])
+
+  // Show boot sequence before anything else
+  if (!bootComplete && !loading) {
+    return <BootSequence onComplete={handleBootComplete} />
+  }
 
   if (loading) {
     return (
@@ -177,10 +244,21 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app ${glitching ? 'crt-glitch' : ''}`}>
+      {/* Global CRT Scanlines */}
+      <div className="global-scanlines" />
+
+      {/* Flash Traffic Red Border Pulse */}
+      {flashBorderPulse && <div className="flash-border-pulse" />}
+
+      {/* Mute indicator */}
+      <button className="sound-toggle" onClick={() => setSoundMuted(toggleMute())} title="Toggle Sound (M)">
+        {soundMuted ? '🔇' : '🔊'}
+      </button>
+
       <TopNav
         activeView={activeView}
-        setActiveView={setActiveView}
+        setActiveView={switchView}
         stats={globalStats}
       />
 
@@ -290,29 +368,40 @@ export default function App() {
         leaders={leaders}
         onResult={(result) => {
           if (result.type === 'conflict' || result.type === 'front') {
-            setActiveView('godseye')
+            switchView('godseye')
           } else if (result.type === 'organization' || result.type.startsWith('leader')) {
-            setActiveView('networks')
+            switchView('networks')
           }
         }}
       />
 
-      {/* Flash Traffic Alert */}
+      {/* Flash Traffic Alert — Full Width Dramatic */}
       {flashTraffic && (
-        <div className="flash-traffic" onClick={handleFlashClick}>
-          <div className="flash-traffic-inner">
-            <div className="flash-traffic-label">
-              <span className="flash-traffic-icon" />
-              FLASH TRAFFIC
-            </div>
-            <div className="flash-traffic-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
+        <>
+          {/* Center screen flash text */}
+          <div className="flash-traffic-center" onClick={handleFlashClick}>
+            <div className="flash-traffic-center-label">FLASH TRAFFIC</div>
+            <div className="flash-traffic-center-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
               {flashTraffic.type}
             </div>
-            <div className="flash-traffic-location">{flashTraffic.location}</div>
-            <div className="flash-traffic-desc">{flashTraffic.description}</div>
-            <div className="flash-traffic-action">CLICK TO LOCATE</div>
+            <div className="flash-traffic-center-loc">{flashTraffic.location}</div>
           </div>
-        </div>
+          {/* Bottom detail card */}
+          <div className="flash-traffic" onClick={handleFlashClick}>
+            <div className="flash-traffic-inner">
+              <div className="flash-traffic-label">
+                <span className="flash-traffic-icon" />
+                FLASH TRAFFIC
+              </div>
+              <div className="flash-traffic-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
+                {flashTraffic.type}
+              </div>
+              <div className="flash-traffic-location">{flashTraffic.location}</div>
+              <div className="flash-traffic-desc">{flashTraffic.description}</div>
+              <div className="flash-traffic-action">CLICK TO LOCATE</div>
+            </div>
+          </div>
+        </>
       )}
 
       {/* Disclaimer */}
