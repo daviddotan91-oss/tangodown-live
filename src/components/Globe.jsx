@@ -35,15 +35,28 @@ function geoToLines(coordinates, radius) {
   return points
 }
 
-// Filled country polygons — warm dark landmass
+// Shared world-atlas loader — single parse for both fills and boundaries
+let _worldAtlasPromise = null
+function loadWorldAtlas() {
+  if (!_worldAtlasPromise) {
+    _worldAtlasPromise = import('world-atlas/countries-110m.json').then(worldTopo => {
+      const data = worldTopo.default || worldTopo
+      return feature(data, data.objects.countries)
+    })
+  }
+  return _worldAtlasPromise
+}
+
+// Filled country polygons — merged into single geometry for performance
 function CountryFills() {
-  const [geos, setGeos] = useState([])
+  const [mergedGeo, setMergedGeo] = useState(null)
 
   useEffect(() => {
-    import('world-atlas/countries-110m.json').then(worldTopo => {
-      const data = worldTopo.default || worldTopo
-      const countries = feature(data, data.objects.countries)
-      const geometries = []
+    loadWorldAtlas().then(countries => {
+      const allVertices = []
+      const allIndices = []
+      let vertexOffset = 0
+
       countries.features.forEach(feat => {
         const geom = feat.geometry
         const rings = []
@@ -60,37 +73,38 @@ function CountryFills() {
           const centerLen = Math.sqrt(cx * cx + cy * cy + cz * cz)
           cx = cx / centerLen * r; cy = cy / centerLen * r; cz = cz / centerLen * r
 
-          const vertices = [cx, cy, cz]
-          pts.forEach(p => vertices.push(p.x, p.y, p.z))
-          const indices = []
+          allVertices.push(cx, cy, cz)
+          pts.forEach(p => allVertices.push(p.x, p.y, p.z))
           for (let i = 1; i < pts.length; i++) {
-            indices.push(0, i, i + 1 <= pts.length ? i + 1 : 1)
+            allIndices.push(
+              vertexOffset,
+              vertexOffset + i,
+              vertexOffset + (i + 1 <= pts.length ? i + 1 : 1)
+            )
           }
-          const geo = new THREE.BufferGeometry()
-          geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
-          geo.setIndex(indices)
-          geo.computeVertexNormals()
-          geometries.push(geo)
+          vertexOffset += pts.length + 1
         })
       })
-      setGeos(geometries)
+
+      const geo = new THREE.BufferGeometry()
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(allVertices, 3))
+      geo.setIndex(allIndices)
+      geo.computeVertexNormals()
+      setMergedGeo(geo)
     })
   }, [])
 
+  if (!mergedGeo) return null
   return (
-    <group>
-      {geos.map((geo, i) => (
-        <mesh key={i} geometry={geo}>
-          <meshBasicMaterial
-            color="#2a1e10"
-            transparent
-            opacity={0.4}
-            side={THREE.DoubleSide}
-            depthWrite={false}
-          />
-        </mesh>
-      ))}
-    </group>
+    <mesh geometry={mergedGeo}>
+      <meshBasicMaterial
+        color="#2a1e10"
+        transparent
+        opacity={0.4}
+        side={THREE.DoubleSide}
+        depthWrite={false}
+      />
+    </mesh>
   )
 }
 
@@ -99,9 +113,7 @@ function CountryBoundaries() {
   const [geometry, setGeometry] = useState(null)
 
   useEffect(() => {
-    import('world-atlas/countries-110m.json').then(worldTopo => {
-      const data = worldTopo.default || worldTopo
-      const countries = feature(data, data.objects.countries)
+    loadWorldAtlas().then(countries => {
       const points = []
       const r = GLOBE_RADIUS + 0.0015
       countries.features.forEach(feat => {
@@ -151,11 +163,11 @@ function Graticule() {
   )
 }
 
-// Hotspot glow clusters
+// Hotspot glow clusters — layered for depth
 function HotspotGlow({ incidents }) {
   const hotspots = useMemo(() => {
     const cells = {}
-    const cellSize = 8
+    const cellSize = 6
     incidents.forEach(inc => {
       if (!inc.lat || !inc.lng) return
       const key = `${Math.round(inc.lat / cellSize) * cellSize},${Math.round(inc.lng / cellSize) * cellSize}`
@@ -169,7 +181,7 @@ function HotspotGlow({ incidents }) {
       .map(c => ({
         lat: c.lat / c.count,
         lng: c.lng / c.count,
-        intensity: Math.min(c.count / 12, 1),
+        intensity: Math.min(c.count / 10, 1),
       }))
   }, [incidents])
 
@@ -177,10 +189,17 @@ function HotspotGlow({ incidents }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return
-    groupRef.current.children.forEach((child, i) => {
-      if (child.material) {
-        const base = hotspots[i]?.intensity || 0.1
-        child.material.opacity = base * 0.12 + 0.02 * Math.sin(clock.elapsedTime * 0.8 + i)
+    const t = clock.elapsedTime
+    groupRef.current.children.forEach((group, i) => {
+      const base = hotspots[i]?.intensity || 0.1
+      const pulse = Math.sin(t * 1.2 + i * 1.5) * 0.04 + 0.04
+      // Inner glow
+      if (group.children[0]?.material) {
+        group.children[0].material.opacity = base * 0.18 + pulse
+      }
+      // Outer glow
+      if (group.children[1]?.material) {
+        group.children[1].material.opacity = base * 0.08 + pulse * 0.5
       }
     })
   })
@@ -192,18 +211,85 @@ function HotspotGlow({ incidents }) {
         const normal = pos.clone().normalize()
         const q = new THREE.Quaternion()
         q.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal)
-        const size = 0.04 + h.intensity * 0.1
+        const innerSize = 0.03 + h.intensity * 0.08
+        const outerSize = innerSize * 2.2
+        const color = h.intensity > 0.7 ? '#FF2222' : h.intensity > 0.4 ? '#FF6600' : '#FFB800'
         return (
-          <mesh key={i} position={pos} quaternion={q}>
-            <circleGeometry args={[size, 24]} />
-            <meshBasicMaterial
-              color={h.intensity > 0.5 ? '#FF4444' : '#FFB800'}
-              transparent
-              opacity={h.intensity * 0.12}
-              side={THREE.DoubleSide}
-              depthWrite={false}
-            />
-          </mesh>
+          <group key={i} position={pos} quaternion={q}>
+            <mesh>
+              <circleGeometry args={[innerSize, 24]} />
+              <meshBasicMaterial color={color} transparent opacity={0.15} side={THREE.DoubleSide} depthWrite={false} />
+            </mesh>
+            <mesh>
+              <circleGeometry args={[outerSize, 24]} />
+              <meshBasicMaterial color={color} transparent opacity={0.06} side={THREE.DoubleSide} depthWrite={false} />
+            </mesh>
+          </group>
+        )
+      })}
+    </group>
+  )
+}
+
+// Conflict zone pulse rings — expanding radar rings at active conflict centers
+function ConflictPulseRings({ conflicts }) {
+  const groupRef = useRef()
+  const ringsRef = useRef([])
+
+  useEffect(() => {
+    ringsRef.current = conflicts
+      .filter(c => c.center)
+      .map(c => ({
+        pos: latLngToVec3(c.center[0], c.center[1], GLOBE_RADIUS + 0.003),
+        intensity: c.intensity,
+        id: c.id,
+      }))
+  }, [conflicts])
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return
+    const t = clock.elapsedTime
+    groupRef.current.children.forEach((group, gi) => {
+      const data = ringsRef.current[gi]
+      if (!data) return
+      group.children.forEach((ring, ri) => {
+        const phase = (t * 0.4 + ri * 0.33 + gi * 0.7) % 1
+        const scale = 1 + phase * 6
+        ring.scale.setScalar(scale)
+        ring.material.opacity = Math.max(0, (1 - phase) * 0.25)
+      })
+    })
+  })
+
+  const ringColor = (intensity) => {
+    switch (intensity) {
+      case 'CRITICAL': return '#FF4444'
+      case 'HIGH': return '#FF8800'
+      default: return '#FFB800'
+    }
+  }
+
+  return (
+    <group ref={groupRef}>
+      {ringsRef.current.map((data) => {
+        const normal = new THREE.Vector3(data.pos.x, data.pos.y, data.pos.z).normalize()
+        const q = new THREE.Quaternion()
+        q.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal)
+        return (
+          <group key={data.id} position={data.pos} quaternion={q}>
+            {[0, 1, 2].map(ri => (
+              <mesh key={ri}>
+                <ringGeometry args={[0.02, 0.025, 48]} />
+                <meshBasicMaterial
+                  color={ringColor(data.intensity)}
+                  transparent
+                  opacity={0.2}
+                  side={THREE.DoubleSide}
+                  depthWrite={false}
+                />
+              </mesh>
+            ))}
+          </group>
         )
       })}
     </group>
@@ -980,6 +1066,7 @@ function GlobeScene({ conflicts, incidents, feed, naval, flyToTarget, onIncident
         <CompassMarkers />
 
         <HotspotGlow incidents={incidents} />
+        <ConflictPulseRings conflicts={conflicts} />
         <RegionLabels conflicts={conflicts} />
 
         {/* Incident Markers */}

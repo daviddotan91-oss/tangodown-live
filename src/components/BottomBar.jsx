@@ -2,11 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react'
 
 export default function BottomBar({ stats, conflicts = [], leaders = {}, naval = [] }) {
   const [uptime, setUptime] = useState(0)
+  const [utcTime, setUtcTime] = useState('')
 
   useEffect(() => {
     const start = performance.now()
     const interval = setInterval(() => {
       setUptime(Math.floor((performance.now() - start) / 1000))
+      const now = new Date()
+      setUtcTime(now.toISOString().replace('T', ' ').slice(0, 19) + 'Z')
     }, 1000)
     return () => clearInterval(interval)
   }, [])
@@ -87,6 +90,7 @@ export default function BottomBar({ stats, conflicts = [], leaders = {}, naval =
         </div>
       </div>
       <div className="status-bar-section status-bar-edge">
+        <span style={{ opacity: 0.5, marginRight: 6 }}>{utcTime}</span>
         <span>{formatUptime(uptime)}</span>
         <span className="status-bar-dot status-bar-dot-green" />
       </div>
