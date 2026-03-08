@@ -382,11 +382,20 @@ export default function App() {
         conflicts={conflicts}
         organizations={organizations}
         leaders={leaders}
+        arsenal={arsenal}
+        naval={naval}
         onResult={(result) => {
           if (result.type === 'conflict' || result.type === 'front') {
             switchView('godseye')
+            if (result.data?.center) setFlyToTarget([...result.data.center])
+            else if (result.data?.conflict?.center) setFlyToTarget([...result.data.conflict.center])
           } else if (result.type === 'organization' || result.type.startsWith('leader')) {
             switchView('networks')
+          } else if (result.type === 'arsenal') {
+            switchView('arsenal')
+          } else if (result.type === 'naval') {
+            switchView('godseye')
+            if (result.data?.lat && result.data?.lng) setFlyToTarget([result.data.lat, result.data.lng])
           }
         }}
       />

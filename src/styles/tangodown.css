@@ -2070,7 +2070,10 @@ html, body, #root {
 .search-close:hover { color: var(--text-primary); border-color: var(--cyan-dim); }
 .search-results { overflow-y: auto; flex: 1; }
 .search-result-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; transition: background 0.1s; border-bottom: 1px solid var(--border-primary); }
-.search-result-item:hover { background: var(--bg-hover); }
+.search-result-item:hover, .search-result-item.search-result-selected { background: var(--bg-hover); }
+.search-result-item.search-result-selected { border-left: 2px solid var(--accent-amber); }
+.search-result-item.type-arsenal .result-icon { color: #00AAFF; }
+.search-result-item.type-naval .result-icon { color: #00AAFF; }
 .result-icon { font-size: 14px; color: var(--cyan); width: 20px; text-align: center; flex-shrink: 0; }
 .result-content { flex: 1; min-width: 0; }
 .result-label { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary); }
