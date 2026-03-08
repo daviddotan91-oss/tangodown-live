@@ -20,7 +20,7 @@
     {
       "id": "axis-of-resistance",
       "name": "Iran's Axis of Resistance",
-      "description": "Network of Iranian-backed armed groups spanning the Middle East, coordinated by the IRGC Quds Force. United by opposition to Israel, the US, and Western influence in the region.",
+      "description": "Network of Iranian-backed armed groups spanning the Middle East, coordinated by the IRGC Quds Force. Designated as terrorist organizations by the US, Israel, and the EU. Pose direct threat to allied forces and regional stability.",
       "members": ["irgc", "hezbollah", "hamas", "pij", "houthis", "kataib-hezbollah", "pmf"],
       "color": "#2e7d32"
     },

@@ -1,8 +1,100 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import KillList from './KillList'
+
+function WeaponIntelCard({ weapon, conflicts, orgName }) {
+  const [expanded, setExpanded] = useState(false)
+
+  // Find this weapon (or similar) across all conflict data
+  const usage = []
+  conflicts.forEach(conflict => {
+    // Match weapon in conflict's weapons array
+    const match = conflict.weapons?.find(w =>
+      w.name.toLowerCase().includes(weapon.toLowerCase().split(' ')[0]) ||
+      weapon.toLowerCase().includes(w.name.toLowerCase().split(' ')[0])
+    )
+    if (match) {
+      usage.push({ conflict, weapon: match })
+    }
+    // Match weapon in recent strikes
+    const strikes = conflict.recentStrikes?.filter(s =>
+      s.weapon.toLowerCase().includes(weapon.toLowerCase().split(' ')[0]) ||
+      weapon.toLowerCase().includes(s.weapon.toLowerCase().split(' ')[0])
+    ) || []
+    strikes.forEach(s => {
+      if (!usage.find(u => u.strike?.date === s.date && u.strike?.target === s.target)) {
+        usage.push({ conflict, strike: s })
+      }
+    })
+  })
+
+  const lastStrike = usage.find(u => u.strike)?.strike
+  const weaponData = usage.find(u => u.weapon)?.weapon
+  const theater = usage.find(u => u.weapon)?.conflict?.name || usage.find(u => u.strike)?.conflict?.name
+
+  return (
+    <div className={`weapon-intel-card ${expanded ? 'expanded' : ''}`} onClick={() => setExpanded(!expanded)}>
+      <div className="weapon-intel-header">
+        <span className="weapon-intel-icon">{weaponData?.type?.includes('Intercept') ? '◇' : weaponData?.type?.includes('Missile') ? '▸' : weaponData?.type?.includes('Rocket') ? '▴' : weaponData?.type?.includes('Bomb') ? '◆' : '●'}</span>
+        <span className="weapon-intel-name">{weapon}</span>
+        {lastStrike && <span className="weapon-intel-recent-dot" title="Recent strike data" />}
+      </div>
+      {expanded && (
+        <div className="weapon-intel-details">
+          {weaponData && (
+            <>
+              <div className="weapon-detail-row">
+                <span className="weapon-detail-label">TYPE</span>
+                <span className="weapon-detail-value">{weaponData.type}</span>
+              </div>
+              <div className="weapon-detail-row">
+                <span className="weapon-detail-label">USAGE</span>
+                <span className="weapon-detail-value">{weaponData.usage}</span>
+              </div>
+              <div className="weapon-detail-row">
+                <span className="weapon-detail-label">THEATER</span>
+                <span className="weapon-detail-value">{theater}</span>
+              </div>
+              <div className="weapon-detail-row">
+                <span className="weapon-detail-label">EST. DAILY USE</span>
+                <span className="weapon-detail-value highlight">{weaponData.dailyUse}/day</span>
+              </div>
+            </>
+          )}
+          {lastStrike && (
+            <div className="weapon-last-strike">
+              <div className="weapon-strike-title">LAST CONFIRMED STRIKE</div>
+              <div className="weapon-strike-date">{lastStrike.date}</div>
+              <div className="weapon-strike-row">
+                <span className="weapon-detail-label">TARGET</span>
+                <span className="weapon-detail-value">{lastStrike.target}</span>
+              </div>
+              <div className="weapon-strike-row">
+                <span className="weapon-detail-label">PLATFORM</span>
+                <span className="weapon-detail-value">{lastStrike.aircraft}</span>
+              </div>
+              <div className="weapon-strike-row">
+                <span className="weapon-detail-label">RESULT</span>
+                <span className="weapon-detail-value result">{lastStrike.result}</span>
+              </div>
+            </div>
+          )}
+          {!weaponData && !lastStrike && (
+            <div className="weapon-no-data">NO OSINT STRIKE DATA AVAILABLE</div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSelect, onClose }) {
   const [activeTab, setActiveTab] = useState('overview')
+  const [conflicts, setConflicts] = useState([])
+
+  // Load conflict data for weapon cross-referencing
+  useEffect(() => {
+    fetch('/data/conflicts.json').then(r => r.json()).then(setConflicts).catch(() => {})
+  }, [])
 
   const tabs = [
     { id: 'overview', label: 'OVERVIEW' },
@@ -21,24 +113,28 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
         </div>
       </div>
 
-      {/* Designation Badges */}
+      {/* Designation Badges — shows how allied nations have designated this org */}
       <div className="dossier-designations">
+        <div className="desig-header">DESIGNATED BY</div>
         {org.usDesignation && (
           <div className="dossier-designation">
-            <span className="desig-country">US</span>
+            <span className="desig-country desig-allied">US</span>
+            <span className="desig-arrow">▸</span>
             <span className="desig-status">{org.usDesignation.status}</span>
             {org.usDesignation.date && <span className="desig-date">{org.usDesignation.date}</span>}
           </div>
         )}
         {org.israelDesignation && (
           <div className="dossier-designation">
-            <span className="desig-country">ISRAEL</span>
+            <span className="desig-country desig-allied">ISRAEL</span>
+            <span className="desig-arrow">▸</span>
             <span className="desig-status">{org.israelDesignation.status}</span>
           </div>
         )}
         {org.euDesignation && (
           <div className="dossier-designation">
-            <span className="desig-country">EU</span>
+            <span className="desig-country desig-allied">EU</span>
+            <span className="desig-arrow">▸</span>
             <span className="desig-status">{org.euDesignation.status}</span>
           </div>
         )}
@@ -104,10 +200,10 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
             </div>
 
             <div className="dossier-weapons-section">
-              <div className="weapons-title">PRIMARY WEAPONS / CAPABILITIES</div>
-              <div className="weapons-list">
+              <div className="weapons-title">ARSENAL — CLICK FOR INTEL</div>
+              <div className="weapons-intel-list">
                 {org.primaryWeapons?.map((w, i) => (
-                  <span key={i} className="weapon-tag">{w}</span>
+                  <WeaponIntelCard key={i} weapon={w} conflicts={conflicts} orgName={org.name} />
                 ))}
               </div>
             </div>
@@ -195,12 +291,6 @@ export default function OrgDossier({ org, leaders, connections, allOrgs, onOrgSe
                 })}
               </div>
             )}
-
-            {/* Cluster membership */}
-            {(() => {
-              const cluster = allOrgs.length > 0 ? null : null // placeholder
-              return null
-            })()}
           </div>
         )}
       </div>
