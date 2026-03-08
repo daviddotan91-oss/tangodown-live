@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Globe from './Globe'
-import { getEventColor, formatUTC } from '../utils/dataUtils'
+import { getEventColor, formatUTC, formatDate } from '../utils/dataUtils'
+import { playClick } from '../utils/soundManager'
 
 const OPERATIONS = [
   {
@@ -138,6 +139,45 @@ export default function ReplayView({ conflicts, incidents, naval }) {
     setPlaying(true)
   }, [])
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.target.tagName === 'INPUT') return
+      switch (e.key) {
+        case ' ':
+          e.preventDefault()
+          handlePlayPause()
+          break
+        case 'ArrowRight':
+          e.preventDefault()
+          setProgress(p => { const n = Math.min(p + 0.02, 1); progressRef.current = n; return n })
+          break
+        case 'ArrowLeft':
+          e.preventDefault()
+          setProgress(p => { const n = Math.max(p - 0.02, 0); progressRef.current = n; return n })
+          break
+      }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [handlePlayPause])
+
+  // Event type breakdown
+  const typeBreakdown = useMemo(() => {
+    const counts = {}
+    visibleIncidents.forEach(inc => {
+      counts[inc.type] = (counts[inc.type] || 0) + 1
+    })
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+  }, [visibleIncidents])
+
+  // Recent events (last 6 revealed)
+  const recentEvents = useMemo(() => {
+    return visibleIncidents.slice().reverse().slice(0, 6)
+  }, [visibleIncidents])
+
   return (
     <div className="replay-view">
       {/* Globe */}
@@ -200,18 +240,45 @@ export default function ReplayView({ conflicts, incidents, naval }) {
           <span className="replay-stat-label">TOTAL</span>
         </div>
         <div className="replay-stat">
-          <span className="replay-stat-value">
+          <span className="replay-stat-value" style={{ color: '#00AAFF' }}>
             {visibleIncidents.filter(i => i.force === 'allied').length}
           </span>
           <span className="replay-stat-label">ALLIED</span>
         </div>
         <div className="replay-stat">
-          <span className="replay-stat-value">
+          <span className="replay-stat-value" style={{ color: '#FF4444' }}>
             {visibleIncidents.filter(i => i.force === 'hostile').length}
           </span>
           <span className="replay-stat-label">HOSTILE</span>
         </div>
       </div>
+
+      {/* Type breakdown */}
+      {typeBreakdown.length > 0 && progress > 0 && (
+        <div className="replay-type-breakdown">
+          {typeBreakdown.map(([type, count]) => (
+            <div key={type} className="replay-type-row">
+              <span className="replay-type-dot" style={{ backgroundColor: getEventColor(type) }} />
+              <span className="replay-type-name">{type}</span>
+              <span className="replay-type-count" style={{ color: getEventColor(type) }}>{count}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Event log — scrolling feed during playback */}
+      {recentEvents.length > 0 && progress > 0 && (
+        <div className="replay-event-log">
+          <div className="replay-log-header">EVENT LOG</div>
+          {recentEvents.map(inc => (
+            <div key={inc.id} className="replay-log-entry">
+              <span className="replay-log-time">{formatUTC(inc.timestamp)}</span>
+              <span className="replay-log-type" style={{ color: getEventColor(inc.type) }}>{inc.type}</span>
+              <span className="replay-log-loc">{inc.location}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Timeline Controls */}
       <div className="replay-timeline">

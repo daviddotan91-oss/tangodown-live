@@ -2198,6 +2198,47 @@ html, body, #root {
 .replay-timeline-dot.revealed { opacity: 1; box-shadow: 0 0 6px currentColor; }
 .replay-time-display { font-family: var(--font-mono); font-size: 12px; color: var(--cyan); white-space: nowrap; flex-shrink: 0; letter-spacing: 0.5px; min-width: 175px; text-align: right; }
 
+/* Replay — Type Breakdown */
+.replay-type-breakdown {
+  position: absolute; bottom: 90px; right: 32px; z-index: 15;
+  background: var(--bg-panel); border: 1px solid var(--border-primary);
+  border-radius: 4px; padding: 10px 14px; backdrop-filter: blur(12px);
+  min-width: 160px;
+}
+.replay-type-row {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--white-dim);
+  padding: 2px 0; letter-spacing: 0.5px;
+}
+.replay-type-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.replay-type-name { flex: 1; }
+.replay-type-count { font-weight: 700; min-width: 20px; text-align: right; }
+
+/* Replay — Event Log */
+.replay-event-log {
+  position: absolute; top: 120px; left: 32px; z-index: 15;
+  background: var(--bg-panel); border: 1px solid var(--border-primary);
+  border-radius: 4px; padding: 10px 14px; backdrop-filter: blur(12px);
+  width: 340px; max-height: 200px; overflow: hidden;
+}
+.replay-log-header {
+  font-family: var(--font-mono); font-size: 9px; color: var(--cyan-dim);
+  letter-spacing: 2px; margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-primary);
+}
+.replay-log-entry {
+  display: flex; gap: 8px; align-items: baseline;
+  padding: 3px 0; animation: replay-log-in 0.3s ease-out;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.replay-log-time { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); width: 65px; flex-shrink: 0; }
+.replay-log-type { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.5px; flex-shrink: 0; }
+.replay-log-loc { font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--white-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@keyframes replay-log-in {
+  from { opacity: 0; transform: translateY(-6px); background: rgba(255, 68, 0, 0.1); }
+  to { opacity: 1; transform: translateY(0); background: transparent; }
+}
+
 /* ═══════════════════════════════════════════════════════
    INTEL VIEW
    ═══════════════════════════════════════════════════════ */
