@@ -420,18 +420,12 @@ export default function BroadcastView({ broadcast = {} }) {
                       <div className="broadcast-news-grid">
                         {items.map(item => {
                           const isPlaying = playingVideo === item.id
-                          const hasDirectId = !!item.youtubeId
-                          const channelLiveUrl = `https://www.youtube.com/channel/${item.youtubeChannelId}/live`
+                          const channelLiveUrl = item.youtubeChannelId
+                            ? `https://www.youtube.com/channel/${item.youtubeChannelId}/live`
+                            : item.youtubeId ? `https://www.youtube.com/watch?v=${item.youtubeId}` : '#'
                           return (
                             <div key={item.id} className={`broadcast-news-card ${isPlaying ? 'broadcast-news-card--active' : ''}`}
-                              onClick={() => {
-                                if (hasDirectId) {
-                                  setPlayingVideo(isPlaying ? null : item.id)
-                                } else {
-                                  // Channels without a direct video ID — open YouTube live page
-                                  setPlayingVideo(isPlaying ? null : item.id)
-                                }
-                              }}>
+                              onClick={() => setPlayingVideo(isPlaying ? null : item.id)}>
                               <div className="broadcast-news-top">
                                 <div className="broadcast-news-info">
                                   <div className="broadcast-news-name">{item.name}</div>
@@ -444,14 +438,7 @@ export default function BroadcastView({ broadcast = {} }) {
                                 </div>
                                 <div className="broadcast-play-indicator">{isPlaying ? '■' : '▶'}</div>
                               </div>
-                              {isPlaying && hasDirectId && (
-                                <div className="broadcast-video-wrap" onClick={e => e.stopPropagation()}>
-                                  <iframe className="broadcast-iframe"
-                                    src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
-                                    allow="autoplay; encrypted-media" allowFullScreen title={item.name} />
-                                </div>
-                              )}
-                              {isPlaying && !hasDirectId && (
+                              {isPlaying && (
                                 <div className="broadcast-yt-link-wrap" onClick={e => e.stopPropagation()}>
                                   <a href={channelLiveUrl} target="_blank" rel="noopener noreferrer"
                                     className="broadcast-yt-open-btn">
