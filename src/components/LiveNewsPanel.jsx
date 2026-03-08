@@ -122,14 +122,14 @@ export default function LiveNewsPanel() {
 
       <style>{`
         .livenews-panel {
-          position: absolute;
+          position: fixed;
           bottom: 50px;
-          right: 320px;
-          width: 300px;
+          right: 308px;
+          width: 260px;
           background: rgba(10, 10, 15, 0.95);
           border: 1px solid var(--border-primary);
           border-radius: 4px;
-          z-index: 30;
+          z-index: 91;
           backdrop-filter: blur(12px);
           overflow: hidden;
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
@@ -137,7 +137,7 @@ export default function LiveNewsPanel() {
         }
         .livenews-collapsed {
           width: auto;
-          min-width: 140px;
+          min-width: 130px;
         }
         @keyframes livenews-fadein {
           from { opacity: 0; transform: translateY(10px); }
@@ -326,8 +326,12 @@ export default function LiveNewsPanel() {
         @media (max-width: 1200px) {
           .livenews-panel {
             right: 10px;
-            width: calc(100vw - 20px);
-            max-width: 300px;
+            width: 240px;
+          }
+        }
+        @media (max-width: 900px) {
+          .livenews-panel {
+            display: none;
           }
         }
       `}</style>
