@@ -1576,10 +1576,7 @@ html, body, #root {
   .top-bar-stats { display: none; }
 }
 
-@media (max-width: 768px) {
-  .war-panel-left, .war-panel-right { display: none; }
-  .top-bar-nav-btns { display: none; }
-}
+/* 768px breakpoint moved to bottom of file — enhanced mobile section */
 
 /* ═══════════════════════════════════════════════════════
    PHASE 2: NETWORKS VIEW
@@ -3015,3 +3012,114 @@ html, body, #root {
   transition: color 0.2s;
 }
 .boot-skip:hover { color: rgba(255,255,255,0.4); }
+
+/* ═══════════════════════════════════════════════════════
+   HUD CORNER BRACKETS — Military Targeting Overlay
+   ═══════════════════════════════════════════════════════ */
+
+.hud-corners {
+  position: fixed; inset: 0; z-index: 5; pointer-events: none;
+}
+.hud-corner {
+  position: absolute; width: 40px; height: 40px;
+}
+.hud-corner::before, .hud-corner::after {
+  content: ''; position: absolute; background: rgba(255, 184, 0, 0.15);
+}
+.hud-corner--tl { top: 8px; left: 8px; }
+.hud-corner--tl::before { top: 0; left: 0; width: 20px; height: 2px; }
+.hud-corner--tl::after { top: 0; left: 0; width: 2px; height: 20px; }
+.hud-corner--tr { top: 8px; right: 8px; }
+.hud-corner--tr::before { top: 0; right: 0; width: 20px; height: 2px; }
+.hud-corner--tr::after { top: 0; right: 0; width: 2px; height: 20px; }
+.hud-corner--bl { bottom: 8px; left: 8px; }
+.hud-corner--bl::before { bottom: 0; left: 0; width: 20px; height: 2px; }
+.hud-corner--bl::after { bottom: 0; left: 0; width: 2px; height: 20px; }
+.hud-corner--br { bottom: 8px; right: 8px; }
+.hud-corner--br::before { bottom: 0; right: 0; width: 20px; height: 2px; }
+.hud-corner--br::after { bottom: 0; right: 0; width: 2px; height: 20px; }
+
+/* ═══════════════════════════════════════════════════════
+   FILM GRAIN OVERLAY — Subtle noise texture
+   ═══════════════════════════════════════════════════════ */
+
+.film-grain {
+  position: fixed; inset: 0; z-index: 997; pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Enhanced breakpoints
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .hud-corners { display: none; }
+  .film-grain { display: none; }
+  .headline-ticker { display: none; }
+  .xfeed-toggle-btn { display: none; }
+
+  .top-bar {
+    padding: 6px 10px;
+    flex-wrap: wrap; gap: 4px;
+    height: auto; min-height: 36px;
+  }
+  .top-bar-title { font-size: 11px; }
+  .top-bar-subtitle { display: none; }
+  .top-bar-right { font-size: 8px; }
+  .top-bar-defcon { font-size: 8px; padding: 1px 5px; }
+  .top-bar-key { display: none; }
+
+  .war-panel-left {
+    display: block; position: fixed;
+    bottom: 0; left: 0; right: 0; top: auto;
+    width: 100% !important; height: 45vh;
+    border-radius: 12px 12px 0 0;
+    border-top: 2px solid var(--accent-amber);
+    transform: translateY(calc(100% - 44px));
+    transition: transform 0.3s ease;
+    z-index: 100;
+  }
+  .war-panel-left:hover, .war-panel-left:focus-within {
+    transform: translateY(0);
+  }
+  .war-panel-left::before {
+    content: ''; display: block;
+    width: 40px; height: 4px;
+    background: rgba(255, 184, 0, 0.3);
+    border-radius: 2px; margin: 8px auto 4px;
+  }
+
+  .war-panel-right { display: none; }
+
+  .replay-ops-bar { flex-wrap: wrap; max-width: 95vw; }
+  .replay-op-btn { font-size: 9px; padding: 4px 8px; }
+  .replay-title { font-size: 14px; }
+  .replay-event-card { width: 250px; right: 10px; top: 50px; }
+  .replay-event-log { width: 250px; left: 10px; top: 100px; }
+  .replay-stats-overlay { left: 10px; bottom: 80px; gap: 12px; }
+  .replay-stat-value { font-size: 14px; }
+  .replay-type-breakdown { right: 10px; bottom: 80px; }
+
+  .intel-metrics-bar { grid-template-columns: repeat(2, 1fr); }
+  .intel-metric-big { font-size: 20px; }
+
+  .flash-traffic-center { font-size: 12px; }
+  .flash-traffic { bottom: 60px; }
+
+  .status-bar { font-size: 8px; padding: 2px 8px; }
+  .disclaimer-footer { display: none; }
+  .sound-toggle { top: auto; bottom: 28px; right: 8px; font-size: 10px; }
+}
+
+@media (max-width: 480px) {
+  .top-bar-nav-btns { gap: 1px; }
+  .top-bar-nav-btn, .top-bar-war-btn { font-size: 8px; padding: 3px 5px; }
+  .top-bar-nav-dot, .top-bar-war-dot { display: none; }
+  .replay-event-card { display: none; }
+  .replay-event-log { display: none; }
+  .intel-exec-summary { padding: 10px 12px; }
+  .intel-exec-line { font-size: 11px; }
+}

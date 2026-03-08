@@ -244,6 +244,17 @@ export default function App() {
       {/* Global CRT Scanlines */}
       <div className="global-scanlines" />
 
+      {/* HUD Corner Brackets */}
+      <div className="hud-corners">
+        <div className="hud-corner hud-corner--tl" />
+        <div className="hud-corner hud-corner--tr" />
+        <div className="hud-corner hud-corner--bl" />
+        <div className="hud-corner hud-corner--br" />
+      </div>
+
+      {/* Film Grain Overlay */}
+      <div className="film-grain" />
+
       {/* Flash Traffic Red Border Pulse */}
       {flashBorderPulse && <div className="flash-border-pulse" />}
 
