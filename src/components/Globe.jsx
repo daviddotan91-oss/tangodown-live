@@ -9,6 +9,7 @@ import ArcTraces from './ArcTraces'
 import TacticalOverlay from './TacticalOverlay'
 import { latLngToVector3 } from '../utils/geoUtils'
 import { getIntensityColor } from '../utils/dataUtils'
+import { fetchAircraftImage } from '../utils/aircraftImages'
 
 const GLOBE_RADIUS = 1
 
@@ -708,6 +709,108 @@ function WarAssets({ conflicts, onSelectAsset }) {
 }
 
 // Asset detail popup — matches Overwatch WarAssetPopup
+function AircraftPopupInner({ data, relevantWeapons, relevantStrikes, onClose }) {
+  const [imgUrl, setImgUrl] = useState(null)
+  const [imgLoading, setImgLoading] = useState(true)
+
+  useEffect(() => {
+    setImgLoading(true)
+    setImgUrl(null)
+    fetchAircraftImage(data.type).then(url => {
+      setImgUrl(url)
+      setImgLoading(false)
+    })
+  }, [data.type])
+
+  return (
+    <div className="war-asset-popup">
+      <button className="war-asset-popup-close" onClick={onClose}>✕</button>
+      <div className="war-asset-popup-header aircraft">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+          <path d="M16 2 L17.5 10 L27 14 L26 16 L17.5 15 L18 24 L22 27 L21 29 L16 26 L11 29 L10 27 L14 24 L14.5 15 L6 16 L5 14 L14.5 10 Z"
+            fill="rgba(0,255,136,0.2)" stroke="#00FF88" strokeWidth="1.2" strokeLinejoin="round" />
+        </svg>
+        <div>
+          <div className="war-asset-popup-name">{data.type}</div>
+          <div className="war-asset-popup-class">{data.role}</div>
+        </div>
+      </div>
+      {/* Aircraft photo */}
+      <div className="war-asset-popup-photo">
+        {imgLoading ? (
+          <div className="war-asset-popup-photo-loading">
+            <span className="war-asset-popup-photo-scanline" />
+            ACQUIRING IMAGE...
+          </div>
+        ) : imgUrl ? (
+          <img src={imgUrl} alt={data.type} className="war-asset-popup-photo-img" />
+        ) : (
+          <div className="war-asset-popup-photo-loading">NO IMAGE AVAILABLE</div>
+        )}
+      </div>
+      <div className="war-asset-popup-grid">
+        <div className="war-asset-popup-field">
+          <span className="war-asset-popup-label">OPERATOR</span>
+          <span className="war-asset-popup-value">{data.operator}</span>
+        </div>
+        <div className="war-asset-popup-field">
+          <span className="war-asset-popup-label">FLEET SIZE</span>
+          <span className="war-asset-popup-value">{data.totalCount} aircraft</span>
+        </div>
+        <div className="war-asset-popup-field">
+          <span className="war-asset-popup-label">STATUS</span>
+          <span className="war-asset-popup-value" style={{ color: data.status === 'active' ? '#44CC44' : '#FFB800' }}>{data.status?.toUpperCase()}</span>
+        </div>
+        <div className="war-asset-popup-field">
+          <span className="war-asset-popup-label">THEATER</span>
+          <span className="war-asset-popup-value">{data.zoneName}</span>
+        </div>
+        <div className="war-asset-popup-field">
+          <span className="war-asset-popup-label">POSITION (EST)</span>
+          <span className="war-asset-popup-value">{data.lat?.toFixed(2)}°N, {data.lng?.toFixed(2)}°E</span>
+        </div>
+      </div>
+      {relevantWeapons.length > 0 && (
+        <>
+          <div className="war-asset-popup-section">ARMAMENT</div>
+          {relevantWeapons.slice(0, 5).map((w, i) => (
+            <div key={i} className="war-asset-popup-weapon">
+              <span className="war-asset-popup-wname">{w.name}</span>
+              <span className="war-asset-popup-wtype">{w.type}</span>
+              <span className="war-asset-popup-wdaily">{w.dailyUse}/day</span>
+            </div>
+          ))}
+        </>
+      )}
+      {relevantStrikes.length > 0 ? (
+        <>
+          <div className="war-asset-popup-section">CONFIRMED STRIKES</div>
+          {relevantStrikes.slice(0, 3).map((s, i) => (
+            <div key={i} className="war-asset-popup-strike">
+              <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
+              <div className="war-asset-popup-strike-target">{s.target}</div>
+              <div className="war-asset-popup-strike-weapon">{s.weapon}</div>
+              <div className="war-asset-popup-strike-result">{s.result}</div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <div className="war-asset-popup-section">RECENT THEATER STRIKES</div>
+          {(data.recentStrikes || []).slice(0, 3).map((s, i) => (
+            <div key={i} className="war-asset-popup-strike">
+              <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
+              <div className="war-asset-popup-strike-target">{s.target}</div>
+              <div className="war-asset-popup-strike-weapon">{s.weapon} via {s.aircraft}</div>
+              <div className="war-asset-popup-strike-result">{s.result}</div>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  )
+}
+
 function WarAssetPopup({ asset, onClose }) {
   const { kind, data } = asset
 
@@ -767,81 +870,9 @@ function WarAssetPopup({ asset, onClose }) {
     )
 
     return (
-      <div className="war-asset-popup">
-        <button className="war-asset-popup-close" onClick={onClose}>✕</button>
-        <div className="war-asset-popup-header aircraft">
-          <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
-            <path d="M16 2 L17.5 10 L27 14 L26 16 L17.5 15 L18 24 L22 27 L21 29 L16 26 L11 29 L10 27 L14 24 L14.5 15 L6 16 L5 14 L14.5 10 Z"
-              fill="rgba(0,255,136,0.2)" stroke="#00FF88" strokeWidth="1.2" strokeLinejoin="round" />
-          </svg>
-          <div>
-            <div className="war-asset-popup-name">{data.type}</div>
-            <div className="war-asset-popup-class">{data.role}</div>
-          </div>
-        </div>
-        <div className="war-asset-popup-grid">
-          <div className="war-asset-popup-field">
-            <span className="war-asset-popup-label">OPERATOR</span>
-            <span className="war-asset-popup-value">{data.operator}</span>
-          </div>
-          <div className="war-asset-popup-field">
-            <span className="war-asset-popup-label">FLEET SIZE</span>
-            <span className="war-asset-popup-value">{data.totalCount} aircraft</span>
-          </div>
-          <div className="war-asset-popup-field">
-            <span className="war-asset-popup-label">STATUS</span>
-            <span className="war-asset-popup-value" style={{ color: data.status === 'active' ? '#44CC44' : '#FFB800' }}>{data.status?.toUpperCase()}</span>
-          </div>
-          <div className="war-asset-popup-field">
-            <span className="war-asset-popup-label">THEATER</span>
-            <span className="war-asset-popup-value">{data.zoneName}</span>
-          </div>
-          <div className="war-asset-popup-field">
-            <span className="war-asset-popup-label">POSITION (EST)</span>
-            <span className="war-asset-popup-value">{data.lat?.toFixed(2)}°N, {data.lng?.toFixed(2)}°E</span>
-          </div>
-        </div>
-        {relevantWeapons.length > 0 && (
-          <>
-            <div className="war-asset-popup-section">ARMAMENT</div>
-            {relevantWeapons.slice(0, 5).map((w, i) => (
-              <div key={i} className="war-asset-popup-weapon">
-                <span className="war-asset-popup-wname">{w.name}</span>
-                <span className="war-asset-popup-wtype">{w.type}</span>
-                <span className="war-asset-popup-wdaily">{w.dailyUse}/day</span>
-              </div>
-            ))}
-          </>
-        )}
-        {relevantStrikes.length > 0 ? (
-          <>
-            <div className="war-asset-popup-section">CONFIRMED STRIKES</div>
-            {relevantStrikes.slice(0, 3).map((s, i) => (
-              <div key={i} className="war-asset-popup-strike">
-                <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
-                <div className="war-asset-popup-strike-target">{s.target}</div>
-                <div className="war-asset-popup-strike-weapon">{s.weapon}</div>
-                <div className="war-asset-popup-strike-result">{s.result}</div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            <div className="war-asset-popup-section">RECENT THEATER STRIKES</div>
-            {(data.recentStrikes || []).slice(0, 3).map((s, i) => (
-              <div key={i} className="war-asset-popup-strike">
-                <div className="war-asset-popup-strike-date">{s.date} — {s.operator}</div>
-                <div className="war-asset-popup-strike-target">{s.target}</div>
-                <div className="war-asset-popup-strike-weapon">{s.weapon} via {s.aircraft}</div>
-                <div className="war-asset-popup-strike-result">{s.result}</div>
-              </div>
-            ))}
-          </>
-        )}
-      </div>
+      <AircraftPopupInner data={data} relevantWeapons={relevantWeapons} relevantStrikes={relevantStrikes} onClose={onClose} />
     )
   }
-
   return null
 }
 
