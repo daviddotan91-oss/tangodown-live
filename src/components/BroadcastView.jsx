@@ -275,9 +275,43 @@ export default function BroadcastView({ broadcast = {} }) {
   }, [playingRadio, stopRadio])
 
   const country = selectedCountry
-  // Split news items into TV and News categories
+  // Split news items by type category
   const tvItems = useMemo(() => (country?.news || []), [country])
   const radioItems = useMemo(() => (country?.radio || []), [country])
+
+  // Group by type for category headers
+  const tvGrouped = useMemo(() => {
+    const groups = {}
+    tvItems.forEach(item => {
+      const cat = item.type || 'OTHER'
+      ;(groups[cat] = groups[cat] || []).push(item)
+    })
+    // Sort: NEWS first, SPORTS second, rest alphabetical
+    const order = ['NEWS', 'SPORTS', 'GOV', 'WEATHER', 'NEWS AGENCY']
+    return Object.entries(groups).sort(([a], [b]) => {
+      const ai = order.indexOf(a), bi = order.indexOf(b)
+      if (ai !== -1 && bi !== -1) return ai - bi
+      if (ai !== -1) return -1
+      if (bi !== -1) return 1
+      return a.localeCompare(b)
+    })
+  }, [tvItems])
+
+  const radioGrouped = useMemo(() => {
+    const groups = {}
+    radioItems.forEach(item => {
+      const cat = item.type || 'OTHER'
+      ;(groups[cat] = groups[cat] || []).push(item)
+    })
+    const order = ['NEWS', 'SPORTS', 'NEWS/TALK', 'NEWS/CULTURE', 'POLITICS', 'MILITARY']
+    return Object.entries(groups).sort(([a], [b]) => {
+      const ai = order.indexOf(a), bi = order.indexOf(b)
+      if (ai !== -1 && bi !== -1) return ai - bi
+      if (ai !== -1) return -1
+      if (bi !== -1) return 1
+      return a.localeCompare(b)
+    })
+  }, [radioItems])
   const tvCount = tvItems.length
   const radioCount = radioItems.length
 
@@ -376,37 +410,63 @@ export default function BroadcastView({ broadcast = {} }) {
                 {tvItems.length === 0 ? (
                   <div className="broadcast-empty">NO TV CHANNELS AVAILABLE</div>
                 ) : (
-                  <div className="broadcast-news-grid">
-                    {tvItems.map(item => {
-                      const isPlaying = playingVideo === item.id
-                      return (
-                        <div key={item.id} className={`broadcast-news-card ${isPlaying ? 'broadcast-news-card--active' : ''}`}
-                          onClick={() => setPlayingVideo(isPlaying ? null : item.id)}>
-                          <div className="broadcast-news-top">
-                            <div className="broadcast-news-info">
-                              <div className="broadcast-news-name">{item.name}</div>
-                              <div className="broadcast-news-meta">
-                                <span className="broadcast-medium-badge broadcast-medium-tv">TV</span>
-                                <span className="broadcast-lang-badge">{item.language}</span>
-                                {item.type && <span className="broadcast-type-badge">{item.type}</span>}
+                  tvGrouped.map(([category, items]) => (
+                    <div key={category} className="broadcast-category-group">
+                      <div className="broadcast-category-label">
+                        <span className="broadcast-category-icon">{category === 'SPORTS' ? '⚽' : category === 'GOV' ? '🏛' : category === 'WEATHER' ? '🌦' : '📡'}</span>
+                        {category}
+                        <span className="broadcast-category-count">{items.length}</span>
+                      </div>
+                      <div className="broadcast-news-grid">
+                        {items.map(item => {
+                          const isPlaying = playingVideo === item.id
+                          const hasDirectId = !!item.youtubeId
+                          const channelLiveUrl = `https://www.youtube.com/channel/${item.youtubeChannelId}/live`
+                          return (
+                            <div key={item.id} className={`broadcast-news-card ${isPlaying ? 'broadcast-news-card--active' : ''}`}
+                              onClick={() => {
+                                if (hasDirectId) {
+                                  setPlayingVideo(isPlaying ? null : item.id)
+                                } else {
+                                  // Channels without a direct video ID — open YouTube live page
+                                  setPlayingVideo(isPlaying ? null : item.id)
+                                }
+                              }}>
+                              <div className="broadcast-news-top">
+                                <div className="broadcast-news-info">
+                                  <div className="broadcast-news-name">{item.name}</div>
+                                  <div className="broadcast-news-meta">
+                                    <span className="broadcast-medium-badge broadcast-medium-tv">TV</span>
+                                    <span className="broadcast-lang-badge">{item.language}</span>
+                                    {item.type && <span className={`broadcast-type-badge ${item.type === 'SPORTS' ? 'broadcast-type-sports' : ''}`}>{item.type}</span>}
+                                  </div>
+                                  {item.description && <div className="broadcast-news-desc">{item.description}</div>}
+                                </div>
+                                <div className="broadcast-play-indicator">{isPlaying ? '■' : '▶'}</div>
                               </div>
-                              {item.description && <div className="broadcast-news-desc">{item.description}</div>}
+                              {isPlaying && hasDirectId && (
+                                <div className="broadcast-video-wrap" onClick={e => e.stopPropagation()}>
+                                  <iframe className="broadcast-iframe"
+                                    src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
+                                    allow="autoplay; encrypted-media" allowFullScreen title={item.name} />
+                                </div>
+                              )}
+                              {isPlaying && !hasDirectId && (
+                                <div className="broadcast-yt-link-wrap" onClick={e => e.stopPropagation()}>
+                                  <a href={channelLiveUrl} target="_blank" rel="noopener noreferrer"
+                                    className="broadcast-yt-open-btn">
+                                    <span className="broadcast-yt-play-icon">▶</span>
+                                    WATCH LIVE ON YOUTUBE
+                                  </a>
+                                  <div className="broadcast-yt-hint">Opens in new tab — live stream from {item.name}</div>
+                                </div>
+                              )}
                             </div>
-                            <div className="broadcast-play-indicator">{isPlaying ? '■' : '▶'}</div>
-                          </div>
-                          {isPlaying && (
-                            <div className="broadcast-video-wrap" onClick={e => e.stopPropagation()}>
-                              <iframe className="broadcast-iframe"
-                                src={item.youtubeChannelId
-                                  ? `https://www.youtube.com/embed/live_stream?channel=${item.youtubeChannelId}&autoplay=1`
-                                  : `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
-                                allow="autoplay; encrypted-media" allowFullScreen title={item.name} />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ))
                 )}
               </div>
             )}
@@ -417,26 +477,35 @@ export default function BroadcastView({ broadcast = {} }) {
                 {radioItems.length === 0 ? (
                   <div className="broadcast-empty">NO RADIO STATIONS AVAILABLE</div>
                 ) : (
-                  <div className="broadcast-radio-list">
-                    {radioItems.map(station => {
-                      const isPlaying = playingRadio?.id === station.id
-                      return (
-                        <div key={station.id} className={`broadcast-radio-row ${isPlaying ? 'broadcast-radio-row--active' : ''}`}>
-                          <button className="broadcast-radio-btn" onClick={() => handlePlayRadio(station)}>
-                            {isPlaying ? '■' : '▶'}
-                          </button>
-                          {isPlaying && <span className="broadcast-pulse" />}
-                          <div className="broadcast-radio-info">
-                            <div className="broadcast-radio-name">{station.name}</div>
-                            {station.description && <div className="broadcast-radio-desc">{station.description}</div>}
-                          </div>
-                          <span className="broadcast-medium-badge broadcast-medium-radio">RADIO</span>
-                          <span className="broadcast-lang-badge">{station.language}</span>
-                          {station.type && <span className="broadcast-type-badge">{station.type}</span>}
-                        </div>
-                      )
-                    })}
-                  </div>
+                  radioGrouped.map(([category, stations]) => (
+                    <div key={category} className="broadcast-category-group">
+                      <div className="broadcast-category-label">
+                        <span className="broadcast-category-icon">{category === 'SPORTS' ? '⚽' : category === 'MILITARY' ? '🎖' : category === 'POLITICS' ? '🏛' : '📻'}</span>
+                        {category}
+                        <span className="broadcast-category-count">{stations.length}</span>
+                      </div>
+                      <div className="broadcast-radio-list">
+                        {stations.map(station => {
+                          const isPlaying = playingRadio?.id === station.id
+                          return (
+                            <div key={station.id} className={`broadcast-radio-row ${isPlaying ? 'broadcast-radio-row--active' : ''}`}>
+                              <button className="broadcast-radio-btn" onClick={() => handlePlayRadio(station)}>
+                                {isPlaying ? '■' : '▶'}
+                              </button>
+                              {isPlaying && <span className="broadcast-pulse" />}
+                              <div className="broadcast-radio-info">
+                                <div className="broadcast-radio-name">{station.name}</div>
+                                {station.description && <div className="broadcast-radio-desc">{station.description}</div>}
+                              </div>
+                              <span className="broadcast-medium-badge broadcast-medium-radio">RADIO</span>
+                              <span className="broadcast-lang-badge">{station.language}</span>
+                              {station.type && <span className={`broadcast-type-badge ${station.type === 'SPORTS' ? 'broadcast-type-sports' : ''}`}>{station.type}</span>}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ))
                 )}
                 <audio ref={audioRef} className="broadcast-audio" controls={!!playingRadio}
                   style={{ display: playingRadio ? 'block' : 'none' }} />
@@ -557,6 +626,20 @@ export default function BroadcastView({ broadcast = {} }) {
         /* VIDEO EMBED */
         .broadcast-video-wrap { margin-top:12px; position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:3px; border:1px solid var(--border-primary); background:#000; }
         .broadcast-iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+
+        /* CATEGORY GROUPS */
+        .broadcast-category-group { margin-bottom:16px; }
+        .broadcast-category-label { display:flex; align-items:center; gap:8px; padding:6px 0 8px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--text-muted); border-bottom:1px solid var(--border-primary); margin-bottom:10px; text-transform:uppercase; }
+        .broadcast-category-icon { font-size:13px; }
+        .broadcast-category-count { font-size:9px; color:var(--text-muted); background:var(--bg-primary); padding:1px 6px; border-radius:6px; border:1px solid var(--border-primary); margin-left:auto; }
+        .broadcast-type-sports { color:#FF6B35 !important; background:rgba(255,107,53,.1) !important; border-color:rgba(255,107,53,.3) !important; }
+
+        /* YOUTUBE OPEN LINK */
+        .broadcast-yt-link-wrap { margin-top:12px; padding:20px; background:linear-gradient(135deg, rgba(255,0,0,.06), rgba(255,0,0,.02)); border:1px solid rgba(255,0,0,.2); border-radius:4px; text-align:center; }
+        .broadcast-yt-open-btn { display:inline-flex; align-items:center; gap:10px; padding:10px 24px; background:rgba(255,0,0,.85); color:#fff; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:2px; font-weight:700; border-radius:4px; text-decoration:none; transition:all .2s; }
+        .broadcast-yt-open-btn:hover { background:#FF0000; transform:scale(1.02); box-shadow:0 0 20px rgba(255,0,0,.3); }
+        .broadcast-yt-play-icon { font-size:16px; }
+        .broadcast-yt-hint { margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); letter-spacing:1px; }
 
         /* RADIO LIST */
         .broadcast-radio-list { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }

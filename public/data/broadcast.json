@@ -124,6 +124,33 @@
           "youtubeId": null,
           "youtubeChannelId": "UC4ItRDhICq49DKWG3VmE7XA",
           "description": "The Jerusalem Post — English-language Israeli news and analysis"
+        },
+        {
+          "id": "sport5-tv",
+          "name": "Sport5 Live",
+          "language": "Hebrew",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCx3nVOBsPaGTcOMnBHjXSDA",
+          "description": "Israel's leading sports channel — football, basketball, and live events"
+        },
+        {
+          "id": "one-sport",
+          "name": "ONE Sport",
+          "language": "Hebrew",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCHOuJwgH5BxLgXaJxfHqxjQ",
+          "description": "ONE — Israeli sports network covering Premier League, European football"
+        },
+        {
+          "id": "sport1-channel",
+          "name": "Sport1 Channel",
+          "language": "Hebrew",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UC6KBhXQFzOBk0-fYm-fUGJA",
+          "description": "Sport1 — Israeli sports coverage, analysis, and live commentary"
         }
       ],
       "radio": [
@@ -198,6 +225,14 @@
           "type": "REGIONAL",
           "streamUrl": "https://radiodarom.mediacast.co.il/radiodarom_mp3",
           "description": "Southern Israel regional radio — Beer Sheva and Negev area"
+        },
+        {
+          "id": "sport5-radio",
+          "name": "Sport5 Radio",
+          "language": "Hebrew",
+          "type": "SPORTS",
+          "streamUrl": "https://stream.sport5.co.il/sport5",
+          "description": "Sport5 Radio — Israeli sports talk, live match commentary"
         }
       ]
     },
@@ -344,6 +379,60 @@
           "youtubeId": null,
           "youtubeChannelId": "UC7TbVv6NBbGpTmnUJ51yBkQ",
           "description": "24/7 weather coverage — severe weather alerts and forecasts"
+        },
+        {
+          "id": "espn-live",
+          "name": "ESPN Live",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCjEbMij_XBVLCnFPnTbCMaQ",
+          "description": "ESPN — live sports coverage, SportsCenter, and breaking sports news"
+        },
+        {
+          "id": "nfl-network",
+          "name": "NFL Network",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
+          "description": "NFL Network — 24/7 football coverage, game highlights, and analysis"
+        },
+        {
+          "id": "nba-tv",
+          "name": "NBA TV",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
+          "description": "NBA TV — live basketball, game recaps, and NBA analysis"
+        },
+        {
+          "id": "cbs-sports-hq",
+          "name": "CBS Sports HQ",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCKuHFGMN6gfFYQFezBMRoMg",
+          "description": "CBS Sports HQ — 24/7 free sports news and live scores"
+        },
+        {
+          "id": "bein-sports",
+          "name": "beIN SPORTS",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCUgbMPOOSunLeFCoGyjGUMA",
+          "description": "beIN SPORTS — international football, La Liga, Ligue 1 coverage"
+        },
+        {
+          "id": "fox-sports",
+          "name": "Fox Sports",
+          "language": "English",
+          "type": "SPORTS",
+          "youtubeId": null,
+          "youtubeChannelId": "UCnZqjaBRvlHR0w3LgyQr3eQ",
+          "description": "Fox Sports — NFL, MLB, NASCAR, UFC and college sports"
         }
       ],
       "radio": [
@@ -426,6 +515,46 @@
           "type": "NEWS",
           "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/FOXNEWSRADIO.mp3",
           "description": "Fox News Radio — hourly news updates and talk shows"
+        },
+        {
+          "id": "espn-radio",
+          "name": "ESPN Radio",
+          "language": "English",
+          "type": "SPORTS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/ESPNRADIO.mp3",
+          "description": "ESPN Radio — live sports talk, game coverage, and SportsCenter updates"
+        },
+        {
+          "id": "fox-sports-radio",
+          "name": "Fox Sports Radio",
+          "language": "English",
+          "type": "SPORTS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/FOXSPORTSRADIO.mp3",
+          "description": "Fox Sports Radio — national sports talk and live game commentary"
+        },
+        {
+          "id": "cbs-sports-radio",
+          "name": "CBS Sports Radio",
+          "language": "English",
+          "type": "SPORTS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CBSSPORTSRADIO.mp3",
+          "description": "CBS Sports Radio — 24/7 sports talk, NFL, NBA, MLB coverage"
+        },
+        {
+          "id": "siriusxm-nba",
+          "name": "SiriusXM NBA Radio",
+          "language": "English",
+          "type": "SPORTS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SIRIUSXM_NBA.mp3",
+          "description": "SiriusXM NBA Radio — basketball talk, live games, and analysis"
+        },
+        {
+          "id": "siriusxm-nfl",
+          "name": "SiriusXM NFL Radio",
+          "language": "English",
+          "type": "SPORTS",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SIRIUSXM_NFL.mp3",
+          "description": "SiriusXM NFL Radio — football coverage, draft analysis, and game day"
         }
       ]
     },
