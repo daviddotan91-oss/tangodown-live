@@ -397,7 +397,9 @@ export default function BroadcastView({ broadcast = {} }) {
                           {isPlaying && (
                             <div className="broadcast-video-wrap" onClick={e => e.stopPropagation()}>
                               <iframe className="broadcast-iframe"
-                                src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
+                                src={item.youtubeChannelId
+                                  ? `https://www.youtube.com/embed/live_stream?channel=${item.youtubeChannelId}&autoplay=1`
+                                  : `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
                                 allow="autoplay; encrypted-media" allowFullScreen title={item.name} />
                             </div>
                           )}
