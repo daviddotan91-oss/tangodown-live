@@ -15,7 +15,7 @@ export function markVisit() {
 }
 
 export default function DailyBriefing({ conflicts, incidents, leaders, naval, onDismiss }) {
-  const [scrolled, setScrolled] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   // All recent strikes from conflict data
   const recentStrikes = useMemo(() => {
@@ -90,20 +90,87 @@ export default function DailyBriefing({ conflicts, incidents, leaders, naval, on
   const dateStr = new Date().toISOString().slice(0, 10)
   const timeStr = new Date().toISOString().slice(11, 19) + 'Z'
 
+  // Top 3 theaters for compact view
+  const topTheaters = theaterSummary.slice(0, 3)
+
+  // ─── COMPACT MODE ───
+  if (!expanded) {
+    return (
+      <div className="briefing-compact">
+        <div className="briefing-compact-header">
+          <div>
+            <div className="briefing-compact-classification">UNCLASSIFIED // OSINT</div>
+            <div className="briefing-compact-title">DAILY INTELLIGENCE BRIEFING</div>
+            <div className="briefing-compact-date">{dateStr} — {timeStr}</div>
+          </div>
+          <button className="briefing-compact-close" onClick={onDismiss}>✕</button>
+        </div>
+
+        <div className="briefing-compact-stats">
+          <div className="briefing-compact-stat briefing-compact-stat--critical">
+            <span className="briefing-compact-stat-val">{globalStats.criticalZones + globalStats.highZones}</span>
+            <span className="briefing-compact-stat-label">ZONES</span>
+          </div>
+          <div className="briefing-compact-stat">
+            <span className="briefing-compact-stat-val">{globalStats.totalEngagements.toLocaleString()}</span>
+            <span className="briefing-compact-stat-label">ENGAGEMENTS</span>
+          </div>
+          <div className="briefing-compact-stat">
+            <span className="briefing-compact-stat-val">{globalStats.totalAircraft.toLocaleString()}</span>
+            <span className="briefing-compact-stat-label">AIRCRAFT</span>
+          </div>
+          <div className="briefing-compact-stat">
+            <span className="briefing-compact-stat-val">{globalStats.totalUAS.toLocaleString()}</span>
+            <span className="briefing-compact-stat-label">UAS</span>
+          </div>
+        </div>
+
+        <div className="briefing-compact-theaters">
+          {topTheaters.map(t => {
+            const color = getIntensityColor(t.intensity)
+            return (
+              <div key={t.name} className="briefing-compact-theater">
+                <span className="briefing-compact-theater-dot" style={{ backgroundColor: color }} />
+                <span className="briefing-compact-theater-name">{t.name}</span>
+                <span className="briefing-compact-theater-int" style={{ color }}>{t.intensity}</span>
+                <span className="briefing-compact-theater-eng">{t.engagements}/day</span>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="briefing-compact-actions">
+          <button className="briefing-compact-expand" onClick={() => setExpanded(true)}>
+            EXPAND FULL BRIEFING
+          </button>
+          <button className="briefing-compact-dismiss" onClick={onDismiss}>
+            DISMISS
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // ─── EXPANDED (FULL) MODE ───
   return (
     <div className="briefing-overlay">
-      <div className="briefing-modal" onScroll={e => setScrolled(e.target.scrollTop > 20)}>
+      <div className="briefing-modal">
         {/* HEADER */}
-        <div className={`briefing-header ${scrolled ? 'briefing-header--scrolled' : ''}`}>
+        <div className="briefing-header">
           <div className="briefing-header-left">
             <div className="briefing-classification">UNCLASSIFIED // OPEN SOURCE INTELLIGENCE</div>
             <div className="briefing-title">DAILY INTELLIGENCE BRIEFING</div>
             <div className="briefing-date">{dateStr} — {timeStr}</div>
           </div>
-          <button className="briefing-dismiss" onClick={onDismiss}>
-            ENTER BATTLESPACE
-            <span className="briefing-dismiss-arrow">→</span>
-          </button>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button className="briefing-collapse-btn" onClick={() => setExpanded(false)}>
+              COLLAPSE
+            </button>
+            <button className="briefing-dismiss" onClick={onDismiss}>
+              ENTER BATTLESPACE
+              <span className="briefing-dismiss-arrow">→</span>
+            </button>
+          </div>
         </div>
 
         {/* GLOBAL THREAT SUMMARY */}

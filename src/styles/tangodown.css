@@ -3424,6 +3424,203 @@ html, body, #root {
 /* ═══════════════════════════════════════════════════════
    DAILY INTELLIGENCE BRIEFING MODAL
    ═══════════════════════════════════════════════════════ */
+/* ─── COMPACT BRIEFING CARD (overlays globe) ─── */
+.briefing-compact {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 900;
+  width: 420px;
+  background: rgba(10, 10, 15, 0.92);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.08), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  animation: briefingFadeIn 0.4s ease;
+}
+
+.briefing-compact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.briefing-compact-classification {
+  font-size: 0.5rem;
+  color: rgba(255, 80, 80, 0.5);
+  letter-spacing: 0.15em;
+}
+
+.briefing-compact-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  letter-spacing: 0.08em;
+  margin: 2px 0;
+}
+
+.briefing-compact-date {
+  font-size: 0.5rem;
+  color: rgba(200, 200, 200, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.briefing-compact-close {
+  background: none; border: none;
+  color: rgba(200, 200, 200, 0.4);
+  font-size: 14px; cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+.briefing-compact-close:hover { color: #FF4444; }
+
+.briefing-compact-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.briefing-compact-stat {
+  text-align: center;
+  padding: 8px 4px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+}
+
+.briefing-compact-stat--critical {
+  border-color: rgba(255, 0, 0, 0.25);
+  background: rgba(255, 0, 0, 0.05);
+}
+
+.briefing-compact-stat-val {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #EEEEEE;
+  font-variant-numeric: tabular-nums;
+}
+
+.briefing-compact-stat--critical .briefing-compact-stat-val {
+  color: var(--accent-red);
+}
+
+.briefing-compact-stat-label {
+  display: block;
+  font-size: 0.4rem;
+  color: rgba(200, 200, 200, 0.4);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.briefing-compact-theaters {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.briefing-compact-theater {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.55rem;
+  color: rgba(200, 200, 200, 0.7);
+}
+
+.briefing-compact-theater-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.briefing-compact-theater-name {
+  flex: 1;
+  color: #CCCCCC;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.briefing-compact-theater-int {
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.briefing-compact-theater-eng {
+  font-size: 0.45rem;
+  color: rgba(200, 200, 200, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.briefing-compact-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.briefing-compact-expand {
+  flex: 1;
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  color: var(--accent-red);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.briefing-compact-expand:hover {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.5);
+}
+
+.briefing-compact-dismiss {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(200, 200, 200, 0.5);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.briefing-compact-dismiss:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(200, 200, 200, 0.8);
+}
+
+/* ─── COLLAPSE BUTTON (inside expanded view) ─── */
+.briefing-collapse-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(200, 200, 200, 0.6);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.briefing-collapse-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #EEEEEE;
+}
+
+/* ─── EXPANDED (FULL SCREEN) BRIEFING ─── */
 .briefing-overlay {
   position: fixed; inset: 0; z-index: 9999;
   background: rgba(0, 0, 0, 0.92);
