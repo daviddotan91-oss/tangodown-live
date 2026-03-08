@@ -1,104 +1,79 @@
-// Maps aircraft type names (from conflicts.json) to Wikipedia article slugs
-// Wikipedia REST API returns a thumbnail image for each article
-const AIRCRAFT_WIKI_SLUGS = {
+// Maps aircraft type names (from conflicts.json) to local image paths
+const AIRCRAFT_IMAGES = {
   // Israel
-  'F-35I Adir': 'Lockheed_Martin_F-35_Lightning_II',
-  'F-16I Sufa': 'F-16I_Sufa',
-  'F-15I Ra\'am': 'F-15I_Ra%27am',
-  'AH-64D Saraph': 'Boeing_AH-64_Apache',
-  'Hermes 900 Kochav': 'Elbit_Hermes_900',
-  'Hermes 450': 'Elbit_Hermes_450',
-  'Heron TP Eitan': 'IAI_Eitan',
+  'F-35I Adir': '/images/aircraft/f-35i-adir.jpg',
+  'F-16I Sufa': '/images/aircraft/f-16i-sufa.jpg',
+  'F-15I Ra\'am': '/images/aircraft/f-15e-strike-eagle.jpg', // Same family
+  'AH-64D Saraph': '/images/aircraft/ah-64d-saraph.jpg',
+  'Hermes 900 Kochav': '/images/aircraft/hermes-900-kochav.jpg',
+  'Hermes 450': '/images/aircraft/hermes-450.jpg',
+  'Heron TP Eitan': '/images/aircraft/heron-tp-eitan.jpg',
 
   // Russia
-  'Su-34 Fullback': 'Sukhoi_Su-34',
-  'Su-25 Frogfoot': 'Sukhoi_Su-25',
-  'Su-35S Flanker-E': 'Sukhoi_Su-35',
-  'Su-24M Fencer': 'Sukhoi_Su-24',
-  'Tu-95MS Bear': 'Tupolev_Tu-95',
-  'Tu-22M3 Backfire': 'Tupolev_Tu-22M',
-  'Ka-52 Alligator': 'Kamov_Ka-52',
+  'Su-34 Fullback': '/images/aircraft/su-34-fullback.jpg',
+  'Su-25 Frogfoot': '/images/aircraft/su-25-frogfoot.jpg',
+  'Su-35S Flanker-E': '/images/aircraft/su-35s-flanker-e.jpg',
+  'Su-24M Fencer': '/images/aircraft/su-24m-fencer.jpg',
+  'Tu-95MS Bear': '/images/aircraft/tu-95ms-bear.jpg',
+  'Tu-22M3 Backfire': '/images/aircraft/tu-22m3-backfire.jpg',
+  'Ka-52 Alligator': '/images/aircraft/ka-52-alligator.jpg',
 
   // Ukraine
-  'MiG-29 Fulcrum': 'Mikoyan_MiG-29',
-  'F-16AM Viper': 'General_Dynamics_F-16_Fighting_Falcon',
-  'Bayraktar TB2': 'Bayraktar_TB2',
+  'MiG-29 Fulcrum': '/images/aircraft/mig-29-fulcrum.jpg',
+  'F-16AM Viper': '/images/aircraft/f-16am-viper.jpg',
+  'Bayraktar TB2': '/images/aircraft/bayraktar-tb2.jpg',
+  'Su-24M Fencer': '/images/aircraft/su-24m-fencer.jpg',
 
   // US / NATO
-  'F/A-18E/F Super Hornet': 'Boeing_F/A-18E/F_Super_Hornet',
-  'EA-18G Growler': 'Boeing_EA-18G_Growler',
-  'E-2D Advanced Hawkeye': 'Northrop_Grumman_E-2_Hawkeye',
-  'MQ-9A Reaper': 'General_Atomics_MQ-9_Reaper',
-  'Rafale M': 'Dassault_Rafale',
-  'Eurofighter Typhoon': 'Eurofighter_Typhoon',
-  'F-15E Strike Eagle': 'McDonnell_Douglas_F-15E_Strike_Eagle',
-  'AC-130J Ghostrider': 'Lockheed_AC-130',
-  'P-8A Poseidon': 'Boeing_P-8_Poseidon',
+  'F/A-18E/F Super Hornet': '/images/aircraft/f-a-18e-f-super-hornet.jpg',
+  'EA-18G Growler': '/images/aircraft/ea-18g-growler.jpg',
+  'E-2D Advanced Hawkeye': '/images/aircraft/e-2d-advanced-hawkeye.jpg',
+  'MQ-9A Reaper': '/images/aircraft/mq-9a-reaper.jpg',
+  'Rafale M': '/images/aircraft/rafale-m.jpg',
+  'Eurofighter Typhoon': '/images/aircraft/eurofighter-typhoon.jpg',
+  'F-15E Strike Eagle': '/images/aircraft/f-15e-strike-eagle.jpg',
+  'AC-130J Ghostrider': '/images/aircraft/ac-130j-ghostrider.jpg',
+  'P-8A Poseidon': '/images/aircraft/p-8a-poseidon.jpg',
 
   // Houthis
-  'Samad-3': 'Samad_(unmanned_aerial_vehicle)',
-  'Waid': 'Waid_(unmanned_aerial_vehicle)',
+  'Samad-3': null,
+  'Waid': null,
 
   // Iran
-  'Mohajer-6': 'Mohajer-6',
-  'Shahed-129': 'Shahed_129',
-  'Kowsar-88': 'HESA_Kowsar',
+  'Mohajer-6': '/images/aircraft/mohajer-6.jpg',
+  'Shahed-129': '/images/aircraft/shahed-129.jpg',
+  'Kowsar-88': '/images/aircraft/kowsar-88.jpg',
 
   // Chinese
-  'J-20 Mighty Dragon': 'Chengdu_J-20',
-  'J-16': 'Shenyang_J-16',
-  'J-15 Flying Shark': 'Shenyang_J-15',
-  'H-6K/N': 'Xian_H-6',
-  'GJ-11 Sharp Sword': 'GJ-11',
-  'Wing Loong II': 'Wing_Loong_II',
-  'Wing Loong I': 'Wing_Loong',
-  'CH-3 Rainbow': 'CASC_Rainbow',
-  'CH-4 Rainbow': 'CASC_Rainbow_4',
+  'J-20 Mighty Dragon': '/images/aircraft/j-20-mighty-dragon.jpg',
+  'J-16': '/images/aircraft/j-16.jpg',
+  'J-15 Flying Shark': '/images/aircraft/j-15-flying-shark.jpg',
+  'H-6K/N': '/images/aircraft/h-6k-n.jpg',
+  'GJ-11 Sharp Sword': null,
+  'Wing Loong II': '/images/aircraft/wing-loong-ii.jpg',
+  'Wing Loong I': '/images/aircraft/wing-loong-i.jpg',
+  'CH-3 Rainbow': '/images/aircraft/ch-3-rainbow.jpg',
+  'CH-4 Rainbow': '/images/aircraft/ch-3-rainbow.jpg', // Same family
 
   // Taiwan / Philippines
-  'F-16V Viper': 'General_Dynamics_F-16_Fighting_Falcon',
-  'ScanEagle': 'Boeing_Insitu_ScanEagle',
+  'F-16V Viper': '/images/aircraft/f-16v-viper.jpg',
+  'ScanEagle': '/images/aircraft/scaneagle.jpg',
 
   // Turkey
-  'Bayraktar Akinci': 'Bayraktar_Akıncı',
+  'Bayraktar Akinci': '/images/aircraft/bayraktar-akinci.jpg',
 
   // Myanmar
-  'Yak-130': 'Yakovlev_Yak-130',
-  'JF-17 Thunder': 'CAC/PAC_JF-17_Thunder',
-  'Mi-35 Hind': 'Mil_Mi-24',
-  'DJI Mavic 3 (modified)': 'DJI_Mavic_3',
+  'Yak-130': '/images/aircraft/yak-130.jpg',
+  'JF-17 Thunder': '/images/aircraft/jf-17-thunder.jpg',
+  'Mi-35 Hind': '/images/aircraft/mi-35-hind.jpg',
+  'DJI Mavic 3 (modified)': '/images/aircraft/dji-mavic-3-modified.jpg',
 
   // Sahel / Africa
-  'L-39 Albatros': 'Aero_L-39_Albatros',
-  'Mi-17 Hip': 'Mil_Mi-17',
-  'Mi-24 Hind': 'Mil_Mi-24',
-
-  // Ethiopia
-  'Mi-35 Hind': 'Mil_Mi-24',
+  'L-39 Albatros': '/images/aircraft/l-39-albatros.jpg',
+  'Mi-17 Hip': '/images/aircraft/mi-17-hip.jpg',
+  'Mi-24 Hind': '/images/aircraft/mi-24-hind.jpg',
 }
 
-// In-memory cache so we don't re-fetch
-const imageCache = {}
-
-export async function fetchAircraftImage(aircraftType) {
-  if (imageCache[aircraftType]) return imageCache[aircraftType]
-
-  const slug = AIRCRAFT_WIKI_SLUGS[aircraftType]
-  if (!slug) return null
-
-  try {
-    const resp = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${slug}`)
-    if (!resp.ok) return null
-    const data = await resp.json()
-    const url = data.thumbnail?.source || data.originalimage?.source || null
-    if (url) {
-      // Request a larger thumbnail (640px wide)
-      const largeUrl = url.replace(/\/\d+px-/, '/640px-')
-      imageCache[aircraftType] = largeUrl
-      return largeUrl
-    }
-  } catch {
-    return null
-  }
-  return null
+export function getAircraftImage(aircraftType) {
+  return AIRCRAFT_IMAGES[aircraftType] || null
 }

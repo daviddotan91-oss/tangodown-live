@@ -9,7 +9,7 @@ import ArcTraces from './ArcTraces'
 import TacticalOverlay from './TacticalOverlay'
 import { latLngToVector3 } from '../utils/geoUtils'
 import { getIntensityColor } from '../utils/dataUtils'
-import { fetchAircraftImage } from '../utils/aircraftImages'
+import { getAircraftImage } from '../utils/aircraftImages'
 
 const GLOBE_RADIUS = 1
 
@@ -710,17 +710,7 @@ function WarAssets({ conflicts, onSelectAsset }) {
 
 // Asset detail popup — matches Overwatch WarAssetPopup
 function AircraftPopupInner({ data, relevantWeapons, relevantStrikes, onClose }) {
-  const [imgUrl, setImgUrl] = useState(null)
-  const [imgLoading, setImgLoading] = useState(true)
-
-  useEffect(() => {
-    setImgLoading(true)
-    setImgUrl(null)
-    fetchAircraftImage(data.type).then(url => {
-      setImgUrl(url)
-      setImgLoading(false)
-    })
-  }, [data.type])
+  const imgUrl = getAircraftImage(data.type)
 
   return (
     <div className="war-asset-popup">
@@ -735,19 +725,11 @@ function AircraftPopupInner({ data, relevantWeapons, relevantStrikes, onClose })
           <div className="war-asset-popup-class">{data.role}</div>
         </div>
       </div>
-      {/* Aircraft photo */}
-      <div className="war-asset-popup-photo">
-        {imgLoading ? (
-          <div className="war-asset-popup-photo-loading">
-            <span className="war-asset-popup-photo-scanline" />
-            ACQUIRING IMAGE...
-          </div>
-        ) : imgUrl ? (
+      {imgUrl && (
+        <div className="war-asset-popup-photo">
           <img src={imgUrl} alt={data.type} className="war-asset-popup-photo-img" />
-        ) : (
-          <div className="war-asset-popup-photo-loading">NO IMAGE AVAILABLE</div>
-        )}
-      </div>
+        </div>
+      )}
       <div className="war-asset-popup-grid">
         <div className="war-asset-popup-field">
           <span className="war-asset-popup-label">OPERATOR</span>
