@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+const DEFCON_COLORS = { 1: '#FF0000', 2: '#FF4444', 3: '#FF8800', 4: '#FFB800', 5: '#44CC44' }
+
 export default function TopNav({ activeView, setActiveView, stats }) {
   const [utcTime, setUtcTime] = useState('')
 
@@ -20,6 +22,10 @@ export default function TopNav({ activeView, setActiveView, stats }) {
     return () => clearInterval(interval)
   }, [])
 
+  const defconColor = DEFCON_COLORS[stats.defcon] || '#FF4444'
+  const fmtK = (n) => n >= 1000 ? `${(n / 1000).toFixed(1)}K` : String(n)
+  const fmtM = (n) => n >= 1000000 ? `${(n / 1000000).toFixed(1)}M` : fmtK(n)
+
   return (
     <div className="top-bar">
       <div className="top-bar-left">
@@ -33,7 +39,8 @@ export default function TopNav({ activeView, setActiveView, stats }) {
             onClick={() => setActiveView('godseye')}
           >
             <span className={`top-bar-war-dot ${activeView === 'godseye' ? 'pulsing' : ''}`} />
-            GOD'S EYE
+            LION'S EYE
+            <kbd className="top-bar-key">W</kbd>
           </button>
           <button
             className={`top-bar-nav-btn ${activeView === 'networks' ? 'active' : ''}`}
@@ -41,6 +48,7 @@ export default function TopNav({ activeView, setActiveView, stats }) {
           >
             <span className="top-bar-nav-dot" />
             NETWORKS
+            <kbd className="top-bar-key">N</kbd>
           </button>
           <button
             className={`top-bar-nav-btn ${activeView === 'replay' ? 'active' : ''}`}
@@ -48,6 +56,7 @@ export default function TopNav({ activeView, setActiveView, stats }) {
           >
             <span className="top-bar-nav-dot" />
             REPLAY
+            <kbd className="top-bar-key">R</kbd>
           </button>
           <button
             className={`top-bar-nav-btn ${activeView === 'intel' ? 'active' : ''}`}
@@ -55,26 +64,30 @@ export default function TopNav({ activeView, setActiveView, stats }) {
           >
             <span className="top-bar-nav-dot" />
             INTEL
+            <kbd className="top-bar-key">I</kbd>
           </button>
         </div>
-      </div>
-
-      <div className="top-bar-stats">
-        <div className="top-bar-stat">
-          INCIDENTS: <span className="top-bar-stat-value">{stats.incidents || 0}</span>
-        </div>
-        <div className="top-bar-stat">
-          ACTIVE ZONES: <span className="top-bar-stat-value">{stats.zones || 0}</span>
-        </div>
-        <div className="top-bar-stat">
-          NAVAL ASSETS: <span className="top-bar-stat-value">{stats.naval || 0}</span>
-        </div>
-        <div className="top-bar-stat">
-          AIRCRAFT: <span className="top-bar-stat-value">{stats.aircraft || '0'}</span>
-        </div>
+        <span className="top-bar-defcon" style={{ color: defconColor, borderColor: defconColor + '66' }}>
+          DEFCON {stats.defcon}
+        </span>
       </div>
 
       <div className="top-bar-right">
+        <div className="top-bar-stats">
+          <div className="top-bar-stat">
+            <span className="top-bar-stat-value">{fmtM(stats.personnel || 0)}</span> PERS
+          </div>
+          <div className="top-bar-stat">
+            <span className="top-bar-stat-value">{fmtK(stats.aircraft || 0)}</span> AIR
+          </div>
+          <div className="top-bar-stat">
+            <span className="top-bar-stat-value">{fmtK(stats.uas || 0)}</span> UAS
+          </div>
+          <div className="top-bar-stat">
+            <span className="top-bar-stat-value">{stats.fronts || 0}</span> FRONTS
+          </div>
+        </div>
+        <span className="top-bar-divider">|</span>
         {utcTime}
       </div>
     </div>
