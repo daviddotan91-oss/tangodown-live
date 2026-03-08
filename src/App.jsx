@@ -12,6 +12,7 @@ import ArsenalView from './components/ArsenalView'
 import BroadcastView from './components/BroadcastView'
 import BootSequence from './components/BootSequence'
 import { HeadlineTicker, XFeedPanel } from './components/IntelFeed'
+import DailyBriefing, { shouldShowBriefing, markVisit } from './components/DailyBriefing'
 import { useConflictData } from './hooks/useConflictData'
 import { useLiveFeed } from './hooks/useLiveFeed'
 import { initAudio, playClick, playTabSwitch, playGlitch, playFlashTraffic, playImpact, toggleMute, isMuted, startAmbient } from './utils/soundManager'
@@ -37,6 +38,9 @@ export default function App() {
   // Boot sequence state
   const [bootComplete, setBootComplete] = useState(false)
   const [audioInitialized, setAudioInitialized] = useState(false)
+
+  // Daily briefing popup — shows if user hasn't visited in 4+ hours
+  const [showBriefing, setShowBriefing] = useState(false)
 
   // CRT Glitch transition state
   const [glitching, setGlitching] = useState(false)
@@ -232,6 +236,15 @@ export default function App() {
   const handleBootComplete = useCallback(() => {
     setBootComplete(true)
     startAmbient()
+    // Check if we should show the daily briefing
+    if (shouldShowBriefing()) {
+      setShowBriefing(true)
+    }
+  }, [])
+
+  const handleDismissBriefing = useCallback(() => {
+    setShowBriefing(false)
+    markVisit()
   }, [])
 
   // Single cinematic boot sequence — covers BOTH loading and intro
@@ -411,33 +424,23 @@ export default function App() {
         }}
       />
 
-      {/* Flash Traffic Alert — Full Width Dramatic */}
+      {/* Flash Traffic Alert */}
       {flashTraffic && (
-        <>
-          {/* Center screen flash text */}
-          <div className="flash-traffic-center" onClick={handleFlashClick}>
-            <div className="flash-traffic-center-label">FLASH TRAFFIC</div>
-            <div className="flash-traffic-center-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
+        <div className="flash-traffic" onClick={handleFlashClick}>
+          <div className="flash-traffic-inner">
+            <div className="flash-traffic-stripe" />
+            <div className="flash-traffic-label">
+              <span className="flash-traffic-icon" />
+              FLASH TRAFFIC
+            </div>
+            <div className="flash-traffic-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
               {flashTraffic.type}
             </div>
-            <div className="flash-traffic-center-loc">{flashTraffic.location}</div>
+            <div className="flash-traffic-location">{flashTraffic.location}</div>
+            <div className="flash-traffic-desc">{flashTraffic.description}</div>
+            <div className="flash-traffic-action">CLICK TO LOCATE</div>
           </div>
-          {/* Bottom detail card */}
-          <div className="flash-traffic" onClick={handleFlashClick}>
-            <div className="flash-traffic-inner">
-              <div className="flash-traffic-label">
-                <span className="flash-traffic-icon" />
-                FLASH TRAFFIC
-              </div>
-              <div className="flash-traffic-type" style={{ color: getEventColorInline(flashTraffic.type) }}>
-                {flashTraffic.type}
-              </div>
-              <div className="flash-traffic-location">{flashTraffic.location}</div>
-              <div className="flash-traffic-desc">{flashTraffic.description}</div>
-              <div className="flash-traffic-action">CLICK TO LOCATE</div>
-            </div>
-          </div>
-        </>
+        </div>
       )}
 
       {/* X Intel Feed Panel */}
@@ -448,6 +451,17 @@ export default function App() {
         headlines={headlinesData.headlines || []}
         sources={headlinesData.sources || {}}
       />
+
+      {/* Daily Intelligence Briefing */}
+      {showBriefing && conflicts.length > 0 && (
+        <DailyBriefing
+          conflicts={conflicts}
+          incidents={incidents}
+          leaders={leaders}
+          naval={naval}
+          onDismiss={handleDismissBriefing}
+        />
+      )}
 
       {/* Disclaimer */}
       <div className="disclaimer-footer">

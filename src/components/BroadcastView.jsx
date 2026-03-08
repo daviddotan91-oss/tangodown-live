@@ -220,6 +220,7 @@ export default function BroadcastView({ broadcast = {} }) {
   const [playingVideo, setPlayingVideo] = useState(null)
   const [playingRadio, setPlayingRadio] = useState(null)
   const audioRef = useRef(null)
+  const [volume, setVolume] = useState(0.7)
   const [geoData, setGeoData] = useState(null)
 
   // Load world geometry
@@ -270,7 +271,7 @@ export default function BroadcastView({ broadcast = {} }) {
     stopRadio()
     setPlayingRadio(station)
     setTimeout(() => {
-      if (audioRef.current) { audioRef.current.src = station.streamUrl; audioRef.current.play().catch(() => {}) }
+      if (audioRef.current) { audioRef.current.volume = volume; audioRef.current.src = station.streamUrl; audioRef.current.play().catch(() => {}) }
     }, 50)
   }, [playingRadio, stopRadio])
 
@@ -494,8 +495,31 @@ export default function BroadcastView({ broadcast = {} }) {
                     </div>
                   ))
                 )}
-                <audio ref={audioRef} className="broadcast-audio" controls={!!playingRadio}
-                  style={{ display: playingRadio ? 'block' : 'none' }} />
+                {playingRadio && (
+                  <div className="broadcast-radio-player">
+                    <audio ref={audioRef} />
+                    <div className="broadcast-player-info">
+                      <span className="broadcast-player-pulse" />
+                      <span className="broadcast-player-label">NOW PLAYING: {playingRadio.name}</span>
+                    </div>
+                    <div className="broadcast-volume-control">
+                      <span className="broadcast-vol-icon">{volume === 0 ? '🔇' : volume < 0.4 ? '🔈' : volume < 0.7 ? '🔉' : '🔊'}</span>
+                      <input
+                        type="range"
+                        className="broadcast-volume-slider"
+                        min="0" max="1" step="0.05"
+                        value={volume}
+                        onChange={e => {
+                          const v = parseFloat(e.target.value)
+                          setVolume(v)
+                          if (audioRef.current) audioRef.current.volume = v
+                        }}
+                      />
+                      <span className="broadcast-vol-pct">{Math.round(volume * 100)}%</span>
+                    </div>
+                    <button className="broadcast-stop-btn" onClick={stopRadio}>STOP</button>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -641,7 +665,19 @@ export default function BroadcastView({ broadcast = {} }) {
         .broadcast-radio-desc { font-size:10px; color:var(--text-secondary); margin-top:2px; line-height:1.4; }
         .broadcast-pulse { width:8px; height:8px; border-radius:50%; background:#44CC44; flex-shrink:0; animation:broadcast-pulse-anim 1.2s ease-in-out infinite; box-shadow:0 0 6px #44CC44; }
         @keyframes broadcast-pulse-anim { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
-        .broadcast-audio { width:100%; height:32px; border-radius:4px; outline:none; filter:invert(1) hue-rotate(180deg) brightness(.85); }
+        /* RADIO PLAYER BAR */
+        .broadcast-radio-player { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-card); border:1px solid rgba(68,204,68,.3); border-radius:4px; margin-top:12px; animation:broadcast-fadein .2s ease; }
+        .broadcast-player-info { display:flex; align-items:center; gap:8px; flex:1; min-width:0; }
+        .broadcast-player-pulse { width:8px; height:8px; border-radius:50%; background:#44CC44; flex-shrink:0; animation:broadcast-pulse-anim 1.2s ease-in-out infinite; box-shadow:0 0 6px #44CC44; }
+        .broadcast-player-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; color:#44CC44; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .broadcast-volume-control { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+        .broadcast-vol-icon { font-size:14px; flex-shrink:0; }
+        .broadcast-volume-slider { -webkit-appearance:none; appearance:none; width:80px; height:4px; background:var(--border-primary); border-radius:2px; outline:none; cursor:pointer; }
+        .broadcast-volume-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:14px; height:14px; border-radius:50%; background:#44CC44; border:2px solid var(--bg-primary); cursor:pointer; box-shadow:0 0 6px rgba(68,204,68,.4); }
+        .broadcast-volume-slider::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:#44CC44; border:2px solid var(--bg-primary); cursor:pointer; }
+        .broadcast-vol-pct { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); width:28px; text-align:right; }
+        .broadcast-stop-btn { padding:4px 10px; background:rgba(255,68,68,.1); border:1px solid rgba(255,68,68,.3); border-radius:3px; color:#FF4444; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; font-weight:700; cursor:pointer; transition:all .2s; flex-shrink:0; }
+        .broadcast-stop-btn:hover { background:rgba(255,68,68,.2); border-color:#FF4444; }
       `}</style>
     </div>
   )

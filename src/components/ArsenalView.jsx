@@ -266,13 +266,67 @@ function DefenseTechTab({ items }) {
 export default function ArsenalView({ arsenal = {} }) {
   const [activeTab, setActiveTab] = useState('airdefense')
   const [selectedItem, setSelectedItem] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const { airDefense = [], uas = [], platforms = [], defenseTech = [] } = arsenal
 
   const handleTabChange = (id) => { setActiveTab(id); setSelectedItem(null) }
 
+  // Filter items by search query across name, operator, manufacturer, theater
+  const filterItems = (items) => {
+    if (!searchQuery.trim()) return items
+    const q = searchQuery.toLowerCase().trim()
+    return items.filter(item =>
+      (item.name || '').toLowerCase().includes(q) ||
+      (item.operator || '').toLowerCase().includes(q) ||
+      (item.manufacturer || '').toLowerCase().includes(q) ||
+      (item.theater || '').toLowerCase().includes(q) ||
+      (item.type || '').toLowerCase().includes(q) ||
+      (item.category || '').toLowerCase().includes(q)
+    )
+  }
+
+  const filteredAirDefense = useMemo(() => filterItems(airDefense), [airDefense, searchQuery])
+  const filteredUAS = useMemo(() => filterItems(uas), [uas, searchQuery])
+  const filteredPlatforms = useMemo(() => filterItems(platforms), [platforms, searchQuery])
+  const filteredDefenseTech = useMemo(() => {
+    if (!searchQuery.trim()) return defenseTech
+    const q = searchQuery.toLowerCase().trim()
+    return defenseTech.filter(co =>
+      (co.name || '').toLowerCase().includes(q) ||
+      (co.hq || '').toLowerCase().includes(q) ||
+      (co.ceo || '').toLowerCase().includes(q) ||
+      (co.description || '').toLowerCase().includes(q)
+    )
+  }, [defenseTech, searchQuery])
+
+  // Total match count for search feedback
+  const totalResults = filteredAirDefense.length + filteredUAS.length + filteredPlatforms.length + filteredDefenseTech.length
+  const totalItems = airDefense.length + uas.length + platforms.length + defenseTech.length
+
   return (
     <div className="arsenal-view">
+      {/* Search bar */}
+      <div className="arsenal-search-bar">
+        <span className="arsenal-search-icon">&#9906;</span>
+        <input
+          className="arsenal-search-input"
+          type="text"
+          placeholder="SEARCH ARSENAL — NAME, OPERATOR, TYPE..."
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          spellCheck={false}
+        />
+        {searchQuery && (
+          <span className="arsenal-search-count">
+            {totalResults}/{totalItems}
+          </span>
+        )}
+        {searchQuery && (
+          <button className="arsenal-search-clear" onClick={() => setSearchQuery('')}>&#10005;</button>
+        )}
+      </div>
+
       {/* Tab bar */}
       <div className="arsenal-tabs">
         {TABS.map(t => (
@@ -286,15 +340,23 @@ export default function ArsenalView({ arsenal = {} }) {
 
       {/* Content */}
       <div className="arsenal-content">
-        {activeTab === 'airdefense' && <AirDefenseTab items={airDefense} selected={selectedItem} onSelect={setSelectedItem} />}
-        {activeTab === 'uas' && <UASTab items={uas} selected={selectedItem} onSelect={setSelectedItem} />}
-        {activeTab === 'platforms' && <PlatformsTab items={platforms} selected={selectedItem} onSelect={setSelectedItem} />}
-        {activeTab === 'defensetech' && <DefenseTechTab items={defenseTech} />}
+        {activeTab === 'airdefense' && <AirDefenseTab items={filteredAirDefense} selected={selectedItem} onSelect={setSelectedItem} />}
+        {activeTab === 'uas' && <UASTab items={filteredUAS} selected={selectedItem} onSelect={setSelectedItem} />}
+        {activeTab === 'platforms' && <PlatformsTab items={filteredPlatforms} selected={selectedItem} onSelect={setSelectedItem} />}
+        {activeTab === 'defensetech' && <DefenseTechTab items={filteredDefenseTech} />}
       </div>
 
       {/* Styles */}
       <style>{`
         .arsenal-view { display:flex; flex-direction:column; height:100%; overflow:hidden; background:var(--bg-primary); }
+        .arsenal-search-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--bg-secondary); border-bottom:1px solid var(--border-primary); flex-shrink:0; }
+        .arsenal-search-icon { color:var(--text-muted); font-size:14px; flex-shrink:0; }
+        .arsenal-search-input { flex:1; padding:7px 10px; background:var(--bg-primary); border:1px solid var(--border-primary); border-radius:3px; color:var(--text-primary); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; outline:none; transition:border-color .2s; }
+        .arsenal-search-input:focus { border-color:var(--accent-gold); box-shadow:0 0 8px rgba(255,184,0,.15); }
+        .arsenal-search-input::placeholder { color:var(--text-muted); letter-spacing:1.5px; }
+        .arsenal-search-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--accent-gold); letter-spacing:1px; white-space:nowrap; }
+        .arsenal-search-clear { width:22px; height:22px; border:1px solid var(--border-primary); border-radius:3px; background:var(--bg-primary); color:var(--text-muted); font-size:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+        .arsenal-search-clear:hover { border-color:#FF4444; color:#FF4444; }
         .arsenal-tabs { display:flex; gap:2px; padding:12px 16px 0; border-bottom:1px solid var(--border-primary); background:var(--bg-secondary); flex-shrink:0; }
         .arsenal-tab { display:flex; align-items:center; gap:6px; padding:10px 18px; background:none; border:none; border-bottom:2px solid transparent; color:var(--text-muted); font-family:var(--font-display); font-size:11px; letter-spacing:1.5px; cursor:pointer; transition:all .2s; text-transform:uppercase; white-space:nowrap; }
         .arsenal-tab:hover { color:var(--text-secondary); background:var(--bg-hover); }
