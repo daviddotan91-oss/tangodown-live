@@ -54,14 +54,6 @@ export default function RightPanel({ feed, naval, conflicts = [], onIncidentClic
     setFeedFilter?.({ type: null, force: null, conflictId: null })
   }
 
-  // Confirmed strikes from real conflict data
-  const confirmedStrikes = useMemo(() => {
-    return conflicts
-      .flatMap(c => (c.recentStrikes || []).map(s => ({ ...s, conflict: c.name })))
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 5)
-  }, [conflicts])
-
   // Naval grouped by theater
   const navalByTheater = useMemo(() => {
     const groups = {}
@@ -124,28 +116,6 @@ export default function RightPanel({ feed, naval, conflicts = [], onIncidentClic
         ))}
         {feed.length === 0 && <div className="war-feed-empty">NO EVENTS MATCH CURRENT FILTERS</div>}
       </div>
-
-      {/* Confirmed Strikes */}
-      {confirmedStrikes.length > 0 && (
-        <div className="confirmed-strikes">
-          <div className="war-panel-title">CONFIRMED STRIKES — VERIFIED</div>
-          {confirmedStrikes.map((s, i) => (
-            <div key={i} className="strike-card">
-              <div className="strike-top">
-                <span className="strike-date">{s.date}</span>
-                <span className="strike-result" style={{
-                  color: /destroy|eliminat|collaps|killed|neutral/i.test(s.result) ? '#44CC44' : '#FFB800'
-                }}>{s.result}</span>
-              </div>
-              <div className="strike-target">{s.target}</div>
-              <div className="strike-bottom">
-                <span className="strike-weapon">{s.weapon}</span>
-                <span className="strike-platform">{s.aircraft}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
 
       {/* Fleet Command */}
       <div className="fleet-command">

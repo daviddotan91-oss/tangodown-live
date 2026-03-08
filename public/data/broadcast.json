@@ -1,0 +1,1216 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "classification": "UNCLASSIFIED // OSINT",
+    "lastUpdated": "2026-03-07",
+    "description": "Global broadcast intelligence — live news feeds and radio streams by country",
+    "totalCountries": 30,
+    "coverage": "Conflict zones, major powers, strategic regions"
+  },
+  "countries": [
+    {
+      "id": "israel",
+      "name": "Israel",
+      "code": "IL",
+      "flag": "\ud83c\uddee\ud83c\uddf1",
+      "region": "Middle East",
+      "lat": 31.77,
+      "lng": 35.21,
+      "news": [
+        {
+          "id": "i24news-en",
+          "name": "i24NEWS English",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "ArNRsBzfpks",
+          "description": "24/7 Israeli English-language international news channel"
+        },
+        {
+          "id": "kan11",
+          "name": "Kan 11",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": "L5Jvfv3A1_w",
+          "description": "Israeli Public Broadcasting Corporation — main news channel"
+        },
+        {
+          "id": "channel12",
+          "name": "Channel 12 News",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": "FGz4dGLwMEo",
+          "description": "Israel's most-watched commercial news channel (Keshet)"
+        },
+        {
+          "id": "channel13",
+          "name": "Channel 13 News",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": "AxhknPn3XEk",
+          "description": "Reshet 13 — major Israeli news network"
+        },
+        {
+          "id": "channel14",
+          "name": "Channel 14 Now",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "youtubeId": "s1HuRKzdOOY",
+          "description": "Right-leaning Israeli news and current affairs channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "glz-radio",
+          "name": "Galatz (IDF Radio)",
+          "language": "Hebrew",
+          "type": "NEWS/MILITARY",
+          "streamUrl": "https://glzwizzlv.bynetcdn.com/glglz_mp3",
+          "description": "Israel Defense Forces official radio station — military and news"
+        },
+        {
+          "id": "kan-bet",
+          "name": "Kan Reshet Bet",
+          "language": "Hebrew",
+          "type": "NEWS",
+          "streamUrl": "https://kanlivep2event-i.akamaihd.net/hls/live/747757/kan_bet/playlist.m3u8",
+          "description": "Israeli public radio — primary news and talk station"
+        },
+        {
+          "id": "galei-zahal",
+          "name": "Galei Zahal (IDF Wave)",
+          "language": "Hebrew",
+          "type": "MILITARY/MUSIC",
+          "streamUrl": "https://glzwizzlv.bynetcdn.com/glz_mp3",
+          "description": "IDF popular radio station — music, culture, and news updates"
+        }
+      ]
+    },
+    {
+      "id": "united-states",
+      "name": "United States",
+      "code": "US",
+      "flag": "\ud83c\uddfa\ud83c\uddf8",
+      "region": "North America",
+      "lat": 38.90,
+      "lng": -77.04,
+      "news": [
+        {
+          "id": "nbc-news-now",
+          "name": "NBC News NOW",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "MkTw3_PmKtc",
+          "description": "NBCUniversal 24/7 streaming news channel"
+        },
+        {
+          "id": "abc-news-live",
+          "name": "ABC News Live",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "gBSLl8iVV4Q",
+          "description": "ABC News 24/7 live streaming news coverage"
+        },
+        {
+          "id": "cbs-news",
+          "name": "CBS News 24/7",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "pOSGnL_7U50",
+          "description": "CBS News 24/7 live streaming coverage"
+        },
+        {
+          "id": "fox-news",
+          "name": "Fox News Live",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "sPJlvUTQCww",
+          "description": "Fox News Channel live stream"
+        },
+        {
+          "id": "cspan",
+          "name": "C-SPAN",
+          "language": "English",
+          "type": "GOV",
+          "youtubeId": "GnKQb22N0Vk",
+          "description": "U.S. government and political proceedings — unfiltered"
+        }
+      ],
+      "radio": [
+        {
+          "id": "npr",
+          "name": "NPR News",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://npr-ice.streamguys1.com/live.mp3",
+          "description": "National Public Radio — 24/7 news and analysis"
+        },
+        {
+          "id": "afn",
+          "name": "Armed Forces Network (AFN)",
+          "language": "English",
+          "type": "MILITARY",
+          "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/AFN_NEWSHD.mp3",
+          "description": "U.S. Department of Defense broadcast service for military personnel"
+        }
+      ]
+    },
+    {
+      "id": "united-kingdom",
+      "name": "United Kingdom",
+      "code": "GB",
+      "flag": "\ud83c\uddec\ud83c\udde7",
+      "region": "Europe",
+      "lat": 51.51,
+      "lng": -0.13,
+      "news": [
+        {
+          "id": "sky-news",
+          "name": "Sky News",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "w9CIeaRTBgs",
+          "description": "Sky News 24/7 live stream — UK and international news"
+        },
+        {
+          "id": "bbc-world",
+          "name": "BBC World News",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "YM2MjlJOfeg",
+          "description": "BBC World Service television — global news coverage"
+        },
+        {
+          "id": "gb-news",
+          "name": "GB News",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "Wv2jMVcafBc",
+          "description": "British free-to-air news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "bbc-world-service",
+          "name": "BBC World Service",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+          "description": "BBC World Service — global English-language radio broadcasting"
+        },
+        {
+          "id": "bbc-radio4",
+          "name": "BBC Radio 4",
+          "language": "English",
+          "type": "NEWS/TALK",
+          "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm",
+          "description": "BBC Radio 4 — UK domestic news, analysis, and current affairs"
+        }
+      ]
+    },
+    {
+      "id": "ukraine",
+      "name": "Ukraine",
+      "code": "UA",
+      "flag": "\ud83c\uddfa\ud83c\udde6",
+      "region": "Eastern Europe",
+      "lat": 50.45,
+      "lng": 30.52,
+      "news": [
+        {
+          "id": "rada-tv",
+          "name": "Rada TV",
+          "language": "Ukrainian",
+          "type": "GOV",
+          "youtubeId": "LfSFmo4fCj8",
+          "description": "Ukrainian Parliament (Verkhovna Rada) official television channel"
+        },
+        {
+          "id": "united24",
+          "name": "United24 Media",
+          "language": "Ukrainian/English",
+          "type": "NEWS",
+          "youtubeId": "U6YrK0Viwfc",
+          "description": "Ukrainian wartime united news marathon broadcast"
+        },
+        {
+          "id": "freedom-tv",
+          "name": "Freedom TV (Svoboda)",
+          "language": "Ukrainian",
+          "type": "NEWS",
+          "youtubeId": "2KzGsMFZBxY",
+          "description": "Ukrainian independent news channel"
+        },
+        {
+          "id": "espreso-tv",
+          "name": "Espreso TV",
+          "language": "Ukrainian",
+          "type": "NEWS",
+          "youtubeId": "z_GNkhROPXI",
+          "description": "Ukrainian 24-hour news and information channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "hromadske-radio",
+          "name": "Hromadske Radio",
+          "language": "Ukrainian",
+          "type": "NEWS",
+          "streamUrl": "https://hromadske.radio/live",
+          "description": "Ukrainian public interest radio — civic journalism"
+        },
+        {
+          "id": "ukrainian-radio",
+          "name": "Ukrainian Radio (UR-1)",
+          "language": "Ukrainian",
+          "type": "NEWS",
+          "streamUrl": "https://radio.nrcu.gov.ua/ur1.mp3",
+          "description": "National Radio Company of Ukraine — first channel"
+        }
+      ]
+    },
+    {
+      "id": "russia",
+      "name": "Russia",
+      "code": "RU",
+      "flag": "\ud83c\uddf7\ud83c\uddfa",
+      "region": "Eastern Europe / Asia",
+      "lat": 55.75,
+      "lng": 37.62,
+      "news": [
+        {
+          "id": "rt-english",
+          "name": "RT English",
+          "language": "English",
+          "type": "STATE NEWS",
+          "youtubeId": "V0I5eglJMRI",
+          "description": "Russian state-funded English-language news network (note: blocked in many Western countries)"
+        },
+        {
+          "id": "russia24",
+          "name": "Russia 24 (Rossiya 24)",
+          "language": "Russian",
+          "type": "STATE NEWS",
+          "youtubeId": "OB3Dtg8ln2o",
+          "description": "Russian state 24-hour news channel — VGTRK network"
+        }
+      ],
+      "radio": [
+        {
+          "id": "radio-russia",
+          "name": "Radio Russia (Radio Rossii)",
+          "language": "Russian",
+          "type": "STATE NEWS",
+          "streamUrl": "https://icecast.vgtrk.cdnvideo.ru/radiorossii_mp3_192kbps",
+          "description": "VGTRK state radio — news and programming"
+        }
+      ]
+    },
+    {
+      "id": "iran",
+      "name": "Iran",
+      "code": "IR",
+      "flag": "\ud83c\uddee\ud83c\uddf7",
+      "region": "Middle East",
+      "lat": 35.69,
+      "lng": 51.39,
+      "news": [
+        {
+          "id": "press-tv",
+          "name": "Press TV",
+          "language": "English",
+          "type": "STATE NEWS",
+          "youtubeId": "6B5v0B9Wy5k",
+          "description": "Iranian state-run English-language 24-hour news network"
+        },
+        {
+          "id": "irinn",
+          "name": "IRINN (Islamic Republic of Iran News Network)",
+          "language": "Persian",
+          "type": "STATE NEWS",
+          "youtubeId": "qsX3fRb0bpg",
+          "description": "IRIB's main Persian-language news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "irib-radio",
+          "name": "IRIB Radio",
+          "language": "Persian",
+          "type": "STATE NEWS",
+          "streamUrl": "https://radio.irib.ir/live/radio-iran",
+          "description": "Islamic Republic of Iran Broadcasting — national radio"
+        }
+      ]
+    },
+    {
+      "id": "turkey",
+      "name": "Turkey",
+      "code": "TR",
+      "flag": "\ud83c\uddf9\ud83c\uddf7",
+      "region": "Middle East / Europe",
+      "lat": 39.93,
+      "lng": 32.86,
+      "news": [
+        {
+          "id": "trt-world",
+          "name": "TRT World",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "CV5Cbav0gGo",
+          "description": "Turkish state broadcaster's English-language international news"
+        },
+        {
+          "id": "anadolu-agency",
+          "name": "Anadolu Agency Live",
+          "language": "Turkish/English",
+          "type": "NEWS AGENCY",
+          "youtubeId": "XA2lgfOjBWE",
+          "description": "Turkey's state-run news agency — live feed"
+        }
+      ],
+      "radio": [
+        {
+          "id": "trt-radyo",
+          "name": "TRT Radyo 1",
+          "language": "Turkish",
+          "type": "NEWS",
+          "streamUrl": "https://radyocanli.trt.net.tr/trt-radyo1.mp3",
+          "description": "Turkish Radio and Television Corporation — primary radio channel"
+        }
+      ]
+    },
+    {
+      "id": "qatar",
+      "name": "Qatar",
+      "code": "QA",
+      "flag": "\ud83c\uddf6\ud83c\udde6",
+      "region": "Middle East",
+      "lat": 25.29,
+      "lng": 51.53,
+      "news": [
+        {
+          "id": "aljazeera-en",
+          "name": "Al Jazeera English",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "F-POY4Q0QSI",
+          "description": "Al Jazeera Media Network — 24/7 English-language international news"
+        },
+        {
+          "id": "aljazeera-ar",
+          "name": "Al Jazeera Arabic",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "bNyUyrR0PHo",
+          "description": "Al Jazeera Arabic — 24/7 Arabic-language news network"
+        }
+      ],
+      "radio": [
+        {
+          "id": "qbs",
+          "name": "Qatar Broadcasting Service",
+          "language": "Arabic/English",
+          "type": "NEWS",
+          "streamUrl": "https://stream.qbs.gov.qa/live",
+          "description": "Qatar state radio broadcasting service"
+        }
+      ]
+    },
+    {
+      "id": "saudi-arabia",
+      "name": "Saudi Arabia",
+      "code": "SA",
+      "flag": "\ud83c\uddf8\ud83c\udde6",
+      "region": "Middle East",
+      "lat": 24.71,
+      "lng": 46.68,
+      "news": [
+        {
+          "id": "alarabiya-en",
+          "name": "Al Arabiya English",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "6TY8BfVLG4I",
+          "description": "Saudi-owned pan-Arab English-language news channel"
+        },
+        {
+          "id": "alarabiya-ar",
+          "name": "Al Arabiya Arabic",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "T045ka3kDJc",
+          "description": "Saudi-owned pan-Arab news channel — Arabic broadcast"
+        },
+        {
+          "id": "saudi-tv",
+          "name": "Saudi TV Channel 1",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "youtubeId": "wznPFm8aVho",
+          "description": "Saudi Arabian government television — primary channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "saudi-radio",
+          "name": "Saudi Radio (Idha'at al-Mamlaka)",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "streamUrl": "https://stream.sba.sa/saudi-radio",
+          "description": "Saudi Broadcasting Authority — national radio service"
+        }
+      ]
+    },
+    {
+      "id": "france",
+      "name": "France",
+      "code": "FR",
+      "flag": "\ud83c\uddeb\ud83c\uddf7",
+      "region": "Europe",
+      "lat": 48.86,
+      "lng": 2.35,
+      "news": [
+        {
+          "id": "france24-en",
+          "name": "France 24 English",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "NiRIbK57VOc",
+          "description": "French state-owned 24/7 English-language international news"
+        },
+        {
+          "id": "france24-fr",
+          "name": "France 24 French",
+          "language": "French",
+          "type": "NEWS",
+          "youtubeId": "l8PMl7tUDIE",
+          "description": "France 24 — 24/7 French-language international news"
+        }
+      ],
+      "radio": [
+        {
+          "id": "rfi",
+          "name": "RFI (Radio France Internationale)",
+          "language": "French/English",
+          "type": "NEWS",
+          "streamUrl": "https://live02.rfi.fr/rfienglish-96k.mp3",
+          "description": "French international public radio — global news service"
+        },
+        {
+          "id": "france-inter",
+          "name": "France Inter",
+          "language": "French",
+          "type": "NEWS/TALK",
+          "streamUrl": "https://icecast.radiofrance.fr/franceinter-midfi.mp3",
+          "description": "Radio France primary national station — news and talk"
+        }
+      ]
+    },
+    {
+      "id": "germany",
+      "name": "Germany",
+      "code": "DE",
+      "flag": "\ud83c\udde9\ud83c\uddea",
+      "region": "Europe",
+      "lat": 52.52,
+      "lng": 13.40,
+      "news": [
+        {
+          "id": "dw-news",
+          "name": "DW News",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "pqabxBKzZ6o",
+          "description": "Deutsche Welle — Germany's international English-language news"
+        },
+        {
+          "id": "dw-deutsch",
+          "name": "DW Deutsch",
+          "language": "German",
+          "type": "NEWS",
+          "youtubeId": "gMTf2nGJlPE",
+          "description": "Deutsche Welle — German-language live broadcast"
+        }
+      ],
+      "radio": [
+        {
+          "id": "deutschlandfunk",
+          "name": "Deutschlandfunk",
+          "language": "German",
+          "type": "NEWS",
+          "streamUrl": "https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3",
+          "description": "Germany's national public news radio — premium news and analysis"
+        }
+      ]
+    },
+    {
+      "id": "india",
+      "name": "India",
+      "code": "IN",
+      "flag": "\ud83c\uddee\ud83c\uddf3",
+      "region": "South Asia",
+      "lat": 28.61,
+      "lng": 77.21,
+      "news": [
+        {
+          "id": "ndtv",
+          "name": "NDTV 24x7",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "WB0nne0hbsQ",
+          "description": "New Delhi Television — 24-hour English news channel"
+        },
+        {
+          "id": "wion",
+          "name": "WION",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "A8-MkhpUMfk",
+          "description": "World Is One News — Indian international news channel"
+        },
+        {
+          "id": "republic-tv",
+          "name": "Republic TV",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "tAGAHljcFXM",
+          "description": "Indian English-language news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "all-india-radio",
+          "name": "All India Radio (AIR)",
+          "language": "Hindi/English",
+          "type": "NEWS",
+          "streamUrl": "https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8",
+          "description": "Prasar Bharati national public radio — India's state broadcaster"
+        }
+      ]
+    },
+    {
+      "id": "china",
+      "name": "China",
+      "code": "CN",
+      "flag": "\ud83c\udde8\ud83c\uddf3",
+      "region": "East Asia",
+      "lat": 39.90,
+      "lng": 116.40,
+      "news": [
+        {
+          "id": "cgtn-en",
+          "name": "CGTN English",
+          "language": "English",
+          "type": "STATE NEWS",
+          "youtubeId": "EAD09Iuh5GI",
+          "description": "China Global Television Network — 24/7 English state media"
+        }
+      ],
+      "radio": [
+        {
+          "id": "cri",
+          "name": "CRI (China Radio International)",
+          "language": "English/Mandarin",
+          "type": "STATE NEWS",
+          "streamUrl": "https://sk.cri.cn/am1008.mp3",
+          "description": "China Radio International — state international broadcasting"
+        }
+      ]
+    },
+    {
+      "id": "japan",
+      "name": "Japan",
+      "code": "JP",
+      "flag": "\ud83c\uddef\ud83c\uddf5",
+      "region": "East Asia",
+      "lat": 35.68,
+      "lng": 139.69,
+      "news": [
+        {
+          "id": "nhk-world",
+          "name": "NHK World-Japan",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "5LMlOyLFCxQ",
+          "description": "Japan Broadcasting Corporation — English-language international service"
+        }
+      ],
+      "radio": [
+        {
+          "id": "nhk-radio",
+          "name": "NHK Radio 1",
+          "language": "Japanese",
+          "type": "NEWS",
+          "streamUrl": "https://radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master.m3u8",
+          "description": "NHK primary radio channel — national news and programming"
+        }
+      ]
+    },
+    {
+      "id": "south-korea",
+      "name": "South Korea",
+      "code": "KR",
+      "flag": "\ud83c\uddf0\ud83c\uddf7",
+      "region": "East Asia",
+      "lat": 37.57,
+      "lng": 126.98,
+      "news": [
+        {
+          "id": "arirang-tv",
+          "name": "Arirang TV",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "rXwMrBb2x1Q",
+          "description": "South Korean English-language international broadcaster"
+        },
+        {
+          "id": "kbs-world",
+          "name": "KBS World 24",
+          "language": "English/Korean",
+          "type": "NEWS",
+          "youtubeId": "4_NjU3-9fTU",
+          "description": "Korean Broadcasting System — international service"
+        },
+        {
+          "id": "ytn",
+          "name": "YTN News",
+          "language": "Korean",
+          "type": "NEWS",
+          "youtubeId": "GoXeJSWfMBs",
+          "description": "Yonhap Television News — 24-hour Korean news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "kbs-radio",
+          "name": "KBS Radio 1",
+          "language": "Korean",
+          "type": "NEWS",
+          "streamUrl": "https://kong.kbs.co.kr/kong/radiostreamplayerdata/radio_1_onair.m3u8",
+          "description": "Korean Broadcasting System — primary news radio"
+        }
+      ]
+    },
+    {
+      "id": "egypt",
+      "name": "Egypt",
+      "code": "EG",
+      "flag": "\ud83c\uddea\ud83c\uddec",
+      "region": "Middle East / North Africa",
+      "lat": 30.04,
+      "lng": 31.24,
+      "news": [
+        {
+          "id": "nile-tv",
+          "name": "Nile TV International",
+          "language": "English/French",
+          "type": "STATE NEWS",
+          "youtubeId": "yaDj6bOYuuo",
+          "description": "Egyptian state international satellite channel"
+        },
+        {
+          "id": "extra-news",
+          "name": "Extra News Egypt",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "DzCOLfgENqg",
+          "description": "Egyptian news channel — 24/7 Arabic coverage"
+        }
+      ],
+      "radio": [
+        {
+          "id": "egyptian-radio",
+          "name": "Egyptian Radio (General Programme)",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "streamUrl": "https://stream.ertu.eg/radio-general",
+          "description": "Egyptian Radio and Television Union — primary radio service"
+        }
+      ]
+    },
+    {
+      "id": "syria",
+      "name": "Syria",
+      "code": "SY",
+      "flag": "\ud83c\uddf8\ud83c\uddfe",
+      "region": "Middle East",
+      "lat": 33.51,
+      "lng": 36.29,
+      "news": [
+        {
+          "id": "syria-tv",
+          "name": "Syria TV",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "JrG0G-YnMRs",
+          "description": "Independent Syrian opposition news channel"
+        },
+        {
+          "id": "orient-news",
+          "name": "Orient News",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "yNPu_VHg7Hk",
+          "description": "Syrian opposition satellite news channel"
+        }
+      ],
+      "radio": []
+    },
+    {
+      "id": "lebanon",
+      "name": "Lebanon",
+      "code": "LB",
+      "flag": "\ud83c\uddf1\ud83c\udde7",
+      "region": "Middle East",
+      "lat": 33.89,
+      "lng": 35.50,
+      "news": [
+        {
+          "id": "lbc",
+          "name": "LBC (Lebanese Broadcasting Corporation)",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "UUUxcYRWmzc",
+          "description": "Major Lebanese private television network"
+        },
+        {
+          "id": "mtv-lebanon",
+          "name": "MTV Lebanon",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "8PPbwvdXtYs",
+          "description": "Murr Television — Lebanese news and entertainment"
+        },
+        {
+          "id": "al-mayadeen",
+          "name": "Al Mayadeen",
+          "language": "Arabic",
+          "type": "NEWS",
+          "youtubeId": "fQcOfq5KOUU",
+          "description": "Pan-Arab news channel based in Beirut — aligned with Axis of Resistance"
+        }
+      ],
+      "radio": [
+        {
+          "id": "voice-of-lebanon",
+          "name": "Voice of Lebanon (Sawt Lubnan)",
+          "language": "Arabic",
+          "type": "NEWS",
+          "streamUrl": "https://stream.vol.com.lb/live",
+          "description": "Lebanese Forces-affiliated radio — news and current affairs"
+        }
+      ]
+    },
+    {
+      "id": "iraq",
+      "name": "Iraq",
+      "code": "IQ",
+      "flag": "\ud83c\uddee\ud83c\uddf6",
+      "region": "Middle East",
+      "lat": 33.31,
+      "lng": 44.37,
+      "news": [
+        {
+          "id": "rudaw-en",
+          "name": "Rudaw English",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "OPxNCNMkals",
+          "description": "Kurdish media network — English-language service from Erbil"
+        },
+        {
+          "id": "kurdistan24",
+          "name": "Kurdistan24",
+          "language": "Kurdish/English/Arabic",
+          "type": "NEWS",
+          "youtubeId": "jOvGiYVF_Ho",
+          "description": "Kurdish 24-hour news channel based in Erbil"
+        },
+        {
+          "id": "iraqiya-tv",
+          "name": "Al Iraqiya TV",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "youtubeId": "0hVb-FTVWNI",
+          "description": "Iraqi state television — Iraqi Media Network"
+        }
+      ],
+      "radio": [
+        {
+          "id": "radio-sawa",
+          "name": "Radio Sawa (Iraq)",
+          "language": "Arabic",
+          "type": "NEWS",
+          "streamUrl": "https://www.radiosawa.com/stream/iraq",
+          "description": "U.S.-funded Arabic-language radio targeting Iraqi audience (MBN)"
+        }
+      ]
+    },
+    {
+      "id": "yemen",
+      "name": "Yemen",
+      "code": "YE",
+      "flag": "\ud83c\uddfe\ud83c\uddea",
+      "region": "Middle East",
+      "lat": 15.37,
+      "lng": 44.19,
+      "news": [
+        {
+          "id": "yemen-tv",
+          "name": "Yemen TV",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "youtubeId": "j6z3rNJBnhY",
+          "description": "Yemen government television (Aden-based, internationally recognized)"
+        },
+        {
+          "id": "al-masirah",
+          "name": "Al Masirah TV",
+          "language": "Arabic",
+          "type": "MILITIA NEWS",
+          "youtubeId": "eCAuIz9GKC0",
+          "description": "Ansar Allah (Houthi) media channel — NOTE: designated entity media"
+        }
+      ],
+      "radio": []
+    },
+    {
+      "id": "sudan",
+      "name": "Sudan",
+      "code": "SD",
+      "flag": "\ud83c\uddf8\ud83c\udde9",
+      "region": "East Africa",
+      "lat": 15.50,
+      "lng": 32.56,
+      "news": [
+        {
+          "id": "sudan-tv",
+          "name": "Sudan TV",
+          "language": "Arabic",
+          "type": "STATE NEWS",
+          "youtubeId": "iQwCjTWFKtA",
+          "description": "Sudanese state television — Sudan National Broadcasting"
+        }
+      ],
+      "radio": [
+        {
+          "id": "radio-dabanga",
+          "name": "Radio Dabanga",
+          "language": "Arabic",
+          "type": "INDEPENDENT",
+          "streamUrl": "https://stream.radiodabanga.org/live",
+          "description": "Independent Sudanese radio — conflict and human rights reporting"
+        }
+      ]
+    },
+    {
+      "id": "somalia",
+      "name": "Somalia",
+      "code": "SO",
+      "flag": "\ud83c\uddf8\ud83c\uddf4",
+      "region": "East Africa",
+      "lat": 2.05,
+      "lng": 45.32,
+      "news": [
+        {
+          "id": "universal-tv",
+          "name": "Universal TV",
+          "language": "Somali",
+          "type": "NEWS",
+          "youtubeId": "3TrV5e5mJdg",
+          "description": "Major Somali satellite TV — news from Mogadishu and diaspora"
+        }
+      ],
+      "radio": [
+        {
+          "id": "radio-mogadishu",
+          "name": "Radio Mogadishu",
+          "language": "Somali",
+          "type": "STATE NEWS",
+          "streamUrl": "https://stream.radiomogadishu.so/live",
+          "description": "Somali government radio — Federal Government of Somalia"
+        }
+      ]
+    },
+    {
+      "id": "nigeria",
+      "name": "Nigeria",
+      "code": "NG",
+      "flag": "\ud83c\uddf3\ud83c\uddec",
+      "region": "West Africa",
+      "lat": 9.06,
+      "lng": 7.49,
+      "news": [
+        {
+          "id": "channels-tv",
+          "name": "Channels Television",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "Bx0imsJ8D9w",
+          "description": "Nigeria's leading independent 24-hour news channel"
+        },
+        {
+          "id": "tvc-news",
+          "name": "TVC News Nigeria",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "PmMOBgezjbo",
+          "description": "Television Continental — Nigerian 24-hour news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "bbc-hausa",
+          "name": "BBC Hausa",
+          "language": "Hausa",
+          "type": "NEWS",
+          "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_hausa_radio",
+          "description": "BBC World Service Hausa — major influence in northern Nigeria"
+        }
+      ]
+    },
+    {
+      "id": "pakistan",
+      "name": "Pakistan",
+      "code": "PK",
+      "flag": "\ud83c\uddf5\ud83c\uddf0",
+      "region": "South Asia",
+      "lat": 33.69,
+      "lng": 73.04,
+      "news": [
+        {
+          "id": "geo-news",
+          "name": "Geo News",
+          "language": "Urdu",
+          "type": "NEWS",
+          "youtubeId": "cjQdI2rN8Vg",
+          "description": "Pakistan's most-watched Urdu news channel — Jang Group"
+        },
+        {
+          "id": "ary-news",
+          "name": "ARY News",
+          "language": "Urdu",
+          "type": "NEWS",
+          "youtubeId": "8djzGFKEdZY",
+          "description": "Major Pakistani Urdu-language news channel"
+        },
+        {
+          "id": "dawn-news",
+          "name": "Dawn News",
+          "language": "English/Urdu",
+          "type": "NEWS",
+          "youtubeId": "m9VD5dKIpMc",
+          "description": "Dawn Media Group — Pakistan's oldest English-language news"
+        }
+      ],
+      "radio": [
+        {
+          "id": "pbc-radio",
+          "name": "PBC Radio Pakistan",
+          "language": "Urdu/English",
+          "type": "STATE NEWS",
+          "streamUrl": "https://stream.radio.gov.pk/live",
+          "description": "Pakistan Broadcasting Corporation — national radio service"
+        }
+      ]
+    },
+    {
+      "id": "afghanistan",
+      "name": "Afghanistan",
+      "code": "AF",
+      "flag": "\ud83c\udde6\ud83c\uddeb",
+      "region": "Central/South Asia",
+      "lat": 34.53,
+      "lng": 69.17,
+      "news": [
+        {
+          "id": "tolonews",
+          "name": "TOLOnews",
+          "language": "Dari/Pashto",
+          "type": "NEWS",
+          "youtubeId": "HdWf8lVWfWQ",
+          "description": "Afghanistan's leading 24/7 news channel — Moby Group"
+        }
+      ],
+      "radio": [
+        {
+          "id": "azadi-radio",
+          "name": "Radio Azadi (RFE/RL)",
+          "language": "Dari/Pashto",
+          "type": "NEWS",
+          "streamUrl": "https://www.rferl.org/aac/live/radio-azadi.aac",
+          "description": "Radio Free Europe / Radio Liberty — Afghan service"
+        }
+      ]
+    },
+    {
+      "id": "poland",
+      "name": "Poland",
+      "code": "PL",
+      "flag": "\ud83c\uddf5\ud83c\uddf1",
+      "region": "Eastern Europe",
+      "lat": 52.23,
+      "lng": 21.01,
+      "news": [
+        {
+          "id": "tvp-world",
+          "name": "TVP World",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "3_WYyLaAcas",
+          "description": "Polish public television's English-language international channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "polish-radio",
+          "name": "Polish Radio (Polskie Radio)",
+          "language": "Polish",
+          "type": "NEWS",
+          "streamUrl": "https://stream.polskieradio.pl/pr1/live.mp3",
+          "description": "Polskie Radio — Program 1 national news and information"
+        }
+      ]
+    },
+    {
+      "id": "taiwan",
+      "name": "Taiwan",
+      "code": "TW",
+      "flag": "\ud83c\uddf9\ud83c\uddfc",
+      "region": "East Asia",
+      "lat": 25.03,
+      "lng": 121.57,
+      "news": [
+        {
+          "id": "tvbs-news",
+          "name": "TVBS News",
+          "language": "Mandarin",
+          "type": "NEWS",
+          "youtubeId": "m_dhMSu3GhQ",
+          "description": "TVBS — major Taiwanese 24-hour cable news channel"
+        },
+        {
+          "id": "cts-news",
+          "name": "CTS News (Huashi)",
+          "language": "Mandarin",
+          "type": "NEWS",
+          "youtubeId": "wM0g7ErHVSk",
+          "description": "Chinese Television System — Taiwanese public news"
+        }
+      ],
+      "radio": [
+        {
+          "id": "rti",
+          "name": "RTI (Radio Taiwan International)",
+          "language": "Mandarin/English",
+          "type": "NEWS",
+          "streamUrl": "https://stream.rti.org.tw/live/english",
+          "description": "Taiwan's international broadcasting service"
+        }
+      ]
+    },
+    {
+      "id": "australia",
+      "name": "Australia",
+      "code": "AU",
+      "flag": "\ud83c\udde6\ud83c\uddfa",
+      "region": "Oceania",
+      "lat": -33.87,
+      "lng": 151.21,
+      "news": [
+        {
+          "id": "abc-australia",
+          "name": "ABC News Australia",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "vOTiJkg1voo",
+          "description": "Australian Broadcasting Corporation — 24/7 live news"
+        },
+        {
+          "id": "sky-news-au",
+          "name": "Sky News Australia",
+          "language": "English",
+          "type": "NEWS",
+          "youtubeId": "xMdMPnaJ3Qg",
+          "description": "Australian 24-hour cable and satellite news channel"
+        }
+      ],
+      "radio": [
+        {
+          "id": "abc-radio",
+          "name": "ABC Radio News",
+          "language": "English",
+          "type": "NEWS",
+          "streamUrl": "https://mediaserviceslive.akamaized.net/hls/live/2038311/newsradio/index.m3u8",
+          "description": "ABC NewsRadio — Australian public news radio service"
+        }
+      ]
+    },
+    {
+      "id": "myanmar",
+      "name": "Myanmar",
+      "code": "MM",
+      "flag": "\ud83c\uddf2\ud83c\uddf2",
+      "region": "Southeast Asia",
+      "lat": 16.87,
+      "lng": 96.20,
+      "news": [
+        {
+          "id": "dvb-myanmar",
+          "name": "DVB (Democratic Voice of Burma)",
+          "language": "Burmese/English",
+          "type": "INDEPENDENT",
+          "youtubeId": "vrFh3VzW4ig",
+          "description": "Independent Burmese media — exiled free press (anti-junta)"
+        }
+      ],
+      "radio": [
+        {
+          "id": "bbc-burmese",
+          "name": "BBC Burmese",
+          "language": "Burmese",
+          "type": "NEWS",
+          "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_burmese_radio",
+          "description": "BBC World Service Burmese — critical information source"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia",
+      "name": "Ethiopia",
+      "code": "ET",
+      "flag": "\ud83c\uddea\ud83c\uddf9",
+      "region": "East Africa",
+      "lat": 9.02,
+      "lng": 38.75,
+      "news": [
+        {
+          "id": "fana-broadcasting",
+          "name": "Fana Broadcasting Corporate",
+          "language": "Amharic",
+          "type": "STATE NEWS",
+          "youtubeId": "fGDAMJVsIz0",
+          "description": "Ethiopian government-aligned broadcasting corporation"
+        },
+        {
+          "id": "ebc-tv",
+          "name": "EBC TV (Ethiopian Broadcasting)",
+          "language": "Amharic/English",
+          "type": "STATE NEWS",
+          "youtubeId": "b4k9P8oLpGE",
+          "description": "Ethiopian Broadcasting Corporation — state television"
+        }
+      ],
+      "radio": [
+        {
+          "id": "ethiopian-radio",
+          "name": "Ethiopian Broadcasting Radio",
+          "language": "Amharic",
+          "type": "STATE NEWS",
+          "streamUrl": "https://stream.ebc.et/live/radio",
+          "description": "Ethiopian Broadcasting Corporation — national radio service"
+        }
+      ]
+    }
+  ]
+}

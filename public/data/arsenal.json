@@ -1,0 +1,1302 @@
+{
+  "airDefense": [
+    {
+      "id": "ad-001",
+      "name": "Iron Dome",
+      "fullName": "Iron Dome Short-Range Air Defense System",
+      "operator": "Israel Defense Forces",
+      "manufacturer": "Rafael Advanced Defense Systems / Raytheon",
+      "type": "SHORT-RANGE",
+      "range": "4-70 km",
+      "interceptor": "Tamir missile",
+      "interceptRate": 90,
+      "deployedUnits": 10,
+      "interceptions": 4000,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "Tamir missile" },
+        { "label": "MANUFACTURER", "value": "Rafael / Raytheon" },
+        { "label": "DEPLOYED UNITS", "value": "10 batteries" }
+      ],
+      "theater": "Israel",
+      "status": "ACTIVE",
+      "lat": 31.77,
+      "lng": 35.21,
+      "description": "Israel's primary rocket defense shield. Each battery consists of a radar unit, battle management control, and 3-4 launchers with 20 interceptors each. Proven in combat across multiple Gaza conflicts and the October 2023 war, intercepting rockets, artillery shells, and mortar rounds. Tamir interceptors use electro-optical sensors for terminal guidance, enabling high kill probability even against salvos."
+    },
+    {
+      "id": "ad-002",
+      "name": "David's Sling",
+      "fullName": "David's Sling Medium-Range Air Defense System",
+      "operator": "Israel Defense Forces",
+      "manufacturer": "Rafael Advanced Defense Systems / Raytheon",
+      "type": "MEDIUM",
+      "range": "40-300 km",
+      "interceptor": "Stunner / SkyCeptor missile",
+      "interceptRate": 85,
+      "deployedUnits": 5,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "Stunner / SkyCeptor missile" },
+        { "label": "MANUFACTURER", "value": "Rafael / Raytheon" },
+        { "label": "DEPLOYED UNITS", "value": "5 batteries" }
+      ],
+      "theater": "Israel",
+      "status": "ACTIVE",
+      "lat": 32.08,
+      "lng": 34.78,
+      "description": "Fills the gap between Iron Dome and Arrow systems, designed to intercept tactical ballistic missiles, medium-range rockets, and cruise missiles. The Stunner interceptor uses a dual CCD/IR seeker for hit-to-kill engagement. First operationally employed during the April 2023 Iranian missile barrage and extensively during the 2023-2024 war."
+    },
+    {
+      "id": "ad-003",
+      "name": "Arrow 2",
+      "fullName": "Arrow 2 Exo-Atmospheric Ballistic Missile Defense System",
+      "operator": "Israel Defense Forces",
+      "manufacturer": "Israel Aerospace Industries / Boeing",
+      "type": "LONG-RANGE",
+      "range": "90-150 km altitude",
+      "interceptor": "Arrow 2 interceptor",
+      "interceptRate": 90,
+      "deployedUnits": 4,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "Arrow 2 interceptor" },
+        { "label": "MANUFACTURER", "value": "IAI / Boeing" },
+        { "label": "DEPLOYED UNITS", "value": "4 batteries" }
+      ],
+      "theater": "Israel",
+      "status": "ACTIVE",
+      "lat": 31.85,
+      "lng": 34.73,
+      "description": "Upper-tier ballistic missile defense system designed to intercept medium and long-range ballistic missiles at high altitudes. Uses a fragmenting warhead to destroy incoming targets. Scored first operational kill during Iran's April 2024 direct attack on Israel, intercepting ballistic missiles in the upper atmosphere. Works in concert with Arrow 3 for layered defense."
+    },
+    {
+      "id": "ad-004",
+      "name": "Arrow 3",
+      "fullName": "Arrow 3 Exo-Atmospheric Interceptor",
+      "operator": "Israel Defense Forces",
+      "manufacturer": "Israel Aerospace Industries / Boeing",
+      "type": "BMD",
+      "range": "Exo-atmospheric (100+ km altitude, 2,400 km range)",
+      "interceptor": "Arrow 3 KKV (kinetic kill vehicle)",
+      "interceptRate": 0,
+      "deployedUnits": 3,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "Arrow 3 KKV (kinetic kill vehicle)" },
+        { "label": "MANUFACTURER", "value": "IAI / Boeing" },
+        { "label": "DEPLOYED UNITS", "value": "3 batteries" }
+      ],
+      "theater": "Israel",
+      "status": "ACTIVE",
+      "lat": 31.85,
+      "lng": 34.73,
+      "description": "Israel's top-tier missile defense, capable of intercepting ballistic missiles in space using a hit-to-kill kinetic vehicle. The most advanced layer of Israel's multi-tier air defense architecture. Successfully intercepted an Iranian ballistic missile outside Earth's atmosphere in November 2023, marking a historic first. Can engage ICBMs and IRBMs at ranges exceeding 2,400 km."
+    },
+    {
+      "id": "ad-005",
+      "name": "Patriot PAC-3",
+      "fullName": "MIM-104 Patriot PAC-3 MSE",
+      "operator": "United States Army / Allied Forces",
+      "manufacturer": "Raytheon / Lockheed Martin",
+      "type": "MEDIUM",
+      "range": "70-160 km",
+      "interceptor": "PAC-3 MSE (hit-to-kill)",
+      "interceptRate": 90,
+      "deployedUnits": 60,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "PAC-3 MSE (hit-to-kill)" },
+        { "label": "MANUFACTURER", "value": "Raytheon / Lockheed Martin" },
+        { "label": "DEPLOYED UNITS", "value": "60 batteries" }
+      ],
+      "theater": "Global (US, NATO, Ukraine, Saudi Arabia, Japan, South Korea)",
+      "status": "ACTIVE",
+      "lat": 50.45,
+      "lng": 30.52,
+      "description": "The backbone of US and allied air defense. PAC-3 MSE variant uses hit-to-kill technology to destroy ballistic missiles, cruise missiles, and advanced aircraft. Deployed to Ukraine in 2023, where it has achieved confirmed kills against Russian Kinzhal hypersonic missiles, Iskander ballistic missiles, and cruise missiles. Each battery includes AN/MPQ-65 radar, engagement control station, and up to 8 launchers."
+    },
+    {
+      "id": "ad-006",
+      "name": "THAAD",
+      "fullName": "Terminal High Altitude Area Defense",
+      "operator": "United States Army",
+      "manufacturer": "Lockheed Martin",
+      "type": "LONG-RANGE",
+      "range": "200+ km, intercept altitude 40-150 km",
+      "interceptor": "THAAD interceptor (kinetic kill vehicle)",
+      "interceptRate": 100,
+      "deployedUnits": 7,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "THAAD interceptor (kinetic kill vehicle)" },
+        { "label": "MANUFACTURER", "value": "Lockheed Martin" },
+        { "label": "DEPLOYED UNITS", "value": "7 batteries" }
+      ],
+      "theater": "US, Guam, South Korea, UAE, Israel (2024 deployment)",
+      "status": "ACTIVE",
+      "lat": 31.50,
+      "lng": 34.50,
+      "description": "US Army's premier theater ballistic missile defense system. Uses hit-to-kill kinetic energy warhead at terminal phase. Deployed to Israel in October 2024 with US crews to bolster defenses against Iranian ballistic missiles. Each battery includes AN/TPY-2 X-band radar (one of the most powerful mobile radars in existence), fire control, and 6 launchers with 8 interceptors each."
+    },
+    {
+      "id": "ad-007",
+      "name": "Aegis BMD",
+      "fullName": "Aegis Ballistic Missile Defense System",
+      "operator": "United States Navy / NATO",
+      "manufacturer": "Lockheed Martin / Raytheon",
+      "type": "NAVAL/LONG-RANGE",
+      "range": "SM-3: 700+ km range, 250+ km altitude; SM-6: 370 km",
+      "interceptor": "SM-3 Block IIA / SM-6",
+      "interceptRate": 90,
+      "deployedUnits": 50,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "SM-3 Block IIA / SM-6" },
+        { "label": "MANUFACTURER", "value": "Lockheed Martin / Raytheon" },
+        { "label": "DEPLOYED UNITS", "value": "50 ships" }
+      ],
+      "theater": "Global (US Navy destroyers and cruisers worldwide)",
+      "status": "ACTIVE",
+      "lat": 14.50,
+      "lng": 42.50,
+      "description": "Sea-based ballistic missile defense system deployed on Ticonderoga-class cruisers and Arleigh Burke-class destroyers. The AN/SPY-1 radar tracks hundreds of targets simultaneously. SM-3 interceptors destroy ballistic missiles exo-atmospherically using kinetic kill vehicles. Aegis ships in the Red Sea have conducted extensive intercepts of Houthi anti-ship ballistic missiles and cruise missiles since late 2023."
+    },
+    {
+      "id": "ad-008",
+      "name": "S-400 Triumf",
+      "fullName": "S-400 Triumf (NATO: SA-21 Growler)",
+      "operator": "Russian Armed Forces / Export Clients",
+      "manufacturer": "Almaz-Antey",
+      "type": "LONG-RANGE",
+      "range": "40N6 missile: 400 km; 48N6: 250 km",
+      "interceptor": "48N6 / 40N6E / 9M96 family",
+      "interceptRate": 90,
+      "deployedUnits": 56,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "48N6 / 40N6E / 9M96 family" },
+        { "label": "MANUFACTURER", "value": "Almaz-Antey" },
+        { "label": "DEPLOYED UNITS", "value": "56 regiments" }
+      ],
+      "theater": "Russia, Syria, Turkey, India, China",
+      "status": "ACTIVE",
+      "lat": 55.75,
+      "lng": 37.62,
+      "description": "Russia's most advanced operational long-range SAM system. Capable of engaging aircraft, cruise missiles, and ballistic missiles at ranges up to 400 km. Each regiment includes 91N6E Big Bird radar, 92N6E Grave Stone engagement radar, and up to 12 TELs. Deployed extensively in Syria and Ukraine. Its actual combat effectiveness remains debated after mixed results against Ukrainian targets and reported vulnerability to HARM anti-radiation missiles."
+    },
+    {
+      "id": "ad-009",
+      "name": "S-300",
+      "fullName": "S-300PMU-2 Favorit (NATO: SA-20 Gargoyle)",
+      "operator": "Syria / Iran / Multiple States",
+      "manufacturer": "Almaz-Antey",
+      "type": "LONG-RANGE",
+      "range": "200 km (PMU-2 variant)",
+      "interceptor": "48N6E2 missile",
+      "interceptRate": 80,
+      "deployedUnits": 40,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "48N6E2 missile" },
+        { "label": "MANUFACTURER", "value": "Almaz-Antey" },
+        { "label": "DEPLOYED UNITS", "value": "40 batteries" }
+      ],
+      "theater": "Syria, Iran, Russia, Greece, Egypt",
+      "status": "ACTIVE",
+      "lat": 33.51,
+      "lng": 36.29,
+      "description": "Long-range SAM system forming the backbone of Syrian and Iranian air defenses. Multiple variants exported globally. In Syria, S-300PMU-2 batteries were delivered in 2018 following the Il-20 shootdown incident but have reportedly never been fired against Israeli strikes, raising questions about operational readiness and integration. Iran operates domestically produced Bavar-373 alongside imported S-300 systems."
+    },
+    {
+      "id": "ad-010",
+      "name": "Buk-M3 Viking",
+      "fullName": "Buk-M3 Viking (NATO: SA-17 Grizzly upgrade)",
+      "operator": "Russian Armed Forces",
+      "manufacturer": "Almaz-Antey",
+      "type": "MEDIUM",
+      "range": "70 km",
+      "interceptor": "9M317MA missile",
+      "interceptRate": 95,
+      "deployedUnits": 20,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "9M317MA missile" },
+        { "label": "MANUFACTURER", "value": "Almaz-Antey" },
+        { "label": "DEPLOYED UNITS", "value": "20 batteries" }
+      ],
+      "theater": "Russia, Ukraine theater",
+      "status": "ACTIVE",
+      "lat": 48.50,
+      "lng": 37.50,
+      "description": "Russia's latest medium-range SAM system, successor to the Buk-M2 that infamously shot down MH17 in 2014. The M3 variant features new 9M317MA vertically-launched missiles with active radar homing, improved ECCM, and the ability to engage six targets simultaneously per TELAR. Widely deployed in Ukraine for area defense of Russian positions. Each brigade includes engagement radar, command post, and up to 6 TELARs."
+    },
+    {
+      "id": "ad-011",
+      "name": "Pantsir-S1",
+      "fullName": "Pantsir-S1 (NATO: SA-22 Greyhound)",
+      "operator": "Russian Armed Forces / Export Clients",
+      "manufacturer": "KBP Instrument Design Bureau",
+      "type": "SHORT-RANGE / SHORAD",
+      "range": "Missile: 20 km; Guns: 4 km",
+      "interceptor": "57E6 missiles + twin 2A38M 30mm autocannons",
+      "interceptRate": 90,
+      "deployedUnits": 100,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "57E6 missiles + twin 2A38M 30mm autocannons" },
+        { "label": "MANUFACTURER", "value": "KBP Instrument Design Bureau" },
+        { "label": "DEPLOYED UNITS", "value": "100+ units" }
+      ],
+      "theater": "Russia, Syria, UAE, Libya, Iraq",
+      "status": "ACTIVE",
+      "lat": 35.20,
+      "lng": 36.70,
+      "description": "Combined missile/gun SHORAD system mounted on truck or tracked chassis. Designed to protect S-400 batteries and point targets from low-flying threats including cruise missiles and PGMs. Combat record has been mixed: multiple Pantsir systems were destroyed by Turkish Bayraktar TB2 drones in Libya and Syria, raising doubts about its effectiveness against modern UAS. Continues to be used in Ukraine for base and area defense."
+    },
+    {
+      "id": "ad-012",
+      "name": "HQ-9",
+      "fullName": "HQ-9B Long-Range Air Defense System",
+      "operator": "People's Liberation Army",
+      "manufacturer": "China Academy of Defence Technology (CADT)",
+      "type": "LONG-RANGE",
+      "range": "200-300 km (HQ-9B variant)",
+      "interceptor": "HQ-9B missile",
+      "interceptRate": 90,
+      "deployedUnits": 30,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "HQ-9B missile" },
+        { "label": "MANUFACTURER", "value": "China Academy of Defence Technology (CADT)" },
+        { "label": "DEPLOYED UNITS", "value": "30 batteries" }
+      ],
+      "theater": "China, South China Sea artificial islands",
+      "status": "ACTIVE",
+      "lat": 16.50,
+      "lng": 112.00,
+      "description": "China's most capable indigenous long-range SAM system, functionally comparable to the S-300PMU. HQ-9B variant features improved seeker and extended range. Deployed on Chinese artificial islands in the South China Sea (Woody Island confirmed) as part of the militarization of disputed territory. Export variant (FD-2000) sold to Turkmenistan and Uzbekistan. Forms core of PLA integrated air defense alongside HQ-22 and HQ-16."
+    },
+    {
+      "id": "ad-013",
+      "name": "NASAMS",
+      "fullName": "National Advanced Surface-to-Air Missile System",
+      "operator": "Ukrainian Armed Forces / NATO",
+      "manufacturer": "Kongsberg / Raytheon",
+      "type": "SHORT-MEDIUM RANGE",
+      "range": "25-40 km (AIM-120 based); 50+ km (AMRAAM-ER)",
+      "interceptor": "AIM-120 AMRAAM / AMRAAM-ER / AIM-9X",
+      "interceptRate": 85,
+      "deployedUnits": 8,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "AIM-120 AMRAAM / AMRAAM-ER / AIM-9X" },
+        { "label": "MANUFACTURER", "value": "Kongsberg / Raytheon" },
+        { "label": "DEPLOYED UNITS", "value": "8 batteries" }
+      ],
+      "theater": "Ukraine, Norway, US (White House defense), Lithuania, Spain",
+      "status": "ACTIVE",
+      "lat": 50.45,
+      "lng": 30.52,
+      "description": "Ground-launched AMRAAM system providing distributed, networked air defense. Donated to Ukraine by the US and Norway starting in late 2022. Praised for its effectiveness against Russian cruise missiles and drones defending Kyiv. Uses the same AIM-120 AMRAAM missile employed by NATO fighter aircraft, ensuring abundant supply chains. NASAMS III variant integrates AMRAAM-ER for extended range."
+    },
+    {
+      "id": "ad-014",
+      "name": "Gepard",
+      "fullName": "Flakpanzer Gepard Self-Propelled Anti-Aircraft Gun",
+      "operator": "Ukrainian Armed Forces",
+      "manufacturer": "Krauss-Maffei Wegmann (KMW)",
+      "type": "SHORAD / C-UAS",
+      "range": "5.5 km (effective AA range)",
+      "interceptor": "Twin Oerlikon KDA 35mm autocannons (1,100 rpm combined)",
+      "interceptRate": 85,
+      "deployedUnits": 52,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "Twin Oerlikon KDA 35mm autocannons (1,100 rpm combined)" },
+        { "label": "MANUFACTURER", "value": "Krauss-Maffei Wegmann (KMW)" },
+        { "label": "DEPLOYED UNITS", "value": "52 units" }
+      ],
+      "theater": "Ukraine",
+      "status": "ACTIVE",
+      "lat": 49.00,
+      "lng": 32.00,
+      "description": "1970s-era German SPAAG that has become one of the most effective counter-drone systems in Ukraine. Originally donated by Germany from stored reserves, the Gepard has proven devastatingly effective against Iranian-made Shahed-136 drones using its rapid-fire 35mm cannons. Its search and tracking radar allows autonomous engagement of slow-moving aerial targets. Ammunition supply from Brazil and Norway has been critical to sustained operations."
+    },
+    {
+      "id": "ad-015",
+      "name": "HAWK",
+      "fullName": "MIM-23 HAWK (Homing All the Way Killer)",
+      "operator": "Ukrainian Armed Forces",
+      "manufacturer": "Raytheon",
+      "type": "MEDIUM",
+      "range": "45 km",
+      "interceptor": "MIM-23K missile",
+      "interceptRate": 75,
+      "deployedUnits": 8,
+      "interceptions": 0,
+      "details": [
+        { "label": "INTERCEPTOR", "value": "MIM-23K missile" },
+        { "label": "MANUFACTURER", "value": "Raytheon" },
+        { "label": "DEPLOYED UNITS", "value": "8 batteries" }
+      ],
+      "theater": "Ukraine",
+      "status": "ACTIVE",
+      "lat": 48.50,
+      "lng": 35.00,
+      "description": "Cold War-era medium-range SAM system donated to Ukraine by the US and Spain from stored reserves. Despite being designed in the 1960s, HAWK has proven effective against Russian cruise missiles and aircraft in Ukrainian service. Refurbished systems were provided with stockpiles of interceptors, offering a cost-effective complement to more modern NASAMS and Patriot batteries. Operators have been trained in the US and Germany."
+    }
+  ],
+  "uas": [
+    {
+      "id": "uas-001",
+      "name": "Bayraktar TB2",
+      "manufacturer": "Baykar Defense",
+      "country": "Turkey",
+      "type": "MALE",
+      "category": "COMBAT",
+      "allegiance": "allied",
+      "wingspan": "12 m",
+      "endurance": "27 hours",
+      "ceiling": "25,000 ft",
+      "payload": "150 kg",
+      "armament": "MAM-L / MAM-C smart munitions (Roketsan)",
+      "operators": ["Turkey", "Ukraine", "Azerbaijan", "Libya GNA", "Ethiopia", "Niger", "Morocco", "Turkmenistan"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia", "nagorno-karabakh", "libya", "sahel-insurgency"],
+      "status": "OPERATIONAL",
+      "description": "The drone that changed modern warfare. Achieved devastating results in the 2020 Nagorno-Karabakh war, destroying Armenian armor and air defense systems. In Libya, TB2s dismantled Haftar's Russian-supplied Pantsir-S1 batteries. In Ukraine, early TB2 strikes destroyed Russian logistics convoys and naval assets. Lower cost ($5M per unit) compared to Western equivalents has driven massive export success. Over 500 units produced."
+    },
+    {
+      "id": "uas-002",
+      "name": "Bayraktar Akinci",
+      "manufacturer": "Baykar Defense",
+      "country": "Turkey",
+      "type": "HALE",
+      "category": "COMBAT / ISR",
+      "allegiance": "allied",
+      "wingspan": "20 m",
+      "endurance": "24 hours",
+      "ceiling": "40,000 ft",
+      "payload": "1,350 kg",
+      "armament": "SOM-J cruise missile, MAM-L, MAM-T, Mk-82/83 bombs, TEBER LGBs",
+      "operators": ["Turkey", "Pakistan"],
+      "combatProven": true,
+      "activeTheaters": ["eastern-mediterranean", "turkey-pkk"],
+      "status": "OPERATIONAL",
+      "description": "Turkey's heavy combat drone and strategic force multiplier. Twin-engine design with AI-enhanced targeting, synthetic aperture radar, and AESA radar capability. Can carry cruise missiles for stand-off strikes, effectively serving as an unmanned bomber. Represents a significant escalation in drone capability beyond the TB2 class. Equipped with domestic Ukrainian-origin AI-400 turboprop engines."
+    },
+    {
+      "id": "uas-003",
+      "name": "MQ-9 Reaper",
+      "manufacturer": "General Atomics Aeronautical Systems",
+      "country": "United States",
+      "type": "MALE",
+      "category": "COMBAT / ISR",
+      "allegiance": "allied",
+      "wingspan": "20 m",
+      "endurance": "27 hours",
+      "ceiling": "50,000 ft",
+      "payload": "1,746 kg",
+      "armament": "AGM-114 Hellfire, GBU-12 Paveway II, GBU-38 JDAM, AIM-9X (air-to-air)",
+      "operators": ["United States", "United Kingdom", "France", "Italy", "Netherlands", "Spain"],
+      "combatProven": true,
+      "activeTheaters": ["middle-east", "africa-ct", "eastern-europe"],
+      "status": "OPERATIONAL",
+      "description": "The primary hunter-killer drone of US and allied forces. Has conducted thousands of precision strikes across Afghanistan, Iraq, Syria, Yemen, Somalia, and Libya. Multi-spectral targeting system includes EO/IR camera, laser designator, and SAR radar. MQ-9B SkyGuardian variant is the next-generation model with improved endurance and NATO interoperability. Over 400 units produced since 2007."
+    },
+    {
+      "id": "uas-004",
+      "name": "MQ-1C Gray Eagle",
+      "manufacturer": "General Atomics Aeronautical Systems",
+      "country": "United States",
+      "type": "MALE",
+      "category": "COMBAT / ISR",
+      "allegiance": "allied",
+      "wingspan": "17 m",
+      "endurance": "25 hours",
+      "ceiling": "29,000 ft",
+      "payload": "488 kg",
+      "armament": "AGM-114 Hellfire, GBU-44/B Viper Strike",
+      "operators": ["United States"],
+      "combatProven": true,
+      "activeTheaters": ["middle-east", "pacific-theater"],
+      "status": "OPERATIONAL",
+      "description": "US Army's division-level UAS providing persistent armed reconnaissance. Extended range variant (ER) features increased fuel capacity and endurance. Considered for transfer to Ukraine in 2022 but blocked over technology sensitivity concerns. Currently undergoing modernization with SIGINT pods, electronic warfare payloads, and AI-enabled autonomous operations under Project Convergence."
+    },
+    {
+      "id": "uas-005",
+      "name": "RQ-4 Global Hawk",
+      "manufacturer": "Northrop Grumman",
+      "country": "United States",
+      "type": "HALE",
+      "category": "ISR",
+      "allegiance": "allied",
+      "wingspan": "39.9 m",
+      "endurance": "34 hours",
+      "ceiling": "60,000 ft",
+      "payload": "1,360 kg (sensor payload)",
+      "armament": "None (ISR only)",
+      "operators": ["United States", "NATO (AGS)", "Japan", "South Korea"],
+      "combatProven": false,
+      "activeTheaters": ["ukraine-russia (ISR from NATO airspace)", "pacific-theater", "middle-east"],
+      "status": "OPERATIONAL",
+      "description": "The largest UAS in the US inventory, providing theater-wide ISR coverage from extreme altitude. Carries EISS (Enhanced Integrated Sensor Suite) with SAR/MTI radar and EO/IR sensors. NATO AGS variant (RQ-4D Phoenix) conducts persistent surveillance of Eastern Europe from Sigonella, Italy. One was shot down by Iran's IRGC over the Strait of Hormuz in June 2019 (valued at $130M+), nearly triggering military conflict."
+    },
+    {
+      "id": "uas-006",
+      "name": "Hermes 900",
+      "manufacturer": "Elbit Systems",
+      "country": "Israel",
+      "type": "MALE",
+      "category": "ISR / COMBAT",
+      "allegiance": "allied",
+      "wingspan": "15 m",
+      "endurance": "36 hours",
+      "ceiling": "30,000 ft",
+      "payload": "350 kg",
+      "armament": "Capable of carrying precision munitions",
+      "operators": ["Israel", "Brazil", "Switzerland", "Chile", "Mexico", "Philippines"],
+      "combatProven": true,
+      "activeTheaters": ["israel-gaza", "israel-lebanon"],
+      "status": "OPERATIONAL",
+      "description": "Israel's primary tactical MALE UAS, extensively used in IDF operations over Gaza and Lebanon. Hermes 900 StarLiner variant is the first UAS certified to fly in civilian airspace. Equipped with advanced COMINT/SIGINT payloads, multi-sensor EO/IR turrets, and SAR radar. Has been continuously deployed since October 2023 providing persistent ISR over Gaza."
+    },
+    {
+      "id": "uas-007",
+      "name": "Heron TP (Eitan)",
+      "manufacturer": "Israel Aerospace Industries (IAI)",
+      "country": "Israel",
+      "type": "HALE",
+      "category": "ISR / COMBAT",
+      "allegiance": "allied",
+      "wingspan": "26 m",
+      "endurance": "36+ hours",
+      "ceiling": "45,000 ft",
+      "payload": "1,000 kg",
+      "armament": "Precision-guided munitions capable",
+      "operators": ["Israel", "India", "Germany"],
+      "combatProven": true,
+      "activeTheaters": ["israel-iran-axis", "israel-gaza"],
+      "status": "OPERATIONAL",
+      "description": "Israel's largest and most capable UAS, comparable in size to a Boeing 737 wing. Used for deep penetration ISR missions including reported flights over Iran. Equipped with satellite communication for beyond-line-of-sight operations, EO/IR/SAR sensor suite, and SIGINT/ELINT packages. Germany operates a leased variant (Heron TP) for reconnaissance in the Middle East and Africa."
+    },
+    {
+      "id": "uas-008",
+      "name": "Harop",
+      "manufacturer": "Israel Aerospace Industries (IAI)",
+      "country": "Israel",
+      "type": "LOITERING MUNITION",
+      "category": "STRIKE",
+      "allegiance": "allied",
+      "wingspan": "3 m",
+      "endurance": "6 hours",
+      "ceiling": "15,000 ft",
+      "payload": "23 kg warhead",
+      "armament": "Built-in high-explosive warhead",
+      "operators": ["Israel", "India", "Azerbaijan", "Germany"],
+      "combatProven": true,
+      "activeTheaters": ["nagorno-karabakh", "israel-regional"],
+      "status": "OPERATIONAL",
+      "description": "Autonomous loitering munition (kamikaze drone) designed to detect, track, and destroy radar emitters via anti-radiation homing. Achieved devastating results in the 2020 Nagorno-Karabakh war, destroying Armenian S-300 and Osa SAM systems. Can loiter over the battlefield for hours before diving onto a target. Successor to the IAI Harpy. The Harop can be recalled and recovered if no target is engaged."
+    },
+    {
+      "id": "uas-009",
+      "name": "Switchblade 600",
+      "manufacturer": "AeroVironment",
+      "country": "United States",
+      "type": "LOITERING MUNITION",
+      "category": "STRIKE",
+      "allegiance": "allied",
+      "wingspan": "1.3 m",
+      "endurance": "40+ minutes",
+      "ceiling": "15,000 ft",
+      "payload": "Javelin-class anti-armor warhead",
+      "armament": "Multipurpose anti-armor warhead",
+      "operators": ["United States", "Ukraine"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia"],
+      "status": "OPERATIONAL",
+      "description": "Man-portable tube-launched loitering munition capable of defeating armored vehicles with a Javelin-class warhead. Switchblade 600 can loiter for 40+ minutes at ranges of 40+ km before striking. Features EO/IR seeker with GPS guidance and wave-off/re-attack capability. Provided to Ukraine under US security assistance packages. The lighter Switchblade 300 variant carries an anti-personnel warhead for soft targets."
+    },
+    {
+      "id": "uas-010",
+      "name": "Ghost",
+      "manufacturer": "Anduril Industries",
+      "country": "United States",
+      "type": "sUAS / VTOL",
+      "category": "ISR / COMBAT",
+      "allegiance": "allied",
+      "wingspan": "Variable (modular)",
+      "endurance": "100+ minutes",
+      "ceiling": "Classified",
+      "payload": "Modular (ISR or strike payloads)",
+      "armament": "Modular warhead options",
+      "operators": ["US Special Operations Command", "USMC", "US Army"],
+      "combatProven": true,
+      "activeTheaters": ["classified-socom-operations"],
+      "status": "OPERATIONAL",
+      "description": "Palmer Luckey's Anduril Industries developed the Ghost as a low-cost, AI-enabled autonomous drone for ISR and strike missions. Fully autonomous flight with AI-powered target identification via Anduril's Lattice software platform. Quad-rotor VTOL design is nearly silent and can operate in GPS-denied environments. Used by US Special Operations in undisclosed theaters. Represents the shift toward autonomous, AI-native combat drones."
+    },
+    {
+      "id": "uas-011",
+      "name": "Altius-600",
+      "manufacturer": "Anduril Industries (acquired from Area-I)",
+      "country": "United States",
+      "type": "LOITERING MUNITION / ISR",
+      "category": "COMBAT / ISR",
+      "allegiance": "allied",
+      "wingspan": "2.54 m",
+      "endurance": "4+ hours",
+      "ceiling": "20,000+ ft",
+      "payload": "Modular (lethal or ISR)",
+      "armament": "Anti-armor warhead or ISR sensor package",
+      "operators": ["US Army", "USSOCOM"],
+      "combatProven": false,
+      "activeTheaters": ["testing-and-deployment"],
+      "status": "OPERATIONAL",
+      "description": "Air-launched, tube-launched, or ground-launched modular drone system acquired by Anduril Industries. Can be deployed from aircraft, ground vehicles, or ships and configured for ISR or strike missions. Integrates with Anduril's Lattice AI platform for autonomous operations, swarm coordination, and human-on-the-loop engagement. Selected by US Army for the Air-Launched Effects (ALE) program. Designed for attritable, high-volume deployment."
+    },
+    {
+      "id": "uas-012",
+      "name": "Shahed-136",
+      "manufacturer": "Iran Aircraft Manufacturing Industrial Company (HESA)",
+      "country": "Iran",
+      "type": "OWA (One-Way Attack)",
+      "category": "STRIKE",
+      "allegiance": "hostile",
+      "wingspan": "2.5 m",
+      "endurance": "Unknown (range-based: 2,500 km)",
+      "ceiling": "Low altitude (terrain following)",
+      "payload": "40 kg warhead",
+      "armament": "High-explosive fragmentation warhead",
+      "operators": ["Iran", "Russia (Geran-2 designation)", "Houthi forces (Ansar Allah)"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia", "red-sea-houthi", "israel-regional"],
+      "status": "OPERATIONAL",
+      "description": "Iran's mass-produced one-way attack drone (kamikaze UAV). Costs $20,000-$50,000 per unit, making it economically asymmetric against multi-million dollar air defense interceptors. Russia has used thousands of Shahed-136 (designated Geran-2) against Ukrainian infrastructure since September 2022. GPS/INS guided with delta wing design and a small piston engine producing a distinctive moped-like sound. Houthi forces have used variants against Red Sea shipping and Israel."
+    },
+    {
+      "id": "uas-013",
+      "name": "Mohajer-6",
+      "manufacturer": "Qods Aviation Industries",
+      "country": "Iran",
+      "type": "TACTICAL",
+      "category": "COMBAT / ISR",
+      "allegiance": "hostile",
+      "wingspan": "10 m",
+      "endurance": "12 hours",
+      "ceiling": "18,000 ft",
+      "payload": "100 kg",
+      "armament": "Qaem-5 PGMs, Almas anti-tank missiles",
+      "operators": ["Iran", "IRGC", "Hezbollah (reported)", "Russia (limited transfer)"],
+      "combatProven": true,
+      "activeTheaters": ["iran-regional", "ukraine-russia"],
+      "status": "OPERATIONAL",
+      "description": "Iran's primary tactical combat drone used by the IRGC for ISR and precision strike missions. Equipped with Iranian-made Qaem-series guided munitions. Has been used in cross-border strikes against Kurdish opposition groups in Iraq. Reports indicate limited numbers transferred to Russia alongside Shahed-136 drones. More sophisticated than the Shahed series, with real-time video downlink and electro-optical targeting."
+    },
+    {
+      "id": "uas-014",
+      "name": "Wing Loong II",
+      "manufacturer": "Chengdu Aircraft Corporation (CAIG/AVIC)",
+      "country": "China",
+      "type": "MALE",
+      "category": "COMBAT / ISR",
+      "allegiance": "hostile",
+      "wingspan": "20.5 m",
+      "endurance": "32 hours",
+      "ceiling": "30,000 ft",
+      "payload": "480 kg",
+      "armament": "Blue Arrow 7 ATGMs, FT-series precision bombs",
+      "operators": ["China", "UAE", "Saudi Arabia", "Egypt", "Pakistan", "Algeria", "Nigeria", "Libya"],
+      "combatProven": true,
+      "activeTheaters": ["libya", "yemen-coalition", "sahel-region"],
+      "status": "OPERATIONAL",
+      "description": "China's primary export combat drone, directly competing with the MQ-9 Reaper at a fraction of the price. Has been sold to over a dozen countries that the US refused to sell Reapers to. Operated by UAE in Yemen and Libya conflicts with confirmed strike missions. Features satellite communication for BLOS operations and Chinese-made precision guided munitions. Over 100 units exported, making it China's most commercially successful military drone."
+    },
+    {
+      "id": "uas-015",
+      "name": "FPV Racing Drones (Modified)",
+      "manufacturer": "Various / Field-Modified",
+      "country": "Ukraine",
+      "type": "sUAS / FPV",
+      "category": "STRIKE",
+      "allegiance": "allied",
+      "wingspan": "0.2-0.4 m (quadrotor)",
+      "endurance": "10-15 minutes",
+      "ceiling": "1,000 ft (practical)",
+      "payload": "0.5-3 kg (PG-7 warheads, RPG rounds, grenades)",
+      "armament": "Improvised explosive payload (RPG warheads, grenades, shaped charges)",
+      "operators": ["Ukraine", "Russia"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia"],
+      "status": "OPERATIONAL",
+      "description": "The weapon that defined the Ukraine war. Commercial FPV racing drone frames ($400-$500 each) modified with explosive payloads to create precision-guided munitions at a fraction of the cost of ATGMs. Ukrainian volunteer networks produce tens of thousands monthly. Piloted via first-person-view goggles at speeds up to 150 km/h, these drones have destroyed tanks, IFVs, artillery, and fortified positions. Both Ukraine and Russia now mass-produce FPV strike drones at industrial scale."
+    },
+    {
+      "id": "uas-016",
+      "name": "Lancet",
+      "manufacturer": "ZALA Aero Group (Kalashnikov Concern)",
+      "country": "Russia",
+      "type": "LOITERING MUNITION",
+      "category": "STRIKE",
+      "allegiance": "hostile",
+      "wingspan": "Lancet-3: 1.95 m",
+      "endurance": "40 minutes",
+      "ceiling": "16,000 ft",
+      "payload": "3-5 kg warhead",
+      "armament": "High-explosive fragmentation or thermobaric warhead",
+      "operators": ["Russia"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia"],
+      "status": "OPERATIONAL",
+      "description": "Russia's most effective loitering munition in the Ukraine conflict. The Lancet-3M variant features TV/IR dual seeker, improved range (70+ km), and AI-assisted target recognition. Has destroyed numerous Ukrainian howitzers, SAM systems, radar stations, and armored vehicles. Typically used in conjunction with the Orlan-10 reconnaissance drone for target acquisition. Mass production has been scaled up since 2023."
+    },
+    {
+      "id": "uas-017",
+      "name": "Orlan-10",
+      "manufacturer": "Special Technology Center (STC)",
+      "country": "Russia",
+      "type": "TACTICAL",
+      "category": "ISR / EW",
+      "allegiance": "hostile",
+      "wingspan": "3.1 m",
+      "endurance": "16 hours",
+      "ceiling": "16,000 ft",
+      "payload": "5 kg",
+      "armament": "None (ISR / EW payload)",
+      "operators": ["Russia"],
+      "combatProven": true,
+      "activeTheaters": ["ukraine-russia", "syria"],
+      "status": "OPERATIONAL",
+      "description": "Russia's most widely deployed tactical reconnaissance drone. Used extensively in Ukraine for artillery spotting, battle damage assessment, and electronic warfare (jamming and direction-finding). Despite its relatively crude construction (reportedly using commercial components including Canon camera bodies), the Orlan-10 has been produced in large numbers (1,000+ units pre-war). Frequently paired with Lancet loitering munitions for detect-and-strike operations."
+    }
+  ],
+  "platforms": [
+    {
+      "id": "wp-001",
+      "name": "F-35I Adir",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Lockheed Martin (Israeli modifications by IAI/Elbit)",
+      "operator": "Israeli Air Force",
+      "theater": "Middle East",
+      "quantity": 36,
+      "status": "ACTIVE",
+      "speed": "Mach 1.6",
+      "range": "2,220 km",
+      "armament": "AIM-120 AMRAAM, AIM-9X, GBU-39 SDB, GBU-53 StormBreaker, JDAM, Spice 1000",
+      "combatDeployments": "Operation Swords of Iron, multiple pre-emptive strikes",
+      "description": "Israel's customized variant of the F-35A Lightning II with unique Israeli EW systems, C4I datalinks, and domestic weapons integration. The Adir features Israeli-developed electronic warfare pods and can carry Israeli precision munitions. Has been used for strikes deep into Syria and reportedly Iran-linked targets. Israel's first stealth fighter and the cornerstone of IAF air superiority doctrine for the coming decades."
+    },
+    {
+      "id": "wp-002",
+      "name": "F-15I Ra'am",
+      "type": "FIGHTER-BOMBER",
+      "category": "FIGHTER-BOMBER",
+      "manufacturer": "Boeing (McDonnell Douglas)",
+      "operator": "Israeli Air Force",
+      "theater": "Middle East",
+      "quantity": 25,
+      "status": "ACTIVE",
+      "speed": "Mach 2.5",
+      "range": "3,900 km (with CFTs)",
+      "armament": "AIM-120 AMRAAM, AIM-7, GBU-28 bunker busters, Popeye missiles, Spice 2000, JDAM",
+      "combatDeployments": "Operation Swords of Iron, multiple Syrian strikes, Operation Outside the Box (2007)",
+      "description": "Israel's long-range strike fighter, the backbone of IAF deep strike capability. The Ra'am (Thunder) is a two-seat variant of the F-15E Strike Eagle with Israeli avionics and weapons integration. Carries conformal fuel tanks for extended range, enabling strikes on distant targets including Iran. Was the platform used to destroy Syria's nuclear reactor at Al-Kibar in 2007 (Operation Outside the Box). 25 aircraft remain in active service."
+    },
+    {
+      "id": "wp-003",
+      "name": "F-16I Sufa",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Lockheed Martin",
+      "operator": "Israeli Air Force",
+      "theater": "Middle East",
+      "quantity": 102,
+      "status": "ACTIVE",
+      "speed": "Mach 2.0",
+      "range": "4,200 km (with CFTs)",
+      "armament": "AIM-120, AIM-9X, Python-5, GBU-39 SDB, Spice 250/1000/2000, JDAM, Delilah cruise missile",
+      "combatDeployments": "Operation Swords of Iron, Gaza and Lebanon campaigns, Syria strikes",
+      "description": "The workhorse of the Israeli Air Force. The Sufa (Storm) is a heavily customized F-16D Block 52+ with Israeli avionics, conformal fuel tanks, and integration of Israeli-made weapons including the Spice family of PGMs and Python-5 AAMs. 102 aircraft form the largest IAF fighter fleet. Has conducted the bulk of precision strikes in Gaza and Lebanon operations since October 2023."
+    },
+    {
+      "id": "wp-004",
+      "name": "B-2 Spirit",
+      "type": "BOMBER",
+      "category": "BOMBER",
+      "manufacturer": "Northrop Grumman",
+      "operator": "United States Air Force",
+      "theater": "Global",
+      "quantity": 19,
+      "status": "ACTIVE",
+      "speed": "Mach 0.95",
+      "range": "11,100 km",
+      "armament": "80x Mk 82 JDAM, 16x B61 nuclear bombs, 16x GBU-57 MOP, GBU-38, AGM-158 JASSM",
+      "combatDeployments": "Kosovo, Afghanistan, Iraq, Libya, Yemen (Houthi strikes 2024)",
+      "description": "America's stealth bomber, capable of delivering massive conventional or nuclear payloads anywhere in the world within hours. In October 2024, B-2s were used to strike deeply buried Houthi weapons storage facilities in Yemen using GBU-57 Massive Ordnance Penetrator (MOP) bunker busters — the first combat use of the 30,000-lb weapon. Each aircraft costs $2.1 billion, making it the most expensive military aircraft ever built."
+    },
+    {
+      "id": "wp-005",
+      "name": "F-22 Raptor",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Lockheed Martin",
+      "operator": "United States Air Force",
+      "theater": "Global",
+      "quantity": 186,
+      "status": "ACTIVE",
+      "speed": "Mach 2.25 (supercruise: Mach 1.82)",
+      "range": "2,960 km",
+      "armament": "AIM-120 AMRAAM, AIM-9X, GBU-32 JDAM, GBU-39 SDB, M61A2 20mm cannon",
+      "combatDeployments": "Syria (2014 - first combat use), deterrence deployments to Pacific and Middle East",
+      "description": "The world's premier air superiority fighter. Features supercruise (supersonic flight without afterburner), thrust vectoring, and the most advanced stealth ever deployed on a fighter aircraft. Never exported to any nation. First used in combat over Syria in 2014. Production ended at 195 aircraft (8 lost). Being gradually replaced by the B-21 in the deep strike role while maintaining air dominance superiority. Slated for retirement by mid-2030s as NGAD progresses."
+    },
+    {
+      "id": "wp-006",
+      "name": "Su-35S Flanker-E",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Sukhoi (UAC)",
+      "operator": "Russian Air Force (VKS)",
+      "theater": "Ukraine, Syria",
+      "quantity": 110,
+      "status": "ACTIVE",
+      "speed": "Mach 2.25",
+      "range": "3,600 km",
+      "armament": "R-77-1, R-73M2, R-37M (300 km AAM), Kh-31, Kh-35U, KAB-500/1500, GSh-30-1 30mm cannon",
+      "combatDeployments": "Ukraine, Syria",
+      "description": "Russia's most capable operational fighter, featuring Irbis-E PESA radar, thrust-vectoring engines, and the R-37M ultra-long-range air-to-air missile (300+ km range). Extensively used in Ukraine for air superiority patrols and ground attack missions. Multiple Su-35s have been shot down by Ukrainian air defenses, including by Patriot PAC-3 systems. Exported to China, Egypt, and Indonesia."
+    },
+    {
+      "id": "wp-007",
+      "name": "Su-57 Felon",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Sukhoi (UAC)",
+      "operator": "Russian Air Force (VKS)",
+      "theater": "Russia / Limited deployment",
+      "quantity": 22,
+      "status": "LIMITED OPERATIONAL",
+      "speed": "Mach 2.0",
+      "range": "3,500 km",
+      "armament": "R-77M, R-37M, Kh-59MK2, Kh-69, internal weapons bays, GSh-30-1 30mm cannon",
+      "combatDeployments": "Limited use in Ukraine (standoff strikes only)",
+      "description": "Russia's first stealth fighter, plagued by development delays and limited production. Only ~22 units delivered as of 2025, with planned production of 76 by 2028 likely unachievable due to sanctions and manufacturing constraints. Used sparingly in Ukraine, primarily for launching standoff cruise missiles (Kh-69) from safe distances. Its true stealth characteristics and avionics capability remain debated by Western analysts. Suffered first confirmed loss in Ukraine in 2024."
+    },
+    {
+      "id": "wp-008",
+      "name": "MiG-29 Fulcrum",
+      "type": "FIGHTER",
+      "category": "FIGHTER",
+      "manufacturer": "Mikoyan (RSK MiG)",
+      "operator": "Ukrainian Air Force",
+      "theater": "Ukraine",
+      "quantity": 40,
+      "status": "ACTIVE",
+      "speed": "Mach 2.25",
+      "range": "1,500 km",
+      "armament": "R-27, R-73, AGM-88 HARM (integrated 2022), JDAM-ER (integrated 2023), GSh-30-1 30mm cannon",
+      "combatDeployments": "Ukraine-Russia war (full-scale since 2022)",
+      "description": "Soviet-era fighter that has been the workhorse of Ukraine's air defense since 2022. Despite being outclassed by Russian Su-35s, Ukrainian MiG-29 pilots have adapted tactics including launching AGM-88 HARM anti-radiation missiles (integrated by the US) against Russian SAM radars. Supplemented by donated MiG-29s from Poland, Slovakia, and other Eastern European nations. Being replaced by F-16s transferred from Western allies starting in 2024."
+    },
+    {
+      "id": "wp-009",
+      "name": "M142 HIMARS",
+      "type": "MLRS",
+      "category": "MLRS",
+      "manufacturer": "Lockheed Martin",
+      "operator": "United States Army / Allied Forces",
+      "theater": "Ukraine, Middle East, Pacific",
+      "quantity": 40,
+      "status": "ACTIVE",
+      "speed": "85 km/h (road)",
+      "range": "GMLRS: 70 km, ATACMS: 300 km, PrSM: 499+ km",
+      "armament": "6x GMLRS rockets OR 1x ATACMS missile OR 2x PrSM missiles",
+      "combatDeployments": "Ukraine-Russia war (game-changing 2022 deployment)",
+      "description": "The weapon system that changed the trajectory of the Ukraine war. HIMARS with GPS-guided GMLRS rockets devastated Russian ammunition depots, command posts, and logistics hubs from summer 2022 onward. The precision of GMLRS (hitting within 2 meters of target at 70 km) combined with shoot-and-scoot mobility made HIMARS nearly impossible for Russia to counter. 40+ systems provided to Ukraine. Later supplemented with ATACMS tactical ballistic missiles for deeper strikes."
+    },
+    {
+      "id": "wp-010",
+      "name": "M1A2 Abrams SEPv3",
+      "type": "MBT",
+      "category": "MBT",
+      "manufacturer": "General Dynamics Land Systems",
+      "operator": "United States Army",
+      "theater": "Global",
+      "quantity": 31,
+      "status": "ACTIVE",
+      "speed": "67 km/h",
+      "range": "426 km",
+      "armament": "120mm M256A1 smoothbore gun, .50 cal M2HB, 2x M240 7.62mm MGs, Trophy APS (SEPv3)",
+      "combatDeployments": "Ukraine (M1A1 variant, limited deployment 2023-2024)",
+      "description": "America's main battle tank, the most produced Western MBT. 31 M1A1 Abrams tanks were provided to Ukraine in 2023 but saw limited deployment due to vulnerability to Russian FPV drones, Lancet loitering munitions, and anti-tank mines. Several were destroyed or captured, leading to their withdrawal from frontline service. The experience highlighted the vulnerability of conventional MBTs in the drone-saturated modern battlefield. SEPv3 variant adds Trophy APS."
+    },
+    {
+      "id": "wp-011",
+      "name": "Merkava Mk4 Barak",
+      "type": "MBT",
+      "category": "MBT",
+      "manufacturer": "Israel Military Industries / MANTAK",
+      "operator": "Israel Defense Forces",
+      "theater": "Israel, Gaza, Lebanon",
+      "quantity": 360,
+      "status": "ACTIVE",
+      "speed": "64 km/h",
+      "range": "500 km",
+      "armament": "120mm MG253 smoothbore gun, Trophy APS, 60mm internal mortar, .50 cal, 2x 7.62mm MGs",
+      "combatDeployments": "Operation Swords of Iron (Gaza 2023-2024), Lebanon operations",
+      "description": "Israel's indigenous main battle tank, designed with crew protection as top priority. The Mk4 Barak variant features the Trophy (Windbreaker) active protection system, which has achieved hundreds of confirmed hard-kills against RPGs and ATGMs in Gaza operations. Unique rear compartment can carry infantry or additional ammunition. Has operated extensively in urban combat in Gaza since October 2023. Trophy APS data has been shared with the US for integration on M1 Abrams."
+    },
+    {
+      "id": "wp-012",
+      "name": "Leopard 2A6",
+      "type": "MBT",
+      "category": "MBT",
+      "manufacturer": "Krauss-Maffei Wegmann (KMW)",
+      "operator": "Multiple NATO / Ukraine",
+      "theater": "Ukraine, Europe",
+      "quantity": 21,
+      "status": "ACTIVE",
+      "speed": "72 km/h",
+      "range": "450 km",
+      "armament": "120mm Rh-120 L/55 smoothbore gun (extended barrel), 2x MG3 7.62mm MGs",
+      "combatDeployments": "Ukraine-Russia war (2023-present)",
+      "description": "Germany's main battle tank and one of NATO's premier armored platforms. 21 Leopard 2A6 tanks were provided to Ukraine by Germany, Portugal, and other NATO nations starting in early 2023. Saw combat during Ukraine's 2023 counteroffensive where several were destroyed by mines, ATGMs, and artillery in heavily defended Russian positions. The longer L/55 gun barrel provides improved armor penetration at extended ranges compared to earlier L/44 variants."
+    },
+    {
+      "id": "wp-013",
+      "name": "ATACMS",
+      "type": "TACTICAL BALLISTIC MISSILE",
+      "category": "TACTICAL BALLISTIC MISSILE",
+      "manufacturer": "Lockheed Martin",
+      "operator": "United States Army / Ukraine",
+      "theater": "Ukraine",
+      "quantity": "300+ provided to Ukraine (various blocks)",
+      "status": "ACTIVE",
+      "speed": "Mach 3+",
+      "range": "Block IA: 300 km",
+      "armament": "Block I: M74 cluster submunitions; Block IA-T: 230 kg unitary HE warhead",
+      "combatDeployments": "Ukraine-Russia war (first use October 2023)",
+      "description": "Army Tactical Missile System, the long-range deep strike weapon fired from HIMARS and M270 MLRS launchers. After months of deliberation, the US provided ATACMS to Ukraine starting in late 2023. Used to strike Russian airfields, logistics hubs, and troop concentrations deep behind the front lines. The Block IA unitary variant strikes hardened point targets while the cluster munition variant is used against dispersed forces and parked aircraft."
+    },
+    {
+      "id": "wp-014",
+      "name": "Storm Shadow / SCALP EG",
+      "type": "CRUISE MISSILE",
+      "category": "CRUISE MISSILE",
+      "manufacturer": "MBDA",
+      "operator": "United Kingdom / France / Ukraine",
+      "theater": "Ukraine",
+      "quantity": "100+ provided to Ukraine",
+      "status": "ACTIVE",
+      "speed": "Mach 0.8",
+      "range": "250-560 km",
+      "armament": "BROACH tandem penetrator warhead (450 kg)",
+      "combatDeployments": "Ukraine-Russia war (first use May 2023)",
+      "description": "Anglo-French stealth cruise missile with terrain-following capability and BROACH (Bomb Royal Ordnance Augmented Charge) tandem warhead designed to penetrate hardened bunkers. Provided to Ukraine by the UK (Storm Shadow) and France (SCALP EG). Used to strike Russian command posts, ammunition depots, and infrastructure in occupied Crimea and eastern Ukraine. The BROACH warhead first penetrates the target structure before the main charge detonates inside."
+    },
+    {
+      "id": "wp-015",
+      "name": "FGM-148 Javelin",
+      "type": "ATGM",
+      "category": "ATGM",
+      "manufacturer": "Raytheon / Lockheed Martin",
+      "operator": "United States / Ukraine / NATO",
+      "theater": "Ukraine, Global",
+      "quantity": "10,000+ provided to Ukraine",
+      "status": "ACTIVE",
+      "speed": "Mach 0.43",
+      "range": "2,500 m (4,750 m for Javelin Lightweight CLU)",
+      "armament": "Tandem-charge HEAT warhead (top-attack or direct fire)",
+      "combatDeployments": "Ukraine-Russia war, Iraq, Syria, Afghanistan",
+      "description": "The iconic fire-and-forget anti-tank missile that became a symbol of Ukrainian resistance. The Javelin's top-attack flight profile strikes the thin top armor of tanks, defeating even heavily armored MBTs. IR seeker locks onto the target before launch, allowing the operator to immediately take cover (fire-and-forget). Over 10,000 Javelins were provided to Ukraine, where they destroyed hundreds of Russian armored vehicles, particularly during the failed Russian advance on Kyiv in early 2022. Costs $178,000 per missile and $200,000+ per CLU."
+    }
+  ],
+  "defenseTech": [
+    {
+      "id": "dt-001",
+      "name": "Palantir Technologies",
+      "ceo": "Alex Karp",
+      "founded": 2003,
+      "hq": "Denver, CO",
+      "marketCap": "$60B+",
+      "products": [
+        {
+          "name": "Palantir Gotham",
+          "type": "Intelligence Platform",
+          "description": "Counter-terrorism analysis platform used for mapping terror networks, tracking financial flows, and fusing intelligence from multiple classified sources. Originally developed for the CIA's war on terror.",
+          "deployedBy": ["CIA", "NSA", "GCHQ", "IDF Intelligence", "FBI"]
+        },
+        {
+          "name": "Palantir Maven / AIP",
+          "type": "AI/ML Platform",
+          "description": "AI-enabled battlefield intelligence platform. Powers Project Maven for DoD targeting, ISR analysis, and kill-chain acceleration. AIP (Artificial Intelligence Platform) integrates LLMs for military decision-making.",
+          "deployedBy": ["US DoD", "USSOCOM", "US Army", "USAF"]
+        },
+        {
+          "name": "TITAN (Tactical Intelligence Targeting Access Node)",
+          "type": "Ground Station",
+          "description": "AI-powered sensor-to-shooter ground station that fuses data from satellites, drones, and ground sensors to accelerate targeting. Won the US Army's $178M TITAN contract.",
+          "deployedBy": ["US Army"]
+        }
+      ],
+      "contracts": "$1.8B+ active DoD contracts",
+      "description": "The backbone of Western military intelligence analysis. Founded by Peter Thiel and Alex Karp with CIA In-Q-Tel funding, Palantir has become the dominant data fusion platform for US and allied intelligence and military operations. Gotham was instrumental in the hunt for Osama bin Laden. Maven/AIP represents the company's push into AI-native military decision-making, enabling commanders to query battlefield data using natural language."
+    },
+    {
+      "id": "dt-002",
+      "name": "Anduril Industries",
+      "ceo": "Palmer Luckey",
+      "founded": 2017,
+      "hq": "Costa Mesa, CA",
+      "marketCap": "Private ($14B+ valuation)",
+      "products": [
+        {
+          "name": "Lattice",
+          "type": "AI Command & Control Platform",
+          "description": "Autonomous sensor fusion and C2 platform that integrates data from drones, cameras, radars, and satellites into a unified real-time operating picture. The digital backbone of all Anduril products.",
+          "deployedBy": ["US DoD", "USSOCOM", "US Marine Corps", "CBP"]
+        },
+        {
+          "name": "Ghost",
+          "type": "Autonomous sUAS",
+          "description": "AI-powered autonomous VTOL drone for ISR and strike missions. Near-silent operation, GPS-denied navigation, and fully autonomous flight capability via Lattice AI.",
+          "deployedBy": ["USSOCOM", "USMC"]
+        },
+        {
+          "name": "Altius-600/700",
+          "type": "Loitering Munition / ISR",
+          "description": "Tube-launched modular drone system deployable from air, ground, or sea platforms. Configurable for ISR or lethal strike. Selected for US Army Air-Launched Effects program.",
+          "deployedBy": ["US Army", "USSOCOM"]
+        },
+        {
+          "name": "Sentry Tower",
+          "type": "Autonomous Surveillance",
+          "description": "AI-powered autonomous surveillance tower using computer vision and sensor fusion for border security and base protection. Deployed along the US southern border.",
+          "deployedBy": ["US CBP", "US DoD"]
+        },
+        {
+          "name": "ACMS (Autonomous Counter-UAS Mission System)",
+          "type": "Counter-Drone",
+          "description": "AI-enabled counter-drone system that detects, tracks, and defeats enemy UAS using electronic warfare and kinetic interceptors. Integrates with Lattice for autonomous engagement.",
+          "deployedBy": ["US DoD", "CENTCOM"]
+        }
+      ],
+      "contracts": "$1B+ in DoD contracts",
+      "description": "Palmer Luckey's defense technology company, built on the thesis that Silicon Valley should serve national defense. Anduril's Lattice AI platform is the connective tissue across all its products, enabling autonomous operations at machine speed. The company has disrupted the traditional defense industrial base by developing products with venture capital before selling to the military — the opposite of the traditional cost-plus model. Valued at $14B+ as of 2024."
+    },
+    {
+      "id": "dt-003",
+      "name": "L3Harris Technologies",
+      "ceo": "Christopher Kubasik",
+      "founded": 2019,
+      "hq": "Melbourne, FL",
+      "marketCap": "$45B+",
+      "products": [
+        {
+          "name": "WESCAM MX-Series",
+          "type": "ISR Sensor Turrets",
+          "description": "Multi-sensor EO/IR/laser turrets used on virtually every Western military aircraft, drone, and ship. The MX-20 is the gold standard for tactical ISR.",
+          "deployedBy": ["US DoD", "NATO", "60+ nations"]
+        },
+        {
+          "name": "Electronic Warfare Systems",
+          "type": "EW / SIGINT",
+          "description": "Electronic warfare suites including communications jamming, radar jamming, and SIGINT collection systems deployed on aircraft, ground vehicles, and ships.",
+          "deployedBy": ["US DoD", "NATO allies"]
+        },
+        {
+          "name": "AN/PRC-163 Manpack Radio",
+          "type": "Tactical Communications",
+          "description": "Two-channel software-defined radio providing encrypted SATCOM and line-of-sight communications for dismounted soldiers. Part of the US Army's HMS Manpack modernization.",
+          "deployedBy": ["US Army", "USSOCOM", "USMC"]
+        }
+      ],
+      "contracts": "$2B+ annual defense revenue",
+      "description": "Formed from the 2019 merger of L3 Technologies and Harris Corporation, L3Harris is the sixth-largest defense contractor globally. Specializes in ISR sensors, electronic warfare, and tactical communications. Their WESCAM sensor turrets are mounted on nearly every Western drone and surveillance aircraft. The company provides critical electronic warfare capabilities used to jam and deceive enemy radar and communications systems."
+    },
+    {
+      "id": "dt-004",
+      "name": "Rafael Advanced Defense Systems",
+      "ceo": "Yoav Har-Even",
+      "founded": 1948,
+      "hq": "Haifa, Israel",
+      "marketCap": "State-owned enterprise",
+      "products": [
+        {
+          "name": "Iron Dome",
+          "type": "Air Defense System",
+          "description": "Short-range rocket defense system using Tamir interceptors. Over 4,000 confirmed intercepts since 2011. Co-produced with Raytheon for US Army deployment as IFPC.",
+          "deployedBy": ["IDF", "US Army (planned)"]
+        },
+        {
+          "name": "Trophy (Windbreaker) APS",
+          "type": "Active Protection System",
+          "description": "Vehicle-mounted hard-kill active protection system that detects and destroys incoming RPGs and ATGMs before impact. Hundreds of confirmed hard-kills in Gaza combat.",
+          "deployedBy": ["IDF (Merkava, Namer)", "US Army (M1A2 SEPv3)", "German Bundeswehr (Leopard 2)"]
+        },
+        {
+          "name": "Spike Missile Family",
+          "type": "Anti-Tank / Multi-Purpose Missiles",
+          "description": "Family of electro-optical guided missiles from man-portable (Spike-SR) to helicopter-launched (Spike NLOS, 32 km range). Fire-and-forget with man-in-the-loop override. Exported to 35+ nations.",
+          "deployedBy": ["IDF", "35+ nations including Germany, UK, Italy, South Korea"]
+        },
+        {
+          "name": "Spice Bomb Family",
+          "type": "Precision Guided Munitions",
+          "description": "Stand-off precision guidance kits (Spice 250, 1000, 2000) converting dumb bombs into GPS/electro-optical guided PGMs with scene-matching AI terminal guidance. Extensively used in Gaza strikes.",
+          "deployedBy": ["Israeli Air Force", "Indian Air Force"]
+        }
+      ],
+      "contracts": "$3B+ annual revenue",
+      "description": "Israel's largest defense company and one of the world's most innovative weapons developers. Rafael's portfolio spans air defense (Iron Dome, David's Sling), active protection (Trophy), precision munitions (Spike, Spice), and naval systems. Iron Dome has fundamentally changed the calculus of asymmetric warfare. Trophy APS has proven so effective that the US, Germany, and UK have purchased it for their own armored fleets."
+    },
+    {
+      "id": "dt-005",
+      "name": "Elbit Systems",
+      "ceo": "Bezhalel Machlis",
+      "founded": 1966,
+      "hq": "Haifa, Israel",
+      "marketCap": "$10B+",
+      "products": [
+        {
+          "name": "Hermes 900/450 UAS",
+          "type": "Medium-Altitude Drone",
+          "description": "MALE UAS family for ISR and precision strike. Hermes 900 StarLiner is the first military drone certified for civilian airspace. Exported to 15+ countries.",
+          "deployedBy": ["IDF", "Brazil", "Switzerland", "Chile", "Mexico"]
+        },
+        {
+          "name": "Skylark Mini-UAS",
+          "type": "Man-Portable Drone",
+          "description": "Hand-launched tactical mini-drone for battalion-level ISR. Electric motor for near-silent operation. 3-hour endurance. Over 3,000 units produced.",
+          "deployedBy": ["IDF", "20+ NATO and allied forces"]
+        },
+        {
+          "name": "IHADSS / Helmet-Mounted Display Systems",
+          "type": "Pilot Display Systems",
+          "description": "Integrated Helmet and Display Sighting System for AH-64 Apache and other rotorcraft. The pilot looks at a target and the gun follows. Also produces the F-35 Gen III HMDS helmet display.",
+          "deployedBy": ["US Army (Apache)", "All F-35 operators worldwide"]
+        },
+        {
+          "name": "Iron Fist APS",
+          "type": "Active Protection System",
+          "description": "Lightweight hard-kill active protection system using interceptor projectiles to defeat RPGs and ATGMs. Selected for US Army's M2 Bradley APS upgrade program.",
+          "deployedBy": ["IDF", "US Army (Bradley)"]
+        }
+      ],
+      "contracts": "$5.5B+ annual revenue",
+      "description": "Israel's second-largest defense electronics company. Elbit produces the helmet-mounted display for every F-35 pilot in the world — the $400,000 Gen III HMDS helmet that replaces the traditional HUD by projecting flight and targeting data directly onto the pilot's visor. Also dominates the tactical drone market with the Hermes family and provides critical EW, cyber, and C4ISR systems to NATO forces."
+    },
+    {
+      "id": "dt-006",
+      "name": "Baykar Defense",
+      "ceo": "Haluk Bayraktar",
+      "founded": 2000,
+      "hq": "Istanbul, Turkey",
+      "marketCap": "Private ($10B+ estimated)",
+      "products": [
+        {
+          "name": "Bayraktar TB2",
+          "type": "MALE Combat Drone",
+          "description": "The drone that changed modern warfare. $5M per unit MALE UAS with MAM-L/MAM-C precision munitions. 500+ units produced, exported to 30+ countries. Proven in Libya, Syria, Nagorno-Karabakh, and Ukraine.",
+          "deployedBy": ["Turkey", "Ukraine", "Azerbaijan", "30+ export customers"]
+        },
+        {
+          "name": "Bayraktar Akinci",
+          "type": "HALE Combat Drone",
+          "description": "Twin-engine heavy combat drone capable of carrying cruise missiles and heavy PGMs. AESA radar, AI-assisted targeting, 1,350 kg payload. Turkey's strategic unmanned bomber.",
+          "deployedBy": ["Turkey", "Pakistan"]
+        },
+        {
+          "name": "Bayraktar Kizilelma",
+          "type": "Unmanned Combat Aircraft",
+          "description": "Jet-powered unmanned fighter aircraft with supersonic capability (planned). Designed for carrier operations on TCG Anadolu. Features AI-enabled autonomous combat, air-to-air missile capability, and low observable design.",
+          "deployedBy": ["Turkey (in development/testing)"]
+        }
+      ],
+      "contracts": "$5B+ in export orders",
+      "description": "The Turkish defense company that democratized combat drone warfare. Founded by the Bayraktar family — CTO Selcuk Bayraktar is the son-in-law of President Erdogan. TB2's combat record in Libya, Syria, Nagorno-Karabakh, and Ukraine made it the most combat-proven drone of the 2020s. Baykar has deliberately priced its drones to undercut Western competitors, achieving massive export success. The upcoming Kizilelma unmanned fighter represents the next evolution in autonomous aerial combat."
+    },
+    {
+      "id": "dt-007",
+      "name": "AeroVironment",
+      "ceo": "Wahid Nawabi",
+      "founded": 1971,
+      "hq": "Arlington, VA",
+      "marketCap": "$5B+",
+      "products": [
+        {
+          "name": "Switchblade 300",
+          "type": "Loitering Munition",
+          "description": "Man-portable, tube-launched loitering munition for anti-personnel targets. 10-minute loiter time, 10 km range, EO/IR seeker with GPS guidance. Thousands provided to Ukraine.",
+          "deployedBy": ["US Army", "USSOCOM", "Ukraine"]
+        },
+        {
+          "name": "Switchblade 600",
+          "type": "Loitering Munition",
+          "description": "Larger loitering munition with Javelin-class anti-armor warhead. 40+ minute endurance, 40+ km range. Designed to defeat MBTs and hardened targets. Deployed in Ukraine.",
+          "deployedBy": ["US Army", "Ukraine"]
+        },
+        {
+          "name": "Puma 3 AE",
+          "type": "Small UAS (ISR)",
+          "description": "Hand-launched small tactical UAS for persistent ISR. All-environment capable with EO/IR sensor payload. 3-hour endurance. Thousands in service across US military.",
+          "deployedBy": ["US Army", "USSOCOM", "USMC", "Allied forces"]
+        },
+        {
+          "name": "Jump 20",
+          "type": "VTOL Medium UAS",
+          "description": "VTOL-capable fixed-wing tactical UAS for ISR and targeting. No runway required. 14-hour endurance. Selected for US Army's Future Tactical UAS (FTUAS) program.",
+          "deployedBy": ["US Army"]
+        }
+      ],
+      "contracts": "$800M+ annual revenue",
+      "description": "Pioneer of small tactical UAS and loitering munitions. AeroVironment's Switchblade has become iconic in the Ukraine conflict, giving individual soldiers the ability to conduct precision strikes beyond line of sight. The company has been producing drones since the 1980s (original Pointer UAS) and dominates the US small UAS market. Their products emphasize portability — a single soldier can carry and deploy a Switchblade from a backpack."
+    },
+    {
+      "id": "dt-008",
+      "name": "General Atomics Aeronautical Systems",
+      "ceo": "Linden Blue",
+      "founded": 1992,
+      "hq": "San Diego, CA",
+      "marketCap": "Private (General Atomics parent)",
+      "products": [
+        {
+          "name": "MQ-9 Reaper",
+          "type": "MALE Combat Drone",
+          "description": "The premier Western hunter-killer drone. 27-hour endurance, 1,746 kg weapons payload, multi-spectral targeting system. Has conducted thousands of precision strikes across the Middle East and Africa.",
+          "deployedBy": ["USAF", "US DHS", "UK RAF", "French Air Force", "Italian Air Force"]
+        },
+        {
+          "name": "MQ-1C Gray Eagle",
+          "type": "MALE Combat/ISR Drone",
+          "description": "US Army's division-level armed reconnaissance UAS. 25-hour endurance with Hellfire missile capability. Extended Range variant features increased fuel and modular payloads.",
+          "deployedBy": ["US Army"]
+        },
+        {
+          "name": "MQ-9B SkyGuardian / SeaGuardian",
+          "type": "Next-Gen MALE Drone",
+          "description": "Next-generation Reaper variant certified for flight in non-segregated airspace. Anti-submarine warfare capability (SeaGuardian variant with sonobuoy dispensing). Selected by UK, Australia, Belgium, and Japan.",
+          "deployedBy": ["UK RAF (Protector RG Mk1)", "Australia", "Japan"]
+        }
+      ],
+      "contracts": "$3B+ annual revenue",
+      "description": "The company that invented the modern combat drone. General Atomics' Predator and Reaper have defined American remote warfare for two decades, conducting targeted killings and persistent surveillance from Afghanistan to Somalia. The MQ-9 Reaper has logged millions of flight hours and its operations have been central to US counter-terrorism strategy. Privately held by the Blue family, GA also operates in nuclear energy and electromagnetic systems."
+    },
+    {
+      "id": "dt-009",
+      "name": "Raytheon / RTX",
+      "ceo": "Christopher Calio",
+      "founded": 1922,
+      "hq": "Arlington, VA",
+      "marketCap": "$160B+",
+      "products": [
+        {
+          "name": "Patriot PAC-3 MSE",
+          "type": "Air Defense System",
+          "description": "The backbone of Western air defense. Hit-to-kill terminal defense against ballistic missiles, cruise missiles, and aircraft. Combat-proven in Ukraine against Russian Kinzhal and Iskander missiles.",
+          "deployedBy": ["US Army", "17 allied nations", "Ukraine"]
+        },
+        {
+          "name": "FIM-92 Stinger",
+          "type": "MANPADS",
+          "description": "Man-portable infrared-homing SAM. Iconic weapon of the Afghan Mujahideen against Soviet helicopters. Thousands provided to Ukraine for short-range air defense against Russian aircraft and drones.",
+          "deployedBy": ["US Army", "30+ nations", "Ukraine"]
+        },
+        {
+          "name": "AIM-120 AMRAAM",
+          "type": "Air-to-Air Missile",
+          "description": "NATO's primary beyond-visual-range air-to-air missile. Active radar homing, fire-and-forget. Also used as the interceptor in NASAMS ground-based air defense system.",
+          "deployedBy": ["All NATO air forces", "36+ nations"]
+        },
+        {
+          "name": "BGM-109 Tomahawk",
+          "type": "Cruise Missile",
+          "description": "Long-range all-weather subsonic cruise missile. 1,600+ km range. Block V variant features maritime moving target capability and joint multi-effects warhead system. Over 2,300 fired in combat since 1991.",
+          "deployedBy": ["US Navy", "Royal Navy"]
+        }
+      ],
+      "contracts": "$27B+ annual defense revenue (RTX Missiles & Defense segment)",
+      "description": "One of the world's largest missile manufacturers and a pillar of US and NATO air defense. Raytheon's Patriot system has become the most sought-after air defense platform in the world following its performance in Ukraine, where it shot down Russian hypersonic Kinzhal missiles — previously claimed to be unstoppable. Now merged into RTX Corporation (formerly Raytheon Technologies). Demand for Patriot, Stinger, and AMRAAM has driven multi-year production backlogs."
+    },
+    {
+      "id": "dt-010",
+      "name": "Lockheed Martin",
+      "ceo": "James Taiclet",
+      "founded": 1995,
+      "hq": "Bethesda, MD",
+      "marketCap": "$130B+",
+      "products": [
+        {
+          "name": "F-35 Lightning II",
+          "type": "5th Gen Stealth Fighter",
+          "description": "The most expensive weapons program in history ($1.7 trillion lifecycle). Three variants (A/B/C) for Air Force, Marines, and Navy. 1,000+ delivered to 18 nations. The backbone of allied air power for the next 50 years.",
+          "deployedBy": ["US Military", "17 allied nations including Israel, UK, Japan, Australia, Italy"]
+        },
+        {
+          "name": "THAAD",
+          "type": "Ballistic Missile Defense",
+          "description": "Terminal High Altitude Area Defense system with 100% intercept rate in testing (18/18). Deployed to Israel in October 2024 to counter Iranian ballistic missiles. Intercepts targets at 40-150 km altitude.",
+          "deployedBy": ["US Army", "UAE", "Saudi Arabia", "South Korea", "Israel (2024)"]
+        },
+        {
+          "name": "M142 HIMARS",
+          "type": "Rocket Artillery",
+          "description": "High Mobility Artillery Rocket System — the weapon that changed the Ukraine war. GPS-guided GMLRS rockets strike within 2m CEP at 70 km range. 40+ systems provided to Ukraine.",
+          "deployedBy": ["US Army", "USMC", "Ukraine", "Poland", "Romania", "Australia"]
+        },
+        {
+          "name": "FGM-148 Javelin",
+          "type": "Anti-Tank Missile",
+          "description": "Fire-and-forget top-attack anti-tank missile. Joint venture with Raytheon. Over 10,000 provided to Ukraine. $178,000 per missile. Became a cultural icon of Ukrainian resistance.",
+          "deployedBy": ["US Army", "USMC", "Ukraine", "20+ allied nations"]
+        },
+        {
+          "name": "AGM-158 JASSM / JASSM-ER",
+          "type": "Stealth Cruise Missile",
+          "description": "Low-observable air-launched cruise missile with 370 km range (JASSM) or 925+ km (JASSM-ER). Penetrates advanced IADS. One of the most closely guarded US weapons — not exported to most allies.",
+          "deployedBy": ["USAF", "US Navy", "Australia", "Finland", "Poland"]
+        }
+      ],
+      "contracts": "$65B+ annual revenue (world's largest defense contractor)",
+      "description": "The world's largest defense company, responsible for the F-35 stealth fighter, THAAD missile defense, HIMARS, Javelin, Trident nuclear missiles, and numerous classified programs. Lockheed Martin's products have defined modern warfare — HIMARS and Javelin shaped the Ukraine conflict while the F-35 is reshaping allied air power globally. The company also operates the Skunk Works advanced development facility responsible for the SR-71, F-117, and classified next-generation programs."
+    },
+    {
+      "id": "dt-011",
+      "name": "Rheinmetall",
+      "ceo": "Armin Papperger",
+      "founded": 1889,
+      "hq": "Dusseldorf, Germany",
+      "marketCap": "$25B+",
+      "products": [
+        {
+          "name": "Gepard SPAAG",
+          "type": "Self-Propelled Anti-Aircraft Gun",
+          "description": "1970s-era 35mm twin-cannon air defense system that became one of the most effective counter-drone weapons in Ukraine. Donated from German reserves. Devastatingly effective against Shahed-136 drones.",
+          "deployedBy": ["Ukraine"]
+        },
+        {
+          "name": "Lynx KF41 IFV",
+          "type": "Infantry Fighting Vehicle",
+          "description": "Next-generation tracked IFV with modular armor, 30mm Lance turret, and optional Spike ATGM integration. Selected by Hungary and Australia. Competing for multiple NATO IFV programs.",
+          "deployedBy": ["Hungary", "Australia (selected)"]
+        },
+        {
+          "name": "120mm Ammunition Production",
+          "type": "Tank & Artillery Ammunition",
+          "description": "One of Europe's largest producers of 120mm tank ammunition, 155mm artillery shells, and 35mm air defense rounds. Massively expanded production capacity for Ukraine support since 2022.",
+          "deployedBy": ["NATO forces", "Ukraine"]
+        },
+        {
+          "name": "Skynex / Skyranger Air Defense",
+          "type": "C-UAS / SHORAD",
+          "description": "Modern short-range air defense systems using 35mm revolver cannon with programmable airburst ammunition (AHEAD). Highly effective against drones and cruise missiles. Skyranger 30 turret being integrated on Boxer vehicles.",
+          "deployedBy": ["Germany", "Ukraine (ordered)"]
+        }
+      ],
+      "contracts": "$8B+ annual revenue (record growth since 2022)",
+      "description": "Germany's largest arms manufacturer, experiencing unprecedented growth driven by European rearmament and Ukraine support. Rheinmetall has become the arsenal of European defense, massively expanding ammunition production lines and establishing new factories in Ukraine itself. The company's Gepard SPAAG became an unexpected star of the Ukraine war, proving devastatingly effective against Iranian Shahed drones. CEO Armin Papperger was the target of a Russian assassination plot uncovered by Western intelligence in 2024."
+    }
+  ]
+}

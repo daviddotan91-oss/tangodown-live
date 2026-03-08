@@ -66,6 +66,22 @@ export default function TopNav({ activeView, setActiveView, stats }) {
             INTEL
             <kbd className="top-bar-key">I</kbd>
           </button>
+          <button
+            className={`top-bar-nav-btn ${activeView === 'arsenal' ? 'active' : ''}`}
+            onClick={() => setActiveView('arsenal')}
+          >
+            <span className="top-bar-nav-dot" />
+            ARSENAL
+            <kbd className="top-bar-key">A</kbd>
+          </button>
+          <button
+            className={`top-bar-nav-btn ${activeView === 'broadcast' ? 'active' : ''}`}
+            onClick={() => setActiveView('broadcast')}
+          >
+            <span className="top-bar-nav-dot" />
+            BROADCAST
+            <kbd className="top-bar-key">B</kbd>
+          </button>
         </div>
         <span className="top-bar-defcon" style={{ color: defconColor, borderColor: defconColor + '66' }}>
           DEFCON {stats.defcon}

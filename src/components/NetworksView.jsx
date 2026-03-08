@@ -37,8 +37,9 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
     latMin: -10, latMax: 52,
   }), [])
 
+  // Track container size with ResizeObserver so canvas updates when dossier opens/closes
   useEffect(() => {
-    const updateSize = () => {
+    const syncSize = () => {
       if (!containerRef.current || !canvasRef.current) return
       const rect = containerRef.current.getBoundingClientRect()
       const dpr = window.devicePixelRatio || 1
@@ -53,37 +54,39 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
         dprRef.current = dpr
       }
     }
-    updateSize()
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
+    syncSize()
+    window.addEventListener('resize', syncSize)
+    const ro = new ResizeObserver(syncSize)
+    if (containerRef.current) ro.observe(containerRef.current)
+    return () => {
+      window.removeEventListener('resize', syncSize)
+      ro.disconnect()
+    }
   }, [])
 
-  // Build node positions from org territory coords
-  useEffect(() => {
+  // Reproject nodes from lat/lng to current canvas pixel positions (called every frame)
+  const reprojectNodes = useCallback((cw, ch) => {
     if (!organizations.length) return
-    const cw = sizeRef.current.w
-    const ch = sizeRef.current.h
     const pad = 30
-    const bounds = {
-      x: pad, y: pad, w: cw - pad * 2, h: ch - pad * 2,
-      ...mapBounds
+    const bounds = { x: pad, y: pad, w: cw - pad * 2, h: ch - pad * 2, ...mapBounds }
+    // Build or update nodes
+    if (nodesRef.current.length !== organizations.length) {
+      nodesRef.current = organizations.map(org => {
+        const coords = org.territoryCoords?.[0] || [20, 40]
+        return { id: org.id, name: org.name, color: org.color || '#FF4444',
+          x: 0, y: 0, lat: coords[0], lng: coords[1], radius: 8 }
+      })
     }
-    const rawNodes = organizations.map(org => {
-      const coords = org.territoryCoords?.[0] || [20, 40]
-      const [px, py] = project(coords[0], coords[1], bounds)
-      return {
-        id: org.id,
-        name: org.name,
-        color: org.color || '#FF4444',
-        x: px, y: py,
-        lat: coords[0], lng: coords[1],
-        radius: 8,
-      }
+    // Project all to current size
+    nodesRef.current.forEach(node => {
+      const [px, py] = project(node.lat, node.lng, bounds)
+      node.x = px
+      node.y = py
     })
     // De-overlap nodes that share same or very close coords
-    for (let i = 0; i < rawNodes.length; i++) {
-      for (let j = i + 1; j < rawNodes.length; j++) {
-        const a = rawNodes[i], b = rawNodes[j]
+    for (let i = 0; i < nodesRef.current.length; i++) {
+      for (let j = i + 1; j < nodesRef.current.length; j++) {
+        const a = nodesRef.current[i], b = nodesRef.current[j]
         const dx = b.x - a.x, dy = b.y - a.y
         const dist = Math.sqrt(dx * dx + dy * dy)
         if (dist < 28) {
@@ -96,7 +99,6 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
         }
       }
     }
-    nodesRef.current = rawNodes
   }, [organizations, mapBounds])
 
   useEffect(() => {
@@ -125,6 +127,9 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
       const ch = sizeRef.current.h
       const pad = 30
       timeRef.current += 0.004
+
+      // Reproject nodes to current canvas size every frame
+      reprojectNodes(cw, ch)
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, cw, ch)
@@ -422,7 +427,7 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
 
     draw()
     return () => cancelAnimationFrame(animRef.current)
-  }, [organizations, networks, selectedOrg, geoData, mapBounds])
+  }, [organizations, networks, selectedOrg, geoData, mapBounds, reprojectNodes])
 
   const getNodeAtPos = useCallback((e) => {
     const rect = canvasRef.current.getBoundingClientRect()
@@ -440,6 +445,9 @@ function TacticalMap({ organizations, networks, onOrgSelect, selectedOrg, geoDat
     if (node) {
       const org = organizations.find(o => o.id === node.id)
       if (org) onOrgSelect(org)
+    } else {
+      // Click on empty space — deselect
+      onOrgSelect(null)
     }
   }, [organizations, onOrgSelect, getNodeAtPos])
 
@@ -531,7 +539,7 @@ function OrgListSidebar({ organizations, networks, leaders, selectedOrg, onOrgSe
               )}
               <div
                 className={`net-org-row ${isSel ? 'selected' : ''}`}
-                onClick={() => onOrgSelect(org)}
+                onClick={() => onOrgSelect(selectedOrg?.id === org.id ? null : org)}
               >
                 <div className="net-org-dot" style={{ backgroundColor: org.color || '#FF4444' }} />
                 <div className="net-org-info">

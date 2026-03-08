@@ -92,28 +92,65 @@ export default function ConflictZone({ conflict }) {
 
         {activeTab === 'operations' && (
           <div className="conflict-operations">
-            <div className="ops-placeholder">
-              <div className="ops-icon">&#9654;</div>
-              <div className="ops-text">OPERATIONAL DATA</div>
-              <div className="ops-subtext">Phase 2 — Replay Engine</div>
-            </div>
+            {conflict.recentStrikes?.length > 0 ? (
+              <div className="ops-strikes">
+                <div className="ops-strikes-header">CONFIRMED OPERATIONS — {conflict.recentStrikes.length} RECENT</div>
+                {conflict.recentStrikes.map((strike, i) => (
+                  <div key={i} className="ops-strike-entry">
+                    <div className="ops-strike-row1">
+                      <span className="ops-strike-date">{strike.date}</span>
+                      <span className="ops-strike-operator">{strike.operator}</span>
+                      <span className="ops-strike-result" style={{
+                        color: /destroy|eliminat|collaps|neutral|intercept/i.test(strike.result) ? '#44CC44' : '#FFB800'
+                      }}>{strike.result}</span>
+                    </div>
+                    <div className="ops-strike-target">{strike.target}</div>
+                    <div className="ops-strike-row3">
+                      <span className="ops-strike-weapon">{strike.weapon}</span>
+                      <span className="ops-strike-platform">{strike.aircraft}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="ops-placeholder">
+                <div className="ops-text">NO CONFIRMED OPERATIONS DATA</div>
+              </div>
+            )}
           </div>
         )}
 
         {activeTab === 'assets' && (
           <div className="conflict-assets">
-            <div className="asset-section">
-              <div className="asset-section-title">AIRCRAFT ({conflict.stats.aircraftInTheater})</div>
-              <div className="asset-placeholder">Detailed order of battle — Phase 2</div>
-            </div>
-            <div className="asset-section">
-              <div className="asset-section-title">NAVAL ({conflict.stats.navalAssets})</div>
-              <div className="asset-placeholder">Fleet composition data — Phase 2</div>
-            </div>
-            <div className="asset-section">
-              <div className="asset-section-title">UAS ({conflict.stats.uasInTheater})</div>
-              <div className="asset-placeholder">Drone inventory — Phase 2</div>
-            </div>
+            {conflict.aircraft?.length > 0 && (
+              <div className="asset-section">
+                <div className="asset-section-title">AIRCRAFT ORDER OF BATTLE ({conflict.aircraft.reduce((s, a) => s + a.count, 0)} TOTAL)</div>
+                {conflict.aircraft.map((ac, i) => (
+                  <div key={i} className="asset-row">
+                    <span className="asset-row-name">{ac.type}</span>
+                    <span className="asset-row-role">{ac.role}</span>
+                    <span className="asset-row-operator">{ac.operator}</span>
+                    <span className="asset-row-count">x{ac.count}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {conflict.weapons?.length > 0 && (
+              <div className="asset-section">
+                <div className="asset-section-title">WEAPONS SYSTEMS ({conflict.weapons.length} TYPES)</div>
+                {conflict.weapons.map((w, i) => (
+                  <div key={i} className="asset-row">
+                    <span className="asset-row-name">{w.name}</span>
+                    <span className="asset-row-role">{w.type}</span>
+                    <span className="asset-row-operator">{w.operator}</span>
+                    <span className="asset-row-count">{w.dailyUse}/d</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {!conflict.aircraft?.length && !conflict.weapons?.length && (
+              <div className="asset-placeholder">NO DETAILED ORDER OF BATTLE AVAILABLE</div>
+            )}
           </div>
         )}
       </div>

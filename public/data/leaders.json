@@ -1902,7 +1902,7 @@
         "UAE"
       ],
       "bounty": null,
-      "threatAssessment": "HIGH",
+      "threatAssessment": "CRITICAL",
       "description": "Political and religious leader of the Houthi movement since 2004 (following his brother Hussein's death). Commands the Houthi forces conducting the Red Sea anti-shipping campaign. Portrays himself as defender of Palestinian cause. Has escalated attacks despite US/UK military strikes on Houthi positions.",
       "knownAssociates": [
         "Mohamed Ali al-Houthi (political council)",
@@ -1922,7 +1922,7 @@
         "Israel"
       ],
       "bounty": null,
-      "threatAssessment": "HIGH",
+      "threatAssessment": "CRITICAL",
       "description": "Long-time deputy to Hassan Nasrallah. Elected as Hezbollah's new Secretary-General following the assassinations of Nasrallah and Safieddine. Theologian and political figure rather than military commander. Faces the challenge of rebuilding Hezbollah's command structure after Israel's decapitation campaign.",
       "knownAssociates": [
         "Remaining Hezbollah Shura Council members",
@@ -2060,6 +2060,118 @@
         "Afghan Taliban (alleged sanctuary arrangement)"
       ],
       "image": "/images/leaders/la-012.jpg"
+    },
+    {
+      "id": "la-013",
+      "name": "Mohammed Sinwar",
+      "orgId": "hamas",
+      "title": "Senior Hamas Commander in Gaza (brother of Yahya Sinwar)",
+      "threatAssessment": "CRITICAL",
+      "lastKnownLocation": "Gaza Strip (underground tunnel network)",
+      "description": "Brother of the late Yahya Sinwar, who was killed by IDF forces in October 2024. Mohammed Sinwar assumed operational command of Hamas' remaining military infrastructure in Gaza. A key figure in the Qassam Brigades, he is believed to have taken over day-to-day military operations and is among the last senior Hamas commanders still operating inside Gaza.",
+      "wantedBy": [
+        "Israel",
+        "United States"
+      ],
+      "bounty": null,
+      "charges": "Directing terrorist operations, involvement in October 7 attack planning and execution",
+      "image": null
+    },
+    {
+      "id": "la-014",
+      "name": "Khalil al-Hayya",
+      "orgId": "hamas",
+      "title": "Deputy Head of Hamas Political Bureau; Head of Hamas in Gaza (external)",
+      "threatAssessment": "CRITICAL",
+      "lastKnownLocation": "Doha, Qatar",
+      "description": "Senior Hamas political leader based in Qatar. Became the de facto external leader of Hamas following the assassinations of Ismail Haniyeh and the death of Yahya Sinwar. Serves as Hamas' chief ceasefire and hostage negotiator. Has been the primary interlocutor with Qatari and Egyptian mediators throughout the Gaza war.",
+      "wantedBy": [
+        "Israel",
+        "United States (sanctions)"
+      ],
+      "bounty": null,
+      "charges": "Senior leadership of designated terrorist organization, directing Hamas operations from abroad",
+      "image": null
+    },
+    {
+      "id": "la-015",
+      "name": "Abu Ubaidah",
+      "orgId": "hamas",
+      "title": "Official Spokesperson of the Izz ad-Din al-Qassam Brigades (Hamas military wing)",
+      "threatAssessment": "CRITICAL",
+      "lastKnownLocation": "Gaza Strip (unknown precise location)",
+      "description": "The masked spokesperson of Hamas' military wing since 2007. Real identity remains unknown. Delivers Hamas military communiques and has become one of the most recognizable figures of the Gaza war, releasing videos on hostage situations and military operations. Serves as the public voice of Hamas' armed resistance.",
+      "wantedBy": [
+        "Israel",
+        "United States"
+      ],
+      "bounty": null,
+      "charges": "Military spokesperson for designated terrorist organization, incitement",
+      "image": null
+    },
+    {
+      "id": "la-016",
+      "name": "Abdul Reza Shahlai",
+      "orgId": "irgc",
+      "title": "Senior IRGC Quds Force Commander",
+      "threatAssessment": "HIGH",
+      "lastKnownLocation": "Yemen (deployed to advise Houthi forces)",
+      "description": "Senior IRGC Quds Force officer with a $15 million US bounty — one of the largest active bounties on any IRGC figure. Accused of directing the 2011 plot to assassinate the Saudi ambassador to the United States on American soil. Has been deployed to Yemen to coordinate Iranian military support to the Houthis, including transfer of ballistic missile and drone technology.",
+      "wantedBy": [
+        "United States (FBI / Rewards for Justice)",
+        "Saudi Arabia"
+      ],
+      "bounty": "$15,000,000 (Rewards for Justice)",
+      "charges": "Conspiracy to commit murder, directing terrorist operations against US and allied targets, weapons proliferation",
+      "image": null
+    },
+    {
+      "id": "la-017",
+      "name": "Mullah Mohammad Yaqoob",
+      "orgId": "taliban",
+      "title": "Acting Minister of Defense, Islamic Emirate of Afghanistan; Son of Mullah Omar",
+      "threatAssessment": "MEDIUM",
+      "lastKnownLocation": "Kabul, Afghanistan",
+      "description": "Son of Taliban founder Mullah Mohammed Omar. Serves as Afghanistan's acting defense minister, commanding the Taliban's military forces. His lineage gives him significant legitimacy within the Taliban movement. Controls the Taliban's conventional military apparatus and has been involved in power struggles with the Haqqani Network faction.",
+      "wantedBy": [
+        "United States (sanctions)"
+      ],
+      "bounty": null,
+      "charges": "Leadership of Taliban military forces, enforcement of repressive governance policies",
+      "image": null
+    },
+    {
+      "id": "la-018",
+      "name": "Sani Shuwaram",
+      "orgId": "boko-haram",
+      "title": "Leader of ISWAP (Islamic State West Africa Province)",
+      "threatAssessment": "HIGH",
+      "lastKnownLocation": "Lake Chad Basin region, northeastern Nigeria",
+      "description": "Assumed leadership of ISWAP following the death of Abu Musab al-Barnawi. ISWAP is the dominant Boko Haram faction aligned with ISIS. Under his command, ISWAP has expanded control over communities in the Lake Chad Basin, taxing populations and attacking Nigerian military positions. The group remains the most lethal jihadist organization in West Africa.",
+      "wantedBy": [
+        "Nigeria",
+        "United States",
+        "Multinational Joint Task Force"
+      ],
+      "bounty": null,
+      "charges": "Leading designated terrorist organization, mass atrocities against civilian populations, kidnapping",
+      "image": null
+    },
+    {
+      "id": "la-019",
+      "name": "Hashem Safieddine",
+      "orgId": "hezbollah",
+      "title": "Former Head of Hezbollah Executive Council; Designated successor to Nasrallah",
+      "threatAssessment": "HIGH",
+      "lastKnownLocation": "Status uncertain — reported killed in Israeli strikes (October 2024, unconfirmed)",
+      "description": "Head of Hezbollah's Executive Council and cousin of Hassan Nasrallah. Was widely expected to succeed Nasrallah as Secretary-General before Israel reportedly targeted him in early October 2024. His status remains officially unconfirmed by Hezbollah. If alive, he remains a senior figure in Hezbollah's leadership structure and a key link to Iran's IRGC.",
+      "wantedBy": [
+        "United States (sanctions / designated)",
+        "Israel"
+      ],
+      "bounty": null,
+      "charges": "Senior leadership of designated terrorist organization, coordinating Hezbollah-IRGC military cooperation",
+      "image": null
     }
   ]
 }

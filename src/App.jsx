@@ -8,6 +8,8 @@ import NetworksView from './components/NetworksView'
 import ReplayView from './components/ReplayView'
 import IntelView from './components/IntelView'
 import SearchOverlay from './components/SearchOverlay'
+import ArsenalView from './components/ArsenalView'
+import BroadcastView from './components/BroadcastView'
 import { useConflictData } from './hooks/useConflictData'
 import { useLiveFeed } from './hooks/useLiveFeed'
 
@@ -23,15 +25,24 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [organizations, setOrganizations] = useState([])
   const [leaders, setLeaders] = useState({ eliminated: [], active: [] })
+  const [networks, setNetworks] = useState({ connections: [], clusters: [] })
+  const [arsenal, setArsenal] = useState({ airDefense: [], uas: [], platforms: [], defenseTech: [] })
+  const [broadcast, setBroadcast] = useState({ countries: [] })
 
-  // Load organizations and leaders for search
+  // Load organizations, leaders, and networks
   useEffect(() => {
     Promise.all([
       fetch('/data/organizations.json').then(r => r.json()),
-      fetch('/data/leaders.json').then(r => r.json())
-    ]).then(([orgs, ldrs]) => {
+      fetch('/data/leaders.json').then(r => r.json()),
+      fetch('/data/networks.json').then(r => r.json()),
+      fetch('/data/arsenal.json').then(r => r.json()),
+      fetch('/data/broadcast.json').then(r => r.json())
+    ]).then(([orgs, ldrs, nets, ars, bcast]) => {
       setOrganizations(orgs)
       setLeaders(ldrs)
+      setNetworks(nets)
+      setArsenal(ars)
+      setBroadcast(bcast)
     }).catch(() => {})
   }, [])
 
@@ -84,6 +95,8 @@ export default function App() {
             case 'n': setActiveView('networks'); break
             case 'r': setActiveView('replay'); break
             case 'i': setActiveView('intel'); break
+            case 'a': setActiveView('arsenal'); break
+            case 'b': setActiveView('broadcast'); break
             case 'f': setPanelsVisible(prev => !prev); break
           }
       }
@@ -95,12 +108,21 @@ export default function App() {
   // Calculate global stats
   const globalStats = useMemo(() => {
     const totalAircraft = conflicts.reduce((s, c) => s + (c.stats?.aircraftInTheater || 0), 0)
+    const totalUAS = conflicts.reduce((s, c) => s + (c.stats?.uasInTheater || 0), 0)
+    const totalPersonnel = conflicts.reduce((s, c) => s + (c.stats?.activePersonnel || 0), 0)
+    const totalFronts = conflicts.reduce((s, c) => s + (c.fronts?.length || 0), 0)
+    const criticalCount = conflicts.filter(c => c.intensity === 'CRITICAL').length
+    const highCount = conflicts.filter(c => c.intensity === 'HIGH').length
+    const defcon = criticalCount >= 3 ? 1 : criticalCount >= 2 ? 2 : criticalCount >= 1 ? 3 : highCount >= 2 ? 4 : 5
     return {
       incidents: feed.length,
       zones: conflicts.length,
       naval: naval.length,
-      aircraft: totalAircraft > 1000 ? `${(totalAircraft / 1000).toFixed(1)}K` : totalAircraft,
-      threatLevel: 'ELEVATED'
+      aircraft: totalAircraft,
+      uas: totalUAS,
+      personnel: totalPersonnel,
+      fronts: totalFronts,
+      defcon
     }
   }, [conflicts, naval, feed.length])
 
@@ -183,6 +205,9 @@ export default function App() {
                   onConflictSelect={handleConflictSelect}
                   selectedConflict={selectedConflict}
                   feed={feed}
+                  leaders={leaders}
+                  organizations={organizations}
+                  networks={networks}
                 />
                 <RightPanel
                   feed={filteredFeed}
@@ -244,9 +269,17 @@ export default function App() {
             naval={naval}
           />
         )}
+
+        {activeView === 'arsenal' && (
+          <ArsenalView arsenal={arsenal} />
+        )}
+
+        {activeView === 'broadcast' && (
+          <BroadcastView broadcast={broadcast} />
+        )}
       </div>
 
-      <BottomBar stats={globalStats} />
+      <BottomBar stats={globalStats} conflicts={conflicts} leaders={leaders} naval={naval} />
 
       {/* Search Overlay */}
       <SearchOverlay

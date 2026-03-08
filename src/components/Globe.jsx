@@ -798,6 +798,11 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
   const flyingRef = useRef(false)
   const targetPosRef = useRef(new THREE.Vector3())
   const lastInteraction = useRef(Date.now())
+  const introPhaseRef = useRef(0) // 0=wide, 1=sweeping in, 2=done
+  const introTimeRef = useRef(0)
+  const introStartPosRef = useRef(new THREE.Vector3())
+  const introMidPosRef = useRef(new THREE.Vector3())
+  const introEndPosRef = useRef(new THREE.Vector3())
 
   const tourOrder = useMemo(() => {
     const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 }
@@ -809,12 +814,36 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
     return new THREE.Vector3(pos[0], pos[1], pos[2])
   }, [])
 
+  // Intro fly-in on mount — sweep from wide shot into most critical conflict zone
+  useEffect(() => {
+    if (!conflicts.length) return
+    const hotZone = tourOrder[0]
+    if (!hotZone?.center) return
+
+    // Start: wide dramatic angle — above and to the side
+    const startPos = new THREE.Vector3(2.5, 3.0, 4.0)
+    // Mid: intermediate sweep position — closer, angled
+    const midTarget = getCameraPosition(hotZone.center[0] + 12, hotZone.center[1] - 20, 3.0)
+    // End: tight on the hot zone
+    const endTarget = getCameraPosition(hotZone.center[0], hotZone.center[1], 2.2)
+
+    introStartPosRef.current.copy(startPos)
+    introMidPosRef.current.copy(midTarget)
+    introEndPosRef.current.copy(endTarget)
+    camera.position.copy(startPos)
+    introPhaseRef.current = 1
+    introTimeRef.current = 0
+    // Suppress idle tour during intro
+    lastInteraction.current = Date.now() + 20000
+  }, [conflicts.length > 0]) // eslint-disable-line
+
   useEffect(() => {
     if (!flyToTarget) return
     const target = getCameraPosition(flyToTarget[0], flyToTarget[1], 2.0)
     targetPosRef.current.copy(target)
     flyingRef.current = true
     tourActiveRef.current = false
+    introPhaseRef.current = 2 // cancel intro if user navigates
     lastInteraction.current = Date.now()
   }, [flyToTarget, getCameraPosition])
 
@@ -822,6 +851,7 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
     const onInteract = () => {
       lastInteraction.current = Date.now()
       tourActiveRef.current = false
+      if (introPhaseRef.current === 1) introPhaseRef.current = 2 // cancel intro on interaction
     }
     window.addEventListener('pointerdown', onInteract)
     window.addEventListener('wheel', onInteract)
@@ -835,6 +865,41 @@ function CameraController({ flyToTarget, conflicts, onTourZone }) {
     const now = Date.now()
     const idleSeconds = (now - lastInteraction.current) / 1000
 
+    // ── Intro cinematic sweep ──
+    if (introPhaseRef.current === 1) {
+      introTimeRef.current += delta
+      const t = introTimeRef.current
+      const totalDuration = 4.5 // seconds for full sweep
+
+      if (t < totalDuration) {
+        // Smooth easing: cubic ease-in-out
+        let progress = t / totalDuration
+        progress = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2
+
+        // Bezier-style 3-point path: start → mid → end
+        const p1 = introStartPosRef.current
+        const p2 = introMidPosRef.current
+        const p3 = introEndPosRef.current
+        // Quadratic bezier interpolation
+        const oneMinusT = 1 - progress
+        camera.position.set(
+          oneMinusT * oneMinusT * p1.x + 2 * oneMinusT * progress * p2.x + progress * progress * p3.x,
+          oneMinusT * oneMinusT * p1.y + 2 * oneMinusT * progress * p2.y + progress * progress * p3.y,
+          oneMinusT * oneMinusT * p1.z + 2 * oneMinusT * progress * p2.z + progress * progress * p3.z
+        )
+        camera.lookAt(0, 0, 0)
+      } else {
+        // Intro complete
+        introPhaseRef.current = 2
+        lastInteraction.current = Date.now()
+        onTourZone?.(tourOrder[0])
+      }
+      return // skip other camera logic during intro
+    }
+
+    // ── Idle auto-tour ──
     if (!tourActiveRef.current && !flyingRef.current && idleSeconds > 12 && tourOrder.length > 0) {
       tourActiveRef.current = true
       idleTimerRef.current = 0
@@ -994,7 +1059,7 @@ export default function Globe({ conflicts, incidents, feed, naval, flyToTarget, 
     <div className="globe-container">
       <GlobeErrorBoundary>
         <Canvas
-          camera={{ position: [0, 1, 5], fov: 45 }}
+          camera={{ position: [2.5, 3.0, 4.0], fov: 45 }}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           dpr={[1, 2]}
           style={{ background: 'transparent' }}
