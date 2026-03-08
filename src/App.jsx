@@ -240,7 +240,7 @@ export default function App() {
   }
 
   return (
-    <div className={`app ${glitching ? 'crt-glitch' : ''}`}>
+    <div className={`app ${glitching ? 'crt-glitch' : ''} ${flashBorderPulse ? 'flash-screen-shake' : ''}`}>
       {/* Global CRT Scanlines */}
       <div className="global-scanlines" />
 

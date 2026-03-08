@@ -236,6 +236,15 @@ html, body, #root {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+.top-bar-defcon.defcon-critical {
+  animation: defconCriticalPulse 1s ease-in-out infinite;
+  text-shadow: 0 0 8px var(--defcon-color, #FF0000);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--defcon-color, #FF0000) 30%, transparent), inset 0 0 6px color-mix(in srgb, var(--defcon-color, #FF0000) 15%, transparent);
+}
+@keyframes defconCriticalPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
 
 .top-bar-stat {
   font-family: var(--font-mono);
@@ -1141,8 +1150,9 @@ html, body, #root {
 .war-feed-item:hover { background: rgba(255, 0, 0, 0.08); }
 
 @keyframes warFeedIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(-4px); background: rgba(255, 68, 0, 0.15); }
+  40% { opacity: 1; transform: translateY(0); background: rgba(255, 68, 0, 0.08); }
+  100% { opacity: 1; background: transparent; }
 }
 
 .war-feed-relative {
@@ -2461,6 +2471,23 @@ html, body, #root {
   0% { border-color: rgba(255, 68, 68, 0.8); box-shadow: inset 0 0 80px rgba(255, 0, 0, 0.3); }
   30% { border-color: rgba(255, 68, 68, 0.4); }
   100% { border-color: transparent; box-shadow: inset 0 0 0px transparent; }
+}
+
+/* Screen shake on flash traffic */
+.flash-screen-shake {
+  animation: screenShake 0.5s ease-out;
+}
+@keyframes screenShake {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-3px, 2px); }
+  20% { transform: translate(4px, -2px); }
+  30% { transform: translate(-2px, 3px); }
+  40% { transform: translate(3px, -1px); }
+  50% { transform: translate(-1px, 2px); }
+  60% { transform: translate(2px, -1px); }
+  70% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, 0px); }
+  100% { transform: translate(0, 0); }
 }
 
 /* Center screen flash overlay */

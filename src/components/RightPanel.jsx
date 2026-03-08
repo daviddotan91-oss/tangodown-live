@@ -34,7 +34,7 @@ export default function RightPanel({ feed, naval, conflicts = [], onIncidentClic
 
   // Refresh relative timestamps
   useEffect(() => {
-    const interval = setInterval(() => setTick(t => t + 1), 10000)
+    const interval = setInterval(() => setTick(t => t + 1), 5000)
     return () => clearInterval(interval)
   }, [])
 

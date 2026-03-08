@@ -83,13 +83,16 @@ export default function TopNav({ activeView, setActiveView, stats }) {
             <kbd className="top-bar-key">B</kbd>
           </button>
         </div>
-        <span className="top-bar-defcon" style={{ color: defconColor, borderColor: defconColor + '66' }}>
+        <span className={`top-bar-defcon ${stats.defcon <= 2 ? 'defcon-critical' : ''}`} style={{ color: defconColor, borderColor: defconColor + '66', '--defcon-color': defconColor }}>
           DEFCON {stats.defcon}
         </span>
       </div>
 
       <div className="top-bar-right">
         <div className="top-bar-stats">
+          <div className="top-bar-stat">
+            <span className="top-bar-stat-value">{stats.incidents || 0}</span> INC
+          </div>
           <div className="top-bar-stat">
             <span className="top-bar-stat-value">{fmtM(stats.personnel || 0)}</span> PERS
           </div>
