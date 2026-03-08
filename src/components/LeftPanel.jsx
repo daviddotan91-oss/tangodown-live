@@ -223,10 +223,85 @@ function DailySitrep({ conflicts, feed, leaders }) {
   )
 }
 
+/* ═══════════════════ ORG DECAPITATION TRACKER ═══════════════════ */
+function OrgDecapTracker({ eliminated, active, orgMap }) {
+  const orgStats = useMemo(() => {
+    const stats = {}
+    eliminated.forEach(t => {
+      const id = t.orgId
+      if (!stats[id]) stats[id] = { eliminated: 0, active: 0 }
+      stats[id].eliminated++
+    })
+    active.forEach(t => {
+      const id = t.orgId
+      if (!stats[id]) stats[id] = { eliminated: 0, active: 0 }
+      stats[id].active++
+    })
+    return Object.entries(stats)
+      .map(([id, s]) => ({
+        id,
+        org: orgMap[id],
+        eliminated: s.eliminated,
+        active: s.active,
+        total: s.eliminated + s.active,
+        pct: Math.round((s.eliminated / (s.eliminated + s.active)) * 100)
+      }))
+      .sort((a, b) => b.eliminated - a.eliminated)
+      .slice(0, 8)
+  }, [eliminated, active, orgMap])
+
+  const totalElim = eliminated.length
+  const totalActive = active.length
+  const globalPct = Math.round((totalElim / (totalElim + totalActive)) * 100)
+
+  return (
+    <div className="decap-tracker">
+      <div className="decap-header">
+        <span className="decap-title">LEADERSHIP ATTRITION</span>
+        <InfoTooltip text="Percentage of tracked leadership eliminated per organization. Higher attrition = greater decapitation of command structure." position="right" />
+      </div>
+      {/* Global counter */}
+      <div className="decap-global">
+        <div className="decap-global-count">
+          <span className="decap-global-x">╳</span>
+          <span className="decap-global-num">{totalElim}</span>
+          <span className="decap-global-label">TOTAL HVTs ELIMINATED</span>
+        </div>
+        <div className="decap-global-bar-track">
+          <div className="decap-global-bar-fill" style={{ width: `${globalPct}%` }} />
+        </div>
+        <div className="decap-global-pct">{globalPct}% LEADERSHIP ATTRITION</div>
+      </div>
+      {/* Per-org bars */}
+      <div className="decap-org-list">
+        {orgStats.map(s => {
+          const color = s.org?.color || '#FF4444'
+          return (
+            <div key={s.id} className="decap-org-row">
+              <div className="decap-org-info">
+                <span className="decap-org-name" style={{ color }}>{s.org?.name || s.id.toUpperCase()}</span>
+                <span className="decap-org-nums">
+                  <span className="decap-killed">{s.eliminated}</span>
+                  <span className="decap-slash">/</span>
+                  <span className="decap-total">{s.total}</span>
+                </span>
+              </div>
+              <div className="decap-bar-track">
+                <div className="decap-bar-fill" style={{ width: `${s.pct}%`, backgroundColor: color }} />
+              </div>
+              <span className="decap-pct" style={{ color: s.pct >= 80 ? '#44CC44' : s.pct >= 50 ? '#FFB800' : '#FF4444' }}>{s.pct}%</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 /* ═══════════════════ MAIN LEFT PANEL ═══════════════════ */
 export default function LeftPanel({ conflicts, onConflictSelect, selectedConflict, feed = [], leaders = {}, organizations = [], networks = {} }) {
   const [expandedConflict, setExpandedConflict] = useState(null)
-  const [activeSection, setActiveSection] = useState('sitrep')
+  const [activeSection, setActiveSection] = useState('killboard')
   const [opsRate, setOpsRate] = useState(0)
   const [opsTrend, setOpsTrend] = useState('stable')
 
@@ -399,6 +474,9 @@ export default function LeftPanel({ conflicts, onConflictSelect, selectedConflic
                 )
               })}
             </div>
+
+            {/* ORG DECAPITATION TRACKER */}
+            <OrgDecapTracker eliminated={eliminatedTargets} active={activeTargets} orgMap={orgMap} />
 
             {activeTargets.length > 0 && (
               <>

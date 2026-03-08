@@ -284,6 +284,8 @@ export default function App() {
         activeView={activeView}
         setActiveView={switchView}
         stats={globalStats}
+        killCount={leaders.eliminated?.length || 0}
+        wantedCount={leaders.active?.length || 0}
       />
 
       {/* Headline Ticker Bar */}

@@ -2062,22 +2062,6 @@
       "image": "/images/leaders/la-012.jpg"
     },
     {
-      "id": "la-013",
-      "name": "Mohammed Sinwar",
-      "orgId": "hamas",
-      "title": "Senior Hamas Commander in Gaza (brother of Yahya Sinwar)",
-      "threatAssessment": "CRITICAL",
-      "lastKnownLocation": "Gaza Strip (underground tunnel network)",
-      "description": "Brother of the late Yahya Sinwar, who was killed by IDF forces in October 2024. Mohammed Sinwar assumed operational command of Hamas' remaining military infrastructure in Gaza. A key figure in the Qassam Brigades, he is believed to have taken over day-to-day military operations and is among the last senior Hamas commanders still operating inside Gaza.",
-      "wantedBy": [
-        "Israel",
-        "United States"
-      ],
-      "bounty": null,
-      "charges": "Directing terrorist operations, involvement in October 7 attack planning and execution",
-      "image": null
-    },
-    {
       "id": "la-014",
       "name": "Khalil al-Hayya",
       "orgId": "hamas",
@@ -2155,22 +2139,6 @@
       ],
       "bounty": null,
       "charges": "Leading designated terrorist organization, mass atrocities against civilian populations, kidnapping",
-      "image": null
-    },
-    {
-      "id": "la-019",
-      "name": "Hashem Safieddine",
-      "orgId": "hezbollah",
-      "title": "Former Head of Hezbollah Executive Council; Designated successor to Nasrallah",
-      "threatAssessment": "HIGH",
-      "lastKnownLocation": "Status uncertain — reported killed in Israeli strikes (October 2024, unconfirmed)",
-      "description": "Head of Hezbollah's Executive Council and cousin of Hassan Nasrallah. Was widely expected to succeed Nasrallah as Secretary-General before Israel reportedly targeted him in early October 2024. His status remains officially unconfirmed by Hezbollah. If alive, he remains a senior figure in Hezbollah's leadership structure and a key link to Iran's IRGC.",
-      "wantedBy": [
-        "United States (sanctions / designated)",
-        "Israel"
-      ],
-      "bounty": null,
-      "charges": "Senior leadership of designated terrorist organization, coordinating Hezbollah-IRGC military cooperation",
       "image": null
     }
   ]

@@ -221,6 +221,46 @@ html, body, #root {
   white-space: nowrap;
 }
 
+/* ── KILL COUNTER in TopNav ── */
+.top-bar-kill-stat {
+  position: relative;
+  padding: 2px 8px !important;
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  border-radius: 3px;
+  animation: killCountPulse 3s ease-in-out infinite;
+}
+@keyframes killCountPulse {
+  0%, 100% { border-color: rgba(255, 0, 0, 0.25); }
+  50% { border-color: rgba(255, 0, 0, 0.5); box-shadow: 0 0 8px rgba(255, 0, 0, 0.15); }
+}
+.top-bar-kill-x {
+  color: #FF4444;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 3px;
+  text-shadow: 0 0 6px rgba(255, 68, 68, 0.5);
+}
+.top-bar-kill-value {
+  color: #FF4444 !important;
+  font-size: 13px !important;
+  text-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+}
+.top-bar-wanted-stat {
+  padding: 2px 6px !important;
+}
+.top-bar-wanted-icon {
+  color: #FFB800;
+  font-size: 9px;
+  margin-right: 2px;
+}
+.top-bar-stat-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border-primary);
+  flex-shrink: 0;
+}
+
 .top-bar-defcon {
   font-family: var(--font-mono);
   font-size: 0.5rem; font-weight: 700;
@@ -939,6 +979,142 @@ html, body, #root {
 /* Kill Board */
 .kill-board {
   padding: 8px 0 0;
+}
+
+/* ── ORG DECAPITATION TRACKER ── */
+.decap-tracker {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-card);
+}
+.decap-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.decap-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+.decap-global {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-primary);
+}
+.decap-global-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.decap-global-x {
+  color: #FF4444;
+  font-size: 14px;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
+}
+.decap-global-num {
+  font-family: 'Orbitron', var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: #FF4444;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(255, 68, 68, 0.4);
+}
+.decap-global-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
+.decap-global-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-primary);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.decap-global-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF4444, #FF8800);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 68, 68, 0.3);
+  transition: width 1s ease;
+}
+.decap-global-pct {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+.decap-org-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.decap-org-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.decap-org-info {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  flex-shrink: 0;
+}
+.decap-org-name {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80px;
+}
+.decap-org-nums {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.decap-killed {
+  color: #FF4444;
+  font-weight: 700;
+}
+.decap-slash {
+  color: var(--text-muted);
+  margin: 0 1px;
+}
+.decap-total {
+  color: var(--text-secondary);
+}
+.decap-bar-track {
+  flex: 1;
+  height: 3px;
+  background: var(--bg-primary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.decap-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+.decap-pct {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  width: 28px;
+  text-align: right;
 }
 
 .kill-board-header {

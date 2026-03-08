@@ -3,7 +3,7 @@ import InfoTooltip from './InfoTooltip'
 
 const DEFCON_COLORS = { 1: '#FF0000', 2: '#FF4444', 3: '#FF8800', 4: '#FFB800', 5: '#44CC44' }
 
-export default function TopNav({ activeView, setActiveView, stats }) {
+export default function TopNav({ activeView, setActiveView, stats, killCount = 0, wantedCount = 0 }) {
   const [utcTime, setUtcTime] = useState('')
 
   useEffect(() => {
@@ -92,6 +92,15 @@ export default function TopNav({ activeView, setActiveView, stats }) {
 
       <div className="top-bar-right">
         <div className="top-bar-stats">
+          <div className="top-bar-stat top-bar-kill-stat">
+            <span className="top-bar-kill-x">╳</span>
+            <span className="top-bar-stat-value top-bar-kill-value">{killCount}</span> ELIMINATED<InfoTooltip text="Total high-value targets confirmed eliminated across all terror organizations — leaders, commanders, and senior operatives neutralized by allied forces." position="bottom" />
+          </div>
+          <div className="top-bar-stat top-bar-wanted-stat">
+            <span className="top-bar-wanted-icon">◎</span>
+            <span className="top-bar-stat-value">{wantedCount}</span> WANTED<InfoTooltip text="Active high-value targets still at large — senior terror leaders and commanders under tracking." position="bottom" />
+          </div>
+          <div className="top-bar-stat-divider" />
           <div className="top-bar-stat">
             <span className="top-bar-stat-value">{stats.incidents || 0}</span> INC<InfoTooltip text="Total reported incidents across all conflict zones in the current tracking period." position="bottom" />
           </div>
