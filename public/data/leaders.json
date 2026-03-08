@@ -10,8 +10,13 @@
       "location": "Dahieh (southern suburbs of Beirut), Lebanon",
       "operationName": "Targeted strike on Hezbollah HQ",
       "significance": "Led Hezbollah for 32 years since 1992. Transformed Hezbollah into the most powerful non-state military force in the Middle East. Under his leadership, Hezbollah amassed 150,000+ rockets and missiles. His elimination marked the most significant blow to Iran's proxy network in decades.",
-      "wantedBy": ["United States", "Israel", "Interpol"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Israel",
+        "Interpol"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-001.jpg"
     },
     {
       "id": "le-002",
@@ -23,8 +28,11 @@
       "location": "Tehran, Iran",
       "operationName": "Attributed to Israel (not officially confirmed)",
       "significance": "Head of Hamas' political bureau since 2017. Former Prime Minister of the Palestinian Authority (2006-2007). Served as Hamas' chief diplomat and fundraiser, managing relationships with Iran, Qatar, and Turkey. Killed while attending the inauguration of Iran's new president.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-002.jpg"
     },
     {
       "id": "le-003",
@@ -36,8 +44,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Hezbollah's most senior military commander after Nasrallah. Responsible for Hezbollah's strategic weapons program. US had a $5 million Rewards for Justice bounty on him. Linked to the 1983 Beirut barracks bombing that killed 241 US Marines.",
-      "wantedBy": ["United States", "Israel"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Israel"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-003.jpg"
     },
     {
       "id": "le-004",
@@ -49,8 +61,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Attributed to Israel",
       "significance": "Founded Hamas' military operations in the West Bank. Key liaison between Hamas and Hezbollah in Lebanon. Believed to be involved in planning the October 7 attack. His killing in Beirut demonstrated Israel's reach into Hezbollah's stronghold.",
-      "wantedBy": ["Israel", "United States"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "Israel",
+        "United States"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-004.jpg"
     },
     {
       "id": "le-005",
@@ -62,8 +78,12 @@
       "location": "Kabul, Afghanistan (safehouse balcony)",
       "operationName": "CIA operation — authorized by President Biden",
       "significance": "Succeeded Osama bin Laden as Al-Qaeda leader in 2011. Egyptian surgeon who co-founded Egyptian Islamic Jihad. Key planner of 9/11 attacks. His presence in Taliban-controlled Kabul proved the Taliban had not severed ties with Al-Qaeda as promised in the 2020 Doha Agreement.",
-      "wantedBy": ["United States (FBI Most Wanted)", "Interpol"],
-      "bounty": "$25,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States (FBI Most Wanted)",
+        "Interpol"
+      ],
+      "bounty": "$25,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-005.jpg"
     },
     {
       "id": "le-006",
@@ -75,8 +95,13 @@
       "location": "Barisha, Idlib Province, Syria",
       "operationName": "Operation Kayla Mueller",
       "significance": "Declared the ISIS 'caliphate' from the Great Mosque of al-Nuri in Mosul, June 2014. Under his leadership, ISIS controlled territory the size of Britain, generated $1B+ annually, and inspired terrorist attacks worldwide. The most wanted terrorist in the world at the time of his death.",
-      "wantedBy": ["United States", "Interpol", "Multiple nations"],
-      "bounty": "$25,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Interpol",
+        "Multiple nations"
+      ],
+      "bounty": "$25,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-006.jpg"
     },
     {
       "id": "le-007",
@@ -88,8 +113,12 @@
       "location": "Baghdad International Airport, Iraq",
       "operationName": "Authorized by President Trump",
       "significance": "Iran's most powerful military figure. Architect of Iran's proxy network across the Middle East. Directed operations by Hezbollah, Shia militias in Iraq, Houthis, and Assad regime support. His assassination by the US was the most significant targeted killing since Osama bin Laden. Nearly triggered direct US-Iran war.",
-      "wantedBy": ["United States", "Israel"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-007.jpg"
     },
     {
       "id": "le-008",
@@ -101,8 +130,12 @@
       "location": "Abbottabad, Pakistan (compound)",
       "operationName": "Operation Neptune Spear",
       "significance": "Mastermind of the September 11, 2001 attacks that killed 2,977 people. Founded Al-Qaeda in 1988. The most wanted person in the world for nearly a decade. His killing by Navy SEALs in a compound near Pakistan's military academy was one of the most significant special operations in history.",
-      "wantedBy": ["United States (FBI Most Wanted #1)", "Interpol"],
-      "bounty": "$25,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States (FBI Most Wanted #1)",
+        "Interpol"
+      ],
+      "bounty": "$25,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-008.jpg"
     },
     {
       "id": "le-009",
@@ -114,7 +147,9 @@
       "location": "Atme, Idlib Province, Syria",
       "operationName": "US counterterrorism operation — authorized by President Biden",
       "significance": "Succeeded al-Baghdadi as ISIS leader. Maintained the organization's global insurgency network despite territorial losses. Killed in a US raid similar to the al-Baghdadi operation.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)"
     },
     {
@@ -127,8 +162,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Israeli targeted strike during Hezbollah military meeting",
       "significance": "Commander of Hezbollah's elite Radwan Force. US had a $7 million bounty for his role in the 1983 US Embassy bombing and Marine barracks bombing in Beirut. Killed alongside multiple other Radwan Force commanders in what Israel described as a strike on a meeting of senior military leadership.",
-      "wantedBy": ["United States", "Israel"],
-      "bounty": "$7,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Israel"
+      ],
+      "bounty": "$7,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-010.jpg"
     },
     {
       "id": "le-011",
@@ -140,8 +179,12 @@
       "location": "Tver Oblast, Russia (in-flight between Moscow and St. Petersburg)",
       "operationName": "Widely attributed to Russian state / GRU",
       "significance": "Founded the Wagner Group private military company. Led the failed June 2023 mutiny against Russian military leadership. Exactly two months after the mutiny, his plane crashed killing all aboard. His death consolidated Russian state control over Wagner operations, which were rebranded as 'Africa Corps' under GRU command.",
-      "wantedBy": ["United States (sanctions)", "EU (sanctions)"],
-      "bounty": null
+      "wantedBy": [
+        "United States (sanctions)",
+        "EU (sanctions)"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-011.jpg"
     },
     {
       "id": "le-012",
@@ -153,7 +196,9 @@
       "location": "Al-Mawasi, Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike (confirmed eliminated August 2024)",
       "significance": "Supreme commander of Hamas' military wing for over 20 years. Mastermind of the October 7, 2023 attack. Survived at least 7 previous Israeli assassination attempts, losing an eye, an arm, and the ability to walk. The most wanted person in Israel for decades.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -166,8 +211,11 @@
       "location": "Al-Shati refugee camp, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Known as the 'Shadow Man' — Hamas' third most senior military leader. Deputy to Mohammed Deif. Key planner of the October 7 attack. Oversaw Hamas' tunnel network and weapons development programs.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-013.jpg"
     },
     {
       "id": "le-014",
@@ -179,7 +227,10 @@
       "location": "Northern Syria",
       "operationName": "Turkish MIT intelligence operation",
       "significance": "Succeeded Abu al-Hassan al-Hashimi al-Qurayshi as ISIS leader. Led ISIS for approximately 7 months before being killed, demonstrating the group's difficulty in maintaining stable leadership under constant pressure from US and allied forces.",
-      "wantedBy": ["United States", "Turkey"],
+      "wantedBy": [
+        "United States",
+        "Turkey"
+      ],
       "bounty": null
     },
     {
@@ -192,8 +243,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Nasrallah's cousin and the most likely successor to lead Hezbollah. Headed Hezbollah's Executive Council, managing the organization's financial and administrative operations. His killing days after Nasrallah's assassination further decapitated Hezbollah's leadership structure.",
-      "wantedBy": ["United States (sanctions)", "Israel"],
-      "bounty": null
+      "wantedBy": [
+        "United States (sanctions)",
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-015.jpg"
     },
     {
       "id": "le-016",
@@ -205,8 +260,12 @@
       "location": "Sambisa Forest, Borno State, Nigeria",
       "operationName": "ISWAP assault on Boko Haram stronghold",
       "significance": "Notorious leader of Boko Haram since 2009. Orchestrated the 2014 kidnapping of 276 Chibok schoolgirls. Under his leadership, Boko Haram killed over 20,000 people. Killed himself with a suicide vest rather than surrender to rival ISWAP fighters, leading to Boko Haram's fragmentation.",
-      "wantedBy": ["United States", "Interpol"],
-      "bounty": "$7,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Interpol"
+      ],
+      "bounty": "$7,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-016.jpg"
     },
     {
       "id": "le-017",
@@ -218,8 +277,12 @@
       "location": "Tel al-Sultan, Rafah, Gaza Strip",
       "operationName": "IDF ground operation in Rafah",
       "significance": "Mastermind and operational commander of the October 7, 2023 attack that killed ~1,200 Israelis. Rose through Hamas' ranks during 22 years in Israeli prison. Known as 'The Butcher of Khan Younis.' Israel's #1 most wanted individual. Found alone in a partially destroyed building by an IDF patrol — not in the tunnel network as expected. His death marked the elimination of the most senior architect of the October 7 massacre.",
-      "wantedBy": ["Israel", "United States"],
-      "bounty": null
+      "wantedBy": [
+        "Israel",
+        "United States"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-017.jpg"
     },
     {
       "id": "le-018",
@@ -231,7 +294,9 @@
       "location": "Al-Mawasi, Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike (same strike that killed Mohammed Deif)",
       "significance": "Commander of Hamas' Khan Younis Brigade, one of the five main territorial brigades of the Qassam Brigades. Killed in the same massive Israeli airstrike that targeted Mohammed Deif. Responsible for Hamas military operations across the Khan Younis governorate.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -244,7 +309,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Commander of Hamas' Northern Gaza Division, overseeing all Qassam Brigades operations in northern Gaza including the Beit Hanoun, Beit Lahia, and Jabalia battalions. Played a key role in the October 7 attack planning. One of the most senior Hamas military commanders eliminated in the war.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -257,7 +324,9 @@
       "location": "Central Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Commander of Hamas' Central Camps Brigade, one of the first senior Hamas military commanders killed in the war. Led the Qassam Brigades' operations in the Bureij, Nuseirat, and Maghazi refugee camps. His early elimination disrupted Hamas' central command structure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -270,7 +339,9 @@
       "location": "Jabalia, northern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Commanded the Qassam Brigades' Shuja'iyya Battalion, one of the key units in Gaza City. Involved in planning and execution of the October 7 breach of the Gaza border fence. His battalion was responsible for multiple infiltration routes used on October 7.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -283,7 +354,9 @@
       "location": "Central Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Took command of Hamas' Central Gaza Division after the elimination of Ayman Nofal. His killing within months of assuming command demonstrated Israel's ability to identify and target Hamas' replacement commanders.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -296,8 +369,11 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike (confirmed October 2024)",
       "significance": "One of Yahya Sinwar's closest associates and a founding member of Hamas. Managed Hamas' governmental operations in Gaza and was a member of Hamas' senior leadership circle. His relationship with Sinwar dated back to their time together in Israeli prison.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-023.jpg"
     },
     {
       "id": "le-024",
@@ -309,7 +385,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike (killed alongside Rawhi Mushtaha)",
       "significance": "Led Hamas' internal security apparatus, responsible for counterintelligence, preventing collaboration with Israel, and maintaining organizational discipline. Key figure in Hamas' security infrastructure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -322,7 +400,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike (killed alongside Mushtaha and al-Siraj)",
       "significance": "Oversaw Hamas' internal security operations. His elimination alongside Mushtaha and al-Siraj in the same strike represented a major blow to Hamas' security and administrative leadership — three senior leaders killed in a single operation.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -335,7 +415,9 @@
       "location": "Southern Lebanon",
       "operationName": "Israeli targeted strike during Lebanon campaign",
       "significance": "Led Hamas' political and operational presence in Lebanon. Coordinated between Hamas and Hezbollah. His killing in Lebanon demonstrated the expansion of Israel's targeting to Hamas leadership outside Gaza.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -348,7 +430,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Oversaw Hamas' intelligence apparatus, responsible for intelligence collection, surveillance, and counterintelligence efforts against Israeli penetration of the organization.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -361,7 +445,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Oversaw Hamas' domestic weapons manufacturing program, including rocket production, drone development, and IED fabrication. Developed the capability to produce thousands of rockets locally and naval commando equipment used in the October 7 attack.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -374,7 +460,9 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Managed Hamas' financial operations, overseeing the movement of funds from Iran and other state sponsors into Gaza. Controlled Hamas' investment portfolio and resource allocation between military and civilian operations.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -387,8 +475,11 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Senior member of Hamas' political bureau and a key figure in hostage negotiations following the October 7 attack. Played a central role in Hamas' strategy regarding the Israeli hostages.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-030.jpg"
     },
     {
       "id": "le-031",
@@ -400,7 +491,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Led Hamas' intelligence operations in northern Gaza. Key intelligence figure in the October 7 attack planning. Responsible for surveillance of Israeli military positions and planning infiltration operations.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -413,7 +506,9 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike during Khan Younis operation",
       "significance": "Senior Hamas military commander in the Khan Younis area. Oversaw tactical operations, tunnel warfare, and anti-tank ambush teams targeting IDF forces during the ground incursion.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -426,7 +521,9 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Second-in-command of the Khan Younis Brigade under Rafa'a Salameh. Managed tactical operations and coordinated ambush teams against IDF ground forces.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -439,7 +536,9 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Commanded a battalion-level unit within the Khan Younis Brigade. Oversaw rocket launching operations and underground tunnel warfare against IDF forces.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -452,7 +551,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Deputy to Ahmed Ghandour in the Northern Gaza Division. Managed tactical operations in the Jabalia and Beit Hanoun areas during the intense fighting in northern Gaza.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -465,7 +566,9 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Member of Hamas' political bureau responsible for political operations in southern Gaza. His killing targeted Hamas' political leadership alongside its military commanders.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -478,7 +581,9 @@
       "location": "Shuja'iyya, Gaza City, Gaza Strip",
       "operationName": "IDF Shuja'iyya offensive",
       "significance": "Oversaw Qassam Brigades operations in the Shuja'iyya neighborhood of Gaza City, one of the most fiercely contested urban battlegrounds with extensive tunnel infrastructure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -491,7 +596,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Oversaw the training and preparation of Qassam Brigades fighters. Responsible for the Nukhba commando training program whose graduates carried out the October 7 infiltration.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -504,7 +611,9 @@
       "location": "Central Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Managed Hamas' logistics network including weapons storage, supply routes through the tunnel system, and equipment distribution across Gaza's underground infrastructure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -517,7 +626,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Led Hamas' rocket launching operations in northern Gaza. Responsible for directing Qassam and modified rocket fire toward Israeli cities including Sderot and Ashkelon.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -530,7 +641,9 @@
       "location": "Shuja'iyya, Gaza City, Gaza Strip",
       "operationName": "IDF Shuja'iyya ground operation",
       "significance": "Senior commander responsible for Hamas' defensive operations in Shuja'iyya. Coordinated anti-armor ambushes and booby-trapped building operations against advancing IDF forces.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -543,7 +656,9 @@
       "location": "Tulkarem, West Bank",
       "operationName": "IDF counterterrorism operation",
       "significance": "Oversaw Hamas' military infrastructure and attack planning in the West Bank. Coordinated weapons smuggling, recruitment, and attack cells following the model created by Saleh al-Arouri.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -556,7 +671,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Long-time head of Hamas' media and communications operations. Managed the organization's public messaging and propaganda. Previously convicted of directing suicide bombings during the Second Intifada.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -569,8 +686,11 @@
       "location": "Rafah, Gaza Strip",
       "operationName": "IDF targeted strike during Rafah operation",
       "significance": "Commanded Hamas' internal security apparatus in southern Gaza. Responsible for counterintelligence operations and maintaining discipline within Hamas' ranks during wartime.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-044.jpg"
     },
     {
       "id": "le-045",
@@ -582,7 +702,9 @@
       "location": "Rafah, Gaza Strip",
       "operationName": "IDF targeted strike during Rafah ground operation",
       "significance": "Commanded the Qassam Brigades' Rafah Brigade. Oversaw the tunnel networks connecting Gaza to the Egyptian border, including smuggling tunnels used for weapons importation.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -595,8 +717,11 @@
       "location": "Khan Younis, Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Senior deputy commander within the Khan Younis Brigade command structure. Oversaw tactical operations and anti-tank warfare teams deployed against IDF armored units.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-046.jpg"
     },
     {
       "id": "le-047",
@@ -608,7 +733,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Commanded Hamas' military police force. Played a role in the management and guarding of hostages taken during the October 7 attack.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -621,7 +748,9 @@
       "location": "Northern Gaza Strip",
       "operationName": "IDF ground operation in northern Gaza",
       "significance": "Led a company-level element of Hamas' elite Nukhba commando force — the spearhead of the October 7 attack. Madi's unit was responsible for attacks on multiple kibbutzim near the border.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -634,7 +763,9 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "IDF tunnel warfare operation",
       "significance": "Oversaw the construction and operation of Hamas' tunnel network beneath Gaza City — the 'Gaza Metro' — extending for hundreds of kilometers as Hamas' primary defensive infrastructure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -647,7 +778,9 @@
       "location": "Central Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Led Hamas' anti-tank guided missile (ATGM) operations. Under his command, Hamas deployed Kornet and Al-Yassin 105 anti-tank weapons that disabled multiple IDF Merkava tanks and Namer APCs during the ground campaign.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -660,7 +793,9 @@
       "location": "Gaza coastline",
       "operationName": "Israeli naval operation",
       "significance": "Led Hamas' naval commando unit used during the October 7 attack to infiltrate Israeli territory via sea. The naval commando route was one of three axes of the October 7 attack.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -673,7 +808,9 @@
       "location": "Rafah area, southern Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Senior commander of Qassam Brigades operations in the southern Gaza sector. Oversaw cross-border tunnel operations and weapons smuggling routes connecting Gaza to Sinai.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -686,7 +823,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Led Hamas' Shura (consultative) Council, the organization's senior religious and strategic advisory body. A founding-era figure of Hamas who provided religious rulings and strategic guidance.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -699,10 +838,12 @@
       "location": "Khan Younis area, Gaza Strip",
       "operationName": "IDF ground operation",
       "significance": "Brother of Hamas leader Yahya Sinwar and a senior military commander. Considered a key link in maintaining Hamas' command structure after the elimination of more senior leaders. His death further dismantled the Sinwar family's grip on Hamas' military operations.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-054.jpg"
     },
-
     {
       "id": "le-060",
       "name": "Abbas al-Musawi",
@@ -713,8 +854,11 @@
       "location": "Southern Lebanon (motorcade near Jibchit)",
       "operationName": "IDF targeted strike on Hezbollah leadership convoy",
       "significance": "Secretary-General of Hezbollah from 1991-1992. His assassination by Israel led to the appointment of Hassan Nasrallah, who would go on to lead Hezbollah for 32 years. The killing was a significant early example of Israel's targeted assassination policy against Hezbollah leadership.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-060.jpg"
     },
     {
       "id": "le-061",
@@ -726,7 +870,12 @@
       "location": "Damascus, Syria (Kfar Sousa district)",
       "operationName": "Joint CIA-Mossad operation",
       "significance": "The most wanted terrorist in the world before bin Laden. Mastermind of the 1983 Beirut Marine barracks bombing (241 killed), 1983 US Embassy bombing, TWA Flight 847 hijacking, Buenos Aires AMIA bombing (85 killed), and Khobar Towers bombing. Operated Hezbollah's global terror network for 25 years. His elimination was one of the most significant joint US-Israeli intelligence operations ever conducted.",
-      "wantedBy": ["United States (FBI Most Wanted)", "Israel", "Argentina", "Interpol"],
+      "wantedBy": [
+        "United States (FBI Most Wanted)",
+        "Israel",
+        "Argentina",
+        "Interpol"
+      ],
       "bounty": "$5,000,000 (Rewards for Justice)"
     },
     {
@@ -739,8 +888,13 @@
       "location": "Damascus International Airport area, Syria",
       "operationName": "Disputed — attributed to Israeli strike or internal dispute",
       "significance": "Hezbollah's top military commander and successor to Mughniyeh. Convicted in absentia by the Special Tribunal for Lebanon for the 2005 assassination of Lebanese PM Rafik Hariri. Oversaw Hezbollah's military intervention in the Syrian civil war supporting Assad.",
-      "wantedBy": ["STL (Hariri assassination)", "United States", "Israel"],
-      "bounty": null
+      "wantedBy": [
+        "STL (Hariri assassination)",
+        "United States",
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-062.jpg"
     },
     {
       "id": "le-063",
@@ -752,8 +906,11 @@
       "location": "Jaramana, Damascus, Syria",
       "operationName": "Israeli targeted strike",
       "significance": "Longest-held Lebanese prisoner in Israel (1979-2008), convicted for the 1979 Nahariya attack that killed 4 Israelis including a 4-year-old. After release in a prisoner swap, joined Hezbollah and was appointed to coordinate attacks from the Golan Heights against Israel.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-063.jpg"
     },
     {
       "id": "le-064",
@@ -765,8 +922,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Same strike that killed Nasrallah",
       "significance": "Commander of Hezbollah's southern front, responsible for all military operations along the Israel-Lebanon border. Killed in the same massive Israeli airstrike that eliminated Nasrallah. Oversaw the cross-border attacks on Israel that began on October 8, 2023.",
-      "wantedBy": ["Israel", "United States"],
-      "bounty": null
+      "wantedBy": [
+        "Israel",
+        "United States"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-064.jpg"
     },
     {
       "id": "le-065",
@@ -778,8 +939,11 @@
       "location": "Khirbet Selm, southern Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Senior deputy commander of Hezbollah's elite Radwan Force. One of the highest-ranking Hezbollah military figures killed in the early phase of the Israel-Hezbollah cross-border conflict. The Radwan Force was Hezbollah's most capable offensive unit, trained for ground invasion of northern Israel.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-065.jpg"
     },
     {
       "id": "le-066",
@@ -791,7 +955,9 @@
       "location": "Tyre, southern Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Commanded Hezbollah's Aziz Unit responsible for operations in southwestern Lebanon along the Israeli border. The most senior Hezbollah commander killed in southern Lebanon before the September 2024 escalation.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -804,7 +970,9 @@
       "location": "Jouaiyya, southern Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Most senior Hezbollah commander killed in cross-border fighting at the time. His death triggered Hezbollah's heaviest rocket barrage into northern Israel. Commanded a sector of Hezbollah's southern front and oversaw daily attacks on Israeli border positions.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -817,7 +985,9 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Same strike that killed Ibrahim Aqil",
       "significance": "Senior Radwan Force commander killed in the same Israeli strike that targeted Ibrahim Aqil during a meeting of Hezbollah military leadership. Multiple Radwan commanders were eliminated in this single strike, devastating Hezbollah's elite special operations capability.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -830,7 +1000,9 @@
       "location": "Beirut, Lebanon",
       "operationName": "Israeli targeted strike (day after Nasrallah's assassination)",
       "significance": "Deputy head of Hezbollah's Central Council and one of the group's most prominent military-political figures. Long-time commander who oversaw Hezbollah operations in southern Lebanon for decades. His killing the day after Nasrallah demonstrated the depth of Israel's intelligence penetration.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -843,7 +1015,9 @@
       "location": "Beirut, Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Led Hezbollah's drone and precision missile programs. Oversaw the development and deployment of Hezbollah's expanding UAV fleet and precision-guided munitions capability that posed a growing threat to Israeli critical infrastructure.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -856,7 +1030,9 @@
       "location": "Southern Lebanon",
       "operationName": "Israeli targeted strike",
       "significance": "Senior commander in Hezbollah's elite Radwan Force, killed in the intensive Israeli campaign against Hezbollah's military leadership in September 2024. The Radwan Force suffered devastating leadership losses during this period.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -869,8 +1045,12 @@
       "location": "Dahieh, Beirut, Lebanon",
       "operationName": "Same strike that killed Hassan Nasrallah",
       "significance": "Senior IRGC commander killed alongside Nasrallah in the Israeli strike on Hezbollah's underground headquarters. His presence with Nasrallah at the time of the strike confirmed the deep integration of IRGC leadership within Hezbollah's command structure. His death was the highest-ranking IRGC casualty since Soleimani.",
-      "wantedBy": ["United States (sanctions)", "Israel"],
-      "bounty": null
+      "wantedBy": [
+        "United States (sanctions)",
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-072.jpg"
     },
     {
       "id": "le-073",
@@ -882,10 +1062,11 @@
       "location": "Beirut, Lebanon",
       "operationName": "Israeli targeted strike during Lebanon campaign",
       "significance": "IRGC Quds Force commander responsible for coordinating Iranian support to Hezbollah in Lebanon and Syria. His killing further disrupted the IRGC's command link to its most important proxy organization.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-080",
       "name": "Abu Muhammad al-Adnani",
@@ -896,8 +1077,13 @@
       "location": "Al-Bab, Aleppo Governorate, Syria",
       "operationName": "US targeted strike",
       "significance": "ISIS's chief spokesman and head of its external operations division. Declared the ISIS caliphate in June 2014. Directed and inspired the wave of ISIS terror attacks in Europe, including the November 2015 Paris attacks (130 killed) and the March 2016 Brussels bombings (32 killed). One of the most dangerous ISIS leaders after Baghdadi.",
-      "wantedBy": ["United States", "France", "Multiple nations"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "France",
+        "Multiple nations"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-080.jpg"
     },
     {
       "id": "le-081",
@@ -909,8 +1095,13 @@
       "location": "Raqqa, Syria",
       "operationName": "US targeted drone strike",
       "significance": "British-Kuwaiti ISIS member who appeared in multiple propaganda videos beheading Western hostages, including American journalists James Foley and Steven Sotloff, and British aid workers David Haines and Alan Henning. His masked image became the face of ISIS brutality worldwide.",
-      "wantedBy": ["United States", "United Kingdom", "Multiple nations"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "United Kingdom",
+        "Multiple nations"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-081.jpg"
     },
     {
       "id": "le-082",
@@ -922,8 +1113,12 @@
       "location": "Al-Shirqat, near Mosul, Iraq",
       "operationName": "US targeted airstrike",
       "significance": "Georgian-born Chechen jihadist who served as ISIS's top military commander. Known as 'Omar the Chechen,' he led ISIS forces in key battles across Syria and Iraq. One of the most recognizable ISIS figures due to his distinctive red beard. Commanded thousands of foreign fighters.",
-      "wantedBy": ["United States", "Georgia"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Georgia"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-082.jpg"
     },
     {
       "id": "le-083",
@@ -935,7 +1130,9 @@
       "location": "Al-Amr, Deir ez-Zor, Syria",
       "operationName": "Delta Force raid — authorized by President Obama",
       "significance": "Oversaw ISIS's oil and gas revenue operations, which generated hundreds of millions of dollars annually. Killed during a rare US ground raid in eastern Syria. His wife, Umm Sayyaf, was captured and provided significant intelligence on ISIS operations and the captivity of Kayla Mueller.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -948,7 +1145,10 @@
       "location": "Near Mayadin, Deir ez-Zor, Syria",
       "operationName": "Coalition airstrike",
       "significance": "Bahraini cleric who served as ISIS's most senior religious authority. Provided the theological justifications for ISIS's most extreme practices including slavery, mass execution, and the destruction of historical sites. His religious rulings gave ISIS's atrocities a veneer of Islamic legitimacy.",
-      "wantedBy": ["United States", "Bahrain"],
+      "wantedBy": [
+        "United States",
+        "Bahrain"
+      ],
       "bounty": null
     },
     {
@@ -961,7 +1161,9 @@
       "location": "Daraa Province, Syria",
       "operationName": "FSA operation",
       "significance": "Third leader of ISIS following the deaths of Baghdadi and Abu Ibrahim. Led ISIS for approximately 8 months. His death continued the pattern of rapid leadership turnover that degraded ISIS's ability to maintain centralized command.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -974,7 +1176,9 @@
       "location": "Jindires, Afrin district, Aleppo, Syria",
       "operationName": "US targeted strike — authorized by President Biden",
       "significance": "Led ISIS operations across all of Syria and was considered one of the top five overall ISIS leaders globally. Responsible for developing ISIS's network in Turkey and aggressively pursuing plans to reconstitute ISIS's capability. Killed by the 'flying Ginsu' R9X blade-equipped Hellfire missile.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)"
     },
     {
@@ -987,8 +1191,12 @@
       "location": "Al-Amr, eastern Syria",
       "operationName": "US Delta Force raid",
       "significance": "Former physics teacher who became ISIS's deputy leader and designated successor to Baghdadi. Oversaw ISIS's administrative and bureaucratic operations. Would have assumed leadership if Baghdadi had been killed.",
-      "wantedBy": ["United States", "Iraq"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Iraq"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-087.jpg"
     },
     {
       "id": "le-088",
@@ -1000,8 +1208,12 @@
       "location": "Mosul, Iraq",
       "operationName": "Coalition airstrike",
       "significance": "Former Iraqi army officer under Saddam Hussein who became one of ISIS's two deputy leaders. Oversaw all ISIS military operations in Iraq. His military experience from the former Iraqi army was crucial to ISIS's early battlefield success.",
-      "wantedBy": ["United States", "Iraq"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Iraq"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-088.jpg"
     },
     {
       "id": "le-089",
@@ -1013,7 +1225,10 @@
       "location": "Tal Rifaat, Aleppo, Syria",
       "operationName": "Syrian rebel raid",
       "significance": "Former colonel in Saddam Hussein's military intelligence who became the strategic mastermind behind ISIS's rise. Designed the blueprint for ISIS's takeover of Syrian territory using intelligence cells, informant networks, and systematic infiltration. Documents found after his death revealed ISIS's detailed plan for state-building through terror.",
-      "wantedBy": ["Iraq", "Syria"],
+      "wantedBy": [
+        "Iraq",
+        "Syria"
+      ],
       "bounty": null
     },
     {
@@ -1026,10 +1241,12 @@
       "location": "Rutba, Anbar Province, Iraq",
       "operationName": "US targeted airstrike",
       "significance": "Notorious ISIS military commander in Anbar Province. Known for his brutality, he appeared in multiple propaganda videos executing prisoners. Commanded ISIS forces in key battles for control of western Iraq's Sunni heartland.",
-      "wantedBy": ["United States", "Iraq"],
+      "wantedBy": [
+        "United States",
+        "Iraq"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-100",
       "name": "Anwar al-Awlaki",
@@ -1040,8 +1257,13 @@
       "location": "Al Jawf Province, Yemen",
       "operationName": "CIA targeted strike — authorized by President Obama",
       "significance": "American-born Yemeni cleric who became the most dangerous English-language recruiter for Al-Qaeda. Directed the 2009 Christmas Day underwear bomber plot, the 2010 cargo plane bomb plot, and inspired the Fort Hood shooting. The first US citizen deliberately targeted and killed by the US government without trial, raising significant legal debate.",
-      "wantedBy": ["United States (FBI Most Wanted)", "Yemen", "Interpol"],
-      "bounty": null
+      "wantedBy": [
+        "United States (FBI Most Wanted)",
+        "Yemen",
+        "Interpol"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-100.jpg"
     },
     {
       "id": "le-101",
@@ -1053,7 +1275,9 @@
       "location": "North Waziristan, Pakistan (FATA)",
       "operationName": "CIA targeted strike",
       "significance": "Al-Qaeda's #2 leader and its most prominent religious authority. Escaped from Bagram Air Base in Afghanistan in 2005. His theological writings provided Al-Qaeda's ideological foundation. His death was described as the most significant strike against Al-Qaeda since bin Laden's killing.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$1,000,000 (Rewards for Justice)"
     },
     {
@@ -1066,7 +1290,9 @@
       "location": "Mukalla, Hadhramaut, Yemen",
       "operationName": "US targeted strike",
       "significance": "Former personal secretary to Osama bin Laden who went on to lead AQAP, considered Al-Qaeda's most dangerous franchise. Also served as Al-Qaeda's global 'general manager' — effectively the #2 leader of the entire Al-Qaeda network. Under his leadership, AQAP directed multiple attacks on the US homeland and orchestrated the Charlie Hebdo attack in Paris.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)"
     },
     {
@@ -1079,7 +1305,9 @@
       "location": "Ma'rib Governorate, Yemen",
       "operationName": "CIA targeted strike — confirmed by President Trump",
       "significance": "Succeeded al-Wuhayshi as AQAP leader. Claimed responsibility for the December 2019 Pensacola Naval Air Station shooting. Under his leadership, AQAP remained the Al-Qaeda franchise most focused on attacking the US homeland.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)"
     },
     {
@@ -1092,7 +1320,9 @@
       "location": "North Waziristan, Pakistan",
       "operationName": "CIA targeted strike",
       "significance": "Libyan national who served as Al-Qaeda's operations chief and became the de facto #2 after bin Laden's death. Managed day-to-day operations of Al-Qaeda's network. Killed less than four months after bin Laden, dealing back-to-back blows to Al-Qaeda's core leadership.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -1105,7 +1335,9 @@
       "location": "Idlib Province, Syria",
       "operationName": "US targeted strike",
       "significance": "Egyptian national who served as Al-Qaeda's deputy overall leader. Son-in-law of Zawahiri. Previously held in Iran alongside other senior Al-Qaeda figures before relocating to Syria. His killing in an area controlled by Hayat Tahrir al-Sham exposed ongoing Al-Qaeda presence in Syria.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -1118,8 +1350,11 @@
       "location": "Ma'rib Governorate, Yemen",
       "operationName": "US targeted strike — confirmed by President Trump",
       "significance": "Mastermind of the October 2000 bombing of the USS Cole in Aden, Yemen, which killed 17 US sailors. On the FBI's Most Wanted Terrorists list. Escaped from Yemeni prison twice. His killing brought closure to the families of the Cole bombing victims after nearly two decades.",
-      "wantedBy": ["United States (FBI Most Wanted Terrorists)"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States (FBI Most Wanted Terrorists)"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-106.jpg"
     },
     {
       "id": "le-107",
@@ -1131,8 +1366,13 @@
       "location": "Mogadishu, Somalia",
       "operationName": "Somali security forces checkpoint",
       "significance": "Al-Qaeda's senior operative in East Africa. Mastermind of the 1998 US Embassy bombings in Nairobi, Kenya (213 killed) and Dar es Salaam, Tanzania (11 killed). Also planned the 2002 Mombasa attacks. On the FBI Most Wanted list for over a decade. Accidentally drove into a government checkpoint and was killed in the ensuing shootout.",
-      "wantedBy": ["United States (FBI Most Wanted)", "Kenya", "Tanzania"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States (FBI Most Wanted)",
+        "Kenya",
+        "Tanzania"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-107.jpg"
     },
     {
       "id": "le-108",
@@ -1144,8 +1384,12 @@
       "location": "Shabwah Province, Yemen",
       "operationName": "US targeted strike",
       "significance": "Saudi national and former Guantanamo Bay detainee who became AQAP's deputy leader after release through Saudi rehabilitation program. His case became the most prominent example of terrorist recidivism and a major argument against Guantanamo releases.",
-      "wantedBy": ["United States", "Saudi Arabia"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Saudi Arabia"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-108.jpg"
     },
     {
       "id": "le-109",
@@ -1157,7 +1401,9 @@
       "location": "North Waziristan, Pakistan",
       "operationName": "CIA targeted strike",
       "significance": "Senior Al-Qaeda military commander who appeared regularly in propaganda videos. Linked to the 2007 suicide bombing at Bagram Air Base during Vice President Cheney's visit. One of the earliest high-value targets eliminated in the CIA's expanded drone campaign in Pakistan.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -1170,10 +1416,11 @@
       "location": "North Waziristan, Pakistan",
       "operationName": "CIA targeted strike",
       "significance": "Egyptian national who served as Al-Qaeda's third-ranking leader and chief financial officer. Managed Al-Qaeda's financial networks and fundraising operations. A founding member of Egyptian Islamic Jihad before merging with Al-Qaeda.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-120",
       "name": "Ahmed Abdi Godane",
@@ -1184,8 +1431,11 @@
       "location": "South of Mogadishu, Somalia",
       "operationName": "US AFRICOM targeted strike",
       "significance": "Founder and first leader of Al-Shabaab. Pledged allegiance to Al-Qaeda in 2012. Under his leadership, Al-Shabaab controlled most of south-central Somalia, conducted the 2013 Westgate mall attack in Nairobi (67 killed), and implemented brutal governance. His death led to Ahmed Diriye's succession.",
-      "wantedBy": ["United States"],
-      "bounty": "$7,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States"
+      ],
+      "bounty": "$7,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-120.jpg"
     },
     {
       "id": "le-121",
@@ -1197,7 +1447,10 @@
       "location": "Dinsoor, Bay Region, Somalia",
       "operationName": "US AFRICOM targeted strike",
       "significance": "Al-Shabaab's intelligence chief who planned the 2013 Westgate shopping mall attack in Nairobi that killed 67 people. Also planned attacks against Western targets across East Africa. His elimination disrupted Al-Shabaab's external operations capability.",
-      "wantedBy": ["United States", "Kenya"],
+      "wantedBy": [
+        "United States",
+        "Kenya"
+      ],
       "bounty": null
     },
     {
@@ -1210,7 +1463,9 @@
       "location": "Southern Somalia",
       "operationName": "US AFRICOM targeted strike",
       "significance": "Senior Al-Shabaab leader responsible for planning attacks outside Somalia, particularly targeting Kenya. Coordinated Al-Shabaab's external operations network that facilitated cross-border attacks.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -1223,7 +1478,9 @@
       "location": "Near Mogadishu, Somalia",
       "operationName": "US AFRICOM targeted strike",
       "significance": "Head of Al-Shabaab's Amniyat (intelligence and security wing), the organization's most secretive and feared division. The Amniyat was responsible for assassinations, intelligence collection, and Al-Shabaab's most sensitive operations.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
     {
@@ -1236,10 +1493,11 @@
       "location": "Northern Somalia (mountainous cave complex)",
       "operationName": "US JSOC raid — authorized by President Biden",
       "significance": "Senior ISIS leader who operated within Al-Shabaab's territory managing ISIS's global financial network and external attack planning from East Africa. Killed during a rare US ground raid — the first significant US ground operation in Somalia in years. His death disrupted ISIS's financial facilitation network.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-130",
       "name": "Mullah Akhtar Mansour",
@@ -1250,8 +1508,12 @@
       "location": "Ahmad Wal, Balochistan, Pakistan (near Afghanistan border)",
       "operationName": "US targeted strike — authorized by President Obama",
       "significance": "Led the Taliban following the revelation of Mullah Omar's death. Under his leadership, the Taliban expanded territorial control across Afghanistan. His killing inside Pakistan was significant — the first US drone strike on a Taliban leader in Balochistan rather than the tribal areas, demonstrating US willingness to strike deeper into Pakistan.",
-      "wantedBy": ["United States", "Afghanistan"],
-      "bounty": null
+      "wantedBy": [
+        "United States",
+        "Afghanistan"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-130.jpg"
     },
     {
       "id": "le-131",
@@ -1263,7 +1525,11 @@
       "location": "Helmand Province, Afghanistan",
       "operationName": "US-Afghan joint operation",
       "significance": "The Taliban's most aggressive and feared military commander. Known for extreme brutality including beheading prisoners on video (inspired by Al-Qaeda in Iraq tactics). Commanded Taliban forces in southern Afghanistan. One-legged from a prior injury but remained a fearsome field commander.",
-      "wantedBy": ["United States", "Afghanistan", "ISAF"],
+      "wantedBy": [
+        "United States",
+        "Afghanistan",
+        "ISAF"
+      ],
       "bounty": null
     },
     {
@@ -1276,8 +1542,12 @@
       "location": "South Waziristan, Pakistan",
       "operationName": "CIA targeted strike",
       "significance": "Founded the TTP in 2007, unifying Pakistani tribal militant factions. Responsible for the assassination of former Pakistani PM Benazir Bhutto in December 2007. Under his leadership, TTP conducted devastating suicide bombings across Pakistan. Killed by a drone strike while on the roof of his father-in-law's house.",
-      "wantedBy": ["Pakistan", "United States"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "Pakistan",
+        "United States"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-132.jpg"
     },
     {
       "id": "le-133",
@@ -1289,10 +1559,13 @@
       "location": "North Waziristan, Pakistan",
       "operationName": "CIA targeted strike",
       "significance": "Led the TTP from 2009-2013. Mastermind of the 2010 Times Square car bomb attempt. Under his leadership, TTP intensified attacks across Pakistan. Directed the 2009 Camp Chapman suicide bombing at a CIA base in Afghanistan that killed 7 CIA officers — the deadliest attack on the CIA in decades.",
-      "wantedBy": ["Pakistan", "United States"],
-      "bounty": "$5,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "Pakistan",
+        "United States"
+      ],
+      "bounty": "$5,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-133.jpg"
     },
-
     {
       "id": "le-140",
       "name": "Abu Mahdi al-Muhandis",
@@ -1303,8 +1576,11 @@
       "location": "Baghdad International Airport, Iraq",
       "operationName": "Same operation that killed Qasem Soleimani",
       "significance": "Leader of Kata'ib Hezbollah and deputy commander of Iraq's PMF. Killed in the same US drone strike that assassinated Qasem Soleimani. A US-designated terrorist since 2009. Directed multiple rocket and IED attacks on US forces in Iraq. His dual role as both a designated terrorist and a senior Iraqi government-linked militia leader exemplified Iran's infiltration of Iraqi state structures.",
-      "wantedBy": ["United States"],
-      "bounty": null
+      "wantedBy": [
+        "United States"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-140.jpg"
     },
     {
       "id": "le-141",
@@ -1316,10 +1592,11 @@
       "location": "Baghdad, Iraq",
       "operationName": "US retaliatory strike following Tower 22 attack",
       "significance": "Senior Kata'ib Hezbollah commander killed in a US retaliatory strike following the January 28, 2024 drone attack on Tower 22 in Jordan that killed 3 US soldiers. The US strike in central Baghdad demonstrated willingness to hit Iranian-backed militia leaders in Iraq's capital.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-150",
       "name": "Dmitry Utkin",
@@ -1330,10 +1607,13 @@
       "location": "Tver Oblast, Russia",
       "operationName": "Same incident as Prigozhin — attributed to Russian state",
       "significance": "Former Russian GRU special forces lieutenant colonel who co-founded and served as the military commander of Wagner Group. His call sign 'Wagner' gave the group its name. Led Wagner's early operations in eastern Ukraine (2014) and Syria. Killed alongside Prigozhin when their plane was shot down, eliminating both founders of the organization.",
-      "wantedBy": ["United States (sanctions)", "EU (sanctions)"],
-      "bounty": null
+      "wantedBy": [
+        "United States (sanctions)",
+        "EU (sanctions)"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-150.jpg"
     },
-
     {
       "id": "le-160",
       "name": "Abu Musab al-Barnawi",
@@ -1344,10 +1624,12 @@
       "location": "Northeastern Nigeria",
       "operationName": "Nigerian military / internal factional dispute",
       "significance": "Son of Boko Haram founder Mohammed Yusuf. Led the ISWAP faction that split from Boko Haram in 2016 and pledged allegiance to ISIS. Under his leadership, ISWAP became the more organized and strategically effective faction, focusing on military targets rather than civilian massacres. His death disrupted ISWAP's chain of command.",
-      "wantedBy": ["Nigeria", "United States"],
+      "wantedBy": [
+        "Nigeria",
+        "United States"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-170",
       "name": "Ahmed Jabari",
@@ -1358,7 +1640,9 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "Opening strike of Operation Pillar of Defense",
       "significance": "Head of Hamas' military wing. The Israeli strike on his car in central Gaza City initiated Operation Pillar of Defense (2012). Jabari had been Hamas' top military leader for years, overseeing rocket attacks on Israel and the capture of Israeli soldier Gilad Shalit in 2006. His assassination was one of Israel's most prominent targeted killings.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -1371,8 +1655,11 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "Israeli targeted strike — authorized by PM Ariel Sharon",
       "significance": "Founder of Hamas in 1987 and its supreme spiritual authority. Quadriplegic cleric who led Hamas from its founding through the Second Intifada's suicide bombing campaign. His assassination was one of the most controversial Israeli targeted killings, sparking massive protests across the Muslim world. His death was followed weeks later by the assassination of his successor, Abdel Aziz al-Rantisi.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-171.jpg"
     },
     {
       "id": "le-172",
@@ -1384,8 +1671,11 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "Israeli targeted strike",
       "significance": "Co-founder of Hamas and successor to Sheikh Yassin as Hamas leader. A pediatrician who became one of Hamas' most hardline leaders. Assassinated just 26 days after succeeding Yassin, demonstrating Israel's determination to decapitate Hamas' leadership. His rapid elimination led Hamas to stop publicly announcing successors.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-172.jpg"
     },
     {
       "id": "le-173",
@@ -1397,8 +1687,11 @@
       "location": "Al Bustan Rotana Hotel, Dubai, UAE",
       "operationName": "Mossad operation (confirmed by Dubai police investigation)",
       "significance": "Co-founder of Hamas' military wing and a senior weapons procurement officer responsible for smuggling Iranian arms into Gaza. His assassination in Dubai by a Mossad team using forged passports became one of the most documented intelligence operations in history — Dubai police released CCTV footage tracking the entire Mossad team.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-173.jpg"
     },
     {
       "id": "le-174",
@@ -1410,7 +1703,9 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "Israeli targeted strike",
       "significance": "One of the founders of Hamas' military wing, the Izz ad-Din al-Qassam Brigades. A key figure in building Hamas' armed capability during the First and Second Intifadas. His assassination was part of Israel's systematic targeting of Hamas' military leadership.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -1423,8 +1718,11 @@
       "location": "Al-Daraj, Gaza City, Gaza Strip",
       "operationName": "Israeli targeted strike",
       "significance": "Founder and commander of the Qassam Brigades. Under his command, the military wing carried out numerous suicide bombings and attacks during the Second Intifada. The strike that killed him also killed 14 civilians, making it one of the most controversial Israeli targeted killings.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-175.jpg"
     },
     {
       "id": "le-176",
@@ -1436,10 +1734,12 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "Shin Bet (Israeli internal security) operation",
       "significance": "Known as 'The Engineer' — Hamas' master bomb-maker who revolutionized suicide bombing in the Israeli-Palestinian conflict. Built the bombs used in a wave of bus bombings that killed dozens of Israelis in 1994-1996. Assassinated when a booby-trapped mobile phone exploded against his head. His death triggered retaliatory Hamas bombings that killed 60 Israelis in February-March 1996.",
-      "wantedBy": ["Israel"],
-      "bounty": null
+      "wantedBy": [
+        "Israel"
+      ],
+      "bounty": null,
+      "image": "/images/leaders/le-176.jpg"
     },
-
     {
       "id": "le-180",
       "name": "Abu Musab al-Zarqawi",
@@ -1450,8 +1750,13 @@
       "location": "Baqubah, Diyala Province, Iraq",
       "operationName": "US targeted strike based on intelligence from Jordanian agent",
       "significance": "Jordanian jihadist who founded Al-Qaeda in Iraq (AQI), the precursor to ISIS. Known as 'The Sheikh of the Slaughterers' for his campaign of beheadings, car bombings, and sectarian massacres that killed thousands. Mastermind of the 2005 Amman hotel bombings. His organization would later evolve into ISIS under Baghdadi.",
-      "wantedBy": ["United States", "Jordan", "Iraq"],
-      "bounty": "$25,000,000 (Rewards for Justice)"
+      "wantedBy": [
+        "United States",
+        "Jordan",
+        "Iraq"
+      ],
+      "bounty": "$25,000,000 (Rewards for Justice)",
+      "image": "/images/leaders/le-180.jpg"
     },
     {
       "id": "le-181",
@@ -1463,10 +1768,11 @@
       "location": "Near Sarmada, Idlib, Syria",
       "operationName": "US targeted strike",
       "significance": "Kuwaiti national who led the 'Khorasan Group,' an Al-Qaeda external operations cell embedded within Jabhat al-Nusra in Syria. One of the few people who had advance knowledge of the 9/11 attacks. Was planning imminent attacks against Western aviation when killed.",
-      "wantedBy": ["United States"],
+      "wantedBy": [
+        "United States"
+      ],
       "bounty": "$7,000,000 (Rewards for Justice)"
     },
-
     {
       "id": "le-190",
       "name": "Amadou Koufa",
@@ -1477,10 +1783,13 @@
       "location": "Central Mali (Mopti region)",
       "operationName": "Counter-terrorism operation",
       "significance": "Fulani cleric who founded Katiba Macina, the most active insurgent group in central Mali. Exploited ethnic Fulani grievances to recruit fighters. His group was responsible for the massive expansion of the Sahel insurgency into central Mali and neighboring Burkina Faso. One of JNIM's most operationally active commanders.",
-      "wantedBy": ["United States", "France", "Mali"],
+      "wantedBy": [
+        "United States",
+        "France",
+        "Mali"
+      ],
       "bounty": null
     },
-
     {
       "id": "le-195",
       "name": "Fathi Hammad",
@@ -1491,7 +1800,10 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Senior Hamas political leader and former Interior Minister of the Hamas government in Gaza. Known for inflammatory speeches calling for attacks on Israelis. One of the few Hamas political bureau members who remained in Gaza during the war.",
-      "wantedBy": ["Israel", "United States (sanctions)"],
+      "wantedBy": [
+        "Israel",
+        "United States (sanctions)"
+      ],
       "bounty": null
     },
     {
@@ -1504,7 +1816,9 @@
       "location": "Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Managed Hamas' economic affairs and investment portfolios. Oversaw the financial infrastructure that sustained Hamas operations during the war, including fund disbursement to fighters' families and operational expenses.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -1517,7 +1831,9 @@
       "location": "Central Gaza Strip",
       "operationName": "IDF targeted strike",
       "significance": "Led Hamas' expanding drone warfare program, which deployed reconnaissance and attack drones during the October 7 assault and throughout the subsequent war. Hamas used drones to drop munitions on IDF positions and for reconnaissance of Israeli troop movements.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     },
     {
@@ -1530,7 +1846,9 @@
       "location": "Gaza City, Gaza Strip",
       "operationName": "IDF targeted strike — Operation Guardian of the Walls (May 2021)",
       "significance": "Highest-ranking Hamas military commander killed during the May 2021 Gaza conflict. Commanded all Qassam Brigades operations in Gaza City. His elimination during the 11-day war demonstrated Israel's ability to identify and strike Hamas' brigade-level commanders even during active combat.",
-      "wantedBy": ["Israel"],
+      "wantedBy": [
+        "Israel"
+      ],
       "bounty": null
     }
   ],
@@ -1541,11 +1859,18 @@
       "orgId": "irgc",
       "title": "Supreme Leader of Iran; Commander-in-Chief of all Iranian armed forces including IRGC",
       "lastKnownLocation": "Tehran, Iran",
-      "wantedBy": ["United States (sanctions)"],
+      "wantedBy": [
+        "United States (sanctions)"
+      ],
       "bounty": null,
       "threatAssessment": "CRITICAL",
       "description": "Supreme Leader of Iran since 1989. Ultimate authority over the IRGC and Iran's proxy network. Authorized the April 2024 direct missile and drone attack on Israel — the first direct Iranian strike on Israeli territory. Controls Iran's nuclear program and 'Axis of Resistance' strategy.",
-      "knownAssociates": ["Hossein Salami (IRGC commander)", "Esmail Qaani (Quds Force)", "Iranian Supreme National Security Council"]
+      "knownAssociates": [
+        "Hossein Salami (IRGC commander)",
+        "Esmail Qaani (Quds Force)",
+        "Iranian Supreme National Security Council"
+      ],
+      "image": "/images/leaders/la-002.jpg"
     },
     {
       "id": "la-003",
@@ -1553,11 +1878,17 @@
       "orgId": "irgc",
       "title": "Commander of the IRGC Quds Force (succeeded Soleimani)",
       "lastKnownLocation": "Tehran, Iran",
-      "wantedBy": ["United States (sanctions)", "Israel"],
+      "wantedBy": [
+        "United States (sanctions)",
+        "Israel"
+      ],
       "bounty": null,
       "threatAssessment": "CRITICAL",
       "description": "Succeeded Qasem Soleimani as commander of the IRGC Quds Force. Manages Iran's proxy relationships across the Middle East. Less charismatic and operationally aggressive than Soleimani but maintains the proxy network. Reportedly suffered a cardiac event in late 2024 and his current operational status is unclear.",
-      "knownAssociates": ["Iranian proxy militia commanders across Iraq, Syria, Lebanon, Yemen"]
+      "knownAssociates": [
+        "Iranian proxy militia commanders across Iraq, Syria, Lebanon, Yemen"
+      ],
+      "image": "/images/leaders/la-003.jpg"
     },
     {
       "id": "la-004",
@@ -1565,11 +1896,20 @@
       "orgId": "houthis",
       "title": "Leader of the Houthi movement / Ansar Allah",
       "lastKnownLocation": "Undisclosed location in northern Yemen (Saada region)",
-      "wantedBy": ["United States (sanctions)", "Saudi Arabia", "UAE"],
+      "wantedBy": [
+        "United States (sanctions)",
+        "Saudi Arabia",
+        "UAE"
+      ],
       "bounty": null,
       "threatAssessment": "HIGH",
       "description": "Political and religious leader of the Houthi movement since 2004 (following his brother Hussein's death). Commands the Houthi forces conducting the Red Sea anti-shipping campaign. Portrays himself as defender of Palestinian cause. Has escalated attacks despite US/UK military strikes on Houthi positions.",
-      "knownAssociates": ["Mohamed Ali al-Houthi (political council)", "Abdulaziz bin Habtoor", "IRGC advisors"]
+      "knownAssociates": [
+        "Mohamed Ali al-Houthi (political council)",
+        "Abdulaziz bin Habtoor",
+        "IRGC advisors"
+      ],
+      "image": "/images/leaders/la-004.jpg"
     },
     {
       "id": "la-005",
@@ -1577,11 +1917,18 @@
       "orgId": "hezbollah",
       "title": "Secretary-General of Hezbollah (succeeded Nasrallah, elected October 2024)",
       "lastKnownLocation": "Lebanon (undisclosed)",
-      "wantedBy": ["United States (sanctions)", "Israel"],
+      "wantedBy": [
+        "United States (sanctions)",
+        "Israel"
+      ],
       "bounty": null,
       "threatAssessment": "HIGH",
       "description": "Long-time deputy to Hassan Nasrallah. Elected as Hezbollah's new Secretary-General following the assassinations of Nasrallah and Safieddine. Theologian and political figure rather than military commander. Faces the challenge of rebuilding Hezbollah's command structure after Israel's decapitation campaign.",
-      "knownAssociates": ["Remaining Hezbollah Shura Council members", "IRGC liaisons"]
+      "knownAssociates": [
+        "Remaining Hezbollah Shura Council members",
+        "IRGC liaisons"
+      ],
+      "image": "/images/leaders/la-005.jpg"
     },
     {
       "id": "la-006",
@@ -1589,11 +1936,17 @@
       "orgId": "isis",
       "title": "Leader of the Islamic State (current)",
       "lastKnownLocation": "Unknown (believed in Iraq-Syria border region)",
-      "wantedBy": ["United States", "Multiple nations"],
+      "wantedBy": [
+        "United States",
+        "Multiple nations"
+      ],
       "bounty": "$10,000,000 (estimated Rewards for Justice)",
       "threatAssessment": "HIGH",
       "description": "Current leader of ISIS, announced in August 2023. Little is publicly known about his identity or background. Leads an organization that continues to conduct insurgent attacks in Syria and Iraq while maintaining global affiliate networks across Africa and Central Asia.",
-      "knownAssociates": ["ISIS Shura Council", "Provincial governors (walis)"]
+      "knownAssociates": [
+        "ISIS Shura Council",
+        "Provincial governors (walis)"
+      ]
     },
     {
       "id": "la-007",
@@ -1601,11 +1954,18 @@
       "orgId": "al-shabaab",
       "title": "Emir (Leader) of Al-Shabaab",
       "lastKnownLocation": "Southern Somalia (mobile, frequently relocates)",
-      "wantedBy": ["United States", "Somalia", "AU"],
+      "wantedBy": [
+        "United States",
+        "Somalia",
+        "AU"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)",
       "threatAssessment": "HIGH",
       "description": "Leader of Al-Shabaab since 2014, formally pledged allegiance to Al-Qaeda. Has expanded Al-Shabaab's revenue base and territorial control despite sustained US and AMISOM military pressure. Believed to be in hiding in southern Somalia with limited public appearances.",
-      "knownAssociates": ["Mahad Karate (intelligence chief)", "Al-Qaeda senior leadership"]
+      "knownAssociates": [
+        "Mahad Karate (intelligence chief)",
+        "Al-Qaeda senior leadership"
+      ]
     },
     {
       "id": "la-008",
@@ -1613,11 +1973,18 @@
       "orgId": "jnim",
       "title": "Leader of JNIM (Jama'at Nusrat al-Islam wal-Muslimin)",
       "lastKnownLocation": "Northern Mali / Algeria border region",
-      "wantedBy": ["United States", "France", "Mali"],
+      "wantedBy": [
+        "United States",
+        "France",
+        "Mali"
+      ],
       "bounty": "$5,000,000 (Rewards for Justice)",
       "threatAssessment": "HIGH",
       "description": "Tuareg leader who founded Ansar Dine and now leads JNIM, Al-Qaeda's Sahel affiliate. Former Malian diplomat turned jihadist. Has unified multiple jihadist factions across the Sahel into the most potent insurgent force in the region. The most wanted person in West Africa.",
-      "knownAssociates": ["Amadou Koufa (Macina commander)", "Al-Qaeda senior leadership"]
+      "knownAssociates": [
+        "Amadou Koufa (Macina commander)",
+        "Al-Qaeda senior leadership"
+      ]
     },
     {
       "id": "la-009",
@@ -1625,11 +1992,17 @@
       "orgId": "al-qaeda",
       "title": "De facto leader of Al-Qaeda (unconfirmed formal appointment)",
       "lastKnownLocation": "Iran (under IRGC monitoring / loose house arrest since 2003)",
-      "wantedBy": ["United States (FBI Most Wanted Terrorists)", "Interpol"],
+      "wantedBy": [
+        "United States (FBI Most Wanted Terrorists)",
+        "Interpol"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)",
       "threatAssessment": "HIGH",
       "description": "Egyptian former special forces officer. Al-Qaeda's military chief and likely successor to al-Zawahiri. Has been in Iran since 2003 under a complex arrangement with the IRGC. Wanted for his role in the 1998 US Embassy bombings in Kenya and Tanzania.",
-      "knownAssociates": ["Al-Qaeda Shura Council", "IRGC (complex relationship)"]
+      "knownAssociates": [
+        "Al-Qaeda Shura Council",
+        "IRGC (complex relationship)"
+      ]
     },
     {
       "id": "la-010",
@@ -1637,11 +2010,17 @@
       "orgId": "taliban",
       "title": "Supreme Leader (Amir al-Mu'minin) of the Islamic Emirate of Afghanistan",
       "lastKnownLocation": "Kandahar, Afghanistan",
-      "wantedBy": ["United States (sanctions)"],
+      "wantedBy": [
+        "United States (sanctions)"
+      ],
       "bounty": null,
       "threatAssessment": "MEDIUM",
       "description": "Supreme leader of the Taliban since 2016 and de facto ruler of Afghanistan since the August 2021 takeover. Reclusive Islamic scholar who has made very few public appearances. Has imposed the world's most restrictive policies on women and girls, banning secondary education and most employment.",
-      "knownAssociates": ["Sirajuddin Haqqani (Interior Minister)", "Mullah Yaqoob (Defense Minister)"]
+      "knownAssociates": [
+        "Sirajuddin Haqqani (Interior Minister)",
+        "Mullah Yaqoob (Defense Minister)"
+      ],
+      "image": "/images/leaders/la-010.jpg"
     },
     {
       "id": "la-011",
@@ -1649,11 +2028,19 @@
       "orgId": "taliban",
       "title": "Minister of Interior, Taliban government; Leader of the Haqqani Network",
       "lastKnownLocation": "Kabul, Afghanistan",
-      "wantedBy": ["United States (FBI Most Wanted)", "Interpol"],
+      "wantedBy": [
+        "United States (FBI Most Wanted)",
+        "Interpol"
+      ],
       "bounty": "$10,000,000 (Rewards for Justice)",
       "threatAssessment": "HIGH",
       "description": "Leader of the Haqqani Network, designated by the US as a Foreign Terrorist Organization. Now serves as Afghanistan's Interior Minister. Responsible for some of the deadliest attacks in Afghanistan. He is a US-designated terrorist who now runs a government ministry.",
-      "knownAssociates": ["Anas Haqqani (brother)", "Taliban Shura", "ISI (alleged historical ties)"]
+      "knownAssociates": [
+        "Anas Haqqani (brother)",
+        "Taliban Shura",
+        "ISI (alleged historical ties)"
+      ],
+      "image": "/images/leaders/la-011.jpg"
     },
     {
       "id": "la-012",
@@ -1661,11 +2048,18 @@
       "orgId": "ttp",
       "title": "Emir (Leader) of Tehrik-i-Taliban Pakistan (TTP)",
       "lastKnownLocation": "Afghanistan (eastern provinces, near Pakistan border)",
-      "wantedBy": ["Pakistan", "United States"],
+      "wantedBy": [
+        "Pakistan",
+        "United States"
+      ],
       "bounty": "$3,000,000 (Rewards for Justice — proposed)",
       "threatAssessment": "HIGH",
       "description": "Leader of the TTP since June 2018. Has reunified TTP splinter factions and intensified attacks against Pakistan, especially since the Taliban takeover of Afghanistan which provided TTP with sanctuary.",
-      "knownAssociates": ["TTP Shura Council", "Afghan Taliban (alleged sanctuary arrangement)"]
+      "knownAssociates": [
+        "TTP Shura Council",
+        "Afghan Taliban (alleged sanctuary arrangement)"
+      ],
+      "image": "/images/leaders/la-012.jpg"
     }
   ]
 }

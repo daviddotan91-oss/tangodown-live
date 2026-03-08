@@ -2017,6 +2017,8 @@ html, body, #root {
 .leader-card.eliminated { border-left: 3px solid var(--red); }
 .leader-card.active { border-left: 3px solid var(--yellow); }
 .leader-photo { width: 60px; height: 60px; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: 3px; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; overflow: hidden; }
+.leader-photo-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.3) contrast(1.1); }
+.eliminated .leader-photo-img { filter: grayscale(0.6) contrast(1.1) brightness(0.8); }
 .leader-silhouette { opacity: 0.5; }
 .eliminated-stamp { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255, 45, 45, 0.15); }
 .eliminated-stamp span { font-family: var(--font-display); font-size: 7px; font-weight: 900; color: var(--red); letter-spacing: 1px; transform: rotate(-15deg); border: 2px solid var(--red); padding: 1px 4px; border-radius: 2px; text-shadow: 0 0 6px var(--red); }

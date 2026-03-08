@@ -16,9 +16,17 @@ export default function LeaderCard({ leader, status }) {
       className={`leader-card ${isEliminated ? 'eliminated' : 'active'} ${expanded ? 'expanded' : ''}`}
       onClick={() => setExpanded(!expanded)}
     >
-      {/* Photo Placeholder */}
+      {/* Photo */}
       <div className="leader-photo">
-        <div className="leader-silhouette">
+        {leader.image ? (
+          <img
+            src={leader.image}
+            alt={leader.name}
+            className="leader-photo-img"
+            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
+          />
+        ) : null}
+        <div className="leader-silhouette" style={leader.image ? { display: 'none' } : undefined}>
           <svg viewBox="0 0 60 60" width="60" height="60">
             <circle cx="30" cy="22" r="12" fill="#1a2a3a" />
             <ellipse cx="30" cy="52" rx="20" ry="16" fill="#1a2a3a" />
