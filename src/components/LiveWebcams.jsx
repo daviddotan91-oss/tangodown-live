@@ -24,9 +24,6 @@ export default function LiveWebcams() {
   if (!webcams.length) return null
 
   const getEmbedUrl = (cam) => {
-    if (cam.youtubeChannel) {
-      return `https://www.youtube.com/embed/live_stream?channel=${cam.youtubeChannel}&autoplay=0&mute=1&modestbranding=1&rel=0`
-    }
     return `https://www.youtube.com/embed/${cam.youtube}?autoplay=0&mute=1&modestbranding=1&rel=0`
   }
 

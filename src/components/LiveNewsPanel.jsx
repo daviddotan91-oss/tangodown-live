@@ -7,7 +7,7 @@ const NEWS_SOURCES = [
     name: 'AL JAZEERA',
     label: 'AJ',
     color: '#D4A843',
-    channelId: 'UCNye-wNBqNL5ZzHSJj3l8Bg',
+    channelUrl: 'https://www.youtube.com/@aboralibrohim/live',
     description: 'Al Jazeera English — 24/7 international news from Doha'
   },
   {
@@ -15,7 +15,7 @@ const NEWS_SOURCES = [
     name: 'SKY NEWS',
     label: 'SKY',
     color: '#E03C31',
-    channelId: 'UCoMdktPbSTixAyNGwb-UYkQ',
+    channelUrl: 'https://www.youtube.com/@SkyNews/live',
     description: 'Sky News — 24/7 UK & international breaking news'
   },
   {
@@ -23,7 +23,7 @@ const NEWS_SOURCES = [
     name: 'FRANCE 24',
     label: 'F24',
     color: '#00A5E5',
-    channelId: 'UCQfwfsi5VrQ8yKZ-UWmAEFg',
+    channelUrl: 'https://www.youtube.com/@FRANCE24English/live',
     description: 'France 24 English — International news from Paris'
   },
   {
@@ -31,7 +31,7 @@ const NEWS_SOURCES = [
     name: 'DW NEWS',
     label: 'DW',
     color: '#0070B8',
-    channelId: 'UCknLrEdhRCp1aegoMqRaCZg',
+    channelUrl: 'https://www.youtube.com/@daboradwari/live',
     description: 'Deutsche Welle — German international broadcaster'
   },
   {
@@ -39,7 +39,7 @@ const NEWS_SOURCES = [
     name: 'i24NEWS',
     label: 'i24',
     color: '#FF6B35',
-    channelId: 'UCVNLAerX8MdR7CXpBqrifAg',
+    channelUrl: 'https://www.youtube.com/@i24NEWSEnglish/live',
     description: 'i24NEWS English — Israeli international news channel'
   }
 ]
@@ -48,8 +48,6 @@ export default function LiveNewsPanel() {
   const [activeSource, setActiveSource] = useState(NEWS_SOURCES[0])
   const [collapsed, setCollapsed] = useState(true)
 
-  const embedUrl = `https://www.youtube.com/embed/live_stream?channel=${activeSource.channelId}&autoplay=0&mute=1&modestbranding=1&rel=0`
-
   return (
     <div className={`livenews-panel ${collapsed ? 'livenews-collapsed' : ''}`}>
       {/* Header */}
@@ -57,7 +55,7 @@ export default function LiveNewsPanel() {
         <div className="livenews-header-left">
           <span className="livenews-live-dot" />
           <span className="livenews-title">LIVE NEWS</span>
-          <InfoTooltip text="Live 24/7 news broadcast feeds from international outlets. Switch between sources using the tabs below." position="left" />
+          <InfoTooltip text="Live 24/7 news broadcast feeds from international outlets. Click to open live stream on YouTube." position="left" />
         </div>
         <button className="livenews-toggle">{collapsed ? '▶' : '▼'}</button>
       </div>
@@ -82,21 +80,42 @@ export default function LiveNewsPanel() {
             ))}
           </div>
 
-          {/* Video */}
-          <div className="livenews-video">
-            <iframe
-              key={activeSource.id}
-              src={embedUrl}
-              title={activeSource.name}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+          {/* Watch Button */}
+          <div className="livenews-body">
+            <div className="livenews-source-header">
+              <span className="livenews-live-badge">LIVE</span>
+              <span className="livenews-source-name" style={{ color: activeSource.color }}>{activeSource.name}</span>
+            </div>
+            <div className="livenews-source-desc">{activeSource.description}</div>
 
-          {/* Info */}
-          <div className="livenews-info">
-            <span className="livenews-source-name" style={{ color: activeSource.color }}>{activeSource.name}</span>
-            <span className="livenews-source-desc">{activeSource.description}</span>
+            <a
+              href={activeSource.channelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="livenews-watch-btn"
+              style={{ '--news-color': activeSource.color }}
+            >
+              <span className="livenews-watch-icon">▶</span>
+              WATCH LIVE ON YOUTUBE
+            </a>
+
+            <div className="livenews-all-sources">
+              <span className="livenews-all-label">ALL SOURCES</span>
+              {NEWS_SOURCES.map(src => (
+                <a
+                  key={src.id}
+                  href={src.channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="livenews-source-link"
+                  style={{ color: src.color }}
+                >
+                  <span className="livenews-link-dot" style={{ background: src.color }} />
+                  {src.name}
+                  <span className="livenews-link-arrow">↗</span>
+                </a>
+              ))}
+            </div>
           </div>
         </>
       )}
@@ -106,7 +125,7 @@ export default function LiveNewsPanel() {
           position: absolute;
           bottom: 50px;
           right: 320px;
-          width: 380px;
+          width: 300px;
           background: rgba(10, 10, 15, 0.95);
           border: 1px solid var(--border-primary);
           border-radius: 4px;
@@ -197,30 +216,30 @@ export default function LiveNewsPanel() {
           border-bottom-width: 2px;
         }
 
-        .livenews-video {
-          position: relative;
-          width: 100%;
-          padding-bottom: 56.25%;
-          background: #000;
+        .livenews-body {
+          padding: 12px;
         }
-        .livenews-video iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: none;
-        }
-
-        .livenews-info {
-          padding: 8px 12px;
+        .livenews-source-header {
           display: flex;
-          flex-direction: column;
-          gap: 2px;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 6px;
+        }
+        .livenews-live-badge {
+          font-family: var(--font-mono);
+          font-size: 8px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: #FF4444;
+          background: rgba(255, 68, 68, 0.12);
+          border: 1px solid rgba(255, 68, 68, 0.3);
+          padding: 2px 6px;
+          border-radius: 2px;
+          animation: livenews-pulse 1.5s ease-in-out infinite;
         }
         .livenews-source-name {
           font-family: var(--font-display);
-          font-size: 11px;
+          font-size: 13px;
           font-weight: 700;
           letter-spacing: 1px;
         }
@@ -229,13 +248,86 @@ export default function LiveNewsPanel() {
           font-size: 9px;
           color: var(--text-muted);
           letter-spacing: 0.5px;
+          margin-bottom: 12px;
+        }
+
+        .livenews-watch-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 16px;
+          background: color-mix(in srgb, var(--news-color, #FF4444) 12%, transparent);
+          border: 1px solid color-mix(in srgb, var(--news-color, #FF4444) 40%, transparent);
+          border-radius: 4px;
+          color: var(--news-color, #FF4444);
+          font-family: var(--font-mono);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-decoration: none;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+        .livenews-watch-btn:hover {
+          background: color-mix(in srgb, var(--news-color, #FF4444) 20%, transparent);
+          box-shadow: 0 0 16px color-mix(in srgb, var(--news-color, #FF4444) 25%, transparent);
+          transform: scale(1.01);
+        }
+        .livenews-watch-icon {
+          font-size: 14px;
+        }
+
+        .livenews-all-sources {
+          margin-top: 14px;
+          padding-top: 10px;
+          border-top: 1px solid var(--border-primary);
+        }
+        .livenews-all-label {
+          display: block;
+          font-family: var(--font-mono);
+          font-size: 8px;
+          letter-spacing: 2px;
+          color: var(--text-muted);
+          margin-bottom: 8px;
+        }
+        .livenews-source-link {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 5px 6px;
+          font-family: var(--font-mono);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          text-decoration: none;
+          border-radius: 3px;
+          transition: all 0.2s;
+        }
+        .livenews-source-link:hover {
+          background: var(--bg-hover);
+        }
+        .livenews-link-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        .livenews-link-arrow {
+          margin-left: auto;
+          opacity: 0.4;
+          font-size: 11px;
+        }
+        .livenews-source-link:hover .livenews-link-arrow {
+          opacity: 1;
         }
 
         @media (max-width: 1200px) {
           .livenews-panel {
             right: 10px;
             width: calc(100vw - 20px);
-            max-width: 380px;
+            max-width: 300px;
           }
         }
       `}</style>
