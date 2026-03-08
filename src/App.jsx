@@ -234,22 +234,9 @@ export default function App() {
     startAmbient()
   }, [])
 
-  // Show boot sequence before anything else
-  if (!bootComplete && !loading) {
-    return <BootSequence onComplete={handleBootComplete} />
-  }
-
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-brand">TANGODOWN<span>.LIVE</span></div>
-        <div className="loading-subtitle">INITIALIZING BATTLESPACE</div>
-        <div className="loading-bar">
-          <div className="loading-bar-fill" />
-        </div>
-        <div className="loading-status">CONNECTING TO OSINT FEEDS...</div>
-      </div>
-    )
+  // Single cinematic boot sequence — covers BOTH loading and intro
+  if (!bootComplete) {
+    return <BootSequence onComplete={handleBootComplete} dataReady={!loading} />
   }
 
   return (

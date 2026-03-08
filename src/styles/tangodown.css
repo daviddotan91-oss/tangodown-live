@@ -2545,6 +2545,8 @@ html, body, #root {
 }
 .headline-ticker-track {
   flex: 1; overflow: hidden; position: relative;
+  mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
 }
 .headline-ticker-scroll {
   display: flex; white-space: nowrap;
@@ -2781,10 +2783,142 @@ html, body, #root {
 }
 @keyframes xfeedSpin { to { transform: rotate(360deg); } }
 
-/* Twitter embed overrides — make it fit dark theme */
-.xfeed-embed-wrap .twitter-timeline {
-  color: var(--text-primary) !important;
+/* Scroll area */
+.xfeed-scroll-area {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
 }
-.xfeed-embed-wrap iframe {
-  border-radius: 4px !important;
+.xfeed-scroll-area::-webkit-scrollbar { width: 3px; }
+.xfeed-scroll-area::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: 2px; }
+
+/* Header actions */
+.xfeed-header-actions { display: flex; align-items: center; gap: 6px; }
+.xfeed-hotkey {
+  font-family: var(--font-mono); font-size: 8px; font-weight: 700;
+  color: var(--text-muted); background: var(--bg-primary);
+  border: 1px solid var(--border-primary); border-radius: 2px;
+  padding: 1px 5px; letter-spacing: 1px;
 }
+
+/* Category icons */
+.xfeed-cat-icon { font-size: 11px; margin-right: 4px; }
+
+/* Section count badge */
+.xfeed-section-count {
+  font-size: 8px; color: var(--text-muted); background: var(--bg-primary);
+  padding: 1px 6px; border-radius: 8px; border: 1px solid var(--border-primary);
+  margin-left: auto;
+}
+.xfeed-section-label {
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Headline priority badge */
+.xfeed-headline-top {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
+}
+.xfeed-headline-priority-badge {
+  font-family: var(--font-mono); font-size: 7px; font-weight: 800;
+  letter-spacing: 1px; padding: 1px 5px; border-radius: 2px;
+  border: 1px solid;
+}
+
+/* Priority row glow */
+.xfeed-priority-critical {
+  background: rgba(255, 68, 68, 0.03);
+  border-left: 2px solid rgba(255, 68, 68, 0.3);
+  padding-left: 8px; margin-left: -8px;
+}
+
+/* Account cards — native styled */
+.xfeed-account-list {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.xfeed-account-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 4px;
+  background: var(--bg-card); border: 1px solid var(--border-primary);
+  text-decoration: none; cursor: pointer;
+  transition: all 0.15s;
+}
+.xfeed-account-card:hover {
+  border-color: rgba(29, 155, 240, 0.3);
+  background: var(--bg-hover);
+  transform: translateX(2px);
+}
+.xfeed-account-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(29, 155, 240, 0.15), rgba(29, 155, 240, 0.05));
+  border: 1px solid rgba(29, 155, 240, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 800;
+  color: #1D9BF0; flex-shrink: 0;
+}
+.xfeed-account-info { flex: 1; min-width: 0; }
+.xfeed-account-name {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--text-primary); letter-spacing: 0.5px;
+}
+.xfeed-account-handle-text {
+  font-family: var(--font-mono); font-size: 9px;
+  color: #1D9BF0; margin-top: 1px;
+}
+.xfeed-account-desc {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--text-muted); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.xfeed-account-arrow {
+  font-size: 14px; color: var(--text-muted);
+  transition: color 0.15s; flex-shrink: 0;
+}
+.xfeed-account-card:hover .xfeed-account-arrow { color: #1D9BF0; }
+
+/* Quick Links section */
+.xfeed-quicklinks {
+  padding: 10px 14px 16px;
+}
+.xfeed-link-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+}
+.xfeed-quick-link {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 10px; border-radius: 3px;
+  background: var(--bg-card); border: 1px solid var(--border-primary);
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  color: var(--text-secondary); text-decoration: none;
+  letter-spacing: 0.5px; transition: all 0.15s;
+}
+.xfeed-quick-link:hover {
+  color: var(--text-primary); border-color: rgba(29, 155, 240, 0.3);
+  background: var(--bg-hover);
+}
+.xfeed-link-icon { font-size: 12px; }
+
+/* ── Boot Sequence Additions ── */
+.boot-vignette {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none; z-index: 1;
+}
+.boot-waiting {
+  animation: bootWaitPulse 1.5s ease-in-out infinite;
+}
+@keyframes bootWaitPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.boot-spinner {
+  display: inline-block; width: 8px; height: 8px;
+  border: 1.5px solid rgba(0, 170, 255, 0.3);
+  border-top-color: #00AAFF; border-radius: 50%;
+  animation: xfeedSpin 0.6s linear infinite;
+  margin-left: 8px; vertical-align: middle;
+}
+.boot-skip {
+  position: absolute; bottom: 30px;
+  font-family: var(--font-mono); font-size: 9px;
+  color: rgba(255,255,255,0.15); letter-spacing: 3px;
+  cursor: pointer; z-index: 3;
+  transition: color 0.2s;
+}
+.boot-skip:hover { color: rgba(255,255,255,0.4); }

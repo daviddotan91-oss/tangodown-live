@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 
 /* ═══════════════════════════════════════════════════════
    HEADLINE TICKER — scrolling news bar below TopNav
@@ -14,8 +14,8 @@ export function HeadlineTicker({ headlines = [], sources = {} }) {
     }
   }
 
-  // Double the headlines for seamless scroll loop
-  const items = [...headlines, ...headlines]
+  // Triple for seamless loop
+  const items = [...headlines, ...headlines, ...headlines]
 
   return (
     <div className="headline-ticker">
@@ -45,19 +45,19 @@ export function HeadlineTicker({ headlines = [], sources = {} }) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   X INTEL PANEL — embedded X/Twitter feeds
+   X INTEL PANEL — headlines + X account cards
+   Native styled, no external Twitter dependency
    ═══════════════════════════════════════════════════════ */
 
 const CATEGORY_ORDER = ['ISRAEL', 'USA', 'NEWS']
 const CATEGORY_LABELS = { ISRAEL: 'ISRAEL', USA: 'UNITED STATES', NEWS: 'NEWS & COMMENTARY' }
 const CATEGORY_COLORS = { ISRAEL: '#0066CC', USA: '#FF4444', NEWS: '#FFB800' }
+const CATEGORY_ICONS = { ISRAEL: '🇮🇱', USA: '🇺🇸', NEWS: '📡' }
 
 export function XFeedPanel({ isOpen, onClose, xAccounts = [], headlines = [], sources = {} }) {
   const [activeCategory, setActiveCategory] = useState('ISRAEL')
-  const [selectedAccount, setSelectedAccount] = useState(null)
-  const embedRef = useRef(null)
 
-  // Filter accounts by category, deduplicate by handle
+  // Deduplicated accounts by category
   const accountsByCategory = useMemo(() => {
     const groups = {}
     const seen = {}
@@ -75,84 +75,37 @@ export function XFeedPanel({ isOpen, onClose, xAccounts = [], headlines = [], so
 
   const currentAccounts = accountsByCategory[activeCategory] || []
 
-  // Load Twitter widget script
-  useEffect(() => {
-    if (!isOpen) return
-    if (!document.getElementById('twitter-wjs')) {
-      const script = document.createElement('script')
-      script.id = 'twitter-wjs'
-      script.src = 'https://platform.twitter.com/widgets.js'
-      script.async = true
-      document.head.appendChild(script)
-    }
-  }, [isOpen])
-
-  // Render selected account's timeline
-  useEffect(() => {
-    if (!selectedAccount || !embedRef.current || !isOpen) return
-    embedRef.current.innerHTML = ''
-    if (window.twttr?.widgets) {
-      window.twttr.widgets.createTimeline(
-        { sourceType: 'profile', screenName: selectedAccount.handle },
-        embedRef.current,
-        {
-          theme: 'dark',
-          chrome: 'noheader nofooter noborders transparent',
-          width: '100%',
-          height: 500,
-          tweetLimit: 10
-        }
-      )
-    } else {
-      // Fallback: create an anchor that Twitter JS will pick up
-      const a = document.createElement('a')
-      a.className = 'twitter-timeline'
-      a.setAttribute('data-theme', 'dark')
-      a.setAttribute('data-chrome', 'noheader nofooter noborders transparent')
-      a.setAttribute('data-tweet-limit', '10')
-      a.href = `https://x.com/${selectedAccount.handle}`
-      a.textContent = `Posts by @${selectedAccount.handle}`
-      embedRef.current.appendChild(a)
-      // Retry when script loads
-      const check = setInterval(() => {
-        if (window.twttr?.widgets) {
-          window.twttr.widgets.load(embedRef.current)
-          clearInterval(check)
-        }
-      }, 500)
-      setTimeout(() => clearInterval(check), 10000)
-    }
-  }, [selectedAccount, isOpen])
-
-  // Auto-select first account
-  useEffect(() => {
-    if (currentAccounts.length > 0 && !selectedAccount) {
-      setSelectedAccount(currentAccounts[0])
-    }
-  }, [currentAccounts])
-
-  // Change account when switching categories
   const handleCategoryChange = useCallback((cat) => {
     setActiveCategory(cat)
-    const accts = accountsByCategory[cat] || []
-    if (accts.length) setSelectedAccount(accts[0])
-  }, [accountsByCategory])
+  }, [])
 
   // Headlines for current category
   const categoryHeadlines = useMemo(() => {
-    return headlines.filter(h => h.category === activeCategory).slice(0, 6)
+    return headlines.filter(h => h.category === activeCategory)
   }, [headlines, activeCategory])
+
+  // All headlines for "all" view
+  const allHeadlines = useMemo(() => {
+    return [...headlines].sort((a, b) => {
+      const p = { CRITICAL: 0, HIGH: 1, MEDIUM: 2 }
+      return (p[a.priority] || 3) - (p[b.priority] || 3)
+    })
+  }, [headlines])
 
   if (!isOpen) return null
 
   return (
     <div className="xfeed-panel">
+      {/* Header */}
       <div className="xfeed-header">
         <div className="xfeed-title">
           <span className="xfeed-x-logo">𝕏</span>
           INTEL FEED
         </div>
-        <button className="xfeed-close" onClick={onClose}>✕</button>
+        <div className="xfeed-header-actions">
+          <kbd className="xfeed-hotkey">X</kbd>
+          <button className="xfeed-close" onClick={onClose}>✕</button>
+        </div>
       </div>
 
       {/* Category Tabs */}
@@ -164,72 +117,101 @@ export function XFeedPanel({ isOpen, onClose, xAccounts = [], headlines = [], so
             style={activeCategory === cat ? { color: CATEGORY_COLORS[cat], borderBottomColor: CATEGORY_COLORS[cat] } : {}}
             onClick={() => handleCategoryChange(cat)}
           >
+            <span className="xfeed-cat-icon">{CATEGORY_ICONS[cat]}</span>
             {CATEGORY_LABELS[cat]}
           </button>
         ))}
       </div>
 
-      {/* Headlines Section */}
-      {categoryHeadlines.length > 0 && (
+      <div className="xfeed-scroll-area">
+        {/* Headlines Section */}
         <div className="xfeed-headlines">
-          <div className="xfeed-section-label">TOP HEADLINES</div>
+          <div className="xfeed-section-label">
+            TOP HEADLINES
+            <span className="xfeed-section-count">{categoryHeadlines.length}</span>
+          </div>
           {categoryHeadlines.map(h => {
             const src = sources[h.source]
             return (
-              <div key={h.id} className="xfeed-headline-row">
+              <div key={h.id} className={`xfeed-headline-row xfeed-priority-${h.priority?.toLowerCase()}`}>
                 <span className="xfeed-headline-dot" style={{
                   backgroundColor: h.priority === 'CRITICAL' ? '#FF4444' : h.priority === 'HIGH' ? '#FF8800' : '#FFB800'
                 }} />
                 <div className="xfeed-headline-content">
-                  {src && <span className="xfeed-headline-source">{src.name}</span>}
+                  <div className="xfeed-headline-top">
+                    {src && <span className="xfeed-headline-source">{src.name}</span>}
+                    <span className="xfeed-headline-priority-badge" style={{
+                      color: h.priority === 'CRITICAL' ? '#FF4444' : h.priority === 'HIGH' ? '#FF8800' : '#FFB800',
+                      borderColor: h.priority === 'CRITICAL' ? '#FF444444' : h.priority === 'HIGH' ? '#FF880044' : '#FFB80044'
+                    }}>{h.priority}</span>
+                  </div>
                   <span className="xfeed-headline-text">{h.text}</span>
                 </div>
               </div>
             )
           })}
         </div>
-      )}
 
-      {/* X Account Selector */}
-      <div className="xfeed-accounts">
-        <div className="xfeed-section-label">X / TWITTER FEEDS</div>
-        <div className="xfeed-account-grid">
-          {currentAccounts.map(acc => (
-            <button
-              key={acc.handle}
-              className={`xfeed-account-btn ${selectedAccount?.handle === acc.handle ? 'active' : ''}`}
-              onClick={() => setSelectedAccount(acc)}
-            >
-              <span className="xfeed-account-at">@</span>
-              <span className="xfeed-account-handle">{acc.handle}</span>
-            </button>
-          ))}
+        {/* X Accounts Section */}
+        <div className="xfeed-accounts">
+          <div className="xfeed-section-label">
+            𝕏 ACCOUNTS — {CATEGORY_LABELS[activeCategory]}
+            <span className="xfeed-section-count">{currentAccounts.length}</span>
+          </div>
+          <div className="xfeed-account-list">
+            {currentAccounts.map(acc => (
+              <a
+                key={acc.handle}
+                href={`https://x.com/${acc.handle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="xfeed-account-card"
+              >
+                <div className="xfeed-account-avatar">
+                  {acc.name.charAt(0)}
+                </div>
+                <div className="xfeed-account-info">
+                  <div className="xfeed-account-name">{acc.name}</div>
+                  <div className="xfeed-account-handle-text">@{acc.handle}</div>
+                  {acc.desc && <div className="xfeed-account-desc">{acc.desc}</div>}
+                </div>
+                <div className="xfeed-account-arrow">↗</div>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Embedded Timeline */}
-      {selectedAccount && (
-        <div className="xfeed-embed-section">
-          <div className="xfeed-embed-header">
-            <span className="xfeed-embed-x">𝕏</span>
-            <span className="xfeed-embed-name">{selectedAccount.name}</span>
-            <a
-              href={`https://x.com/${selectedAccount.handle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="xfeed-open-x"
-            >
-              OPEN ON X ↗
+        {/* Quick Links */}
+        <div className="xfeed-quicklinks">
+          <div className="xfeed-section-label">QUICK LINKS</div>
+          <div className="xfeed-link-grid">
+            <a href="https://x.com/search?q=Israel%20IDF&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">🔍</span>
+              IDF Live Search
+            </a>
+            <a href="https://x.com/search?q=%22Iron%20Dome%22%20OR%20%22Iron%20Swords%22&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">🛡</span>
+              Iron Dome / Swords
+            </a>
+            <a href="https://x.com/search?q=Trump%20military%20OR%20defense&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">🇺🇸</span>
+              Trump Defense
+            </a>
+            <a href="https://x.com/search?q=OSINT%20strike%20OR%20airstrike&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">📡</span>
+              OSINT Strikes
+            </a>
+            <a href="https://x.com/search?q=Houthi%20OR%20%22Red%20Sea%22%20attack&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">🚢</span>
+              Red Sea / Houthis
+            </a>
+            <a href="https://x.com/search?q=Ukraine%20frontline%20OR%20Bakhmut&src=typed_query&f=live" target="_blank" rel="noopener noreferrer" className="xfeed-quick-link">
+              <span className="xfeed-link-icon">⚔</span>
+              Ukraine Front
             </a>
           </div>
-          <div className="xfeed-embed-wrap" ref={embedRef}>
-            <div className="xfeed-embed-loading">
-              <div className="xfeed-loading-spinner" />
-              LOADING @{selectedAccount.handle}...
-            </div>
-          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
