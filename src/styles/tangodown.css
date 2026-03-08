@@ -614,7 +614,7 @@ html, body, #root {
 
 .war-header-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem; font-weight: 700;
+  font-size: 0.8rem; font-weight: 700;
   color: #FF0000; letter-spacing: 0.15em;
   text-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
 }
@@ -641,7 +641,7 @@ html, body, #root {
 
 .war-panel-title {
   font-family: var(--font-mono);
-  font-size: 0.5rem; color: rgba(255, 80, 80, 0.7);
+  font-size: 0.6rem; color: rgba(255, 80, 80, 0.7);
   letter-spacing: 0.15em; margin-bottom: 6px;
   display: flex; align-items: center; gap: 6px;
 }
@@ -1147,8 +1147,8 @@ html, body, #root {
 
 .war-feed-relative {
   font-family: var(--font-mono);
-  font-size: 0.42rem; color: rgba(200, 200, 200, 0.35);
-  width: 26px; text-align: right; flex-shrink: 0;
+  font-size: 0.52rem; color: rgba(200, 200, 200, 0.35);
+  width: 30px; text-align: right; flex-shrink: 0;
 }
 
 .war-feed-force-dot {
@@ -1159,13 +1159,13 @@ html, body, #root {
 
 .war-feed-action {
   font-family: var(--font-mono);
-  font-size: 0.42rem; font-weight: 700;
+  font-size: 0.52rem; font-weight: 700;
   letter-spacing: 0.05em; flex-shrink: 0;
 }
 
 .war-feed-loc {
   font-family: var(--font-mono);
-  font-size: 0.4rem; color: rgba(200, 200, 200, 0.5);
+  font-size: 0.5rem; color: rgba(200, 200, 200, 0.5);
   flex: 1; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1230,7 +1230,7 @@ html, body, #root {
 
 .fleet-theater-label {
   font-family: var(--font-mono);
-  font-size: 0.38rem; color: rgba(0, 170, 255, 0.5);
+  font-size: 0.48rem; color: rgba(0, 170, 255, 0.5);
   letter-spacing: 0.15em; padding: 3px 0;
   border-bottom: 1px solid rgba(0, 170, 255, 0.08);
   margin-bottom: 2px;
@@ -1257,14 +1257,14 @@ html, body, #root {
 
 .fleet-ship-name {
   font-family: var(--font-mono);
-  font-size: 0.4rem; color: #CCCCCC;
+  font-size: 0.5rem; color: #CCCCCC;
   font-weight: 600; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
 
 .fleet-ship-type {
   font-family: var(--font-mono);
-  font-size: 0.32rem; color: rgba(200, 200, 200, 0.3);
+  font-size: 0.42rem; color: rgba(200, 200, 200, 0.3);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
@@ -2115,8 +2115,8 @@ html, body, #root {
 .flash-traffic:hover .flash-traffic-action { color: var(--red); }
 
 /* ─── Feed Filter Bar ─── */
-.war-header-actions { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); }
-.feed-filter-toggle { font-family: var(--font-mono); font-size: 8px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border-primary); padding: 3px 8px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.15s; }
+.war-header-actions { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+.feed-filter-toggle { font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border-primary); padding: 3px 8px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.15s; }
 .feed-filter-toggle:hover { color: var(--text-primary); border-color: var(--cyan-dim); }
 .feed-filter-toggle.active { color: var(--cyan); border-color: var(--cyan-dim); background: var(--cyan-ghost); }
 .feed-filter-toggle.has-filters { color: var(--cyan); }
