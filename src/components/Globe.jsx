@@ -10,6 +10,7 @@ import TacticalOverlay from './TacticalOverlay'
 import { latLngToVector3 } from '../utils/geoUtils'
 import { getIntensityColor } from '../utils/dataUtils'
 import { getAircraftImage } from '../utils/aircraftImages'
+import { getVesselImage } from '../utils/vesselImages'
 
 const GLOBE_RADIUS = 1
 
@@ -797,6 +798,7 @@ function WarAssetPopup({ asset, onClose }) {
   const { kind, data } = asset
 
   if (kind === 'ship') {
+    const vesselImg = getVesselImage(data.class)
     return (
       <div className="war-asset-popup">
         <button className="war-asset-popup-close" onClick={onClose}>✕</button>
@@ -811,6 +813,12 @@ function WarAssetPopup({ asset, onClose }) {
             <div className="war-asset-popup-class">{data.class}</div>
           </div>
         </div>
+        {vesselImg && (
+          <div className="war-asset-popup-photo">
+            <img src={vesselImg} alt={data.name} className="war-asset-popup-photo-img" />
+            <div className="war-asset-popup-photo-label">{data.class}</div>
+          </div>
+        )}
         <div className="war-asset-popup-grid">
           <div className="war-asset-popup-field">
             <span className="war-asset-popup-label">OPERATOR</span>
@@ -828,6 +836,12 @@ function WarAssetPopup({ asset, onClose }) {
             <span className="war-asset-popup-label">THEATER</span>
             <span className="war-asset-popup-value">{data.theater}</span>
           </div>
+          {data.displacement && (
+            <div className="war-asset-popup-field">
+              <span className="war-asset-popup-label">DISPLACEMENT</span>
+              <span className="war-asset-popup-value">{data.displacement}</span>
+            </div>
+          )}
           <div className="war-asset-popup-field">
             <span className="war-asset-popup-label">POSITION</span>
             <span className="war-asset-popup-value">{data.lat?.toFixed(2)}°N, {data.lng?.toFixed(2)}°E</span>
